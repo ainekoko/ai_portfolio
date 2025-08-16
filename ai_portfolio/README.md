@@ -1,3 +1,27 @@
+
+## ディレクトリ構成
+```bash
+ai_portfolio/
+├── public/                  # 静的ファイル（画像、PDF、HTMLなど）を配置
+│   ├── assets/              # 画像やフォントなどのアセット
+│   │   ├── images/
+│   │   └── fonts/
+│   ├── mockups/             # figma から書き出した画像や PDF カンプ
+│   └── static-html/         # HTML/CSS のみで作成された静的ページ
+│       ├── index.html
+│       └── style.css
+├── src/                     # Next.js のソースコード
+│   ├── pages/               # ページコンポーネント
+│   ├── components/          # 再利用可能な UI コンポーネント
+│   ├── styles/              # CSS / SCSS モジュール
+│   └── lib/                 # ユーティリティ関数など
+├── .gitignore
+├── README.md
+└── next.config.js
+```
+
+
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
