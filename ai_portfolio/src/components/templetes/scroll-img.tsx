@@ -1,79 +1,70 @@
 'use client';
-import React, { useEffect, useRef, useState } from 'react';
-import { Canvas, useFrame, useThree } from '@react-three/fiber';
-import { useScroll, Image, ScrollControls, Scroll } from '@react-three/drei';
+import React, { useRef } from 'react';
+import { useFrame, useThree } from '@react-three/fiber';
+import { useScroll, Image } from '@react-three/drei';
 import { Group } from 'three';
+import * as THREE from 'three';
+
+interface ZoomMaterial extends THREE.Material {
+  zoom: number;
+}
+
+interface ZoomSprite extends THREE.Object3D {
+  material: ZoomMaterial;
+}
 
 const ScrollImg: React.FC = () => {
-  const [mounted, setMounted] = useState(false);
+  const { height } = useThree((state) => state.viewport);
+  const data = useScroll();
+  const group = useRef<Group>(null!);
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  useFrame(() => {
+    if (!group.current) return;
+    const children = group.current.children;
+    if (children.length >= 4) {
+      (children[0] as unknown as ZoomSprite).material.zoom =
+        1 + data.range(0, 1 / 3) / 3;
+      (children[1] as unknown as ZoomSprite).material.zoom =
+        1 + data.range(0, 1 / 3) / 3;
+      (children[2] as unknown as ZoomSprite).material.zoom =
+        1 + data.range(1.15 / 3, 1 / 3) / 3;
+      (children[3] as unknown as ZoomSprite).material.zoom =
+        1 + data.range(1.15 / 3, 1 / 3) / 3;
+    }
+  });
 
-  const Images = () => {
-    const { height } = useThree((state) => state.viewport);
-    const data = useScroll();
-    const group = useRef<Group>(null!);
-
-    useFrame(() => {
-      if (!group.current) return;
-      const children = group.current.children;
-      if (children.length >= 4) {
-        (children[0] as any).material.zoom = 1 + data.range(0, 1 / 3) / 3;
-        (children[1] as any).material.zoom = 1 + data.range(0, 1 / 3) / 3;
-        (children[2] as any).material.zoom =
-          1 + data.range(1.15 / 3, 1 / 3) / 3;
-        (children[3] as any).material.zoom =
-          1 + data.range(1.15 / 3, 1 / 3) / 3;
-      }
-    });
-
-    return (
+  return (
+    <>
       <group ref={group}>
+        {/* eslint-disable-next-line jsx-a11y/alt-text */}
         <Image
           url='/assets/images/top_1.jpg'
-          scale={[4, height, 1]}
-          position={[-1, 0, 1]}
+          scale={[2, 6]}
+          position={[-2, -1, 1]}
         />
+        {/* eslint-disable-next-line jsx-a11y/alt-text */}
         <Image url='/assets/images/top_2.jpg' scale={3} position={[2, 0, 1]} />
+        {/* eslint-disable-next-line jsx-a11y/alt-text */}
         <Image
           url='/assets/images/top_3.jpg'
-          scale={[1, 3.5, 1]}
+          scale={[1, 3.5]}
           position={[-2.3, -height, 2]}
         />
+        {/* eslint-disable-next-line jsx-a11y/alt-text */}
         <Image
           url='/assets/images/top_4.jpg'
-          scale={[1, 2.7, 1]}
+          scale={[1, 2.7]}
           position={[-1.4, -height - 0.7, 1]}
         />
+        {/* eslint-disable-next-line jsx-a11y/alt-text */}
         <Image
           url='/assets/images/top_5.jpg'
-          scale={[1.4, 2, 1]}
+          scale={[1.4, 2]}
           position={[1.3, -height - 0.3, 3.2]}
         />
       </group>
-    );
-  };
-
-  return mounted ? (
-    <Canvas key='main-canvas' frameloop='demand'>
-      <ScrollControls damping={3} pages={2}>
-        <Scroll>
-          <Images />
-        </Scroll>
-        <Scroll html>
-          <h1 style={{ position: 'absolute', top: '60vh', left: '1.5em' }}>
-            Be
-          </h1>
-          <h1 style={{ position: 'absolute', top: '140vh', left: '40vw' }}>
-            Creative
-          </h1>
-        </Scroll>
-      </ScrollControls>
-    </Canvas>
-  ) : null;
+    </>
+  );
 };
 
-//export default ScrollImg;
-export default React.memo(ScrollImg);
+export default ScrollImg;
