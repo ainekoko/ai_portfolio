@@ -1,5 +1,5 @@
-
 ## ディレクトリ構成
+
 ```bash
 ai_portfolio/
 ├── public/                  # 静的ファイル（画像、PDF、HTMLなど）を配置
@@ -20,7 +20,10 @@ ai_portfolio/
 └── next.config.js
 ```
 
+### インストールしたパッケージ
 
+・react-three/fiber
+・react-three/drei
 
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
