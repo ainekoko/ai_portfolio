@@ -2,108 +2,891 @@
 <html lang="ja">
   <head>
     <meta charset="UTF-8" />
-    <title>Ai's Portfolio</title>
-    <link rel="stylesheet" href="./style.css" />
+    <title>プロフィールサイト</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v6.4.2/css/all.css"
+    />
+    <link rel="stylesheet" href="style.css" />
   </head>
-  <body>
-    <!-- ヘッダー -->
-    <header class="hero">
-      <h1>Ai's Portfolio</h1>
-      <nav class="menu">
-        <ul>
-          <li><a href="#experience">Previous Experience</a></li>
-          <li><a href="#skills">Skill</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-      </nav>
+  <body
+    class="bg-[#eaf4f4] text-gray-700 min-w-[480px] font-['Italiana','Yu Gothic','Hiragino Kaku Gothic ProN',Meiryo,sans-serif]"
+  >
+    <!-- 右側ナビゲーション -->
+    <nav class="z-10 fixed top-0 right-0 w-64 h-full shadow-lg flex flex-col">
+      <!-- ハンバーガーメニューアイコン -->
+      <div class="p-6 flex justify-end">
+        <div class="flex flex-col gap-1">
+          <div class="w-8 h-0.5 bg-black"></div>
+          <div class="w-8 h-0.5 bg-black"></div>
+          <div class="w-8 h-0.5 bg-black"></div>
+        </div>
+      </div>
+
+      <!-- ナビゲーションメニュー -->
+      <div class="flex flex-col items-end pr-8 gap-1">
+        <a
+          href="#profile"
+          class="nav-text text-xl text-gray-800 hover:text-gray-600 transition-colors duration-300 transform hover:translate-x-2"
+        >
+          Profile
+        </a>
+
+        <a
+          href="#experience"
+          class="mt-0 nav-text text-xl text-gray-800 hover:text-gray-600 transition-colors duration-300 transform hover:translate-x-2"
+        >
+          Previous Experience
+        </a>
+
+        <a
+          href="#contact"
+          class="mt-0 nav-text text-xl text-gray-800 hover:text-gray-600 transition-colors duration-300 transform hover:translate-x-2"
+        >
+          Contact
+        </a>
+        <a
+          href="#portfolio"
+          class="nav-text text-xl text-gray-800 hover:text-gray-600 transition-colors duration-300 transform hover:translate-x-2"
+        >
+          Portfolio
+        </a>
+
+        <a
+          href="#mypage"
+          class="text-xl text-gray-800 hover:text-gray-600 transition-colors duration-300 transform hover:translate-x-2"
+        >
+          My Page
+        </a>
+      </div>
+
+      <!-- 装飾的な三角形 -->
+      <div
+        class="absolute bottom-0 left-0 w-0 h-0 border-l-[150px] border-l-transparent border-b-[200px] border-b-gray-100 opacity-20"
+      ></div>
+    </nav>
+    <!-- header Top -->
+    <div class="sticky top-0 z-20 bg-[#eaf4f471]">
+      <div class="header-top flex items-center px-6 pt-4 pb-2 relative">
+        <h1 class="text-[#3b3b3b] text-2xl font-bold tracking-wider">
+          Ai's Portfolio
+        </h1>
+      </div>
+    </div>
+
+    <header class="container relative pb-5 bg-[#eaf4f4]">
+      <!-- headerメイン -->
+      <div class="header-main flex flex-col items-center mt-3 relative">
+        <!-- Ai's portfolio -->
+        <div class="w-full relative">
+          <img
+            class="absolute left-8 top-10 rounded-lg opacity-80"
+            src="../assets/images/top_1.jpg"
+            alt="top_1"
+          />
+          <img
+            class="absolute right-2.5 top-0 rounded-lg opacity-80"
+            src="../assets/images/top_2.jpg"
+            alt="top_2"
+          />
+          <h1
+            class="text-9xl absolute top-80 left-32 z-10 text-white drop-shadow-lg"
+          >
+            Ai's Portfolio
+          </h1>
+        </div>
+        <!-- Hello -->
+        <div class="relative w-full text-center">
+          <img
+            class="absolute left-72 top-0 rounded-lg opacity-80"
+            src="../assets/images/top_3.jpg"
+            alt="top_3"
+          />
+          <img
+            class="absolute left-1/3 top-0 rounded-lg opacity-80"
+            src="../assets/images/top_4.jpg"
+            alt="top_3"
+          />
+          <img
+            class="absolute right-80 top-0 rounded-lg opacity-80"
+            src="../assets/images/top_5.jpg"
+            alt="top_3"
+          />
+          <h2 class="text-7xl text-white font-bold drop-shadow mt-2">
+            - Hello -
+          </h2>
+          <p class="text-3xl text-white mt-2 relative z-50 leading-relaxed">
+            閲覧頂きありがとうございます<br />
+            このサイトで少しでも私の事を知って頂けたら幸いです
+          </p>
+        </div>
+      </div>
     </header>
 
-    <!-- Hello セクション -->
-    <section class="hello">
-      <h2>Hello</h2>
-      <div class="hello-images">
-        <img src="../assets/images/top_1.jpg" alt="ネイル" />
-        <img src="../assets/images/top_2.jpg" alt="草原" />
-      </div>
-      <p>
-        育休中に学習した内容を活かし、システムエンジニアとして活動しています。
-      </p>
-    </section>
-
-    <!-- プロフィール -->
-    <section class="profile">
-      <h2>Profile</h2>
-      <div class="profile-text">
-        <p>
-          化粧品メーカーで営業・企画・ネイリストとして勤務。現在はIT業界でSESとして活動中。
-        </p>
-      </div>
-      <div class="social-icons">
-        <a href="mailto:example@example.com"
-          ><img src="mail-icon.png" alt="メール"
-        /></a>
-        <a href="https://twitter.com/yourhandle"
-          ><img src="twitter-icon.png" alt="X"
-        /></a>
-      </div>
-    </section>
-
-    <!-- 職務経歴 -->
-    <section id="experience" class="experience">
-      <h2>Previous Experience</h2>
-      <div class="experience-columns">
-        <div class="cosmetics">
-          <h3>化粧品業界</h3>
-          <p>2011〜2017年：営業・企画・ネイリスト業務</p>
-          <img src="nail-work.jpg" alt="ネイル施術" />
+    <main>
+      <!-- プロフィール -->
+      <section id="profile" class="bg-[#f8fdfa] mt-8 py-6 relative">
+        <div
+          class="double-line-header flex items-center justify-end w-full relative my-10 mx-0"
+        >
+          <h2 class="relative px-3 py-5 text-6xl inline-block text-right">
+            <span>Profile</span><span class="jp text-sm ml-2"> / 自己紹介</span>
+          </h2>
         </div>
-        <div class="it">
-          <h3>ネイリスト業務</h3>
-          <ul>
-            <li>ショッピングサイト</li>
-            <li>クリエイティブ業務</li>
-            <li>クラウド事業</li>
-            <li>銀行業務</li>
-            <li>プログラム作成</li>
-            <li>要件定義</li>
-            <li>ネイリスト業務</li>
+        <div class="container">
+          <ul class="mx-auto text-base space-y-2 ml-0 w-8/12">
+            <li class="flex border-b border-dotted border-[#bde7c4] pl-5 pb-4">
+              <span class="w-40">出身</span>
+              <div class="w-10/12">群馬県/現在は北海道</div>
+            </li>
+            <li class="flex border-b border-dotted border-[#bde7c4] pl-5 pb-4">
+              <span class="w-40">学歴</span>
+              <div class="w-10/12">東京国際大学へ入学、1年間オレゴンへ留学</div>
+            </li>
+            <li class="flex border-b border-dotted border-[#bde7c4] pl-5 pb-4">
+              <span class="w-40">自己紹介</span>
+              <div class="w-10/12">
+                1988年生まれ。
+                東京にて化粧品メーカーに就職。その後、好きな場所でのびのびと仕事がしたいと考える様になりSESへ転職。
+                現在は主人の地元でもある北海道へ移住。
+                子供二人に恵まれ北海道を満喫しながら過ごしています。
+              </div>
+            </li>
+            <li class="flex border-b border-dotted border-[#bde7c4] pl-5 pb-4">
+              <span class="w-40">趣味</span>
+              <ul class="w-10/12">
+                <li>ゲーム</li>
+                <li>もの作り</li>
+                <li>ファッション</li>
+                <li>ネイル</li>
+              </ul>
+            </li>
+            <li class="flex border-b border-dotted border-[#bde7c4] pl-5 pb-4">
+              <span class="w-40">尊敬する人</span>
+              <ul class="w-10/12">
+                <li>Shin codeさん</li>
+                <li>コードマフィアさん</li>
+                <div>
+                  細かい部分も教授して下さり、youtubeやUdemyで勉強の際本当にお世話になっています！
+                </div>
+              </ul>
+            </li>
           </ul>
-          <img src="computer-work.jpg" alt="PC作業" />
+          <div
+            class="flex flex-wrap justify-center gap-5 my-20 text-base font-medium"
+          >
+            <button
+              class="relative h-12 overflow-hidden rounded border border-rose-300 solid bg-white px-5 py-2.5 rose-300 transition-all duration-300 hover:bg-white hover:ring-2 hover:ring-rose-300 hover:ring-offset-2"
+            >
+              <i class="fa-solid fa-envelope mr-2 text-rose-300 text-xl"></i>
+              <span class="relative">ai.ebata.contact@gmail.com</span>
+            </button>
+            <button
+              class="relative h-12 overflow-hidden rounded border border-purple-400 solid bg-white px-5 py-2.5 rose-300 transition-all duration-300 hover:bg-white hover:ring-2 hover:ring-purple-400 hover:ring-offset-2"
+            >
+              <i class="fa-brands fa-github mr-2 text-purple-400 text-xl"></i>
+              <span class="relative"
+                >https://github.com/ainekoko/ai_portfolio</span
+              >
+            </button>
+            <button
+              class="relative h-12 overflow-hidden rounded border border-indigo-500 solid bg-white px-5 py-2.5 rose-300 transition-all duration-300 hover:bg-white hover:ring-2 hover:ring-indigo-500 hover:ring-offset-2"
+            >
+              <i
+                class="fa-brands fa-square-x-twitter mr-2 text-indigo-500 text-xl"
+              ></i>
+              <span class="relative">ai.ebata.contact@gmail.com</span>
+            </button>
+          </div>
+          <div class="absolute right-8 top-40 opacity-80">
+            <img
+              src="../assets/images/hokkaido.png"
+              alt="北海道イラスト"
+              class=""
+            />
+          </div>
         </div>
+      </section>
+
+      <!-- メッセージ -->
+      <section
+        id="message"
+        class="relative bg-[#fffbe6] z-10 flex flex-col items-center justify-center"
+      >
+        <h2
+          class="text-[#e5c227] text-center text-lg font-bold mb-3 z-10 relative"
+        >
+          Message
+        </h2>
+        <p
+          class="w-[800px] text-center text-base leading-relaxed z-10 relative"
+        >
+          初めまして。AIです(^^)/<br />
+          新卒で入社した化粧品メーカーでは、様々な経験をさせて頂きネイル商材のデザイン企画や大手企業の商品をともに作れるというやりがい、
+          時には被災地へ赴き子供から大人までネイルを無料で体験するコーナーを設けたり等、様々な経験をさせて頂きました。<br />
+          IT業界に興味を持ったきっかけは、自社商品を＠コスメにて紹介して頂いた所、看板商品になるまでに大きな反響がありました。<br />
+          それからもっと自社を大きくするにはネットが不可欠ではないか？今後もっとネット社会になっていくのでは？と思ったのがきっかけでした。<br />
+          ですが、当時会社ではWEBに力を入れておらず、必要最低限のHPしか作成されていませんでした。<br />
+          今後もWEBは外注に任せるとの事だったので、自分でHPに携わりたいと言う気持ちが大きくなりIT業界へ飛び込みました。<br />
+          当初は手探りで毎日勉強しても追いつかないくらいで半泣き状態でしたが、
+          家で過ごす時間も増え北海道への移住も叶い子供達も伸び伸びと過ごしている毎日にIT業界に転職して本当良かったなぁと思っています。
+        </p>
+      </section>
+      <!----------------------------- Previous Experience ------------------------------------->
+      <section id="experience" class="h-[860px] relative pt-10 px-4 bg-white">
+        <div
+          class="double-line-header flex items-center w-full relative my-10 mx-0"
+        >
+          <h2 class="relative px-3 py-5 text-6xl inline-block text-right">
+            <span>Previous Experience</span
+            ><span class="jp text-sm ml-2"> / 今までの仕事の紹介</span>
+          </h2>
+        </div>
+        <div
+          class="container flex justify-left gap-4 flex-wrap justify-between m-auto"
+        >
+          <!-- 化粧品メーカー左側 -->
+          <div class="w-6/12 flex flex-col">
+            <h3 class="text-3xl mb-1 pb-12">
+              化粧品メーカー<span class="jp text-sm ml-2"> 2011~2017</span>
+            </h3>
+            <p class="leading-loose">
+              入社当初はネイリストからの接客スタートでコミュニケーションスキルを身に着けました。<br />
+              2年目以降、総合営業職となり全国の店舗へ直接出向き商品の発注や紹介、イベントブースを提案しネイル体験コーナー等を店舗の方と企画したり、大手企業の商品をヒアリングからスケジュール調整、見積もり等目まぐるしい毎日ではありましたが貴重な経験をさせて頂きました。<br />
+              そして企画部へ異動となり、自社の商品企画に携わり企画デザインを100種類プレゼンまでに考えたりと大変な事も多々ありましたが、企画が通った時の達成感は「次も頑張るぞぉ！」と毎日にやりがいを感じられました。
+            </p>
+          </div>
+          <!-- 化粧品メーカー右側 -->
+          <div
+            class="bg-[#eaf4f4] p-5 mt-3.5 w-5/12 border-double shadow-[0_0_0_15px_#eaf4f4] border-white border-4"
+          >
+            <div class="border-b border-gray-200 pb-6">
+              <div class="flex-1 pr-6">
+                <!-- 2011 -->
+                <div class="text-lg font-bold text-gray-700">2011</div>
+                <div class="pl-10">
+                  <span class="text-sm font-medium"> ～ネイリスト～ </span>
+                  <ul class="mt-3 pl-2.5 space-y-2 text-sm text-gray-600">
+                    <li class="flex items-start">
+                      <span
+                        class="w-1 h-1 bg-gray-400 rounded-full mt-1.5 mr-3 flex-shrink-0"
+                      ></span>
+                      店舗接客にてコミュニケーションスキルを身に着ける
+                    </li>
+                  </ul>
+                </div>
+                <!-- 2012~2016 -->
+                <div class="text-lg font-bold text-gray-700">2012~2016</div>
+                <div class="pl-10">
+                  <span class="text-sm font-medium"> ～ルート営業～ </span>
+                  <ul class="mt-3 pl-2.5 space-y-2 text-sm text-gray-600">
+                    <li class="flex items-start">
+                      <span
+                        class="w-1 h-1 bg-gray-400 rounded-full mt-1.5 mr-3 flex-shrink-0"
+                      ></span>
+                      全国の店舗へ直接出向き、商品の棚卸発注や新商品の紹介、イベント等の企画提案
+                    </li>
+                  </ul>
+                </div>
+                <div class="pl-10">
+                  <span class="text-sm font-medium"> ～OEM営業～ </span>
+                  <ul class="mt-3 pl-2.5 space-y-2 text-sm text-gray-600">
+                    <li class="flex items-start">
+                      <span
+                        class="w-1 h-1 bg-gray-400 rounded-full mt-1.5 mr-3 flex-shrink-0"
+                      ></span>
+                      クライアント企業の要望をヒアリングし、
+                      ネイル商材や化粧品関連のオリジナル商品の開発・製造をサポート
+                    </li>
+                  </ul>
+                </div>
+                <!-- 2015~2017 -->
+                <div class="text-lg font-bold text-gray-700">2015~2017</div>
+                <div class="pl-10">
+                  <span class="text-sm font-medium"> ～企画～ </span>
+                  <ul class="mt-3 pl-2.5 space-y-2 text-sm text-gray-600">
+                    <li class="flex items-start">
+                      <span
+                        class="w-1 h-1 bg-gray-400 rounded-full mt-1.5 mr-3 flex-shrink-0"
+                      ></span>
+                      自社製品の企画の担当
+                      illustratorを使用しデザインの制作に携わる
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="absolute opacity-80 bottom-5 left-10">
+          <img src="../assets/images/nail_1.png" alt="ネイル" class="" />
+        </div>
+        <div
+          class="absolute left-1/2 bottom-0 -translate-x-1/2 -translate-y-1/2 text-[#eaf4f4] text-9xl md:text-[10rem] font-bold whitespace-nowrap pointer-events-none select-none"
+        >
+          Previous Experience
+        </div>
+      </section>
+      <!----------------------------- IT ------------------------------------->
+      <section id="it" class="h-[860px] relative pt-10 px-4 bg-[#cde4e4]">
+        <div
+          class="double-line-header flex items-center w-full relative my-10 mx-0"
+        ></div>
+        <div
+          class="container flex justify-left gap-4 flex-wrap justify-between m-auto"
+        >
+          <!-- IT左側 -->
+          <div class="w-6/12 flex flex-col">
+            <h3 class="text-3xl mb-1 pb-12">
+              IT業界<span class="jp text-sm ml-2"> 2018</span>
+            </h3>
+            <p class="leading-loose">
+              ただIT業界と言っても右も左も分からない状態； <br />
+              なので一先ずスクールに通い友達のネイルサイトを作成し、転職活動に挑みました！<br />
+              有り難いことに拾って頂きSESとして未熟な私にも様々な現場で経験が出来、本当に感謝をしています。<br />
+              契約の関係上、作成したサイトは転載する事が出来ませんがその現場での業務を記載しましたので見て頂けると幸いです。　
+            </p>
+          </div>
+          <!-- IT右側 -->
+          <div
+            class="z-10 bg-white p-5 mt-3.5 w-5/12 border-double shadow-[0_0_0_15px_#eaf4f4] border-[#a0b4b4] border-4"
+          >
+            <!-- shoppingサイト -->
+            <div class="max-w-2xl mx-auto bg-white">
+              <table class="w-full">
+                <thead>
+                  <tr>
+                    <th class="p-4 text-lg text-center jp">
+                      ショッピングサイト
+                    </th>
+                  </tr>
+                </thead>
+                <tbody class="text-sm">
+                  <tr>
+                    <td class="p-6">
+                      <div class="space-y-1.5 jp">
+                        <div class="flex items-start">
+                          <span class="mr-2">◆</span>
+                          <span class="mr-8">参画期間</span>
+                          <span>自社/出社/3か月</span>
+                        </div>
+
+                        <div class="flex items-start">
+                          <span class="mr-2">◆</span>
+                          <span class="mr-16">規模</span>
+                          <span>ディレクター1名、FE5名</span>
+                        </div>
+
+                        <div class="flex items-start">
+                          <span class="mr-2">◆</span>
+                          <span class="mr-6">担当フェーズ</span>
+                          <span>開発</span>
+                        </div>
+
+                        <div>
+                          <div class="flex items-start mb-2">
+                            <span class="text-black mr-2">◆</span>
+                            <span class="font-semibold">業務内容</span>
+                          </div>
+                          <div class="ml-6">
+                            <span class="text-black mr-2">•</span>
+                            <span>会員ページの改修作業</span>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <!-- 開発環境セクション -->
+                  <tr>
+                    <td class="px-6 py-4">
+                      <div
+                        class="border-t-2 border-dashed border-gray-400 pt-4"
+                      >
+                        <h3 class="font-bold text-lg mb-4 jp">開発環境</h3>
+                        <div class="space-y-1.5 jp">
+                          <div>
+                            <span class="font-semibold">【言語】</span>
+                            <span class="ml-2">HTML/CSS/PHP</span>
+                          </div>
+                          <div>
+                            <span class="font-semibold">【OS】</span>
+                            <span class="ml-4">Windows</span>
+                          </div>
+                          <div>
+                            <span class="font-semibold">【FW】</span>
+                            <span class="ml-4">Laravel</span>
+                          </div>
+                          <div>
+                            <span class="font-semibold">【ツール】</span>
+                            <span class="ml-2">Chatwork/GitHub</span>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <!-- 説明文セクション -->
+                  <tr>
+                    <td class="p-6">
+                      <p class="leading-relaxed jp">
+                        初の実務だった為、まずは先輩方から基本作法を学びながらページの改修作業を行いました。
+                      </p>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="absolute opacity-80 bottom-5 left-10">
+          <img src="../assets/images/nail_1.png" alt="ネイル" class="" />
+        </div>
+        <div
+          class="absolute left-1/2 bottom-0 -translate-x-1/2 -translate-y-1/2 text-[#eaf4f4] text-9xl md:text-[10rem] font-bold whitespace-nowrap pointer-events-none select-none"
+        >
+          Previous Experience
+        </div>
+      </section>
+
+      <!------------------------------------------ スキル ----------------------------------->
+      <section id="skill" class="bg-[#f8fdfa] py-6 relative">
+        <div
+          class="double-line-header flex items-center justify-end w-full relative my-10 mx-0"
+        >
+          <h2 class="relative px-3 py-5 text-6xl inline-block text-right">
+            <span>Skill</span
+            ><span class="jp text-sm ml-2">
+              / 現場で経験したスキルを一覧化しました</span
+            >
+          </h2>
+        </div>
+        <div class="container flex">
+          <!-- プログラミング言語 -->
+          <div id="programmingLanguage" class="w-1/2">
+            <p>Programing Language</p>
+            <ul
+              class="flex flex-wrap justify-start pt-10 gap-5 mb-4 text-base font-medium"
+            >
+              <li class="text-center">
+                <img
+                  src="../assets/images/icons8-html.svg"
+                  alt="HTML5"
+                  class="text-xl w-18 h-18 inline-block pb-2.5"
+                />
+                <p>HTML5</p>
+                <p class="text-sm text-gray-500">8 years</p>
+              </li>
+              <li class="text-center">
+                <img
+                  src="../assets/images/icons8-css.svg"
+                  alt="CSS"
+                  class="text-xl w-18 h-18 inline-block pb-2.5"
+                />
+                <p>CSS</p>
+                <p class="text-sm text-gray-500">8 years</p>
+              </li>
+              <li class="text-center">
+                <img
+                  src="../assets/images/icons8-js.svg"
+                  alt="JavaScript"
+                  class="text-xl w-18 h-18 inline-block pb-2.5"
+                />
+                <p>JavaScript</p>
+                <p class="text-sm text-gray-500">6 years</p>
+              </li>
+              <li class="text-center">
+                <img
+                  src="../assets/images/icons8-ts.svg"
+                  alt="TypeScript"
+                  class="text-xl w-18 h-18 inline-block pb-2.5"
+                />
+                <p>TypeScript</p>
+                <p class="text-sm text-gray-500">4 years</p>
+              </li>
+              <li class="text-center">
+                <img
+                  src="../assets/images/icons8-php.svg"
+                  alt="PHP"
+                  class="text-xl w-18 h-18 inline-block pb-2.5"
+                />
+                <p>PHP</p>
+                <p class="text-sm text-gray-500">1 years</p>
+              </li>
+            </ul>
+          </div>
+          <!-- CMS -->
+          <div id="cms" class="w-1/2">
+            <p>CMS</p>
+            <ul
+              class="flex flex-wrap justify-start gap-5 mb-4 pt-10 text-base font-medium"
+            >
+              <li class="text-center">
+                <img
+                  src="../assets/images/icons8-wp.svg"
+                  alt="WordPress"
+                  class="text-xl w-18 h-18 inline-block pb-2.5"
+                />
+                <p>WordPress</p>
+                <p class="text-sm text-gray-500">2 years</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="container flex">
+          <!-- Framework -->
+          <div id="framework" class="w-1/2">
+            <p>Framework</p>
+            <ul
+              class="flex flex-wrap justify-start pt-10 gap-5 mb-4 text-base font-medium"
+            >
+              <li class="text-center">
+                <img
+                  src="../assets/images/icons8-nextjs.svg"
+                  alt="Next.js"
+                  class="text-xl w-18 h-18 inline-block pb-2.5"
+                />
+                <p>Next.js</p>
+                <p class="text-sm text-gray-500">1 years 6 months</p>
+              </li>
+              <li class="text-center">
+                <img
+                  src="../assets/images/icons8-vue.svg"
+                  alt="Vue.js"
+                  class="text-xl w-18 h-18 inline-block pb-2.5"
+                />
+                <p>Vue.js</p>
+                <p class="text-sm text-gray-500">2 years</p>
+              </li>
+              <li class="text-center">
+                <img
+                  src="../assets/images/laravel.svg"
+                  alt="Laravel"
+                  class="text-xl w-18 h-18 inline-block pb-2.5"
+                />
+                <p>Laravel</p>
+                <p class="text-sm text-gray-500">6 months</p>
+              </li>
+              <li class="text-center">
+                <img
+                  src="../assets/images/icons8-bootstrap.svg"
+                  alt="BootStrap"
+                  class="text-xl w-18 h-18 inline-block pb-2.5"
+                />
+                <p>BootStrap</p>
+                <p class="text-sm text-gray-500">6 months</p>
+              </li>
+              <li class="text-center">
+                <img
+                  src="../assets/images/jest.svg"
+                  alt="Jest"
+                  class="text-xl w-18 h-18 inline-block pb-2.5"
+                />
+                <p>Jest</p>
+                <p class="text-sm text-gray-500">6 months</p>
+              </li>
+            </ul>
+          </div>
+          <!-- Library -->
+          <div id="library" class="w-1/2">
+            <p>Library</p>
+            <ul
+              class="flex flex-wrap justify-start pt-10 gap-5 mb-4 text-base font-medium"
+            >
+              <li class="text-center">
+                <img
+                  src="../assets/images/d3.svg"
+                  alt="D3.js"
+                  class="text-xl w-18 h-18 inline-block pb-2.5"
+                />
+                <p>D3.js</p>
+                <p class="text-sm text-gray-500">2 years</p>
+              </li>
+              <li class="text-center">
+                <img
+                  src="../assets/images/three.js.svg"
+                  alt="Three.js"
+                  class="text-xl w-18 h-18 inline-block pb-2.5"
+                />
+                <p>Three.js</p>
+                <p class="text-sm text-gray-500">6 months</p>
+              </li>
+              <li class="text-center">
+                <img
+                  src="../assets/images/icons8-react-native.svg"
+                  alt="React"
+                  class="text-xl w-18 h-18 inline-block pb-2.5"
+                />
+                <p>React</p>
+                <p class="text-sm text-gray-500">6 months</p>
+              </li>
+              <li class="text-center">
+                <img
+                  src="../assets/images/icons8-jquery.svg"
+                  alt="jQuery"
+                  class="text-xl w-18 h-18 inline-block pb-2.5"
+                />
+                <p>jQuery</p>
+                <p class="text-sm text-gray-500">2 months</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- Accordion -->
+        <div class="container mx-auto space-y-2">
+          <details class="accordion-003 mb-2 border-b-2 border-gray-300">
+            <summary
+              class="flex justify-between items-center relative px-8 py-4 text-gray-800 font-semibold cursor-pointer"
+            >
+              その他
+            </summary>
+            <div class="container flex border-t-[0.5px] border-gray-400">
+              <!-- another -->
+              <div id="another" class="">
+                <ul
+                  class="flex flex-wrap justify-start pt-10 gap-5 mb-4 text-base font-medium"
+                >
+                  <li class="text-center">
+                    <img
+                      src="../assets/images/icons8-adobe-xd.svg"
+                      alt="Adobe XD"
+                      class="text-xl w-18 h-18 inline-block pb-2.5"
+                    />
+                    <p>Adobe XD</p>
+                    <p class="text-sm text-gray-500">3 years</p>
+                  </li>
+                  <li class="text-center">
+                    <img
+                      src="../assets/images/icons8-adobe-illustrator.svg"
+                      alt="Adobe Illustrator"
+                      class="text-xl w-18 h-18 inline-block pb-2.5"
+                    />
+                    <p>Adobe Illustrator</p>
+                    <p class="text-sm text-gray-500">1 years</p>
+                  </li>
+                  <li class="text-center">
+                    <img
+                      src="../assets/images/icons8-adobe-photoshop.svg"
+                      alt="Adobe Photoshop"
+                      class="text-xl w-18 h-18 inline-block pb-2.5"
+                    />
+                    <p>Adobe Photoshop</p>
+                    <p class="text-sm text-gray-500">1 years</p>
+                  </li>
+                  <li class="text-center">
+                    <img
+                      src="../assets/images/icons8-figma.svg"
+                      alt="Figma"
+                      class="text-xl w-18 h-18 inline-block pb-2.5"
+                    />
+                    <p>Figma</p>
+                    <p class="text-sm text-gray-500">6 months</p>
+                  </li>
+                  <li class="text-center">
+                    <img
+                      src="../assets/images/icons8-visual-studio.png"
+                      alt="Visual Studio"
+                      class="text-xl w-18 h-18 inline-block pb-2.5"
+                    />
+                    <p>Visual Studio</p>
+                    <p class="text-sm text-gray-500">6 months</p>
+                  </li>
+                  <li class="text-center">
+                    <img
+                      src="../assets/images/flourish.png"
+                      alt="Flourish"
+                      class="text-xl w-18 h-18 inline-block pb-2.5"
+                    />
+                    <p>Flourish</p>
+                    <p class="text-sm text-gray-500">1 years</p>
+                  </li>
+                  <li class="text-center">
+                    <img
+                      src="../assets/images/icons8-storybook.svg"
+                      alt="Storybook"
+                      class="text-xl w-18 h-18 inline-block pb-2.5"
+                    />
+                    <p>Storybook</p>
+                    <p class="text-sm text-gray-500">2 years</p>
+                  </li>
+                  <li class="text-center">
+                    <img
+                      src="../assets/images/icons8-github.svg"
+                      alt="GitHub"
+                      class="text-xl w-18 h-18 inline-block pb-2.5"
+                    />
+                    <p>GitHub</p>
+                    <p class="text-sm text-gray-500">2 years</p>
+                  </li>
+                  <li class="text-center">
+                    <img
+                      src="../assets/images/icons8-gitlab.svg"
+                      alt="GitLab"
+                      class="text-xl w-18 h-18 inline-block pb-2.5"
+                    />
+                    <p>GitLab</p>
+                    <p class="text-sm text-gray-500">2 years</p>
+                  </li>
+                  <li class="text-center">
+                    <img
+                      src="../assets/images/icons8-sass.svg"
+                      alt="Sass"
+                      class="text-xl w-18 h-18 inline-block pb-2.5"
+                    />
+                    <p>Sass</p>
+                    <p class="text-sm text-gray-500">2 years</p>
+                  </li>
+                  <li class="text-center">
+                    <img
+                      src="../assets/images/icons8-firebase.svg"
+                      alt="Firebase"
+                      class="text-xl w-18 h-18 inline-block pb-2.5"
+                    />
+                    <p>Firebase</p>
+                    <p class="text-sm text-gray-500">6 months</p>
+                  </li>
+                  <li class="text-center">
+                    <img
+                      src="../assets/images/icons8-docker.svg"
+                      alt="Docker"
+                      class="text-xl w-18 h-18 inline-block pb-2.5"
+                    />
+                    <p>Docker</p>
+                    <p class="text-sm text-gray-500">1 years</p>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </details>
+        </div>
+        <!-- 設計書関連 -->
+        <div class="container bg-white p-8 rounded-lg shadow-sm">
+          <h2 class="text-xl font-bold text-gray-800 mb-6">設計書関連</h2>
+
+          <ul class="space-y-4 list-none pl-0">
+            <li class="relative pl-6">
+              <span class="absolute left-0 top-1 text-gray-600">-</span>
+              <div>
+                <span class="text-gray-800 font-medium">要件概要書</span>
+                <span class="text-gray-600 ml-2">（QAの資料作成等）</span>
+              </div>
+            </li>
+
+            <li class="relative pl-6">
+              <span class="absolute left-0 top-1 text-gray-600">-</span>
+              <div>
+                <span class="text-gray-800 font-medium">基本設計書</span>
+                <span class="text-gray-600 ml-2"
+                  >（機能書、業務フロー図、外部設計書、WF図）</span
+                >
+              </div>
+            </li>
+
+            <li class="relative pl-6">
+              <span class="absolute left-0 top-1 text-gray-600">-</span>
+              <div>
+                <span class="text-gray-800 font-medium">詳細設計書</span>
+                <span class="text-gray-600 ml-2"
+                  >（画面遷移図、APIとの整合性確認、内部設計書、テストケースなど）</span
+                >
+              </div>
+            </li>
+          </ul>
+        </div>
+      </section>
+      <!----------------------------------------- message－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－ -->
+      <div class="relative">
+        <img
+          src="../assets/images/wave_1.svg"
+          alt="背景の波線1"
+          class="bg-[#f8fdfa]"
+        />
+        <img
+          src="../assets/images/wave_2.svg"
+          alt="背景の波線2"
+          class="bg-[#7DFFE1]"
+        />
       </div>
-    </section>
+      <section id="contact" class="mx-auto bg-[#C1FFEA]">
+        <div
+          class="double-line-header flex items-center justify-end w-full relative py-10 mx-0"
+        >
+          <h2 class="relative px-3 py-5 text-6xl inline-block text-right">
+            <span>Contact</span
+            ><span class="jp text-sm ml-2">
+              / ご質問がありましたらお気軽にご連絡ください</span
+            >
+          </h2>
+        </div>
 
-    <!-- スキル -->
-    <section id="skills" class="skills">
-      <h2>Skill</h2>
-      <div class="skill-icons">
-        <img src="html5.png" alt="HTML5" />
-        <img src="css3.png" alt="CSS3" />
-        <img src="js.png" alt="JavaScript" />
-        <img src="php.png" alt="PHP" />
-        <img src="laravel.png" alt="Laravel" />
-        <img src="vue.png" alt="Vue.js" />
-        <img src="nextjs.png" alt="Next.js" />
-        <img src="wordpress.png" alt="WordPress" />
-        <!-- 他のアイコンも追加可能 -->
-      </div>
-      <p>このポートフォリオは育休中の6か月間で制作しました。</p>
-    </section>
-
-    <!-- お問い合わせ -->
-    <section id="contact" class="contact">
-      <h2>Contact</h2>
-      <form>
-        <input type="text" name="name" placeholder="名前" />
-        <input type="email" name="email" placeholder="メールアドレス" />
-        <textarea name="message" placeholder="メッセージ"></textarea>
-        <button type="submit">送信</button>
-      </form>
-    </section>
-
-    <!-- フッター -->
-    <footer>
-      <p>&copy; 2025 Ai</p>
+        <div class="bg-[#C1FFEA] container px-80">
+          <form class="flex flex-col gap-3 mx-auto py-4">
+            <label for="name" class="text-[#348a58] text-sm">Name</label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              required
+              class="border border-[#bde7c4] rounded px-3 py-2 text-base"
+            />
+            <label for="email" class="text-[#348a58] text-sm"
+              >Mail Address</label
+            >
+            <input
+              type="email"
+              id="email"
+              name="email"
+              required
+              class="border border-[#bde7c4] rounded px-3 py-2 text-base"
+            />
+            <label for="message" class="text-[#348a58] text-sm">comment</label>
+            <textarea
+              id="contactMessage"
+              name="message"
+              rows="4"
+              required
+              class="border border-[#bde7c4] rounded px-3 py-2 text-base"
+            ></textarea>
+            <button
+              class="bg-green-700/50 hover:bg-green-700/20 text-white font-semibold py-3 px-6 rounded-xl backdrop-blur-md border border-white/30 transform transition-all duration-300 ease-out hover:scale-95 hover:translate-y-1 shadow-lg hover:shadow-md"
+            >
+              送信
+            </button>
+          </form>
+        </div>
+      </section>
+    </main>
+    <footer class="bg-[#C1FFEA] relative">
+      <p
+        class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10"
+      >
+        © 2025 Ai's Portfolio
+      </p>
+      <img src="../assets/images/fotter.png" alt="クローバー" class="" />
     </footer>
+
+    <!-- ハンバーガーメニュー開閉スクリプト -->
+    <script>
+      const burger = document.getElementById('burger');
+      const nav = document.getElementById('nav');
+      burger.addEventListener('click', function () {
+        nav.classList.toggle('invisible');
+        nav.classList.toggle('opacity-0');
+        nav.classList.toggle('opacity-100');
+        nav.classList.toggle('visible');
+        burger.classList.toggle('burger-open');
+      });
+      // メニューリンククリックで閉じる
+      nav.querySelectorAll('a').forEach((el) => {
+        el.addEventListener('click', () => {
+          nav.classList.add('invisible', 'opacity-0');
+          nav.classList.remove('visible', 'opacity-100');
+          burger.classList.remove('burger-open');
+        });
+      });
+    </script>
   </body>
 </html>
