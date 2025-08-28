@@ -13,7 +13,7 @@ export default function Home() {
           </Scroll>
           <Scroll html>
             <h1 style={{ position: 'absolute', top: '30vh', left: '1em' }}>
-              Ai's Portfolio
+              Ai&rsquo;s Portfolio{' '}
             </h1>
             <h1 style={{ position: 'absolute', top: '140vh', left: '40vw' }}>
               - Hello -
