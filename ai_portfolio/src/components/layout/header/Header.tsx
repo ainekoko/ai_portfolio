@@ -3,7 +3,7 @@ import React from 'react';
 const Header = () => {
   return (
     <header>
-      <nav className='z-10 fixed top-0 right-0 w-64 h-full flex flex-col'>
+      <nav className='pointer-events-none z-10 fixed top-0 right-0 w-64 h-full flex flex-col'>
         <div className='p-6 flex justify-end'>
           <div className='flex flex-col gap-1'>
             <div className='w-8 h-0.5 bg-black'></div>
@@ -50,7 +50,7 @@ const Header = () => {
         </div>
       </nav>
       {/* header Top */}
-      <div className='sticky top-0 z-20'>
+      <div className='fixed top-0 left-0 z-20 pointer-events-auto'>
         <div className='header-top flex items-center px-6 pt-4 pb-2 relative'>
           <p className='text-[#3b3b3b] text-2xl font-bold tracking-wider'>
             Ai&rsquo;s Portfolio
