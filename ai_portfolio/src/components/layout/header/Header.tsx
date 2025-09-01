@@ -4,74 +4,6 @@ import styles from './Header.module.css';
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  // スタイルをReactコンポーネント内で管理
-  useEffect(() => {
-    // カスタムスタイルをheadに追加
-    const style = document.createElement('style');
-    style.textContent = `
-      /* SVG Path Animation */
-      .hamburger-line {
-        fill: none;
-        stroke: #000;
-        stroke-width: 6;
-        transition: stroke-dasharray 600ms cubic-bezier(0.4, 0, 0.2, 1),
-                    stroke-dashoffset 600ms cubic-bezier(0.4, 0, 0.2, 1);
-      }
-      
-      .hamburger-line:nth-child(1) {
-        stroke-dasharray: 60 207;
-      }
-      
-      .hamburger-line:nth-child(2) {
-        stroke-dasharray: 60 60;
-      }
-      
-      .hamburger-line:nth-child(3) {
-        stroke-dasharray: 60 207;
-      }
-      
-      .hamburger-active .hamburger-line:nth-child(1) {
-        stroke-dasharray: 90 207;
-        stroke-dashoffset: -134;
-      }
-      
-      .hamburger-active .hamburger-line:nth-child(2) {
-        stroke-dasharray: 1 60;
-        stroke-dashoffset: -30;
-      }
-      
-      .hamburger-active .hamburger-line:nth-child(3) {
-        stroke-dasharray: 90 207;
-        stroke-dashoffset: -134;
-      }
-
-      /* Clip-path animation */
-      .nav-clip-initial {
-        clip-path: circle(0% at calc(100% - 44px) 44px);
-      }
-      
-      .nav-clip-active {
-        clip-path: circle(150% at calc(100% - 44px) 44px);
-      }
-
-      /* Nav item animations */
-      .nav-item-enter {
-        opacity: 1 !important;
-        transform: translateY(0) !important;
-      }
-    `;
-
-    // スタイルをheadに追加
-    document.head.appendChild(style);
-
-    // クリーンアップ
-    return () => {
-      if (document.head.contains(style)) {
-        document.head.removeChild(style);
-      }
-    };
-  }, []);
-
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
@@ -100,7 +32,7 @@ const Header = () => {
           <button
             onClick={toggleMenu}
             className={`fixed top-5 right-5 z-[1000] w-12 h-12 p-0 border-none bg-transparent cursor-pointer pointer-events-auto ${
-              isMenuOpen ? 'hamburger-active' : ''
+              isMenuOpen ? styles.hamburgerActive : ''
             }`}
             aria-label='メニュー'
             aria-controls='morph-menu'
@@ -113,12 +45,12 @@ const Header = () => {
               viewBox='0 0 100 100'
             >
               <path
-                className='hamburger-line'
+                className={styles.hamburgerLine}
                 d='M 20,29 H 80 C 80,29 94.5,28.817352 94.532987,66.711331 94.543142,77.980673 90.966081,81.670246 85.259173,81.668997 79.552261,81.667751 75.000211,74.999942 75.000211,74.999942 L 25.000021,25.000058'
               />
-              <path className='hamburger-line' d='M 20,50 H 80' />
+              <path className={styles.hamburgerLine} d='M 20,50 H 80' />
               <path
-                className='hamburger-line'
+                className={styles.hamburgerLine}
                 d='M 20,71 H 80 C 80,71 94.5,71.182648 94.532987,33.288669 94.543142,22.019327 90.966081,18.329754 85.259173,18.331003 79.552261,18.332249 75.000211,25.000058 75.000211,25.000058 L 25.000021,74.999942'
               />
             </svg>
@@ -128,7 +60,7 @@ const Header = () => {
           <nav
             id='morph-menu'
             className={`fixed top-0 left-0 w-full h-screen bg-gray-900/[0.98] transition-all duration-700 ease-out z-[900] pointer-events-auto ${
-              isMenuOpen ? 'nav-clip-active' : 'nav-clip-initial'
+              isMenuOpen ? styles.navClipActive : styles.navClipInitial
             }`}
             aria-hidden={!isMenuOpen}
           >
@@ -148,7 +80,7 @@ const Header = () => {
                     key={index}
                     className={`nav-item opacity-0 translate-y-7 transition-all duration-[400ms] ease-out ${
                       item.delay
-                    } ${isMenuOpen ? 'nav-item-enter' : ''}`}
+                    } ${isMenuOpen ? styles.navItemEnter : ''}`}
                   >
                     <a
                       href='#'
