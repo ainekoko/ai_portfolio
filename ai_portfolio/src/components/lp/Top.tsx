@@ -35,7 +35,7 @@ const Top = () => {
               <h1 className='absolute top-[30vh] left-4 text-4xl font-bold'>
                 Ai&rsquo;s Portfolio
               </h1>
-              <h1 className='absolute top-[125vh] left-[35vw] text-3xl font-bold'>
+              <h1 className='absolute top-[125vh] left-[30vw] text-3xl font-bold'>
                 - Hello -
               </h1>
               <p className='absolute top-[145vh] left-[50vw] text-lg w-1'>
@@ -49,7 +49,7 @@ const Top = () => {
             <div
               style={{
                 position: 'absolute',
-                top: '200vh',
+                top: '300vh',
                 width: '100vw',
                 height: '100vh',
                 background: 'linear-gradient(to bottom, #000, #333)',

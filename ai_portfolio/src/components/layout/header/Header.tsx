@@ -1,54 +1,198 @@
-import React from 'react';
-
+'use client';
+import { useState, useEffect } from 'react';
+import styles from './Header.module.css';
 const Header = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  // スタイルをReactコンポーネント内で管理
+  useEffect(() => {
+    // カスタムスタイルをheadに追加
+    const style = document.createElement('style');
+    style.textContent = `
+      /* SVG Path Animation */
+      .hamburger-line {
+        fill: none;
+        stroke: #000;
+        stroke-width: 6;
+        transition: stroke-dasharray 600ms cubic-bezier(0.4, 0, 0.2, 1),
+                    stroke-dashoffset 600ms cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      
+      .hamburger-line:nth-child(1) {
+        stroke-dasharray: 60 207;
+      }
+      
+      .hamburger-line:nth-child(2) {
+        stroke-dasharray: 60 60;
+      }
+      
+      .hamburger-line:nth-child(3) {
+        stroke-dasharray: 60 207;
+      }
+      
+      .hamburger-active .hamburger-line:nth-child(1) {
+        stroke-dasharray: 90 207;
+        stroke-dashoffset: -134;
+      }
+      
+      .hamburger-active .hamburger-line:nth-child(2) {
+        stroke-dasharray: 1 60;
+        stroke-dashoffset: -30;
+      }
+      
+      .hamburger-active .hamburger-line:nth-child(3) {
+        stroke-dasharray: 90 207;
+        stroke-dashoffset: -134;
+      }
+
+      /* Clip-path animation */
+      .nav-clip-initial {
+        clip-path: circle(0% at calc(100% - 44px) 44px);
+      }
+      
+      .nav-clip-active {
+        clip-path: circle(150% at calc(100% - 44px) 44px);
+      }
+
+      /* Nav item animations */
+      .nav-item-enter {
+        opacity: 1 !important;
+        transform: translateY(0) !important;
+      }
+    `;
+
+    // スタイルをheadに追加
+    document.head.appendChild(style);
+
+    // クリーンアップ
+    return () => {
+      if (document.head.contains(style)) {
+        document.head.removeChild(style);
+      }
+    };
+  }, []);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+  };
+
+  // Escapeキーでメニューを閉じる
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isMenuOpen) {
+        closeMenu();
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [isMenuOpen]);
+
   return (
     <header>
       <nav className='pointer-events-none z-10 fixed top-0 right-0 w-64 h-full flex flex-col'>
-        <div className='p-6 flex justify-end'>
-          <div className='flex flex-col gap-1'>
-            <div className='w-8 h-0.5 bg-black'></div>
-            <div className='w-8 h-0.5 bg-black'></div>
-            <div className='w-8 h-0.5 bg-black'></div>
-          </div>
+        <div className='header'>
+          {/* Hamburger Button */}
+          <button
+            onClick={toggleMenu}
+            className={`fixed top-5 right-5 z-[1000] w-12 h-12 p-0 border-none bg-transparent cursor-pointer pointer-events-auto ${
+              isMenuOpen ? 'hamburger-active' : ''
+            }`}
+            aria-label='メニュー'
+            aria-controls='morph-menu'
+            aria-expanded={isMenuOpen}
+          >
+            <svg
+              className='w-full h-full'
+              width='48'
+              height='48'
+              viewBox='0 0 100 100'
+            >
+              <path
+                className='hamburger-line'
+                d='M 20,29 H 80 C 80,29 94.5,28.817352 94.532987,66.711331 94.543142,77.980673 90.966081,81.670246 85.259173,81.668997 79.552261,81.667751 75.000211,74.999942 75.000211,74.999942 L 25.000021,25.000058'
+              />
+              <path className='hamburger-line' d='M 20,50 H 80' />
+              <path
+                className='hamburger-line'
+                d='M 20,71 H 80 C 80,71 94.5,71.182648 94.532987,33.288669 94.543142,22.019327 90.966081,18.329754 85.259173,18.331003 79.552261,18.332249 75.000211,25.000058 75.000211,25.000058 L 25.000021,74.999942'
+              />
+            </svg>
+          </button>
+
+          {/* Navigation Menu */}
+          <nav
+            id='morph-menu'
+            className={`fixed top-0 left-0 w-full h-screen bg-gray-900/[0.98] transition-all duration-700 ease-out z-[900] pointer-events-auto ${
+              isMenuOpen ? 'nav-clip-active' : 'nav-clip-initial'
+            }`}
+            aria-hidden={!isMenuOpen}
+          >
+            <div className='flex items-center justify-center w-full h-full'>
+              <ul className='m-0 p-0 list-none text-center'>
+                {[
+                  { en: 'Home', ja: 'ホーム', delay: 'delay-[300ms]' },
+                  {
+                    en: 'Portfolio',
+                    ja: 'ポートフォリオ',
+                    delay: 'delay-[400ms]',
+                  },
+                  { en: 'Mypage', ja: 'マイページ', delay: 'delay-[500ms]' },
+                  { en: 'Blog', ja: 'ブログ', delay: 'delay-[600ms]' },
+                ].map((item, index) => (
+                  <li
+                    key={index}
+                    className={`nav-item opacity-0 translate-y-7 transition-all duration-[400ms] ease-out ${
+                      item.delay
+                    } ${isMenuOpen ? 'nav-item-enter' : ''}`}
+                  >
+                    <a
+                      href='#'
+                      onClick={(e) => {
+                        e.preventDefault();
+                        closeMenu();
+                      }}
+                      className='relative inline-block py-5 px-5 text-3xl text-white no-underline overflow-hidden group'
+                    >
+                      <span className='block transition-transform duration-300 ease-out group-hover:-translate-y-full'>
+                        {item.en}
+                      </span>
+                      <span className='absolute top-full left-0 w-full block transition-transform duration-300 ease-out group-hover:-translate-y-full'>
+                        {item.ja}
+                      </span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </nav>
         </div>
 
         {/* ナビゲーションメニュー */}
-        <div className='flex flex-col items-end pr-8 gap-1'>
-          <a
-            href='#profile'
-            className='nav-text text-xl text-gray-800 hover:text-gray-600 transition-colors duration-300 transform hover:translate-x-2'
-          >
-            Profile
-          </a>
 
-          <a
-            href='#experience'
-            className='mt-0 nav-text text-xl text-gray-800 hover:text-gray-600 transition-colors duration-300 transform hover:translate-x-2'
-          >
-            Previous Experience
-          </a>
-
-          <a
-            href='#contact'
-            className='mt-0 nav-text text-xl text-gray-800 hover:text-gray-600 transition-colors duration-300 transform hover:translate-x-2'
-          >
-            Contact
-          </a>
-          <a
-            href='#portfolio'
-            className='nav-text text-xl text-gray-800 hover:text-gray-600 transition-colors duration-300 transform hover:translate-x-2'
-          >
-            Portfolio
-          </a>
-
-          <a
-            href='#mypage'
-            className='text-xl text-gray-800 hover:text-gray-600 transition-colors duration-300 transform hover:translate-x-2'
-          >
-            My Page
-          </a>
+        <div className='flex flex-col items-end pr-8 gap-1 mt-20 pointer-events-auto'>
+          {[
+            { href: '#profile', text: 'Profile' },
+            { href: '#experience', text: 'Previous Experience' },
+            { href: '#contact', text: 'Contact' },
+            { href: '#portfolio', text: 'Portfolio' },
+            { href: '#mypage', text: 'My Page' },
+          ].map((link, index) => (
+            <a
+              key={index}
+              href={link.href}
+              className='nav-text text-xl text-gray-800 hover:text-gray-600 transition-all duration-300 transform hover:translate-x-2'
+            >
+              {link.text}
+            </a>
+          ))}
         </div>
       </nav>
+
       {/* header Top */}
       <div className='fixed top-0 left-0 z-20 pointer-events-auto'>
         <div className='header-top flex items-center px-6 pt-4 pb-2 relative'>
