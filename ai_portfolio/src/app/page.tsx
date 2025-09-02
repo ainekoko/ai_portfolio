@@ -1,8 +1,11 @@
-import Top from '@/components/lp/Top';
+import ThreeCanvas from '@/components/ThreeCanvas';
 export default function Home() {
   return (
-    <div className='overflow-x-hidden'>
-      <Top />
-    </div>
+    <main>
+      {/* クライアントコンポーネントで3D体験 */}
+      <section className='h-screen'>
+        <ThreeCanvas />
+      </section>
+    </main>
   );
 }
