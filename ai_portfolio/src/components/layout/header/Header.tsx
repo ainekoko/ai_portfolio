@@ -13,7 +13,6 @@ const Header = () => {
   const closeMenu = () => {
     setIsMenuOpen(false);
   };
-
   // Escapeキーでメニューを閉じる
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
