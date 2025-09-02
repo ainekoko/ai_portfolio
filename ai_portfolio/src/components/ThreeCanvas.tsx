@@ -21,12 +21,12 @@ const ThreeCanvas = () => {
             <h1 className='absolute top-[125vh] left-[30vw] text-3xl font-bold'>
               - Hello -
             </h1>
-            <p className='absolute top-[145vh] left-[50vw] text-lg w-1'>
+            <p className='absolute top-[145vh] left-[50vw] text-lg w-1 drop-shadow-[0_0_3px_white]'>
               閲覧頂きありがとうございます
             </p>
-            <p className='absolute top-[150vh] left-[45vw] text-base w-1'>
+            <p className='absolute top-[150vh] left-[45vw] text-base w-1 drop-shadow-[0_0_3px_white]'>
               このサイトで少しでも私の事を知って頂けたら幸いです
-            </p>
+            </p>{' '}
           </div>
           {/* 追加のセクション */}
           <div
