@@ -1,51 +1,29 @@
 // components/ThreeCanvas.tsx
 'use client';
+import { useState } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { Scroll, ScrollControls } from '@react-three/drei';
-import { useEffect, useState } from 'react';
 import ScrollImg from '@/components/templetes/scroll-img';
 import ScrollHandler from './ScrollHandler';
-
-// コンポーネントでの使用例
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { faGithub, faXTwitter } from '@fortawesome/free-brands-svg-icons';
 
 const ThreeCanvas = () => {
   const [visibleSections, setVisibleSections] = useState<Set<string>>(
-    new Set()
+    new Set() //Set{"hello", "profile"}
   );
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setVisibleSections((prev) => new Set([...prev, entry.target.id]));
-          }
-        });
-      },
-      { threshold: 0.3 } // 30%表示されたらアニメーション開始
-    );
-
-    // 監視対象のセクションを取得
-    const sections = ['profile', 'projects', 'hello']; // 必要に応じてセクション名を追加
-    sections.forEach((sectionId) => {
-      const element = document.getElementById(sectionId);
-      if (element) {
-        observer.observe(element);
-      }
-    });
-
-    return () => observer.disconnect();
-  }, []);
-
+  /* @description: セクションの表示状態を判定
+   * @param sectionId - セクションのID{"hello", "profile"...}
+   * @returns セクションが表示されているかどうか真偽値
+   */
   const isVisible = (sectionId: string) => visibleSections.has(sectionId);
 
   return (
     <Canvas frameloop='demand'>
-      {/* ページ数を増やして全体のコンテンツを含める */}
-      <ScrollControls damping={0.5} pages={4}>
+      <ScrollControls pages={4}>
+        {/* スクロール位置に応じて表示するタイトルのセクションを制御 */}
         <ScrollHandler setVisibleSections={setVisibleSections} />
         <Scroll>
           <ScrollImg />
@@ -101,7 +79,7 @@ const ThreeCanvas = () => {
                 ></div>
               </div>
               <h2
-                className={`relative px-3 py-5 text-6xl inline-block text-right transition-all duration-1000 ease-out delay-200 ${
+                className={`relative px-3 py-5 text-9xl inline-block text-right transition-all duration-1000 ease-out delay-200 ${
                   isVisible('profile')
                     ? 'translate-y-0 opacity-100'
                     : 'translate-y-8 opacity-0'
@@ -171,7 +149,7 @@ const ThreeCanvas = () => {
                   </ul>
                 </li>
               </ul>
-              <div className='flex flex-wrap justify-center gap-5 my-20 text-base font-medium'>
+              <div className='flex flex-wrap justify-center gap-5 my-15 text-base font-medium'>
                 <button className='relative h-12 overflow-hidden rounded border border-rose-300 solid bg-white px-5 py-2.5 rose-300 transition-all duration-300 hover:bg-white hover:ring-2 hover:ring-rose-300 hover:ring-offset-2'>
                   <FontAwesomeIcon
                     icon={faEnvelope}
