@@ -69,8 +69,6 @@ const CustomCursor: React.FC<CustomCursorProps> = ({
     (e: MouseEvent) => {
       const target = e.target as HTMLElement;
       const isHoverElement = target.matches(hoverSelectors);
-      console.log('1', target, hoverSelectors);
-      console.log('1', isHoverElement);
       setIsHovering(isHoverElement);
     },
     [hoverSelectors]
