@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import Header from '@/components/layout/header/Header';
 import Footer from '@/components/layout/footer/Footer';
+import { ScrollVisibilityProvider } from '@/context/ScrollVisibilityContext';
 import './globals.css';
 
 const geistSans = Geist({
@@ -30,7 +31,9 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <Header />
-        <main>{children}</main>
+        <main>
+          <ScrollVisibilityProvider>{children}</ScrollVisibilityProvider>
+        </main>
         <Footer />
       </body>
     </html>

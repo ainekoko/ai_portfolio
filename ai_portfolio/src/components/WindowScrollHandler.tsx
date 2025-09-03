@@ -1,15 +1,12 @@
-// スクロール位置に応じて表示するセクションタイトルを制御するコンポーネント
-
+// components/WindowScrollHandler.tsx - Context使用版
 'use client';
+import { useScrollVisibility } from '@/context/ScrollVisibilityContext';
 import { useScroll } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
 import { useRef } from 'react';
 
-interface ScrollHandlerProps {
-  setVisibleSections: (sections: Set<string>) => void;
-}
-
-const ScrollHandler = ({ setVisibleSections }: ScrollHandlerProps) => {
+const WindowScrollHandler = () => {
+  const { setVisibleSections } = useScrollVisibility(); // Context から取得
   const scroll = useScroll(); //スクロール位置（0-1の範囲）を取得
   const lastOffsetRef = useRef<number>(-1); //前回のスクロール位置
   const lastVisibleSectionsRef = useRef<string>(''); //前回表示されていたセクションリストを文字列で記憶
@@ -57,4 +54,4 @@ const ScrollHandler = ({ setVisibleSections }: ScrollHandlerProps) => {
   return null;
 };
 
-export default ScrollHandler;
+export default WindowScrollHandler;
