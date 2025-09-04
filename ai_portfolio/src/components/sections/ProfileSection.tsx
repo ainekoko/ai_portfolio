@@ -2,7 +2,6 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { faGithub, faXTwitter } from '@fortawesome/free-brands-svg-icons';
-import { useState } from 'react';
 const ProfileSection = () => {
   return (
     <section
@@ -12,7 +11,7 @@ const ProfileSection = () => {
       <div className='flex items-center w-full relative my-10 mx-0'>
         {/* 左側の短い二重線 */}
         <div className='w-16 relative mr-6 overflow-hidden'>
-          <div
+          {/* <div
             className={`bg-gray-400 transition-all duration-1000 ease-out ${
               isVisible('profile')
                 ? 'translate-x-0 opacity-100'
@@ -27,21 +26,24 @@ const ProfileSection = () => {
                 : '-translate-x-full opacity-0'
             }`}
             style={{ height: '0.5px' }}
-          ></div>
+          ></div> */}
         </div>
-        <h2
+        {/* <h2
           className={`relative px-3 py-5 text-9xl inline-block text-right transition-all duration-1000 ease-out delay-200 ${
             isVisible('profile')
               ? 'translate-y-0 opacity-100'
               : 'translate-y-8 opacity-0'
           }`}
+        > */}
+        <h2
+          className={`relative px-3 py-5 text-9xl inline-block text-right transition-all duration-1000 ease-out delay-200`}
         >
           <span>Profile</span>
           <span className='jp text-sm ml-2'> / 自己紹介</span>
         </h2>
         {/* 右側の長い二重線 */}
         <div className='flex-1 ml-8 relative overflow-hidden'>
-          <div
+          {/* <div
             className={`bg-gray-400 transition-all duration-1000 ease-out delay-300 ${
               isVisible('profile')
                 ? 'translate-x-0 opacity-100'
@@ -56,7 +58,7 @@ const ProfileSection = () => {
                 : 'translate-x-full opacity-0'
             }`}
             style={{ height: '0.5px' }}
-          ></div>
+          ></div> */}
         </div>
       </div>
       <div className='container'>
