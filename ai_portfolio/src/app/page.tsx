@@ -1,11 +1,8 @@
-import ThreeCanvas from '@/components/ThreeCanvas';
+import ThreeCanvas from '@/components/three/ThreeCanvas';
 export default function Home() {
   return (
-    <main>
-      {/* クライアントコンポーネントで3D体験 */}
-      <section className='h-screen'>
-        <ThreeCanvas />
-      </section>
+    <main className='h-screen'>
+      <ThreeCanvas />
     </main>
   );
 }
