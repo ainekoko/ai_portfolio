@@ -21,7 +21,7 @@ const ScrollImg: React.FC = () => {
   useFrame(() => {
     if (!group.current) return;
     const children = group.current.children;
-    if (children.length >= 4) {
+    if (children.length >= 5) {
       (children[0] as unknown as ZoomSprite).material.zoom =
         1 + data.range(0, 1 / 3) / 3;
       (children[1] as unknown as ZoomSprite).material.zoom =
@@ -29,6 +29,8 @@ const ScrollImg: React.FC = () => {
       (children[2] as unknown as ZoomSprite).material.zoom =
         1 + data.range(1.15 / 3, 1 / 3) / 3;
       (children[3] as unknown as ZoomSprite).material.zoom =
+        1 + data.range(1.15 / 3, 1 / 3) / 3;
+      (children[4] as unknown as ZoomSprite).material.zoom =
         1 + data.range(1.15 / 3, 1 / 3) / 3;
     }
   });
@@ -39,28 +41,28 @@ const ScrollImg: React.FC = () => {
         {/* eslint-disable-next-line jsx-a11y/alt-text */}
         <Image
           url='/assets/images/top_1.jpg'
-          scale={[2, 6]}
-          position={[-2, -1, 1]}
+          scale={[2.5, 6]} // もっと小さく
+          position={[-3, -1, 1]}
         />
         {/* eslint-disable-next-line jsx-a11y/alt-text */}
-        <Image url='/assets/images/top_2.jpg' scale={3} position={[2, 0, 1]} />
+        <Image url='/assets/images/top_2.jpg' scale={5} position={[2, -1, 1]} />
         {/* eslint-disable-next-line jsx-a11y/alt-text */}
         <Image
           url='/assets/images/top_3.jpg'
-          scale={[1, 3.5]}
-          position={[-2.3, -height, 2]}
+          scale={[3, 3]}
+          position={[-0.5, -height, 2]}
         />
         {/* eslint-disable-next-line jsx-a11y/alt-text */}
         <Image
           url='/assets/images/top_4.jpg'
-          scale={[1, 2.7]}
-          position={[-1.4, -height - 0.7, 1]}
+          scale={[2, 6]}
+          position={[-4, -9, 1]}
         />
         {/* eslint-disable-next-line jsx-a11y/alt-text */}
         <Image
           url='/assets/images/top_5.jpg'
-          scale={[1.4, 2]}
-          position={[1.3, -height - 0.3, 3.2]}
+          scale={[2, 6]}
+          position={[3, -10, 1]}
         />
       </group>
     </>
