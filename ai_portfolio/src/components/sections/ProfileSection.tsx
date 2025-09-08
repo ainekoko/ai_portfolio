@@ -6,7 +6,7 @@ const ProfileSection = () => {
   return (
     <section
       id='profile'
-      className='absolute top-[270vh] w-screen h-screen p-8  mt-8 py-6'
+      className='bg-[#ffffff] absolute top-[270vh] w-screen h-screen p-8  mt-8 py-6'
     >
       <div className='flex items-center w-full relative my-10 mx-0'>
         {/* 左側の短い二重線 */}

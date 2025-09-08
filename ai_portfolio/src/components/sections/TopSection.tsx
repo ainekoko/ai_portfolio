@@ -1,6 +1,6 @@
 const TopSection = () => {
   return (
-    <section className='absolute top-0 w-screen h-screen'>
+    <section id='topSection' className=' absolute top-0 w-screen h-screen'>
       <h1 className='absolute top-[30vh] left-4 text-4xl font-bold'>
         Ai&rsquo;s Portfolio
       </h1>

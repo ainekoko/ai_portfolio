@@ -14,7 +14,7 @@ interface ZoomSprite extends THREE.Object3D {
 }
 
 const ScrollImg: React.FC = () => {
-  const { height } = useThree((state) => state.viewport);
+  const { width, height } = useThree((state) => state.viewport);
   const data = useScroll();
   const group = useRef<Group>(null!);
 
@@ -38,6 +38,11 @@ const ScrollImg: React.FC = () => {
   return (
     <>
       <group ref={group}>
+        {/* 白い背景プレーン - 最も奥に配置 */}
+        <mesh position={[0, 0, -5]} scale={[width * 2, height * 10, 1]}>
+          <planeGeometry args={[1, 1]} />
+          <meshBasicMaterial color='#ffffff' />
+        </mesh>
         {/* eslint-disable-next-line jsx-a11y/alt-text */}
         <Image
           url='/assets/images/top_1.jpg'
