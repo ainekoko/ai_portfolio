@@ -11,7 +11,12 @@ import TopSection from '../sections/TopSection';
 const ThreeCanvas = () => {
   return (
     <>
-      <Canvas frameloop='demand'>
+      <Canvas
+        gl={{
+          toneMapping: THREE.NoToneMapping, // ここで設定
+          toneMappingExposure: 1.0,
+        }}
+      >
         <ScrollControls pages={10}>
           {/* スクロール位置に応じて表示するタイトルのセクションを制御 */}
           <WindowScrollHandler />
