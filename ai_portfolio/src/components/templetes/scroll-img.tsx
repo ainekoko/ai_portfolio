@@ -1,5 +1,5 @@
 'use client';
-import React, { useRef } from 'react';
+import React, { useRef, useMemo } from 'react';
 import { useFrame, useThree } from '@react-three/fiber';
 import { useScroll, Image } from '@react-three/drei';
 import { Group } from 'three';
@@ -35,17 +35,30 @@ const ScrollImg: React.FC = () => {
     }
   });
 
+  // Canvas要素でグラデーションを作成
+  const createGradientTexture = () => {
+    const canvas = document.createElement('canvas');
+    canvas.width = 256;
+    canvas.height = 256;
+    const context = canvas.getContext('2d')!;
+
+    const gradient = context.createLinearGradient(0, 0, 0, 256);
+    gradient.addColorStop(0, '#c5fff8');
+    gradient.addColorStop(1, '#ffffff');
+
+    context.fillStyle = gradient;
+    context.fillRect(0, 0, 256, 500);
+
+    return new THREE.CanvasTexture(canvas);
+  };
+  const texture = useMemo(() => createGradientTexture(), []);
   return (
     <>
       <group ref={group}>
         {/* 白い背景プレーン - 最も奥に配置 */}
-        <mesh position={[0, 0, -5]} scale={[width * 2, height * 10, 1]}>
+        <mesh position={[0, 0, -5]} scale={[width * 2, height * 7, 1]}>
           <planeGeometry args={[1, 1]} />
-          <meshBasicMaterial
-            color='#ffffff'
-            transparent={false}
-            opacity={1.0}
-          />{' '}
+          <meshBasicMaterial map={texture} />{' '}
         </mesh>
         {/* eslint-disable-next-line jsx-a11y/alt-text */}
         <Image

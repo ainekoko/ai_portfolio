@@ -17,7 +17,7 @@ const ThreeCanvas = () => {
           toneMappingExposure: 1.0,
         }}
       >
-        <ScrollControls pages={10}>
+        <ScrollControls pages={10.7} damping={0.3}>
           {/* スクロール位置に応じて表示するタイトルのセクションを制御 */}
           <WindowScrollHandler />
           <Scroll>
@@ -31,7 +31,7 @@ const ThreeCanvas = () => {
             {/* メッセージ */}
             <section
               id='message'
-              className=' absolute top-[500vh] w-screen h-screen p-8  mt-8 py-6'
+              className=' relative top-[320vh] w-screen h-screen  mt-8 py-50'
             >
               <h2 className='text-[#e5c227] text-center text-lg font-bold mb-3 z-10 relative'>
                 Message
@@ -57,7 +57,7 @@ const ThreeCanvas = () => {
             {/* Previous Experience */}
             <section
               id='experience'
-              className='absolute top-[600vh] w-screen h-screen p-8  mt-8 py-6'
+              className='bg-[#ffffff] relative top-[350vh] w-screen h-screen p-8  mt-8 py-7'
             >
               <div className='double-line-header flex items-center w-full relative my-10 mx-0'>
                 <h2 className='relative px-3 py-5 text-6xl inline-block text-right'>
@@ -161,7 +161,7 @@ const ThreeCanvas = () => {
             {/* IT */}
             <section
               id='it'
-              className='bg-[url(/assets/images/bg_flower_right.png)] absolute top-[600vh] w-screen h-screen p-8  mt-8 py-6'
+              className='bg-[#bfdad1] relative top-[355vh] w-screen h-screen p-8  mt-8 py-6'
             >
               <div className='double-line-header flex items-center w-full relative my-10 mx-0'></div>
               <div className='container flex justify-left gap-4 flex-wrap justify-between m-auto'>
@@ -289,7 +289,7 @@ const ThreeCanvas = () => {
             {/* スキル */}
             <section
               id='skill'
-              className='bg-[#f8fdfa] absolute top-[700vh] w-screen h-screen p-8  mt-8 py-6'
+              className='bg-[#f8fdfa] relative top-[360vh] w-screen h-screen p-8  mt-8 py-6'
             >
               <div className='double-line-header flex items-center justify-end w-full relative my-10 mx-0'>
                 <h2 className='relative px-3 py-5 text-6xl inline-block text-right'>
@@ -637,7 +637,7 @@ const ThreeCanvas = () => {
               </div>
             </section>
             {/* message*/}
-            <div className='relative'>
+            {/* <div className='relative'>
               <img
                 src='../assets/images/wave_1.svg'
                 alt='背景の波線1'
@@ -648,10 +648,10 @@ const ThreeCanvas = () => {
                 alt='背景の波線2'
                 className='bg-[#7DFFE1]'
               />
-            </div>
+            </div> */}
             <section
               id='contact'
-              className='absolute top-[850vh] w-screen h-screen p-8  mt-8 py-6 bg-[#C1FFEA]'
+              className='relative top-[380vh] w-screen h-screen p-8  mt-8 py-6 bg-[#C1FFEA]'
             >
               <div className='double-line-header flex items-center justify-end w-full relative py-10 mx-0'>
                 <h2 className='relative px-3 py-5 text-6xl inline-block text-right'>
