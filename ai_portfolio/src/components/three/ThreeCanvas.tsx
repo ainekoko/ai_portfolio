@@ -11,7 +11,7 @@ import TopSection from '../sections/TopSection';
 
 const ThreeCanvas = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const carouselRef = useRef(null);
+  const carouselRef = useRef<HTMLDivElement>(null);
   const totalSlides = 3;
 
   // 動的にスライド幅を計算する関数
@@ -19,8 +19,7 @@ const ThreeCanvas = () => {
     if (!carouselRef.current) return 400;
 
     const container = carouselRef.current;
-    const containerWidth = container.offsetWidth;
-    // コンテナ幅に基づいてスライド幅を計算（gap分も考慮）
+    const containerWidth = (container as HTMLElement).offsetWidth; // コンテナ幅に基づいてスライド幅を計算（gap分も考慮）
     return containerWidth;
   }, []);
 
@@ -29,7 +28,7 @@ const ThreeCanvas = () => {
     if (!carouselRef.current) return;
 
     const container = carouselRef.current;
-    const scrollLeft = container.scrollLeft;
+    const scrollLeft = (container as HTMLElement).scrollLeft;
     const slideWidth = getSlideWidth();
     const newSlide = Math.round(scrollLeft / slideWidth);
     setCurrentSlide(Math.max(0, Math.min(newSlide, totalSlides - 1)));
@@ -37,7 +36,7 @@ const ThreeCanvas = () => {
 
   // 指定されたスライドに移動する関数
   const goToSlide = useCallback(
-    (slideIndex) => {
+    (slideIndex: number) => {
       if (!carouselRef.current) return;
 
       const slideWidth = getSlideWidth();
@@ -75,7 +74,7 @@ const ThreeCanvas = () => {
     const container = carouselRef.current;
     if (!container) return;
 
-    let scrollTimeout;
+    let scrollTimeout: NodeJS.Timeout | undefined;
     const handleScroll = () => {
       clearTimeout(scrollTimeout);
       scrollTimeout = setTimeout(updateDots, 150);
@@ -231,6 +230,7 @@ const ThreeCanvas = () => {
                 </div>
               </div>
               <div className='absolute opacity-80 bottom-5 left-10'>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src='../assets/images/nail_1.png'
                   alt='ネイル'
@@ -711,6 +711,7 @@ const ThreeCanvas = () => {
               </div>
 
               <div className='absolute opacity-80 bottom-5 left-10'>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src='../assets/images/nail_1.png'
                   alt='ネイル'
@@ -740,6 +741,7 @@ const ThreeCanvas = () => {
                   <p>Programing Language</p>
                   <ul className='flex flex-wrap justify-start pt-10 gap-5 mb-4 text-base font-medium'>
                     <li className='text-center'>
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
                         src='../assets/images/icons8-html.svg'
                         alt='HTML5'
@@ -749,6 +751,7 @@ const ThreeCanvas = () => {
                       <p className='text-sm text-gray-500'>8 years</p>
                     </li>
                     <li className='text-center'>
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
                         src='../assets/images/icons8-css.svg'
                         alt='CSS'
@@ -758,6 +761,7 @@ const ThreeCanvas = () => {
                       <p className='text-sm text-gray-500'>8 years</p>
                     </li>
                     <li className='text-center'>
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
                         src='../assets/images/icons8-js.svg'
                         alt='JavaScript'
@@ -767,6 +771,7 @@ const ThreeCanvas = () => {
                       <p className='text-sm text-gray-500'>6 years</p>
                     </li>
                     <li className='text-center'>
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
                         src='../assets/images/icons8-ts.svg'
                         alt='TypeScript'
@@ -776,6 +781,7 @@ const ThreeCanvas = () => {
                       <p className='text-sm text-gray-500'>4 years</p>
                     </li>
                     <li className='text-center'>
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
                         src='../assets/images/icons8-php.svg'
                         alt='PHP'
@@ -791,6 +797,7 @@ const ThreeCanvas = () => {
                   <p>CMS</p>
                   <ul className='flex flex-wrap justify-start gap-5 mb-4 pt-10 text-base font-medium'>
                     <li className='text-center'>
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
                         src='../assets/images/icons8-wp.svg'
                         alt='WordPress'
@@ -808,6 +815,7 @@ const ThreeCanvas = () => {
                   <p>Framework</p>
                   <ul className='flex flex-wrap justify-start pt-10 gap-5 mb-4 text-base font-medium'>
                     <li className='text-center'>
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
                         src='../assets/images/icons8-nextjs.svg'
                         alt='Next.js'
@@ -817,6 +825,7 @@ const ThreeCanvas = () => {
                       <p className='text-sm text-gray-500'>1 years 6 months</p>
                     </li>
                     <li className='text-center'>
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
                         src='../assets/images/icons8-vue.svg'
                         alt='Vue.js'
@@ -826,6 +835,7 @@ const ThreeCanvas = () => {
                       <p className='text-sm text-gray-500'>2 years</p>
                     </li>
                     <li className='text-center'>
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
                         src='../assets/images/laravel.svg'
                         alt='Laravel'
@@ -835,6 +845,7 @@ const ThreeCanvas = () => {
                       <p className='text-sm text-gray-500'>6 months</p>
                     </li>
                     <li className='text-center'>
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
                         src='../assets/images/icons8-bootstrap.svg'
                         alt='BootStrap'
@@ -844,6 +855,7 @@ const ThreeCanvas = () => {
                       <p className='text-sm text-gray-500'>6 months</p>
                     </li>
                     <li className='text-center'>
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
                         src='../assets/images/jest.svg'
                         alt='Jest'
@@ -859,6 +871,7 @@ const ThreeCanvas = () => {
                   <p>Library</p>
                   <ul className='flex flex-wrap justify-start pt-10 gap-5 mb-4 text-base font-medium'>
                     <li className='text-center'>
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
                         src='../assets/images/d3.svg'
                         alt='D3.js'
@@ -868,6 +881,7 @@ const ThreeCanvas = () => {
                       <p className='text-sm text-gray-500'>2 years</p>
                     </li>
                     <li className='text-center'>
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
                         src='../assets/images/three.js.svg'
                         alt='Three.js'
@@ -877,6 +891,7 @@ const ThreeCanvas = () => {
                       <p className='text-sm text-gray-500'>6 months</p>
                     </li>
                     <li className='text-center'>
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
                         src='../assets/images/icons8-react-native.svg'
                         alt='React'
@@ -886,6 +901,7 @@ const ThreeCanvas = () => {
                       <p className='text-sm text-gray-500'>6 months</p>
                     </li>
                     <li className='text-center'>
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
                         src='../assets/images/icons8-jquery.svg'
                         alt='jQuery'
@@ -908,6 +924,7 @@ const ThreeCanvas = () => {
                     <div id='another' className=''>
                       <ul className='flex flex-wrap justify-start pt-10 gap-5 mb-4 text-base font-medium'>
                         <li className='text-center'>
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
                           <img
                             src='../assets/images/icons8-adobe-xd.svg'
                             alt='Adobe XD'
@@ -917,6 +934,7 @@ const ThreeCanvas = () => {
                           <p className='text-sm text-gray-500'>3 years</p>
                         </li>
                         <li className='text-center'>
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
                           <img
                             src='../assets/images/icons8-adobe-illustrator.svg'
                             alt='Adobe Illustrator'
@@ -926,6 +944,7 @@ const ThreeCanvas = () => {
                           <p className='text-sm text-gray-500'>1 years</p>
                         </li>
                         <li className='text-center'>
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
                           <img
                             src='../assets/images/icons8-adobe-photoshop.svg'
                             alt='Adobe Photoshop'
@@ -935,6 +954,7 @@ const ThreeCanvas = () => {
                           <p className='text-sm text-gray-500'>1 years</p>
                         </li>
                         <li className='text-center'>
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
                           <img
                             src='../assets/images/icons8-figma.svg'
                             alt='Figma'
@@ -944,6 +964,7 @@ const ThreeCanvas = () => {
                           <p className='text-sm text-gray-500'>6 months</p>
                         </li>
                         <li className='text-center'>
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
                           <img
                             src='../assets/images/icons8-visual-studio.png'
                             alt='Visual Studio'
@@ -953,6 +974,7 @@ const ThreeCanvas = () => {
                           <p className='text-sm text-gray-500'>6 months</p>
                         </li>
                         <li className='text-center'>
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
                           <img
                             src='../assets/images/flourish.png'
                             alt='Flourish'
@@ -962,6 +984,7 @@ const ThreeCanvas = () => {
                           <p className='text-sm text-gray-500'>1 years</p>
                         </li>
                         <li className='text-center'>
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
                           <img
                             src='../assets/images/icons8-storybook.svg'
                             alt='Storybook'
@@ -971,6 +994,7 @@ const ThreeCanvas = () => {
                           <p className='text-sm text-gray-500'>2 years</p>
                         </li>
                         <li className='text-center'>
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
                           <img
                             src='../assets/images/icons8-github.svg'
                             alt='GitHub'
@@ -980,6 +1004,7 @@ const ThreeCanvas = () => {
                           <p className='text-sm text-gray-500'>2 years</p>
                         </li>
                         <li className='text-center'>
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
                           <img
                             src='../assets/images/icons8-gitlab.svg'
                             alt='GitLab'
@@ -989,6 +1014,7 @@ const ThreeCanvas = () => {
                           <p className='text-sm text-gray-500'>2 years</p>
                         </li>
                         <li className='text-center'>
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
                           <img
                             src='../assets/images/icons8-sass.svg'
                             alt='Sass'
@@ -998,6 +1024,7 @@ const ThreeCanvas = () => {
                           <p className='text-sm text-gray-500'>2 years</p>
                         </li>
                         <li className='text-center'>
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
                           <img
                             src='../assets/images/icons8-firebase.svg'
                             alt='Firebase'
@@ -1007,6 +1034,7 @@ const ThreeCanvas = () => {
                           <p className='text-sm text-gray-500'>6 months</p>
                         </li>
                         <li className='text-center'>
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
                           <img
                             src='../assets/images/icons8-docker.svg'
                             alt='Docker'
@@ -1125,7 +1153,7 @@ const ThreeCanvas = () => {
                   <textarea
                     id='contactMessage'
                     name='message'
-                    rows='4'
+                    rows={4}
                     required
                     className='border border-[#bde7c4] rounded px-3 py-2 text-base'
                   ></textarea>

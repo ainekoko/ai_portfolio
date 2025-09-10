@@ -130,6 +130,7 @@ const ProfileSection = () => {
           </button>
         </div>
         <div className='absolute right-8 top-40 opacity-80'>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src='../assets/images/hokkaido.png'
             alt='北海道イラスト'
