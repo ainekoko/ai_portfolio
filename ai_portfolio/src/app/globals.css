@@ -21,12 +21,16 @@
 
 body {
   background: var(--background);
+  background-image: url('/assets/images/bg_flower_left.png'),
+    url('/assets/images/bg_flower_right.png');
+  background-position: left center, right center;
+  background-repeat: no-repeat, no-repeat;
+  background-attachment: fixed, fixed;
   color: var(--foreground);
   font-family: 'Italiana', Arial, Helvetica, sans-serif;
   cursor: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48Y2lyY2xlIGN4PSIxNiIgY3k9IjE2IiByPSIxMCIgZmlsbD0iYmxhY2siLz48L3N2Zz4='),
     auto;
 }
-
 html,
 body,
 #root {

@@ -6,7 +6,7 @@ const ProfileSection = () => {
   return (
     <section
       id='profile'
-      className='absolute top-[270vh] w-screen h-screen p-8  mt-8 py-6'
+      className='bg-[#ffffff] relative top-[300vh] w-screen pb-20 p-8 mt-8 py-6'
     >
       <div className='flex items-center w-full relative my-10 mx-0'>
         {/* 左側の短い二重線 */}
@@ -130,6 +130,7 @@ const ProfileSection = () => {
           </button>
         </div>
         <div className='absolute right-8 top-40 opacity-80'>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src='../assets/images/hokkaido.png'
             alt='北海道イラスト'
