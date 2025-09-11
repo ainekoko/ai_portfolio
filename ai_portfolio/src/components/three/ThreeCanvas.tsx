@@ -8,12 +8,13 @@ import * as THREE from 'three';
 import WindowScrollHandler from './WindowScrollHandler';
 import ProfileSection from '../sections/ProfileSection';
 import TopSection from '../sections/TopSection';
+import { useScrollVisibility } from '@/context/ScrollVisibilityContext';
 
 const ThreeCanvas = () => {
+  const { isVisible } = useScrollVisibility(); // Context から isVisible を取得
   const [currentSlide, setCurrentSlide] = useState(0);
   const carouselRef = useRef<HTMLDivElement>(null);
   const totalSlides = 3;
-
   // 動的にスライド幅を計算する関数
   const getSlideWidth = useCallback(() => {
     if (!carouselRef.current) return 400;
@@ -107,7 +108,7 @@ const ThreeCanvas = () => {
           </Scroll>
           <Scroll html>
             {/* 最初のセクション */}
-            <TopSection />
+            <TopSection isVisible={isVisible('hello')} />
             {/* プロフィール */}
             <ProfileSection />
             {/* メッセージ */}
