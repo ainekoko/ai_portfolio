@@ -14,6 +14,17 @@ const ThreeCanvas = () => {
   const carouselRef = useRef<HTMLDivElement>(null);
   const totalSlides = 3;
 
+  /* 表示されているセクションのIDを格納するSet ['Hello', 'Profile'...ets] */
+  const [visibleSections, setVisibleSections] = useState<Set<string>>(
+    new Set()
+  );
+  /**
+   * セクションの表示状態を判定
+   * @param sectionId - セクションのID{"hello", "profile"...}
+   * @returns セクションが表示されているかどうか真偽値
+   */
+  const isVisible = (sectionId: string) => visibleSections.has(sectionId);
+
   // 動的にスライド幅を計算する関数
   const getSlideWidth = useCallback(() => {
     if (!carouselRef.current) return 400;
@@ -95,19 +106,17 @@ const ThreeCanvas = () => {
     <>
       <Canvas
         gl={{
-          toneMapping: THREE.NoToneMapping, // ここで設定
+          toneMapping: THREE.NoToneMapping,
           toneMappingExposure: 1.0,
         }}
       >
         <ScrollControls pages={10.7} damping={0.3}>
-          {/* スクロール位置に応じて表示するタイトルのセクションを制御 */}
-          <WindowScrollHandler />
-          <Scroll>
-            <ScrollImg />
-          </Scroll>
+          <WindowScrollHandler setVisibleSections={setVisibleSections} />
+          <ScrollImg />
+
           <Scroll html>
             {/* 最初のセクション */}
-            <TopSection />
+            <TopSection isVisible={isVisible('hello')} />
             {/* プロフィール */}
             <ProfileSection />
             {/* メッセージ */}

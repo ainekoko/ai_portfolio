@@ -1,23 +1,34 @@
-// components/WindowScrollHandler.tsx - Context使用版
+/**
+ * WindowScrollHandler.tsx
+ *
+ * スクロール位置に応じて表示されているセクションを判定し、
+ * その情報を親コンポーネントに通知するためのコンポーネント。
+ */
+
 'use client';
-import { useScrollVisibility } from '@/context/ScrollVisibilityContext';
+import { WindowScrollHandlerProps } from '@/types/scroll';
 import { useScroll } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
 import { useRef } from 'react';
 
-const WindowScrollHandler = () => {
-  const { setVisibleSections } = useScrollVisibility(); // Context から取得
-  const scroll = useScroll(); //スクロール位置（0-1の範囲）を取得
-  const lastOffsetRef = useRef<number>(-1); //前回のスクロール位置
-  const lastVisibleSectionsRef = useRef<string>(''); //前回表示されていたセクションリストを文字列で記憶
-  const frameCountRef = useRef<number>(0); //フレーム数をカウント。処理頻度を制限
+/**
+ * @param props.setVisibleSections - 表示されているセクションのIDセットを更新する関数
+ * @returns ['hello', 'profile', 'experience', 'skill', 'contact'] のいずれかのセット
+ */
+const WindowScrollHandler = ({
+  setVisibleSections,
+}: WindowScrollHandlerProps) => {
+  const scroll = useScroll();
+  const lastOffsetRef = useRef<number>(-1);
+  const lastVisibleSectionsRef = useRef<string>('');
+  const frameCountRef = useRef<number>(0);
 
   useFrame(() => {
     // 3フレームに1回だけ実行（約20fps）
     frameCountRef.current++;
     if (frameCountRef.current % 3 !== 0) return;
 
-    const offset = scroll.offset; //スクロールの詳細位置
+    const offset = scroll.offset;
 
     // スクロール位置が0.5%未満の変化の場合はスキップ
     if (Math.abs(offset - lastOffsetRef.current) < 0.005) return;
@@ -25,26 +36,40 @@ const WindowScrollHandler = () => {
     lastOffsetRef.current = offset;
     const newVisibleSections = new Set<string>();
 
-    // 各セクションの表示開始位置
-    const sectionThresholds = {
-      hello: 0.21, //トップ
-      profile: 0.675, //プロフィール
-      projects: 0.95, //プロジェクト
-    };
+    // DOM要素を基準にした表示判定
+    const sectionIds = ['hello', 'profile', 'experience', 'skill', 'contact'];
 
-    Object.entries(sectionThresholds).forEach(([sectionId, threshold]) => {
-      //スクロール位置に達したらnameをnewVisibleSectionsへ追加
-      if (offset >= threshold) {
+    sectionIds.forEach((sectionId) => {
+      const element = document.getElementById(sectionId);
+      if (!element) return;
+
+      // 要素の位置情報を取得
+      const rect = element.getBoundingClientRect();
+      const elementTop = rect.top;
+      const elementBottom = rect.bottom;
+      const windowHeight = window.innerHeight;
+
+      // 要素が画面内に表示されているかチェック
+      // 要素の上端が画面下部より上にあり、要素の下端が画面上部より下にある場合
+      const isVisible = elementTop < windowHeight && elementBottom > 0;
+
+      // より詳細な表示判定（要素の50%以上が表示されている場合）
+      const visibleHeight =
+        Math.min(elementBottom, windowHeight) - Math.max(elementTop, 0);
+      const elementHeight = rect.height;
+      const visibilityRatio = Math.max(0, visibleHeight) / elementHeight;
+
+      // 要素の30%以上が表示されている場合に表示とみなす
+      if (isVisible && visibilityRatio > 0.3) {
         newVisibleSections.add(sectionId);
       }
     });
 
-    // [hello, profile, projects]⇒ "hello,profile,projects"のように変換して比較
+    // セクション状態の文字列化と比較
     const currentSectionsString = Array.from(newVisibleSections)
       .sort()
       .join(',');
-
-    // 前回と今回が同様の場合のみpropを送る
+    // 前回と今回が異なる場合のみ状態を更新
     if (currentSectionsString !== lastVisibleSectionsRef.current) {
       lastVisibleSectionsRef.current = currentSectionsString;
       setVisibleSections(newVisibleSections);
