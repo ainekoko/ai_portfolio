@@ -1,18 +1,20 @@
+/**
+ * ScrollImg.tsx
+ * スクロールに応じて画像がズームイン・ズームアウトするコンポーネント
+ */
 'use client';
 import React, { useRef, useMemo } from 'react';
 import { useFrame, useThree } from '@react-three/fiber';
 import { useScroll, Image } from '@react-three/drei';
 import { Group } from 'three';
 import * as THREE from 'three';
+import { Scroll } from '@react-three/drei';
+import { ZoomSprite } from '@/types/scroll';
 
-interface ZoomMaterial extends THREE.Material {
-  zoom: number;
-}
-
-interface ZoomSprite extends THREE.Object3D {
-  material: ZoomMaterial;
-}
-
+/**
+ * スクロールに応じて画像がズームイン・ズームアウトするコンポーネント
+ * @returns React.FC
+ */
 const ScrollImg: React.FC = () => {
   const { width, height } = useThree((state) => state.viewport);
   const data = useScroll();
@@ -53,7 +55,7 @@ const ScrollImg: React.FC = () => {
   };
   const texture = useMemo(() => createGradientTexture(), []);
   return (
-    <>
+    <Scroll>
       <group ref={group}>
         {/* 白い背景プレーン - 最も奥に配置 */}
         <mesh position={[0, 0, -5]} scale={[width * 2, height * 7, 1]}>
@@ -87,7 +89,7 @@ const ScrollImg: React.FC = () => {
           position={[3, -10, 1]}
         />
       </group>
-    </>
+    </Scroll>
   );
 };
 

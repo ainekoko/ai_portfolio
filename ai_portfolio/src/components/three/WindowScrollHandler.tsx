@@ -1,12 +1,23 @@
-// components/WindowScrollHandler.tsx - DOM要素ベース版
+/**
+ * WindowScrollHandler.tsx
+ *
+ * スクロール位置に応じて表示されているセクションを判定し、
+ * その情報を親コンポーネントに通知するためのコンポーネント。
+ */
+
 'use client';
-import { useScrollVisibility } from '@/context/ScrollVisibilityContext';
+import { WindowScrollHandlerProps } from '@/types/scroll';
 import { useScroll } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
 import { useRef } from 'react';
 
-const WindowScrollHandler = () => {
-  const { setVisibleSections } = useScrollVisibility();
+/**
+ * @param props.setVisibleSections - 表示されているセクションのIDセットを更新する関数
+ * @returns ['hello', 'profile', 'experience', 'skill', 'contact'] のいずれかのセット
+ */
+const WindowScrollHandler = ({
+  setVisibleSections,
+}: WindowScrollHandlerProps) => {
   const scroll = useScroll();
   const lastOffsetRef = useRef<number>(-1);
   const lastVisibleSectionsRef = useRef<string>('');
