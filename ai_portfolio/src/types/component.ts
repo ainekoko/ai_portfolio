@@ -1,6 +1,7 @@
 /**
- * @param isVisible - id=helloが表示されているかどうか
+ * @param isVisible - 指定id表示されているかどうか
+ * @type boolean
  */
-export interface TopSectionProps {
+export interface SectionIdProps {
   isVisible: boolean;
 }

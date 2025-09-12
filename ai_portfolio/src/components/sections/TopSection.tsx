@@ -1,10 +1,10 @@
-import { TopSectionProps } from '@/types/component';
+import { SectionIdProps } from '@/types/component';
 /**
  * TopSection.tsx
  * 最初のセクションを表示するコンポーネント
  * @param props - isVisible: boolean
  */
-const TopSection = (props: TopSectionProps) => {
+const TopSection = (props: SectionIdProps) => {
   return (
     <section id='topSection' className='absolute top-0 w-screen h-screen'>
       <h1 className='drop-shadow-[1px_0px_35px_#383838] text-[8rem] w-[55rem] text-white m-0 p-0 absolute top-[30vh] left-4 text-4xl font-bold'>

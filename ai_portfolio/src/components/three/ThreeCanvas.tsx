@@ -118,7 +118,7 @@ const ThreeCanvas = () => {
             {/* 最初のセクション */}
             <TopSection isVisible={isVisible('hello')} />
             {/* プロフィール */}
-            <ProfileSection />
+            <ProfileSection isVisible={isVisible('profile')} />
             {/* メッセージ */}
             <section
               id='message'
