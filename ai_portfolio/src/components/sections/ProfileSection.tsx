@@ -1,22 +1,26 @@
 import React from 'react';
-import { SectionIdProps } from '@/types/component';
-import SectionTitle from '../common/SectionHeader';
 import ContactButtons from '../profile/ContactButtons';
 import { CONTACT_BUTTONS, PROFILE_DATA } from '@/utils/profileData';
 import ProfileInfoTable from '../profile/ProfileInfoTable';
+import SectionHeader from '../common/SectionHeader';
+import { SectionProps } from '@/types/component';
 /**
  * TopSection.tsx
  * 最初のセクションを表示するコンポーネント
  * @param props - isVisible: boolean
  */
-const ProfileSection = (props: SectionIdProps) => {
+const ProfileSection = ({ isVisible }: SectionProps) => {
   return (
     <section
       id='profile'
       className='bg-[#ffffff] relative top-[300vh] w-screen pb-20 p-8 mt-8 py-6'
     >
       {/* Section Title */}
-      <SectionTitle isVisible={props.isVisible} />
+      <SectionHeader
+        isVisible={isVisible('profile')}
+        title='Profile'
+        subtitle='自己紹介'
+      />
       <div className='container'>
         {/* Profile Info Table */}
         <ProfileInfoTable profileData={PROFILE_DATA} />

@@ -1,4 +1,4 @@
-import { SectionIdProps } from '@/types/component';
+import { SectionTitleProps } from '@/types/component';
 import React from 'react';
 
 /**
@@ -6,18 +6,7 @@ import React from 'react';
  * @param props - isVisible: boolean
  * @returns
  */
-const SectionTitle = ({ isVisible }: SectionIdProps) => {
-  const sectionTitle = [
-    {
-      section: 'Profile',
-      sub: '自己紹介',
-    },
-    {
-      section: 'Experience',
-      sub: '今までの仕事の紹介',
-    },
-  ];
-
+const SectionHeader = ({ isVisible, title, subtitle }: SectionTitleProps) => {
   return (
     <div className='flex items-center w-full relative my-10 mx-0'>
       {/* 左側の短い二重線 */}
@@ -44,24 +33,25 @@ const SectionTitle = ({ isVisible }: SectionIdProps) => {
           isVisible ? '' : 'opacity-0'
         }`}
       >
-        {'Profile'.split('').map((letter, index) => (
-          <span
-            key={index}
-            className={`inline-block transition-all duration-700 ease-out hover:text-amber-950 hover:rotate-12 hover:scale-125 ${
-              isVisible
-                ? 'translate-y-0 opacity-100 rotate-0'
-                : 'translate-y-8 opacity-0 rotate-45'
-            }`}
-            style={{
-              transitionDelay: `${200 + index * 100}ms`,
-              fontWeight: '300',
-              letterSpacing: '0.05em',
-              textShadow: isVisible ? '2px 2px 4px rgba(0,0,0,0.1)' : 'none',
-            }}
-          >
-            {letter}
-          </span>
-        ))}
+        {title &&
+          title.split('').map((letter, index) => (
+            <span
+              key={index}
+              className={`inline-block transition-all duration-700 ease-out hover:text-amber-950 hover:rotate-12 hover:scale-125 ${
+                isVisible
+                  ? 'translate-y-0 opacity-100 rotate-0'
+                  : 'translate-y-8 opacity-0 rotate-45'
+              }`}
+              style={{
+                transitionDelay: `${200 + index * 100}ms`,
+                fontWeight: '300',
+                letterSpacing: '0.05em',
+                textShadow: isVisible ? '2px 2px 4px rgba(0,0,0,0.1)' : 'none',
+              }}
+            >
+              {letter}
+            </span>
+          ))}
 
         <span
           className={`text-sm ml-4 italic text-gray-500 px-2 py-1 rounded transition-all duration-1000 ease-out delay-1000 ${
@@ -70,7 +60,7 @@ const SectionTitle = ({ isVisible }: SectionIdProps) => {
               : 'translate-x-4 opacity-0 bg-transparent'
           }`}
         >
-          / 自己紹介
+          {subtitle && <span>/ {subtitle}</span>}{' '}
         </span>
       </h2>
       {/* 右側の長い二重線 */}
@@ -96,4 +86,4 @@ const SectionTitle = ({ isVisible }: SectionIdProps) => {
   );
 };
 
-export default SectionTitle;
+export default SectionHeader;

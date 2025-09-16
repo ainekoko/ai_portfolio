@@ -4,28 +4,35 @@ import { Canvas } from '@react-three/fiber';
 import { Scroll, ScrollControls } from '@react-three/drei';
 import ScrollImg from '@/components/templetes/scroll-img';
 import * as THREE from 'three';
-// コンポーネントでの使用例
 import WindowScrollHandler from './WindowScrollHandler';
 import ProfileSection from '../sections/ProfileSection';
 import TopSection from '../sections/TopSection';
 import MessageSection from '../sections/Message';
 import ExperienceSection from '../sections/ExperienceSection';
+import { useVisibleSections } from '@/hooks';
 
 const ThreeCanvas = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const carouselRef = useRef<HTMLDivElement>(null);
   const totalSlides = 3;
 
-  /* 表示されているセクションのIDを格納するSet ['Hello', 'Profile'...ets] */
-  const [visibleSections, setVisibleSections] = useState<Set<string>>(
-    new Set()
-  );
+  // /* 表示されているセクションのIDを格納するSet ['Hello', 'Profile'...ets] */
+  // const [visibleSections, setVisibleSections] = useState<Set<string>>(
+  //   new Set()
+  // );
+  // /**
+  //  * セクションの表示状態を判定
+  //  * @param sectionId - セクションのID{"hello", "profile"...}
+  //  * @returns セクションが表示されているかどうか真偽値
+  //  */
+  // const isVisible = (sectionId: string) => visibleSections.has(sectionId);
+  // console.log(visibleSections);
+
   /**
-   * セクションの表示状態を判定
-   * @param sectionId - セクションのID{"hello", "profile"...}
-   * @returns セクションが表示されているかどうか真偽値
+   * セクションの表示状態を管理するカスタムフック
    */
-  const isVisible = (sectionId: string) => visibleSections.has(sectionId);
+  const { setVisibleSections, isVisible, visibleSections } =
+    useVisibleSections();
 
   // 動的にスライド幅を計算する関数
   const getSlideWidth = useCallback(() => {
@@ -120,11 +127,11 @@ const ThreeCanvas = () => {
             {/* 最初のsection */}
             <TopSection isVisible={isVisible('hello')} />
             {/* プロフィールsection */}
-            <ProfileSection isVisible={isVisible('profile')} />
+            <ProfileSection isVisible={isVisible} />
             {/* メッセージsection */}
             <MessageSection />
             {/* Previous Experience */}
-            <ExperienceSection isVisible={isVisible('experience')} />
+            <ExperienceSection isVisible={isVisible} />
             {/* IT */}
             <section
               id='it'
