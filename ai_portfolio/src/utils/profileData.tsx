@@ -1,10 +1,13 @@
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { faGithub, faXTwitter } from '@fortawesome/free-brands-svg-icons';
 
+/**
+ * プロフィールデータ
+ */
 export const PROFILE_DATA = [
   {
     label: '出身',
-    content: '群馬県/現在は北海道',
+    content: '群馬県/東京に約15年程住み、現在は北海道へ移住',
   },
   {
     label: '学歴',
@@ -41,6 +44,9 @@ export const PROFILE_DATA = [
   },
 ];
 
+/**
+ * 連絡先ボタンデータ
+ */
 export const CONTACT_BUTTONS = [
   {
     icon: faEnvelope,
@@ -56,7 +62,7 @@ export const CONTACT_BUTTONS = [
   },
   {
     icon: faXTwitter,
-    text: 'ai.ebata.contact@gmail.com', // Twitter用に修正が必要
+    text: 'ai.ebata.contact@gmail.com',
     color: 'indigo-500',
     href: '#',
   },

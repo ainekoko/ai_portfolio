@@ -8,6 +8,7 @@ import * as THREE from 'three';
 import WindowScrollHandler from './WindowScrollHandler';
 import ProfileSection from '../sections/ProfileSection';
 import TopSection from '../sections/TopSection';
+import MessageSection from '../sections/Message';
 
 const ThreeCanvas = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -110,41 +111,17 @@ const ThreeCanvas = () => {
           toneMappingExposure: 1.0,
         }}
       >
-        <ScrollControls pages={10.7} damping={0.3}>
+        <ScrollControls pages={10.7} damping={0.5}>
           <WindowScrollHandler setVisibleSections={setVisibleSections} />
           <ScrollImg />
 
           <Scroll html>
-            {/* 最初のセクション */}
+            {/* 最初のsection */}
             <TopSection isVisible={isVisible('hello')} />
-            {/* プロフィール */}
+            {/* プロフィールsection */}
             <ProfileSection isVisible={isVisible('profile')} />
-            {/* メッセージ */}
-            <section
-              id='message'
-              className=' relative top-[320vh] w-screen h-screen  mt-8 py-50'
-            >
-              <h2 className='text-[#e5c227] text-center text-lg font-bold mb-3 z-10 relative'>
-                Message
-              </h2>
-              <p className='w-[800px] text-center text-base leading-relaxed z-10 relative m-auto'>
-                初めまして。AIです(^^)/
-                <br />
-                新卒で入社した化粧品メーカーでは、様々な経験をさせて頂きネイル商材のデザイン企画や大手企業の商品をともに作れるというやりがい、
-                時には被災地へ赴き子供から大人までネイルを無料で体験するコーナーを設けたり等、様々な経験をさせて頂きました。
-                <br />
-                IT業界に興味を持ったきっかけは、自社商品を＠コスメにて紹介して頂いた所、看板商品になるまでに大きな反響がありました。
-                <br />
-                それからもっと自社を大きくするにはネットが不可欠ではないか？今後もっとネット社会になっていくのでは？と思ったのがきっかけでした。
-                <br />
-                ですが、当時会社ではWEBに力を入れておらず、必要最低限のHPしか作成されていませんでした。
-                <br />
-                今後もWEBは外注に任せるとの事だったので、自分でHPに携わりたいと言う気持ちが大きくなりIT業界へ飛び込みました。
-                <br />
-                当初は手探りで毎日勉強しても追いつかないくらいで半泣き状態でしたが、
-                家で過ごす時間も増え北海道への移住も叶い子供達も伸び伸びと過ごしている毎日にIT業界に転職して本当良かったなぁと思っています。
-              </p>
-            </section>
+            {/* メッセージsection */}
+            <MessageSection />
             {/* Previous Experience */}
             <section
               id='experience'
