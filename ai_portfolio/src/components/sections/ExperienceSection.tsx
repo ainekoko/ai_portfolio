@@ -1,5 +1,4 @@
 import { SectionProps } from '@/types/component';
-import SectionTitle from '../common/SectionHeader';
 import SectionHeader from '../common/SectionHeader';
 import ExperienceInfoList from '../experience/ExperienceInfoList';
 import { JOB_INTRODUCTION_LEFT } from '@/utils/ExperienceData';
@@ -44,7 +43,7 @@ const ExperienceSection = ({ isVisible }: SectionProps) => {
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src='../assets/images/nail_1.png' alt='ネイル' className='' />
       </div>
-      <div className='absolute left-1/2 bottom-0 -translate-x-1/2 -translate-y-1/2 text-[#eaf4f4] text-9xl md:text-[10rem] font-bold whitespace-nowrap pointer-events-none select-none z-0'>
+      <div className='absolute left-1/2 bottom-0 -translate-x-1/2 -translate-y-1/2 text-[#7b9696] text-9xl md:text-[10rem] font-bold whitespace-nowrap pointer-events-none select-none z-0'>
         Previous Experience
       </div>
     </section>
