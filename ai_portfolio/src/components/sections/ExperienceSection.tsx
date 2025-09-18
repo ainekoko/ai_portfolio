@@ -20,7 +20,7 @@ const ExperienceSection = ({ isVisible }: SectionProps) => {
         title='Experience'
         subtitle='これまでの職務経歴'
       />
-      <div className='container text-sm flex justify-left gap-4 flex-wrap justify-between m-auto'>
+      <div className='container  text-sm flex justify-left gap-4 flex-wrap justify-between m-auto'>
         {/* 化粧品メーカー左側 */}
         <div className='w-6/12 flex flex-col'>
           <h3 className='text-3xl mb-1 pb-12'>
@@ -44,7 +44,7 @@ const ExperienceSection = ({ isVisible }: SectionProps) => {
         <img src='../assets/images/nail_1.png' alt='ネイル' className='' />
       </div>
       <div className='absolute left-1/2 bottom-0 -translate-x-1/2 -translate-y-1/2 text-[#7b9696] text-9xl md:text-[10rem] font-bold whitespace-nowrap pointer-events-none select-none z-0'>
-        Previous Experience
+        NAIL
       </div>
     </section>
   );
