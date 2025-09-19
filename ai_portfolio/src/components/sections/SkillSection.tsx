@@ -23,7 +23,8 @@ const SkillSection = ({ isVisible }: SectionProps) => {
         subtitle='現場で経験したスキルを一覧化しました'
       />
 
-      <div className='container flex'>
+      {/* 一つのコンテナで4つのスキルセクションを2x2のグリッドで配置 */}
+      <div className='container grid grid-cols-2'>
         {/*-- プログラミング言語 -*/}
         <SkillItemList
           id='programmingLanguage'
@@ -32,8 +33,6 @@ const SkillSection = ({ isVisible }: SectionProps) => {
         />
         {/*-- CMS -*/}
         <SkillItemList id='cms' title='CMS' skillData={SKILL_DATA.cms} />
-      </div>
-      <div className='container flex'>
         {/*-- Framework -*/}
         <SkillItemList
           id='framework'
@@ -47,6 +46,7 @@ const SkillSection = ({ isVisible }: SectionProps) => {
           skillData={SKILL_DATA.Library}
         />
       </div>
+
       {/*-- Accordion -*/}
       <SkillAccordion id='another' skillData={SKILL_DATA.another} />
       {/*-- 設計書関連 -*/}
@@ -54,5 +54,4 @@ const SkillSection = ({ isVisible }: SectionProps) => {
     </section>
   );
 };
-
 export default SkillSection;

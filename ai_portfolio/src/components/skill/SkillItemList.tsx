@@ -16,8 +16,7 @@ interface SkillItemListProps {
 const SkillItemList = ({ id, title, skillData }: SkillItemListProps) => {
   console.log(skillData);
   return (
-    // <div id={id} className='w-1/2'>
-    <div id={id} className='w-1/2'>
+    <div id={id}>
       <p>{title}</p>
       <ul className='flex flex-wrap justify-start pt-10 gap-5 mb-4 text-base font-medium'>
         {skillData.map((item, index) => (
