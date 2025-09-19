@@ -36,7 +36,7 @@ const ThreeCanvas = () => {
             {/* Previous Experience */}
             <ExperienceSection isVisible={isVisible} />
             {/* IT */}
-            <ItSection isVisible={isVisible} />
+            <ItSection />
             {/* スキル */}
             <section
               id='skill'

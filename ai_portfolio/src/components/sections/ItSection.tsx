@@ -1,5 +1,4 @@
 'use client';
-import { SectionProps } from '@/types/component';
 import {
   ITJOB_INTRODUCTION_LEFT,
   ITJOB_INTRODUCTION_RIGHT,
@@ -7,7 +6,7 @@ import {
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import CompanyBox from '@/components/it/CompanyBox';
 
-const ItSection = ({ isVisible }: SectionProps) => {
+const ItSection = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const carouselRef = useRef<HTMLDivElement>(null);
   const totalSlides = ITJOB_INTRODUCTION_RIGHT.length;
