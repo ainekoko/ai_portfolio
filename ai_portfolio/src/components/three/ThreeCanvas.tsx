@@ -55,7 +55,7 @@ const ThreeCanvas = () => {
             </div> */}
             <section
               id='contact'
-              className='relative top-[380vh] w-screen h-screen p-8  mt-8 py-6 bg-[#C1FFEA]'
+              className='relative top-[400vh] w-screen h-screen p-8  mt-8 py-6 bg-[#C1FFEA]'
             >
               <div className='double-line-header flex items-center justify-end w-full relative py-10 mx-0'>
                 <h2 className='relative px-3 py-5 text-6xl inline-block text-right'>

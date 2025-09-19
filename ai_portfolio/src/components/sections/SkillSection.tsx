@@ -4,6 +4,7 @@ import SectionHeader from '../common/SectionHeader';
 import SkillItemList from '../skill/SkillItemList';
 import { DOCUMENT_SKILL, SKILL_DATA } from '@/utils/skillData';
 import DocumentSkill from '../skill/SkillDocument';
+import SkillAccordion from '../skill/SkillAccordion';
 
 const SkillSection = ({ isVisible }: SectionProps) => {
   return (
@@ -43,21 +44,7 @@ const SkillSection = ({ isVisible }: SectionProps) => {
         />
       </div>
       {/*-- Accordion -*/}
-      <div className='container mx-auto space-y-2'>
-        <details className='accordion-003 mb-2 border-b-2 border-gray-300'>
-          <summary className='flex justify-between items-center relative px-8 py-4 text-gray-800 font-semibold cursor-pointer'>
-            その他
-          </summary>
-          <div className='container flex border-t-[0.5px] border-gray-400'>
-            {/*-- another -*/}
-            <SkillItemList
-              id='another'
-              title='Another'
-              skillData={SKILL_DATA.another}
-            />
-          </div>
-        </details>
-      </div>
+      <SkillAccordion id='library' skillData={SKILL_DATA.another} />
       {/*-- 設計書関連 -*/}
       <DocumentSkill documentData={DOCUMENT_SKILL} />
     </section>
