@@ -27,7 +27,7 @@ export interface ItJobIntroductionLeftItem {
  * @property {string[]} devenvironment.tool - 使用ツールのリスト
  * @property {string} content - 業務内容の詳細説明
  */
-export interface ItJobIntroductionLeftItem {
+export interface ItJobIntroductionRightItem {
   outsourcedCompany: string;
   period: string;
   scale: string;
@@ -35,8 +35,8 @@ export interface ItJobIntroductionLeftItem {
   bussinessContent: string[];
   devenvironment: {
     language: string[];
-    framework: string[];
-    database: string[];
+    framework?: string[];
+    database?: string[];
     os: string;
     tool: string[];
   };

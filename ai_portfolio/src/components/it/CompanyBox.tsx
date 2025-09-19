@@ -1,3 +1,4 @@
+import { ItJobIntroductionRightItem } from '@/types/it';
 import React from 'react';
 
 /**
@@ -6,7 +7,11 @@ import React from 'react';
  * @param param0 - companyData: 会社情報の配列
  * @returns
  */
-const CompanyBox = ({ companyData }) => {
+const CompanyBox = ({
+  companyData,
+}: {
+  companyData: ItJobIntroductionRightItem[];
+}) => {
   console.log(companyData);
   return (
     <>
