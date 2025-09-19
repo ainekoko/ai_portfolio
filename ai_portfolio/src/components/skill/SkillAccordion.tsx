@@ -6,6 +6,13 @@ interface SkillAccordionProps {
   id: string;
   skillData: typeof SKILL_DATA.another;
 }
+
+/**
+ * スキルアコーディオンコンポーネント
+ * @param id: アコーディオンのID,
+ * @param skillData: スキルデータの配列
+ * @returns
+ */
 const SkillAccordion = ({ id, skillData }: SkillAccordionProps) => {
   const [isOpen, setIsOpen] = useState(false);
 

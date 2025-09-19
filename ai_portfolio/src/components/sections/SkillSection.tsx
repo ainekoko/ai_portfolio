@@ -6,6 +6,10 @@ import { DOCUMENT_SKILL, SKILL_DATA } from '@/utils/skillData';
 import DocumentSkill from '../skill/SkillDocument';
 import SkillAccordion from '../skill/SkillAccordion';
 
+/**
+ * スキルセクションコンポーネント
+ * @param  isVisible: セクションの表示状態を判定する関数
+ */
 const SkillSection = ({ isVisible }: SectionProps) => {
   return (
     <section
@@ -44,7 +48,7 @@ const SkillSection = ({ isVisible }: SectionProps) => {
         />
       </div>
       {/*-- Accordion -*/}
-      <SkillAccordion id='library' skillData={SKILL_DATA.another} />
+      <SkillAccordion id='another' skillData={SKILL_DATA.another} />
       {/*-- 設計書関連 -*/}
       <DocumentSkill documentData={DOCUMENT_SKILL} />
     </section>

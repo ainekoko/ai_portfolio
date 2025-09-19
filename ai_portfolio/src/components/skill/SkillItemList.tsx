@@ -1,10 +1,6 @@
 import { SkillItemsType } from '@/types/skill';
 import React from 'react';
 
-/**
- * スキルアイテムデータ
- * @param skillData: スキルデータの配列,
- */
 interface SkillItemListProps {
   id: string;
   title?: string;
@@ -13,7 +9,9 @@ interface SkillItemListProps {
 
 /**
  * スキルアイテムリストコンポーネント
- * @param param0 - skillData: スキルデータの配列,
+ * @param id: コンポーネントのID,
+ * @param title: セクションのタイトル,
+ * @param skillData: スキルデータの配列
  */
 const SkillItemList = ({ id, title, skillData }: SkillItemListProps) => {
   console.log(skillData);
