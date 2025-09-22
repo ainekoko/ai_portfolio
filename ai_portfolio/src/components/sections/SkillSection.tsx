@@ -19,7 +19,7 @@ const SkillSection = ({ isVisible }: SectionProps) => {
       {/* Section Title */}
       <SectionHeader
         isVisible={isVisible('skill')}
-        title='skill'
+        title='Skill'
         subtitle='現場で経験したスキルを一覧化しました'
       />
 
