@@ -42,18 +42,6 @@ const ThreeCanvas = () => {
             {/* スキル */}
             <SkillSection isVisible={isVisible} />
             {/* message*/}
-            {/* <div className='relative'>
-              <img
-                src='../assets/images/wave_1.svg'
-                alt='背景の波線1'
-                className='bg-[#f8fdfa]'
-              />
-              <img
-                src='../assets/images/wave_2.svg'
-                alt='背景の波線2'
-                className='bg-[#7DFFE1]'
-              />
-            </div> */}
             <ContactSection isVisible={isVisible} />
           </Scroll>
         </ScrollControls>
