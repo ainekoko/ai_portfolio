@@ -6,7 +6,6 @@ import * as THREE from 'three';
 import WindowScrollHandler from './WindowScrollHandler';
 import ScrollController from './ScrollController';
 import ScrollSync from '../ui/ScrollSync';
-import SectionPositionsDebug from '../debug/SectionPositionsDebug';
 import ProfileSection from '../sections/ProfileSection';
 import TopSection from '../sections/TopSection';
 import MessageSection from '../sections/Message';
@@ -15,29 +14,14 @@ import { useVisibleSections } from '@/hooks';
 import ItSection from '../sections/ItSection';
 import SkillSection from '../sections/SkillSection';
 import ContactSection from '../sections/ContactSection';
-import { useCallback } from 'react';
-import { ScrollData } from '@/types/scroll';
 
 const ThreeCanvas = () => {
   const { setVisibleSections, isVisible } = useVisibleSections();
-
-  /**
-   * スクロールデータ準備完了時のコールバック関数
-   * @param scrollData - 準備されたスクロールデータ
-   */
-  const handleScrollDataReady = useCallback((scrollData: ScrollData) => {
-    // 必要に応じてスクロールデータを使用
-    console.log('Scroll data ready:', scrollData);
-  }, []);
 
   return (
     <>
       {/* ブラウザのスクロールバー同期用コンポーネント */}
       <ScrollSync />
-
-      {/* デバッグ用コンポーネント（開発環境のみ） */}
-      <SectionPositionsDebug />
-
       <Canvas
         gl={{
           toneMapping: THREE.NoToneMapping,
@@ -54,10 +38,7 @@ const ThreeCanvas = () => {
           style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
         >
           <ScrollController />
-          <WindowScrollHandler
-            setVisibleSections={setVisibleSections}
-            onScrollDataReady={handleScrollDataReady}
-          />
+          <WindowScrollHandler setVisibleSections={setVisibleSections} />
           <ScrollImg />
 
           <Scroll html>

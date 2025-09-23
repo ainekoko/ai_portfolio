@@ -58,7 +58,7 @@ const ScrollController = () => {
           const rect: DOMRect = element.getBoundingClientRect();
           const elementTop: number = rect.top + window.pageYOffset;
 
-          // オフセットを調整（ヘッダーの高さなどを考慮）
+          // オフセットを調整
           const offset: number = sectionId === 'topSection' ? 0 : -80; // 80pxのオフセット
           const adjustedTop: number = elementTop + offset;
 
@@ -67,11 +67,6 @@ const ScrollController = () => {
           const vhPosition: number = Math.max(0, adjustedTop / vh);
 
           positions[sectionId] = vhPosition;
-          console.log(
-            `Section ${sectionId}: ${vhPosition.toFixed(
-              1
-            )}vh (${adjustedTop}px) - offset: ${offset}px`
-          );
         } else {
           console.warn(`Element with id "${sectionId}" not found`);
           // フォールバック値を設定
@@ -86,10 +81,7 @@ const ScrollController = () => {
           positions[sectionId] = fallbackPositions[sectionId] || 0;
         }
       });
-
       sectionPositions.current = positions;
-      console.log('Calculated section positions:', positions);
-
       // 元のスクロール位置に戻す
       window.scrollTo(0, currentScroll);
     }, 100);
@@ -97,12 +89,11 @@ const ScrollController = () => {
 
   /**
    * 指定されたセクションまでスムーズスクロールする関数
+   * @param sectionId - スクロール先のセクションID
    */
   const scrollToSection: ScrollToSectionFunction = (
     sectionId: string
   ): void => {
-    console.log(`scrollToSection called for: ${sectionId}`);
-
     // scrollが未初期化の場合は待機
     if (!scroll?.el) {
       console.warn('Scroll element not ready, retrying...');
