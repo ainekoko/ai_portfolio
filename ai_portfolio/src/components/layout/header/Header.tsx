@@ -14,19 +14,41 @@ const Header = () => {
     setIsMenuOpen(false);
   };
 
-  // セクションへのスクロール処理
+  /**
+   * セクションへのスクロール処理
+   * @param sectionId - スクロール先のセクションID
+   */
   const handleSectionClick = (sectionId: string) => {
     console.log('クリックされたセクションID:', sectionId);
+    // 型安全なWindow拡張
+    interface ExtendedWindow extends Window {
+      scrollToSection?: (sectionId: string) => void;
+    }
+
     // ThreeCanvasで設定されたグローバル関数を呼び出し
-    if (typeof window !== 'undefined' && (window as any).scrollToSection) {
-      (window as any).scrollToSection(sectionId);
+    const extendedWindow = window as ExtendedWindow;
+    if (typeof window !== 'undefined' && extendedWindow.scrollToSection) {
+      extendedWindow.scrollToSection(sectionId);
     } else {
-      // フォールバック: 通常のスクロール
-      console.warn('scrollToSection function not available, using fallback');
-      const element = document.getElementById(sectionId);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-      }
+      // フォールバック: 関数が未設定の場合は少し待ってから再試行
+      console.warn(
+        'scrollError:scrollToSection function not available, retrying in 100ms...'
+      );
+
+      setTimeout(() => {
+        if (extendedWindow.scrollToSection) {
+          extendedWindow.scrollToSection(sectionId);
+        } else {
+          // 最終フォールバック: 通常のスクロール
+          console.warn(
+            'scrollError:scrollToSection still not available, using native scroll fallback'
+          );
+          const element = document.getElementById(sectionId);
+          if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+          }
+        }
+      }, 100);
     }
     closeMenu();
   };
