@@ -9,19 +9,32 @@
 import { WindowScrollHandlerProps } from '@/types/scroll';
 import { useScroll } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
-import { useRef } from 'react';
+import { useRef, useEffect } from 'react';
+
+interface ExtendedWindowScrollHandlerProps extends WindowScrollHandlerProps {
+  onScrollDataReady?: (scrollData: any) => void;
+}
 
 /**
  * @param props.setVisibleSections - 表示されているセクションのIDセットを更新する関数
+ * @param props.onScrollDataReady - スクロールデータが準備できた時のコールバック
  * @returns ['hello', 'profile', 'experience', 'skill', 'contact'] のいずれかのセット
  */
 const WindowScrollHandler = ({
   setVisibleSections,
-}: WindowScrollHandlerProps) => {
+  onScrollDataReady,
+}: ExtendedWindowScrollHandlerProps) => {
   const scroll = useScroll();
   const lastOffsetRef = useRef<number>(-1);
   const lastVisibleSectionsRef = useRef<string>('');
   const frameCountRef = useRef<number>(0);
+
+  // スクロールデータを親に渡す
+  useEffect(() => {
+    if (onScrollDataReady) {
+      onScrollDataReady(scroll);
+    }
+  }, [scroll, onScrollDataReady]);
 
   useFrame(() => {
     // 3フレームに1回だけ実行（約20fps）
@@ -37,7 +50,14 @@ const WindowScrollHandler = ({
     const newVisibleSections = new Set<string>();
 
     // DOM要素を基準にした表示判定
-    const sectionIds = ['hello', 'profile', 'experience', 'skill', 'contact'];
+    const sectionIds = [
+      'top',
+      'hello',
+      'profile',
+      'experience',
+      'skill',
+      'contact',
+    ];
 
     sectionIds.forEach((sectionId) => {
       const element = document.getElementById(sectionId);
