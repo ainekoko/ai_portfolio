@@ -12,7 +12,6 @@ const CompanyBox = ({
 }: {
   companyData: ItJobIntroductionRightItem[];
 }) => {
-  console.log(companyData);
   return (
     <>
       {companyData.map((data, index: number) => (
