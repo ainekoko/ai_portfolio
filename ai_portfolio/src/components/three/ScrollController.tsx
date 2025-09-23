@@ -2,7 +2,7 @@
 'use client';
 import { useScroll } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useCallback } from 'react';
 
 // グローバル関数の型定義
 type ScrollToSectionFunction = (sectionId: string) => void;
@@ -32,7 +32,7 @@ const ScrollController = () => {
    * セクション位置を自動計算する関数
    * DOM要素の実際の位置を測定してvh値に変換
    */
-  const calculateSectionPositions = (): void => {
+  const calculateSectionPositions = useCallback((): void => {
     const positions: Record<string, number> = {};
     const sectionIds: string[] = [
       'topSection',
@@ -58,7 +58,7 @@ const ScrollController = () => {
           const rect: DOMRect = element.getBoundingClientRect();
           const elementTop: number = rect.top + window.pageYOffset;
 
-          // オフセットを調整
+          // オフセットを調整（ヘッダーの高さなどを考慮）
           const offset: number = sectionId === 'topSection' ? 0 : -80; // 80pxのオフセット
           const adjustedTop: number = elementTop + offset;
 
@@ -85,11 +85,10 @@ const ScrollController = () => {
       // 元のスクロール位置に戻す
       window.scrollTo(0, currentScroll);
     }, 100);
-  };
+  }, []);
 
   /**
    * 指定されたセクションまでスムーズスクロールする関数
-   * @param sectionId - スクロール先のセクションID
    */
   const scrollToSection: ScrollToSectionFunction = (
     sectionId: string
