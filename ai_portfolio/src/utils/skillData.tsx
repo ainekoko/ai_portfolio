@@ -12,7 +12,7 @@ export const SKILL_DATA = {
     },
     {
       label: 'JavaScript',
-      img: '/assets/images/icons8-javascript.svg',
+      img: '/assets/images/icons8-js.svg',
       year: 6,
     },
     {
@@ -68,7 +68,7 @@ export const SKILL_DATA = {
     },
     {
       label: 'Three.js',
-      img: '/assets/images/three.svg',
+      img: '/assets/images/threejs.svg',
       year: 0.6,
     },
     {
@@ -105,12 +105,12 @@ export const SKILL_DATA = {
     },
     {
       label: 'Visual Studio Code',
-      img: '/assets/images/icons8-visual-studio.svg',
+      img: '/assets/images/icons8-visual-studio.png',
       year: 6,
     },
     {
       label: 'Flourish',
-      img: '/assets/images/flourish.svg',
+      img: '/assets/images/flourish.png',
       year: 1,
     },
     {

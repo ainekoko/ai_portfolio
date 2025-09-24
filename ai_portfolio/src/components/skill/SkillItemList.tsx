@@ -14,7 +14,6 @@ interface SkillItemListProps {
  * @param skillData: スキルデータの配列
  */
 const SkillItemList = ({ id, title, skillData }: SkillItemListProps) => {
-  console.log(skillData);
   return (
     <div id={id}>
       <p>{title}</p>

@@ -18,8 +18,20 @@
     --foreground: #ededed;
   }
 }
+/* マウスホイールのスムーズスクロール */
+html {
+  scroll-behavior: auto; /* smoothだと同期が難しいのでautoに */
+}
+html,
+body {
+  /* スクロールバー */
+  overflow: auto !important;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(155, 155, 155, 0.7) transparent;
+}
 
 body {
+  position: relative;
   background: var(--background);
   background-image: url('/assets/images/bg_flower_left.png'),
     url('/assets/images/bg_flower_right.png');
@@ -31,6 +43,12 @@ body {
   cursor: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48Y2lyY2xlIGN4PSIxNiIgY3k9IjE2IiByPSIxMCIgZmlsbD0iYmxhY2siLz48L3N2Zz4='),
     auto;
 }
+
+/* ページ全体のスクロールを滑らかに */
+* {
+  scroll-behavior: auto;
+}
+
 html,
 body,
 #root {
@@ -47,4 +65,52 @@ a {
 
 button svg {
   pointer-events: none;
+}
+/* Webkit系ブラウザのスクロールバーカスタマイズ */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(155, 155, 155, 0.7);
+  border-radius: 6px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(155, 155, 155, 0.9);
+  background-clip: padding-box;
+}
+
+/* Three.jsのCanvasを固定位置に配置 */
+canvas {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  z-index: -1 !important;
+}
+
+/* Three.jsのスクロールコンテナのスクロールバーを非表示 */
+[data-scrollcontrols] {
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+}
+
+[data-scrollcontrols]::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+/* HTMLコンテンツがCanvasの上に表示されるように */
+.scroll-content {
+  position: relative;
+  z-index: 1;
+  pointer-events: auto;
 }

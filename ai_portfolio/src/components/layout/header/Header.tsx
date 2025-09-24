@@ -14,6 +14,45 @@ const Header = () => {
     setIsMenuOpen(false);
   };
 
+  /**
+   * セクションへのスクロール処理
+   * @param sectionId - スクロール先のセクションID
+   */
+  const handleSectionClick = (sectionId: string) => {
+    console.log('クリックされたセクションID:', sectionId);
+    // 型安全なWindow拡張
+    interface ExtendedWindow extends Window {
+      scrollToSection?: (sectionId: string) => void;
+    }
+
+    // ThreeCanvasで設定されたグローバル関数を呼び出し
+    const extendedWindow = window as ExtendedWindow;
+    if (typeof window !== 'undefined' && extendedWindow.scrollToSection) {
+      extendedWindow.scrollToSection(sectionId);
+    } else {
+      // フォールバック: 関数が未設定の場合は少し待ってから再試行
+      console.warn(
+        'scrollError:scrollToSection function not available, retrying in 100ms...'
+      );
+
+      setTimeout(() => {
+        if (extendedWindow.scrollToSection) {
+          extendedWindow.scrollToSection(sectionId);
+        } else {
+          // 最終フォールバック: 通常のスクロール
+          console.warn(
+            'scrollError:scrollToSection still not available, using native scroll fallback'
+          );
+          const element = document.getElementById(sectionId);
+          if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+          }
+        }
+      }, 100);
+    }
+    closeMenu();
+  };
+
   // Escapeキーでメニューを閉じる
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -80,14 +119,36 @@ const Header = () => {
               <div className='flex items-center justify-center w-full h-full'>
                 <ul className='m-0 p-0 list-none text-center'>
                   {[
-                    { en: 'Home', ja: 'ホーム', delay: 'delay-[300ms]' },
                     {
-                      en: 'Portfolio',
-                      ja: 'ポートフォリオ',
+                      en: 'Home',
+                      ja: 'ホーム',
+                      sectionId: 'topSection',
+                      delay: 'delay-[300ms]',
+                    },
+                    {
+                      en: 'Profile',
+                      ja: 'プロフィール',
+                      sectionId: 'profile',
                       delay: 'delay-[400ms]',
                     },
-                    { en: 'Mypage', ja: 'マイページ', delay: 'delay-[500ms]' },
-                    { en: 'Blog', ja: 'ブログ', delay: 'delay-[600ms]' },
+                    {
+                      en: 'Experience',
+                      ja: '職務経歴',
+                      sectionId: 'experience',
+                      delay: 'delay-[500ms]',
+                    },
+                    {
+                      en: 'Skills',
+                      ja: 'スキル',
+                      sectionId: 'skill',
+                      delay: 'delay-[600ms]',
+                    },
+                    {
+                      en: 'Contact',
+                      ja: 'お問い合わせ',
+                      sectionId: 'contact',
+                      delay: 'delay-[700ms]',
+                    },
                   ].map((item, index) => (
                     <li
                       key={index}
@@ -96,15 +157,17 @@ const Header = () => {
                       } ${isMenuOpen ? styles.navItemEnter : ''}`}
                     >
                       <a
-                        href='#'
+                        href={`#${item.sectionId}`}
                         onClick={(e) => {
                           e.preventDefault();
-                          closeMenu();
+                          handleSectionClick(item.sectionId);
                         }}
                         className='relative inline-block py-5 px-5 text-3xl text-white no-underline overflow-hidden hover:text-pink-400 transition-colors duration-500'
                       >
                         <span className='block pointer-events-none'>
                           {item.en}
+                          <br />
+                          <span className='text-sm opacity-70'>{item.ja}</span>
                         </span>
                       </a>
                     </li>
@@ -117,15 +180,19 @@ const Header = () => {
           {/* ナビゲーションメニュー */}
           <div className='flex flex-col items-end pr-8 gap-1 mt-20 pointer-events-auto'>
             {[
-              { href: '#profile', text: 'Profile' },
-              { href: '#experience', text: 'Previous Experience' },
-              { href: '#contact', text: 'Contact' },
-              { href: '#portfolio', text: 'Portfolio' },
-              { href: '#mypage', text: 'My Page' },
+              { href: 'topSection', text: 'Top' },
+              { href: 'profile', text: 'Profile' },
+              { href: 'experience', text: 'Previous Experience' },
+              { href: 'skill', text: 'Skills' },
+              { href: 'contact', text: 'Contact' },
             ].map((link, index) => (
               <a
                 key={index}
-                href={link.href}
+                href={`#${link.href}`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleSectionClick(link.href);
+                }}
                 className='nav-text text-xl text-gray-800 hover:text-gray-600 transition-all duration-300 transform hover:translate-x-2'
               >
                 {link.text}
@@ -138,7 +205,11 @@ const Header = () => {
         <div className='fixed top-0 left-0 z-20 pointer-events-auto'>
           <div className='header-top flex items-center px-6 pt-4 pb-2 relative'>
             <a
-              href='#'
+              href='#topSection'
+              onClick={(e) => {
+                e.preventDefault();
+                handleSectionClick('topSection');
+              }}
               className='text-[#3b3b3b] text-2xl font-bold tracking-wider'
             >
               Ai&rsquo;s Portfolio

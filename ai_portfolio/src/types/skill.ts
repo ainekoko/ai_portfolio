@@ -7,14 +7,6 @@
  * @property {Array} Library
  * @property {Array} another - その他のスキル.
  * @example
- * const skillItem: SkillItem = {
- *   programmingLanguage: [
- *     {
- *       label: 'HTML5',
- *       img: '../assets/images/icons8-html.svg',
- *       year: 8,
- *     },
- *   ],
  */
 export interface SkillItemListType {
   programmingLanguage: SkillItemType[];

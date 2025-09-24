@@ -37,7 +37,14 @@ const WindowScrollHandler = ({
     const newVisibleSections = new Set<string>();
 
     // DOM要素を基準にした表示判定
-    const sectionIds = ['hello', 'profile', 'experience', 'skill', 'contact'];
+    const sectionIds = [
+      'top',
+      'hello',
+      'profile',
+      'experience',
+      'skill',
+      'contact',
+    ];
 
     sectionIds.forEach((sectionId) => {
       const element = document.getElementById(sectionId);

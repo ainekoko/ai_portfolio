@@ -1,0 +1,76 @@
+/* src/styles/scroll.css */
+/* ブラウザのスクロールバーを確実に表示させるスタイル */
+
+html,
+body {
+  /* スクロールバーを常に表示 */
+  overflow: auto !important;
+  /* スクロールバーのスタイリング（Webkit系ブラウザ） */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(155, 155, 155, 0.7) transparent;
+}
+
+/* Webkit系ブラウザのスクロールバーカスタマイズ */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(155, 155, 155, 0.7);
+  border-radius: 6px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(155, 155, 155, 0.9);
+  background-clip: padding-box;
+}
+
+/* Three.jsのCanvasを固定位置に配置 */
+canvas {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  z-index: -1 !important;
+}
+
+/* Three.jsのスクロールコンテナのスクロールバーを非表示 */
+[data-scrollcontrols] {
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+}
+
+[data-scrollcontrols]::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+/* スクロール同期のための設定 */
+body {
+  /* 高さは動的に設定されます */
+  position: relative;
+}
+
+/* HTMLコンテンツがCanvasの上に表示されるように */
+.scroll-content {
+  position: relative;
+  z-index: 1;
+  pointer-events: auto;
+}
+
+/* マウスホイールのスムーズスクロール */
+html {
+  scroll-behavior: auto; /* smoothだと同期が難しいのでautoに */
+}
+
+/* ページ全体のスクロールを滑らかに */
+* {
+  scroll-behavior: auto;
+}
