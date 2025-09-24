@@ -1,70 +1,100 @@
 'use client';
-import { Canvas } from '@react-three/fiber';
-import { Scroll, ScrollControls } from '@react-three/drei';
-import ScrollImg from '@/components/templetes/scroll-img';
-import * as THREE from 'three';
-import WindowScrollHandler from './WindowScrollHandler';
-import ScrollController from './ScrollController';
-import ScrollSync from '../ui/ScrollSync';
-import ProfileSection from '../sections/ProfileSection';
-import TopSection from '../sections/TopSection';
-import MessageSection from '../sections/Message';
-import ExperienceSection from '../sections/ExperienceSection';
+import GentleScrollProvider from '@/components/ui/GentleScrollProvider';
+import ProfileSection from '@/components/sections/ProfileSection';
+import TopSection from '@/components/sections/TopSection';
+import MessageSection from '@/components/sections/Message';
+import ExperienceSection from '@/components/sections/ExperienceSection';
 import { useVisibleSections } from '@/hooks';
-import ItSection from '../sections/ItSection';
-import SkillSection from '../sections/SkillSection';
-import ContactSection from '../sections/ContactSection';
+import ItSection from '@/components/sections/ItSection';
+import SkillSection from '@/components/sections/SkillSection';
+import ContactSection from '@/components/sections/ContactSection';
+import ScrollSync from '../ui/ScrollSync';
+import { Canvas } from '@react-three/fiber';
+import { ScrollControls } from '@react-three/drei';
+import ScrollController from './ScrollController';
+import WindowScrollHandler from './WindowScrollHandler';
+import ScrollImg from '../templetes/scroll-img';
+import * as THREE from 'three';
 
-const ThreeCanvas = () => {
+const GentleScrollCanvas = () => {
   const { setVisibleSections, isVisible } = useVisibleSections();
 
   return (
     <>
-      {/* ブラウザのスクロールバー同期用コンポーネント */}
-      <ScrollSync />
-      <Canvas
-        gl={{
-          toneMapping: THREE.NoToneMapping,
-          toneMappingExposure: 1.0,
-        }}
-        style={{ position: 'fixed', top: 0, left: 0, zIndex: -1 }}
+      <GentleScrollProvider
+        damping={0.15} // バウンド無しの適度な値
+        wheelSensitivity={0.4} // ホイール感度
+        touchSensitivity={0.6} // タッチ感度
       >
-        {/* Three.jsのシーン */}
-        <ScrollControls
-          pages={10.7}
-          damping={0.3}
-          distance={1}
-          infinite={false}
-          horizontal={false}
-          style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-        >
-          {/* スクロール同期コントローラー */}
-          <ScrollController />
-          {/* スクロール位置に応じて表示セクションを判定 */}
-          <WindowScrollHandler setVisibleSections={setVisibleSections} />
+        {/* セクション内容 */}
+        <div style={{ position: 'relative', zIndex: 1 }}>
+          {/* TopSection */}
+          {/* <ScrollSync /> */}
+          <Canvas
+            gl={{
+              toneMapping: THREE.NoToneMapping,
+              toneMappingExposure: 1.0,
+            }}
+            style={{ position: 'fixed', top: 0, left: 0, zIndex: -1 }}
+          >
+            {/* Three.jsのシーン */}
+            <ScrollControls
+              pages={3.5}
+              damping={0.3}
+              distance={1}
+              infinite={false}
+              horizontal={false}
+              style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+            >
+              {/* スクロール同期コントローラー */}
+              <ScrollController />
+              {/* スクロール位置に応じて表示セクションを判定 */}
+              <WindowScrollHandler setVisibleSections={setVisibleSections} />
 
-          {/*-------------- ここから画面表示 --------------*/}
-          {/* スクロール画像 */}
-          <ScrollImg />
-          <Scroll html>
-            {/* 最初のsection */}
+              {/*-------------- ここから画面表示 --------------*/}
+              {/* スクロール画像 */}
+              <ScrollImg />
+            </ScrollControls>
+          </Canvas>
+
+          {/* 最初のsection */}
+          <div data-section>
             <TopSection isVisible={isVisible('hello')} />
-            {/* プロフィールsection */}
+          </div>
+
+          {/* プロフィールsection */}
+          <div data-section>
             <ProfileSection isVisible={isVisible} />
-            {/* メッセージsection */}
+          </div>
+
+          {/* メッセージsection */}
+          <div data-section>
             <MessageSection />
-            {/* Previous Experience */}
+          </div>
+
+          {/* Previous Experience */}
+          <div data-section>
             <ExperienceSection isVisible={isVisible} />
-            {/* IT */}
+          </div>
+
+          {/* IT */}
+          <div data-section>
             <ItSection />
-            {/* スキル */}
+          </div>
+
+          {/* スキル */}
+          <div data-section>
             <SkillSection isVisible={isVisible} />
-            {/* message*/}
+          </div>
+
+          {/* Contact */}
+          <div data-section>
             <ContactSection isVisible={isVisible} />
-          </Scroll>
-        </ScrollControls>
-      </Canvas>
+          </div>
+        </div>
+      </GentleScrollProvider>
     </>
   );
 };
-export default ThreeCanvas;
+
+export default GentleScrollCanvas;
