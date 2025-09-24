@@ -52,18 +52,22 @@ const ScrollController = () => {
 
     setTimeout(() => {
       sectionIds.forEach((sectionId: string) => {
+        // セクションの要素を取得
         const element: HTMLElement | null = document.getElementById(sectionId);
         if (element) {
           // 要素の正確な位置を取得
           const rect: DOMRect = element.getBoundingClientRect();
+          // ページ全体に対するトップ位置を計算
           const elementTop: number = rect.top + window.pageYOffset;
 
           // オフセットを調整（ヘッダーの高さなどを考慮）
-          const offset: number = sectionId === 'topSection' ? 0 : -80; // 80pxのオフセット
+          const offset: number = sectionId === 'topSection' ? 0 : -10; // 10pxのオフセット
+          // 調整後のトップ位置
           const adjustedTop: number = elementTop + offset;
 
           // ピクセル値をvh値に変換
           const vh: number = window.innerHeight / 100;
+          // vh位置を計算（負の値を0にクランプ）
           const vhPosition: number = Math.max(0, adjustedTop / vh);
 
           positions[sectionId] = vhPosition;
@@ -108,11 +112,10 @@ const ScrollController = () => {
       return;
     }
 
+    // ターゲットのvh位置を取得
     const targetVh: number | undefined = sectionPositions.current[sectionId];
 
     if (targetVh !== undefined) {
-      console.log(`Scrolling to ${sectionId}: ${targetVh.toFixed(1)}vh`);
-
       isAnimating.current = true;
       syncDirection.current = 'three-to-browser';
 
@@ -132,35 +135,50 @@ const ScrollController = () => {
         document.documentElement.scrollHeight,
         document.documentElement.offsetHeight
       );
+
+      // クライアントのビューポートの高さを取得
       const documentClientHeight: number = window.innerHeight;
+      // 最大スクロール可能距離を計算
       const documentMaxScroll: number =
         documentScrollHeight - documentClientHeight;
 
+      // スクロール位置の割合を計算
       const scrollPercentage: number =
         documentMaxScroll > 0 ? targetBrowserScrollTop / documentMaxScroll : 0;
 
+      // Three.jsのスクロールコンテナの最大スクロール可能距離を計算
       const threeMaxScroll: number =
         scroll.el.scrollHeight - scroll.el.clientHeight;
+      // Three.jsのターゲットスクロール位置を計算
       const targetThreeScrollTop: number = scrollPercentage * threeMaxScroll;
+      // 現在のThree.jsのスクロール位置を取得
       const currentThreeScrollTop: number = scroll.el.scrollTop;
 
       // スムーズスクロールアニメーション
       const duration: number = 1000;
+      // アニメーションの開始時間を記録
       const startTime: number = Date.now();
 
+      // アニメーションループ
       const animateScroll = (): void => {
+        // 経過時間を計算
         const elapsed: number = Date.now() - startTime;
+
+        // 進行度を0-1の範囲で計算
         const progress: number = Math.min(elapsed / duration, 1);
 
+        // イージング関数（easeInOutQuart）
         const easeProgress: number =
           progress < 0.5
             ? 8 * progress * progress * progress * progress
             : 1 - Math.pow(-2 * progress + 2, 4) / 2;
 
+        // 現在のスクロール位置を計算
         const currentBrowserPosition: number =
           currentBrowserScrollTop +
           (targetBrowserScrollTop - currentBrowserScrollTop) * easeProgress;
 
+        // Three.jsの現在のスクロール位置を計算
         const currentThreePosition: number =
           currentThreeScrollTop +
           (targetThreeScrollTop - currentThreeScrollTop) * easeProgress;

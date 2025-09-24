@@ -9,32 +9,19 @@
 import { WindowScrollHandlerProps } from '@/types/scroll';
 import { useScroll } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
-import { useRef, useEffect } from 'react';
-
-interface ExtendedWindowScrollHandlerProps extends WindowScrollHandlerProps {
-  onScrollDataReady?: (scrollData: any) => void;
-}
+import { useRef } from 'react';
 
 /**
  * @param props.setVisibleSections - 表示されているセクションのIDセットを更新する関数
- * @param props.onScrollDataReady - スクロールデータが準備できた時のコールバック
  * @returns ['hello', 'profile', 'experience', 'skill', 'contact'] のいずれかのセット
  */
 const WindowScrollHandler = ({
   setVisibleSections,
-  onScrollDataReady,
-}: ExtendedWindowScrollHandlerProps) => {
+}: WindowScrollHandlerProps) => {
   const scroll = useScroll();
   const lastOffsetRef = useRef<number>(-1);
   const lastVisibleSectionsRef = useRef<string>('');
   const frameCountRef = useRef<number>(0);
-
-  // スクロールデータを親に渡す
-  useEffect(() => {
-    if (onScrollDataReady) {
-      onScrollDataReady(scroll);
-    }
-  }, [scroll, onScrollDataReady]);
 
   useFrame(() => {
     // 3フレームに1回だけ実行（約20fps）

@@ -6,7 +6,6 @@ import * as THREE from 'three';
  */
 export interface WindowScrollHandlerProps {
   setVisibleSections: (sections: Set<string>) => void;
-  onScrollDataReady?: (scrollData: ScrollData) => void;
 }
 
 /**

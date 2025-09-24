@@ -29,6 +29,7 @@ const ThreeCanvas = () => {
         }}
         style={{ position: 'fixed', top: 0, left: 0, zIndex: -1 }}
       >
+        {/* Three.jsのシーン */}
         <ScrollControls
           pages={10.7}
           damping={0.3}
@@ -37,10 +38,14 @@ const ThreeCanvas = () => {
           horizontal={false}
           style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
         >
+          {/* スクロール同期コントローラー */}
           <ScrollController />
+          {/* スクロール位置に応じて表示セクションを判定 */}
           <WindowScrollHandler setVisibleSections={setVisibleSections} />
-          <ScrollImg />
 
+          {/*-------------- ここから画面表示 --------------*/}
+          {/* スクロール画像 */}
+          <ScrollImg />
           <Scroll html>
             {/* 最初のsection */}
             <TopSection isVisible={isVisible('hello')} />
