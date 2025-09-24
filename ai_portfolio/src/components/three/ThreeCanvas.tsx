@@ -46,24 +46,23 @@ const ThreeCanvas = () => {
           {/*-------------- ここから画面表示 --------------*/}
           {/* スクロール画像 */}
           <ScrollImg />
-          <Scroll html>
-            {/* 最初のsection */}
-            <TopSection isVisible={isVisible('hello')} />
-            {/* プロフィールsection */}
-            <ProfileSection isVisible={isVisible} />
-            {/* メッセージsection */}
-            <MessageSection />
-            {/* Previous Experience */}
-            <ExperienceSection isVisible={isVisible} />
-            {/* IT */}
-            <ItSection />
-            {/* スキル */}
-            <SkillSection isVisible={isVisible} />
-            {/* message*/}
-            <ContactSection isVisible={isVisible} />
-          </Scroll>
         </ScrollControls>
       </Canvas>
+
+      {/* 最初のsection */}
+      <TopSection isVisible={isVisible('hello')} />
+      {/* プロフィールsection */}
+      <ProfileSection isVisible={isVisible} />
+      {/* メッセージsection */}
+      <MessageSection />
+      {/* Previous Experience */}
+      <ExperienceSection isVisible={isVisible} />
+      {/* IT */}
+      <ItSection />
+      {/* スキル */}
+      <SkillSection isVisible={isVisible} />
+      {/* message*/}
+      <ContactSection isVisible={isVisible} />
     </>
   );
 };
