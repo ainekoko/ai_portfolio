@@ -1,22 +1,27 @@
-// src/components/ui/SmoothScrollHandler.tsx
 'use client';
 import { useEffect, useRef } from 'react';
 
-interface SmoothScrollHandlerProps {
-  scrollSpeed?: number; // スクロール速度の倍率 (デフォルト: 0.3)
+interface ThreeScrollHandlerProps {
+  scrollSpeed?: number; // スクロール速度の倍率 (デフォルト: 0.4)
   smoothness?: number; // 滑らかさ (デフォルト: 0.08)
   enableSmooth?: boolean; // 滑らかスクロールを有効にするか (デフォルト: true)
 }
 
-const SmoothScrollHandler = ({
-  scrollSpeed = 0.3,
+/**
+ * Three.js環境専用のスクロールハンドラー
+ * ブラウザのネイティブスクロールと協調動作する
+ */
+const ThreeScrollHandler = ({
+  scrollSpeed = 0.4,
   smoothness = 0.08,
   enableSmooth = true,
-}: SmoothScrollHandlerProps) => {
+}: ThreeScrollHandlerProps) => {
   const targetScrollY = useRef(0);
   const currentScrollY = useRef(0);
   const animationId = useRef<number | null>(null);
   const isScrolling = useRef(false);
+  const userScrolling = useRef(false);
+  const scrollTimeout = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     // 初期スクロール位置を設定
@@ -38,20 +43,24 @@ const SmoothScrollHandler = ({
       // 滑らかに移動
       currentScrollY.current += difference * smoothness;
 
-      // スクロール位置を適用
-      window.scrollTo(0, currentScrollY.current);
+      // ユーザーが手動スクロール中でなければスクロール位置を適用
+      if (!userScrolling.current) {
+        window.scrollTo(0, currentScrollY.current);
+      }
 
       // 次のフレームで継続
       animationId.current = requestAnimationFrame(smoothScrollAnimation);
     };
 
-    // ホイールイベントハンドラー
+    // ホイールイベントハンドラー（Three.js環境用）
     const handleWheel = (e: WheelEvent) => {
       e.preventDefault();
 
+      // スクロール量を調整
+      const scrollAmount = e.deltaY * scrollSpeed;
+
       if (!enableSmooth) {
         // 滑らかスクロールが無効の場合は直接スクロール
-        const scrollAmount = e.deltaY * scrollSpeed;
         window.scrollBy({
           top: scrollAmount,
           behavior: 'auto',
@@ -60,7 +69,6 @@ const SmoothScrollHandler = ({
       }
 
       // ターゲット位置を更新
-      const scrollAmount = e.deltaY * scrollSpeed;
       targetScrollY.current += scrollAmount;
 
       // スクロール範囲を制限
@@ -78,41 +86,27 @@ const SmoothScrollHandler = ({
       }
     };
 
-    // タッチスクロール対応（モバイル）
-    const handleTouchStart = (e: TouchEvent) => {
-      if (!enableSmooth) return;
+    // ブラウザスクロールの検知（手動スクロール判定用）
+    const handleBrowserScroll = () => {
+      const currentScrollTop =
+        window.pageYOffset || document.documentElement.scrollTop;
 
-      const touch = e.touches[0];
-      const startY = touch.clientY;
+      // 手動スクロールを検知
+      if (Math.abs(currentScrollTop - currentScrollY.current) > 5) {
+        userScrolling.current = true;
+        targetScrollY.current = currentScrollTop;
+        currentScrollY.current = currentScrollTop;
 
-      const handleTouchMove = (moveEvent: TouchEvent) => {
-        moveEvent.preventDefault();
-        const moveTouch = moveEvent.touches[0];
-        const deltaY = (moveTouch.clientY - startY) * -2; // 感度調整
-
-        targetScrollY.current += deltaY * scrollSpeed;
-        const maxScroll =
-          document.documentElement.scrollHeight - window.innerHeight;
-        targetScrollY.current = Math.max(
-          0,
-          Math.min(targetScrollY.current, maxScroll)
-        );
-
-        if (!isScrolling.current) {
-          isScrolling.current = true;
-          smoothScrollAnimation();
+        // タイムアウトをリセット
+        if (scrollTimeout.current) {
+          clearTimeout(scrollTimeout.current);
         }
-      };
 
-      const handleTouchEnd = () => {
-        document.removeEventListener('touchmove', handleTouchMove);
-        document.removeEventListener('touchend', handleTouchEnd);
-      };
-
-      document.addEventListener('touchmove', handleTouchMove, {
-        passive: false,
-      });
-      document.addEventListener('touchend', handleTouchEnd);
+        // 200ms後に手動スクロール状態を解除
+        scrollTimeout.current = setTimeout(() => {
+          userScrolling.current = false;
+        }, 200);
+      }
     };
 
     // キーボードスクロール対応
@@ -123,16 +117,16 @@ const SmoothScrollHandler = ({
 
       switch (e.key) {
         case 'ArrowUp':
-          scrollAmount = -50;
+          scrollAmount = -50 * scrollSpeed;
           break;
         case 'ArrowDown':
-          scrollAmount = 50;
+          scrollAmount = 50 * scrollSpeed;
           break;
         case 'PageUp':
-          scrollAmount = -window.innerHeight * 0.8;
+          scrollAmount = -window.innerHeight * 0.8 * scrollSpeed;
           break;
         case 'PageDown':
-          scrollAmount = window.innerHeight * 0.8;
+          scrollAmount = window.innerHeight * 0.8 * scrollSpeed;
           break;
         case 'Home':
           targetScrollY.current = 0;
@@ -172,12 +166,6 @@ const SmoothScrollHandler = ({
       }
     };
 
-    // ブラウザの戻る/進むボタン対応
-    const handlePopState = () => {
-      targetScrollY.current = window.pageYOffset;
-      currentScrollY.current = window.pageYOffset;
-    };
-
     // リサイズ対応
     const handleResize = () => {
       const maxScroll =
@@ -188,21 +176,23 @@ const SmoothScrollHandler = ({
 
     // イベントリスナーを追加
     window.addEventListener('wheel', handleWheel, { passive: false });
-    window.addEventListener('touchstart', handleTouchStart, { passive: false });
+    window.addEventListener('scroll', handleBrowserScroll, { passive: true });
     window.addEventListener('keydown', handleKeyDown);
-    window.addEventListener('popstate', handlePopState);
     window.addEventListener('resize', handleResize);
 
     // クリーンアップ
     return () => {
       window.removeEventListener('wheel', handleWheel);
-      window.removeEventListener('touchstart', handleTouchStart);
+      window.removeEventListener('scroll', handleBrowserScroll);
       window.removeEventListener('keydown', handleKeyDown);
-      window.removeEventListener('popstate', handlePopState);
       window.removeEventListener('resize', handleResize);
 
       if (animationId.current) {
         cancelAnimationFrame(animationId.current);
+      }
+
+      if (scrollTimeout.current) {
+        clearTimeout(scrollTimeout.current);
       }
     };
   }, [scrollSpeed, smoothness, enableSmooth]);
@@ -210,4 +200,4 @@ const SmoothScrollHandler = ({
   return null;
 };
 
-export default SmoothScrollHandler;
+export default ThreeScrollHandler;
