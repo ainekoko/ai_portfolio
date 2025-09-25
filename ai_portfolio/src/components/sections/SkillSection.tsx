@@ -1,3 +1,4 @@
+'use client';
 import { SectionProps } from '@/types/component';
 import React from 'react';
 import SectionHeader from '../common/SectionHeader';

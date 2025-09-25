@@ -1,4 +1,4 @@
-// src/hooks/useVisibleSections.ts
+'use client';
 import { useState } from 'react';
 
 /** セクションの表示状態を管理するカスタムフック */

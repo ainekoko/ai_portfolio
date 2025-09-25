@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from 'next/font/google';
 import Header from '@/components/layout/header/Header';
 import Footer from '@/components/layout/footer/Footer';
 import './globals.css';
+import ThreeScrollHandler from '@/components/ui/ScrollHandler';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -29,6 +30,11 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <ThreeScrollHandler
+          scrollSpeed={0.4} // スクロール速度（遅く: 0.1, 速く: 1.0）
+          smoothness={0.08} // 滑らかさ（滑らか: 0.05, 素早く: 0.15）
+          enableSmooth={true} // 滑らかスクロールのON/OFF
+        />
         <Header />
         <main>{children}</main>
         <Footer />

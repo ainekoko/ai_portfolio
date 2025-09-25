@@ -28,6 +28,10 @@ const ScrollController = () => {
   );
   const sectionPositions = useRef<Record<string, number>>({});
 
+  // 手動スクロール検知用
+  const userScrolling = useRef(false);
+  const scrollTimeout = useRef<NodeJS.Timeout | null>(null);
+
   /**
    * セクション位置を自動計算する関数
    * DOM要素の実際の位置を測定してvh値に変換
@@ -256,13 +260,22 @@ const ScrollController = () => {
     };
   }, []);
 
-  // ブラウザスクロールからThree.jsへの同期
+  // ブラウザスクロールからThree.jsへの同期（修正版）
   useEffect(() => {
     const handleBrowserScroll = (): void => {
       if (!scroll?.el || isAnimating.current) return;
 
       const currentBrowserScrollTop: number =
         window.pageYOffset || document.documentElement.scrollTop;
+
+      // 手動スクロール検知
+      userScrolling.current = true;
+      if (scrollTimeout.current) {
+        clearTimeout(scrollTimeout.current);
+      }
+      scrollTimeout.current = setTimeout(() => {
+        userScrolling.current = false;
+      }, 100);
 
       if (
         Math.abs(currentBrowserScrollTop - lastBrowserScrollTop.current) > 1
@@ -302,15 +315,19 @@ const ScrollController = () => {
 
     return () => {
       window.removeEventListener('scroll', handleBrowserScroll);
+      if (scrollTimeout.current) {
+        clearTimeout(scrollTimeout.current);
+      }
     };
   }, [scroll]);
 
-  // Three.jsのスクロールとブラウザのスクロールを同期（Three.js → ブラウザ）
+  // Three.jsのスクロールとブラウザのスクロールを同期（Three.js → ブラウザ）修正版
   useFrame(() => {
     if (
       !scroll?.el ||
       isAnimating.current ||
-      syncDirection.current === 'browser-to-three'
+      syncDirection.current === 'browser-to-three' ||
+      userScrolling.current // ★ 手動スクロール中は同期をスキップ
     )
       return;
 
@@ -339,8 +356,11 @@ const ScrollController = () => {
         const targetBrowserScrollTop: number =
           scrollPercentage * documentMaxScroll;
 
-        document.documentElement.scrollTop = targetBrowserScrollTop;
-        document.body.scrollTop = targetBrowserScrollTop;
+        // 手動スクロール中でなければ同期を実行
+        if (!userScrolling.current) {
+          document.documentElement.scrollTop = targetBrowserScrollTop;
+          document.body.scrollTop = targetBrowserScrollTop;
+        }
 
         lastThreeScrollTop.current = currentThreeScrollTop;
         lastBrowserScrollTop.current = targetBrowserScrollTop;

@@ -1,3 +1,4 @@
+'use client';
 import { QAITEMS, SELF_INTRODUCTION } from '@/utils/messageData';
 import React, { useState } from 'react';
 
