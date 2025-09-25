@@ -11,6 +11,12 @@ import * as THREE from 'three';
 import { Scroll } from '@react-three/drei';
 import { ZoomSprite } from '@/types/scroll';
 
+interface ImageData {
+  url: string;
+  scale: number | [number, number]; // number[] ではなく [number, number]
+  position?: [number, number, number];
+}
+
 /**
  * スクロールに応じて画像がズームイン・ズームアウトするコンポーネント
  * @returns React.FC
@@ -19,6 +25,24 @@ const ScrollImg: React.FC = () => {
   const { width, height } = useThree((state) => state.viewport);
   const data = useScroll();
   const group = useRef<Group>(null!);
+  const images: ImageData[] = useMemo(
+    () => [
+      {
+        url: '/assets/images/top_1.jpg',
+        scale: [2.5, 6],
+        position: [-3, -1, 1],
+      },
+      { url: '/assets/images/top_2.jpg', scale: 5, position: [2, -1, 1] },
+      {
+        url: '/assets/images/top_3.jpg',
+        scale: [3, 3],
+        position: [-0.5, -height, 2],
+      },
+      { url: '/assets/images/top_4.jpg', scale: [2, 6], position: [-4, -9, 1] },
+      { url: '/assets/images/top_5.jpg', scale: [2, 6], position: [3, -10, 1] },
+    ],
+    [height]
+  );
 
   useFrame(() => {
     if (!group.current) return;
@@ -37,57 +61,25 @@ const ScrollImg: React.FC = () => {
     }
   });
 
-  // Canvas要素でグラデーションを作成
-  const createGradientTexture = () => {
-    const canvas = document.createElement('canvas');
-    canvas.width = 256;
-    canvas.height = 256;
-    const context = canvas.getContext('2d')!;
-
-    const gradient = context.createLinearGradient(0, 0, 0, 256);
-    gradient.addColorStop(0, '#c5fff8');
-    gradient.addColorStop(1, '#ffffff');
-
-    context.fillStyle = gradient;
-    context.fillRect(0, 0, 256, 500);
-
-    return new THREE.CanvasTexture(canvas);
-  };
-  const texture = useMemo(() => createGradientTexture(), []);
   return (
     <Scroll>
       <group ref={group}>
         {/* 白い背景プレーン - 最も奥に配置 */}
         <mesh position={[0, 0, -5]} scale={[width * 2, height * 7, 1]}>
           <planeGeometry args={[1, 1]} />
-          <meshBasicMaterial map={texture} />{' '}
+          {/* <meshBasicMaterial map={texture} /> */}
         </mesh>
-        {/* eslint-disable-next-line jsx-a11y/alt-text */}
-        <Image
-          url='/assets/images/top_1.jpg'
-          scale={[2.5, 6]} // もっと小さく
-          position={[-3, -1, 1]}
-        />
-        {/* eslint-disable-next-line jsx-a11y/alt-text */}
-        <Image url='/assets/images/top_2.jpg' scale={5} position={[2, -1, 1]} />
-        {/* eslint-disable-next-line jsx-a11y/alt-text */}
-        <Image
-          url='/assets/images/top_3.jpg'
-          scale={[3, 3]}
-          position={[-0.5, -height, 2]}
-        />
-        {/* eslint-disable-next-line jsx-a11y/alt-text */}
-        <Image
-          url='/assets/images/top_4.jpg'
-          scale={[2, 6]}
-          position={[-4, -9, 1]}
-        />
-        {/* eslint-disable-next-line jsx-a11y/alt-text */}
-        <Image
-          url='/assets/images/top_5.jpg'
-          scale={[2, 6]}
-          position={[3, -10, 1]}
-        />
+        {images.map((img, index) => (
+          <React.Fragment key={index}>
+            {/* eslint-disable-next-line jsx-a11y/alt-text */}
+            <Image
+              key={index}
+              url={img.url}
+              scale={img.scale}
+              position={img.position}
+            />
+          </React.Fragment>
+        ))}
       </group>
     </Scroll>
   );
