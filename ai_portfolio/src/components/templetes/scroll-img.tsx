@@ -34,14 +34,14 @@ const ScrollImg: React.FC = () => {
       {
         url: '/assets/images/top_1.jpg',
         // 横幅を画面の20%、アスペクト比を保つために高さも調整
-        scale: [width * imageWidthRatio, width * imageWidthRatio * 0.75], // 4:3のアスペクト比
-        position: [-3, -1, 1],
+        scale: [width * 0.2, 6], // 4:3のアスペクト比
+        position: [width * 0.1, 0, 1], // 右側固定（画面幅の35%の位置）
       },
       {
         url: '/assets/images/top_2.jpg',
-        // 正方形の場合
-        scale: width * imageWidthRatio,
-        position: [2, -1, 1],
+        // 正方形で横幅固定
+        scale: width * 0.25, // 正方形に統一
+        position: [-width * 0.2, -1, 1], // 左側固定（画面幅の-35%の位置）
       },
       {
         url: '/assets/images/top_3.jpg',
@@ -52,14 +52,14 @@ const ScrollImg: React.FC = () => {
       {
         url: '/assets/images/top_4.jpg',
         // 横幅20%、縦長のアスペクト比
-        scale: [width * imageWidthRatio, width * imageWidthRatio * 1.5],
-        position: [-4, -9, 1],
+        scale: [width * imageWidthRatio, 6],
+        position: [-width * 0.2, -9, 1],
       },
       {
         url: '/assets/images/top_5.jpg',
         // 横幅20%、縦長のアスペクト比
-        scale: [width * imageWidthRatio, width * imageWidthRatio * 1.5],
-        position: [3, -10, 1],
+        scale: [width * imageWidthRatio, 5],
+        position: [width * 0.2, -10, 1],
       },
     ],
     [width, height, imageWidthRatio]
