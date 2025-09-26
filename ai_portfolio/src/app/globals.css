@@ -1,5 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Italiana&display=swap');
 @import 'tailwindcss';
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -10,6 +10,7 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-italiana: var(--font-italiana); /* Italiana変数を追加 */
 }
 
 @media (prefers-color-scheme: dark) {
@@ -18,13 +19,14 @@
     --foreground: #ededed;
   }
 }
+
 /* マウスホイールのスムーズスクロール */
 html {
-  scroll-behavior: auto; /* smoothだと同期が難しいのでautoに */
+  scroll-behavior: auto;
 }
+
 html,
 body {
-  /* スクロールバー */
   overflow: auto !important;
   scrollbar-width: thin;
   scrollbar-color: rgba(155, 155, 155, 0.7) transparent;
@@ -39,9 +41,35 @@ body {
   background-repeat: no-repeat, no-repeat;
   background-attachment: fixed, fixed;
   color: var(--foreground);
-  font-family: 'Italiana', Arial, Helvetica, sans-serif;
+  /* next/font/google で読み込んだItalianaフォントを使用 */
+  font-family: var(--font-italiana), Arial, Helvetica, sans-serif;
   cursor: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48Y2lyY2xlIGN4PSIxNiIgY3k9IjE2IiByPSIxMCIgZmlsbD0iYmxhY2siLz48L3N2Zz4='),
     auto;
+}
+
+/* レスポンシブ対応追加 */
+@media (max-width: 768px) {
+  body {
+    background-size: 80% auto, 80% auto;
+    background-position: left top, right top;
+  }
+
+  /* モバイルでカスタムカーソルを無効化 */
+  * {
+    cursor: auto !important;
+  }
+
+  /* スクロールバーをモバイルで調整 */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+}
+
+/* タブレット用の中間サイズ */
+@media (min-width: 768px) and (max-width: 1024px) {
+  body {
+    background-size: 70% auto, 70% auto;
+  }
 }
 
 /* ページ全体のスクロールを滑らかに */
@@ -66,6 +94,7 @@ a {
 button svg {
   pointer-events: none;
 }
+
 /* Webkit系ブラウザのスクロールバーカスタマイズ */
 ::-webkit-scrollbar {
   width: 12px;
