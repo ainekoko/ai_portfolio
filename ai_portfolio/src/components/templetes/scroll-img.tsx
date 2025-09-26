@@ -26,45 +26,73 @@ const ScrollImg: React.FC = () => {
   const group = useRef<Group>(null!);
   const imageRefs = useRef<(THREE.Mesh | null)[]>([]);
 
-  // 画面の横幅の20%を基準とした画像サイズを計算
-  const imageWidthRatio = 0.2; // 20%
+  const images: ImageData[] = useMemo(() => {
+    // 959px以下をSPとして判定
+    const isMobile = width < 959 / 100;
 
-  const images: ImageData[] = useMemo(
-    () => [
+    if (isMobile) {
+      console.log('SP mode');
+      // SP用の設定
+      return [
+        {
+          url: '/assets/images/top_2.jpg', //草原
+          scale: width * 0.6, // SP用正方形サイズ
+          // position: [0, height * 0.2, 1], // 中央配置、少し下に
+          position: [width * 0.02, 0, 1],
+        },
+        {
+          url: '/assets/images/top_1.jpg', //ネイル
+          scale: [width * 0.2, width * 0.5],
+          position: [-width * 0.25, -2, 1],
+        },
+
+        {
+          url: '/assets/images/top_3.jpg', //クロワッサン
+          scale: [width * 0.6, width * 0.6],
+          position: [0, -10, 1],
+        },
+        {
+          url: '/assets/images/top_4.jpg', //子供
+          scale: [width * 0.2, height * 0.5],
+          position: [-width * 0.25, -height * 1.1, 1],
+        },
+        {
+          url: '/assets/images/top_5.jpg', //草原
+          scale: [width * 0.2, height * 0.4],
+          position: [width * 0.25, -height * 1.6, 1],
+        },
+      ];
+    }
+
+    // PC・タブレット用の設定（既存）
+    return [
       {
         url: '/assets/images/top_1.jpg',
-        // 横幅を画面の20%、アスペクト比を保つために高さも調整
-        scale: [width * 0.2, 6], // 4:3のアスペクト比
-        position: [width * 0.1, 0, 1], // 右側固定（画面幅の35%の位置）
+        scale: [width * 0.2, 6],
+        position: [width * 0.1, 0, 1],
       },
       {
         url: '/assets/images/top_2.jpg',
-        // 正方形で横幅固定
-        scale: width * 0.25, // 正方形に統一
-        position: [-width * 0.2, -1, 1], // 左側固定（画面幅の-35%の位置）
+        scale: width * 0.25,
+        position: [-width * 0.2, -1, 1],
       },
       {
         url: '/assets/images/top_3.jpg',
-        // 横幅20%で正方形
-        scale: [width * imageWidthRatio, width * imageWidthRatio],
+        scale: [width * 0.2, width * 0.2],
         position: [-0.5, -height, 2],
       },
       {
         url: '/assets/images/top_4.jpg',
-        // 横幅20%、縦長のアスペクト比
-        scale: [width * imageWidthRatio, 6],
+        scale: [width * 0.2, 6],
         position: [-width * 0.2, -9, 1],
       },
       {
         url: '/assets/images/top_5.jpg',
-        // 横幅20%、縦長のアスペクト比
-        scale: [width * imageWidthRatio, 5],
+        scale: [width * 0.2, 5],
         position: [width * 0.2, -10, 1],
       },
-    ],
-    [width, height, imageWidthRatio]
-  );
-
+    ];
+  }, [width, height]);
   useFrame(() => {
     if (!group.current || !data) return;
 
