@@ -3,6 +3,9 @@ import { useState, useEffect } from 'react';
 import styles from './Header.module.css';
 import CustomCursor from '@/components/ui/CustomCursor';
 
+/**
+ *  ヘッダーコンポーネント
+ */
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -20,26 +23,22 @@ const Header = () => {
    */
   const handleSectionClick = (sectionId: string) => {
     console.log('クリックされたセクションID:', sectionId);
-    // 型安全なWindow拡張
+
     interface ExtendedWindow extends Window {
       scrollToSection?: (sectionId: string) => void;
     }
 
-    // ThreeCanvasで設定されたグローバル関数を呼び出し
     const extendedWindow = window as ExtendedWindow;
     if (typeof window !== 'undefined' && extendedWindow.scrollToSection) {
       extendedWindow.scrollToSection(sectionId);
     } else {
-      // フォールバック: 関数が未設定の場合は少し待ってから再試行
       console.warn(
         'scrollError:scrollToSection function not available, retrying in 100ms...'
       );
-
       setTimeout(() => {
         if (extendedWindow.scrollToSection) {
           extendedWindow.scrollToSection(sectionId);
         } else {
-          // 最終フォールバック: 通常のスクロール
           console.warn(
             'scrollError:scrollToSection still not available, using native scroll fallback'
           );
@@ -53,7 +52,6 @@ const Header = () => {
     closeMenu();
   };
 
-  // Escapeキーでメニューを閉じる
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape' && isMenuOpen) {
@@ -67,23 +65,27 @@ const Header = () => {
 
   return (
     <>
-      {/* カスタムカーソル */}
-      <CustomCursor />
+      {/* カスタムカーソル（デスクトップのみ） */}
+      <div className='hidden md:block'>
+        <CustomCursor />
+      </div>
 
-      {/* デフォルトカーソルを非表示 */}
+      {/* デフォルトカーソルを非表示（デスクトップのみ） */}
       <style jsx global>{`
-        * {
-          cursor: none !important;
+        @media (min-width: 768px) {
+          * {
+            cursor: none !important;
+          }
         }
       `}</style>
 
       <header>
-        <nav className='pointer-events-none z-10 fixed top-0 right-0 w-64 h-full flex flex-col'>
+        <nav className='pointer-events-none z-10 fixed top-0 right-0 w-full md:w-64 h-full flex flex-col'>
           <div className='header'>
             {/* Hamburger Button */}
             <button
               onClick={toggleMenu}
-              className={`fixed top-5 right-5 z-[1000] w-12 h-12 p-0 border-none bg-transparent cursor-pointer pointer-events-auto ${
+              className={`fixed top-3 md:top-5 right-3 md:right-5 z-[1000] w-10 h-10 md:w-12 md:h-12 p-0 border-none bg-transparent cursor-pointer pointer-events-auto ${
                 isMenuOpen ? styles.hamburgerActive : ''
               }`}
               aria-label='メニュー'
@@ -152,7 +154,7 @@ const Header = () => {
                   ].map((item, index) => (
                     <li
                       key={index}
-                      className={` opacity-0 translate-y-7 transition-all duration-[400ms] ease-out ${
+                      className={`opacity-0 translate-y-7 transition-all duration-[400ms] ease-out ${
                         item.delay
                       } ${isMenuOpen ? styles.navItemEnter : ''}`}
                     >
@@ -162,12 +164,14 @@ const Header = () => {
                           e.preventDefault();
                           handleSectionClick(item.sectionId);
                         }}
-                        className='relative inline-block py-5 px-5 text-3xl text-white no-underline overflow-hidden hover:text-pink-400 transition-colors duration-500'
+                        className='relative inline-block py-3 md:py-5 px-3 md:px-5 text-2xl md:text-3xl text-white no-underline overflow-hidden hover:text-pink-400 transition-colors duration-500'
                       >
                         <span className='block pointer-events-none'>
                           {item.en}
                           <br />
-                          <span className='text-sm opacity-70'>{item.ja}</span>
+                          <span className='text-xs md:text-sm opacity-70'>
+                            {item.ja}
+                          </span>
                         </span>
                       </a>
                     </li>
@@ -177,8 +181,8 @@ const Header = () => {
             </nav>
           </div>
 
-          {/* ナビゲーションメニュー */}
-          <div className='flex flex-col items-end pr-8 gap-1 mt-20 pointer-events-auto'>
+          {/* ナビゲーションメニュー（デスクトップのみ） */}
+          <div className='hidden lg:flex flex-col items-end pr-8 gap-1 mt-20 pointer-events-auto'>
             {[
               { href: 'topSection', text: 'Top' },
               { href: 'profile', text: 'Profile' },
@@ -193,7 +197,7 @@ const Header = () => {
                   e.preventDefault();
                   handleSectionClick(link.href);
                 }}
-                className='nav-text text-xl text-gray-800 hover:text-gray-600 transition-all duration-300 transform hover:translate-x-2'
+                className='nav-text text-lg xl:text-xl text-gray-800 hover:text-gray-600 transition-all duration-300 transform hover:translate-x-2'
               >
                 {link.text}
               </a>
@@ -203,14 +207,14 @@ const Header = () => {
 
         {/* header Top */}
         <div className='fixed top-0 left-0 z-20 pointer-events-auto'>
-          <div className='header-top flex items-center px-6 pt-4 pb-2 relative'>
+          <div className='header-top flex items-center px-3 md:px-6 pt-2 md:pt-4 pb-2 relative'>
             <a
               href='#topSection'
               onClick={(e) => {
                 e.preventDefault();
                 handleSectionClick('topSection');
               }}
-              className='text-[#3b3b3b] text-2xl font-bold tracking-wider'
+              className='text-[#3b3b3b] text-lg md:text-2xl font-bold tracking-wider'
             >
               Ai&rsquo;s Portfolio
             </a>
