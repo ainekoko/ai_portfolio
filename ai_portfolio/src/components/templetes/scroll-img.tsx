@@ -1,6 +1,7 @@
 /**
  * ScrollImg.tsx
  * スクロールに応じて画像がズームイン・ズームアウトするコンポーネント
+ * 画像の横幅を画面の20%に調整
  */
 'use client';
 import React, { useRef, useMemo } from 'react';
@@ -25,42 +26,47 @@ const ScrollImg: React.FC = () => {
   const group = useRef<Group>(null!);
   const imageRefs = useRef<(THREE.Mesh | null)[]>([]);
 
+  // 画面の横幅の20%を基準とした画像サイズを計算
+  const imageWidthRatio = 0.2; // 20%
+
   const images: ImageData[] = useMemo(
     () => [
       {
         url: '/assets/images/top_1.jpg',
-        scale: [2.5, 6],
+        // 横幅を画面の20%、アスペクト比を保つために高さも調整
+        scale: [width * imageWidthRatio, width * imageWidthRatio * 0.75], // 4:3のアスペクト比
         position: [-3, -1, 1],
       },
       {
         url: '/assets/images/top_2.jpg',
-        scale: 5,
+        // 正方形の場合
+        scale: width * imageWidthRatio,
         position: [2, -1, 1],
       },
       {
         url: '/assets/images/top_3.jpg',
-        scale: [3, 3],
+        // 横幅20%で正方形
+        scale: [width * imageWidthRatio, width * imageWidthRatio],
         position: [-0.5, -height, 2],
       },
       {
         url: '/assets/images/top_4.jpg',
-        scale: [2, 6],
+        // 横幅20%、縦長のアスペクト比
+        scale: [width * imageWidthRatio, width * imageWidthRatio * 1.5],
         position: [-4, -9, 1],
       },
       {
         url: '/assets/images/top_5.jpg',
-        scale: [2, 6],
+        // 横幅20%、縦長のアスペクト比
+        scale: [width * imageWidthRatio, width * imageWidthRatio * 1.5],
         position: [3, -10, 1],
       },
     ],
-    [height]
+    [width, height, imageWidthRatio]
   );
 
   useFrame(() => {
     if (!group.current || !data) return;
-
-    // スクロールオフセットをログ出力（デバッグ用）
-    // console.log('Scroll offset:', data.offset);
 
     const children = group.current.children;
 
