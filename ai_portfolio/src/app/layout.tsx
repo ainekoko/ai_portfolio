@@ -39,7 +39,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} ${italiana.variable} antialiased`}
       >
         <ThreeScrollHandler
-          scrollSpeed={0.4} // スクロール速度（遅く: 0.1, 速く: 1.0）
+          scrollSpeed={0.5} // スクロール速度（遅く: 0.1, 速く: 1.0）
           smoothness={0.08} // 滑らかさ（滑らか: 0.05, 素早く: 0.15）
           enableSmooth={true} // 滑らかスクロールのON/OFF
         />

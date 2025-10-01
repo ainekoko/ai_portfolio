@@ -21,12 +21,11 @@ const ProfileSection = ({ isVisible }: SectionProps) => {
         title='Profile'
         subtitle='自己紹介'
       />
-      <div className='container'>
+      <div className='bg-[url(/assets/images/hokkaido.png)]  bg-no-repeat '>
         {/* Profile Info Table */}
         <ProfileInfoTable profileData={PROFILE_DATA} />
         {/* Contact Buttons */}
         <ContactButtons contacts={CONTACT_BUTTONS} />
-
         <div className='absolute right-8 top-40 opacity-80'>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src='../assets/images/hokkaido.png' alt='北海道イラスト' />
