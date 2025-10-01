@@ -31,6 +31,7 @@ const ProfileSection = ({ isVisible }: SectionProps) => {
           <img
             src='../assets/images/profile-shimaenaga.png'
             alt='北海道イラスト'
+            className='animate-float hover:scale-110 transition-transform duration-300'
           />
         </div>
       </div>
