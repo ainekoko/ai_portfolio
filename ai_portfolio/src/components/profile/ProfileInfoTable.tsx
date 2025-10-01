@@ -11,11 +11,11 @@ interface ProfileInfoTableProps {
 
 /**
  * プロフィール情報テーブルコンポーネント
- * @param param0 - profileData: プロフィール情報の配列
+ * @param - profileData: プロフィール情報の配列
  */
 const ProfileInfoTable: React.FC<ProfileInfoTableProps> = ({ profileData }) => {
   return (
-    <ul className='mx-auto text-base space-y-2 ml-0 w-8/12'>
+    <ul className='text-base space-y-2 ml-0 lg:w-[900px]'>
       {profileData.map((item, index) => (
         <li
           key={index}

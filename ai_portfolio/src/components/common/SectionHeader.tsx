@@ -60,7 +60,7 @@ const SectionHeader = ({ isVisible, title, subtitle }: SectionTitleProps) => {
               : 'translate-x-4 opacity-0 bg-transparent'
           }`}
         >
-          {subtitle && <span>/ {subtitle}</span>}
+          {subtitle && <span className='hidden lg:inline'>/ {subtitle}</span>}
         </span>
       </h2>
       {/* 右側の長い二重線 */}
