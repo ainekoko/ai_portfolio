@@ -20,7 +20,7 @@ export default function Home() {
       {/* プロフィールsection */}
       <ProfileSection isVisible={isVisible} />
       {/* メッセージsection */}
-      {/* <MessageSection /> */}
+      <MessageSection />
       {/* Previous Experience */}
       {/* <ExperienceSection isVisible={isVisible} /> */}
       {/* IT */}
