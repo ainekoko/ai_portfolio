@@ -16,14 +16,14 @@ const MessageSection = () => {
   return (
     <section
       id='message'
-      className='relative top-[320vh] w-screen h-screen mt-8 py-50'
+      className='relative top-[310vh] w-screen h-screen mt-8 py-50'
     >
       <h2 className='text-[#e5c227] text-center text-lg font-bold mb-3 z-10 relative'>
         Message
       </h2>
 
       {/* 自己紹介部分 */}
-      <div className='w-[650px] text-base leading-relaxed z-10 relative m-auto mb-12'>
+      <div className='w-10/12 md:w-[650px] text-base leading-relaxed z-10 relative m-auto mb-12'>
         {SELF_INTRODUCTION.content}
       </div>
 

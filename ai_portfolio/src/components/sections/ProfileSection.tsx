@@ -14,7 +14,7 @@ const ProfileSection = ({ isVisible }: SectionProps) => {
   return (
     <section
       id='profile'
-      className='bg-[url(/assets/images/hokkaido.png)]  bg-no-repeat bg-[position:right] bg-[#ffffff] relative top-[300vh] w-screen pb-10 p-8 mt-8 py-6'
+      className='bg-[url(/assets/images/hokkaido.png)]  bg-no-repeat bg-[position:right] bg-[#ffffff] relative top-[310vh] w-screen pb-16 p-8 mt-8 py-6'
     >
       {/* Section Title */}
       <SectionHeader
