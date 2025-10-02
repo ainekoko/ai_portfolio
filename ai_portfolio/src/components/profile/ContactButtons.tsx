@@ -20,7 +20,7 @@ interface ContactButtonsProps {
  */
 const ContactButtons: React.FC<ContactButtonsProps> = ({ contacts }) => {
   return (
-    <div className='flex flex-wrap justify-center gap-5 my-15 text-base font-medium'>
+    <div className='flex flex-wrap justify-center gap-5 my-10 text-base font-medium'>
       {contacts.map((contact, index) => (
         <button
           key={index}

@@ -4,6 +4,7 @@ import { CONTACT_BUTTONS, PROFILE_DATA } from '@/utils/profileData';
 import ProfileInfoTable from '../profile/ProfileInfoTable';
 import SectionHeader from '../common/SectionHeader';
 import { SectionProps } from '@/types/component';
+import Huwahuwa_img from '../common/huwahuwa_img';
 /**
  * TopSection.tsx
  * 最初のセクションを表示するコンポーネント
@@ -13,7 +14,7 @@ const ProfileSection = ({ isVisible }: SectionProps) => {
   return (
     <section
       id='profile'
-      className='bg-[url(/assets/images/hokkaido.png)]  bg-no-repeat bg-[position:right] bg-[#ffffff] relative top-[300vh] w-screen pb-20 p-8 mt-8 py-6'
+      className='bg-[url(/assets/images/hokkaido.png)]  bg-no-repeat bg-[position:right] bg-[#ffffff] relative top-[300vh] w-screen pb-10 p-8 mt-8 py-6'
     >
       {/* Section Title */}
       <SectionHeader
@@ -26,12 +27,11 @@ const ProfileSection = ({ isVisible }: SectionProps) => {
         <ProfileInfoTable profileData={PROFILE_DATA} />
         {/* Contact Buttons */}
         <ContactButtons contacts={CONTACT_BUTTONS} />
-        <div className='absolute right-8 top-40 opacity-80'>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src='../assets/images/profile-shimaenaga.png'
-            alt='北海道イラスト'
-            className='animate-float hover:scale-110 transition-transform duration-300'
+        <div className='absolute left-10 lg:left-3/5 bottom-16 lg:bottom-56'>
+          <Huwahuwa_img
+            image='profile-shimaenaga.png'
+            name='シマエナガ'
+            move='gentle'
           />
         </div>
       </div>

@@ -54,13 +54,13 @@ const SectionHeader = ({ isVisible, title, subtitle }: SectionTitleProps) => {
           ))}
 
         <span
-          className={`text-xs md:text-sm ml-2 md:ml-4 italic text-gray-500 px-1 md:px-2 py-1 rounded transition-all duration-1000 ease-out delay-1000 ${
+          className={`lg:inline block text-xs md:text-sm ml-2 md:ml-4 italic text-gray-500 px-1 md:px-2 py-1 rounded transition-all duration-1000 ease-out delay-1000 ${
             isVisible
               ? 'translate-x-0 opacity-100 '
               : 'translate-x-4 opacity-0 bg-transparent'
           }`}
         >
-          {subtitle && <span className='hidden lg:inline'>/ {subtitle}</span>}
+          {subtitle && <span className='lg:inline'>/ {subtitle}</span>}
         </span>
       </h2>
       {/* 右側の長い二重線 */}
