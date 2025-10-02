@@ -50,11 +50,11 @@ const TopSection = (props: SectionIdProps) => {
       <p
         className='
         absolute top-[175vh] 
-        left-1/2 transform -translate-x-1/2
-        md:left-[50vw] md:transform-none
-        text-center md:text-left
-        text-sm md:text-lg 
-        w-full md:w-1 
+         transform -translate-x-1/2
+        left-[50vw] transform-none
+        text-left
+        text-sm  md:text-graduate
+        w-1 
         drop-shadow-[0_0_3px_white]
       '
       >
@@ -64,11 +64,11 @@ const TopSection = (props: SectionIdProps) => {
       <p
         className='
         absolute top-[180vh] md:top-[178vh] 
-        left-1/2 transform -translate-x-1/2
-        md:left-[45vw] md:transform-none
-        text-center md:text-left
-        text-xs md:text-base 
-        w-full md:w-1 
+        transform -translate-x-1/2
+        left-[45vw] transform-none
+        text-left
+        tetext-base 
+        w-1 
         drop-shadow-[0_0_3px_white]
       '
       >
