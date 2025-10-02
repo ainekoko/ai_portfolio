@@ -15,7 +15,7 @@ const SkillSection = ({ isVisible }: SectionProps) => {
   return (
     <section
       id='skill'
-      className='bg-[#f8fdfa] relative top-[360vh] w-screen h-screen p-8  mt-8 py-6'
+      className='bg-[#f8fdfa] relative top-[360vh] w-screen  p-8  mt-8 py-6 pb-16'
     >
       {/* Section Title */}
       <SectionHeader

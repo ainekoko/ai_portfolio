@@ -19,7 +19,7 @@ const ProfileInfoTable: React.FC<ProfileInfoTableProps> = ({ profileData }) => {
       {profileData.map((item, index) => (
         <li
           key={index}
-          className='text-sm flex border-b border-dotted border-[#bde7c4] pl-5 pb-1'
+          className='text-sm flex border-b border-dotted border-[#3b3b3b] pl-5 pb-1 my-6'
         >
           <span className='w-40'>{item.label}</span>
           <div className='w-10/12'>{item.content}</div>

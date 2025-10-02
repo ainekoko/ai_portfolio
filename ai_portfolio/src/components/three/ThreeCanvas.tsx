@@ -25,7 +25,7 @@ const ThreeCanvas = ({ setVisibleSections }: ThreeCanvasProps) => {
       >
         {/* Three.jsのシーン */}
         <ScrollControls
-          pages={11}
+          pages={11.5}
           damping={0.3}
           distance={1}
           infinite={false}
