@@ -76,8 +76,7 @@ const ScrollController = () => {
 
           positions[sectionId] = vhPosition;
         } else {
-          console.warn(`Element with id "${sectionId}" not found`);
-          // フォールバック値を設定
+          // フォールバック値を設定（ワーニングは削除）
           const fallbackPositions: Record<string, number> = {
             topSection: 0,
             profile: 300,
@@ -96,128 +95,134 @@ const ScrollController = () => {
   }, []);
 
   /**
-   * 指定されたセクションまでスムーズスクロールする関数
-   */
-  const scrollToSection: ScrollToSectionFunction = (
-    sectionId: string
-  ): void => {
-    // scrollが未初期化の場合は待機
-    if (!scroll?.el) {
-      console.warn('Scroll element not ready, retrying...');
-      setTimeout(() => scrollToSection(sectionId), 100);
-      return;
-    }
-
-    // セクション位置が未計算の場合は計算してから実行
-    if (Object.keys(sectionPositions.current).length === 0) {
-      console.log('Section positions not calculated, calculating...');
-      calculateSectionPositions();
-      setTimeout(() => scrollToSection(sectionId), 500);
-      return;
-    }
-
-    // ターゲットのvh位置を取得
-    const targetVh: number | undefined = sectionPositions.current[sectionId];
-
-    if (targetVh !== undefined) {
-      isAnimating.current = true;
-      syncDirection.current = 'three-to-browser';
-
-      // 現在のスクロール位置を取得
-      const currentBrowserScrollTop: number =
-        window.pageYOffset || document.documentElement.scrollTop;
-
-      // ターゲット位置を計算（vh -> px変換）
-      const vh: number = window.innerHeight / 100;
-      const targetBrowserScrollTop: number = targetVh * vh;
-
-      // Three.jsのスクロール同期計算
-      const documentScrollHeight: number = Math.max(
-        document.body.scrollHeight,
-        document.body.offsetHeight,
-        document.documentElement.clientHeight,
-        document.documentElement.scrollHeight,
-        document.documentElement.offsetHeight
-      );
-
-      // クライアントのビューポートの高さを取得
-      const documentClientHeight: number = window.innerHeight;
-      // 最大スクロール可能距離を計算
-      const documentMaxScroll: number =
-        documentScrollHeight - documentClientHeight;
-
-      // スクロール位置の割合を計算
-      const scrollPercentage: number =
-        documentMaxScroll > 0 ? targetBrowserScrollTop / documentMaxScroll : 0;
-
-      // Three.jsのスクロールコンテナの最大スクロール可能距離を計算
-      const threeMaxScroll: number =
-        scroll.el.scrollHeight - scroll.el.clientHeight;
-      // Three.jsのターゲットスクロール位置を計算
-      const targetThreeScrollTop: number = scrollPercentage * threeMaxScroll;
-      // 現在のThree.jsのスクロール位置を取得
-      const currentThreeScrollTop: number = scroll.el.scrollTop;
-
-      // スムーズスクロールアニメーション
-      const duration: number = 1000;
-      // アニメーションの開始時間を記録
-      const startTime: number = Date.now();
-
-      // アニメーションループ
-      const animateScroll = (): void => {
-        // 経過時間を計算
-        const elapsed: number = Date.now() - startTime;
-
-        // 進行度を0-1の範囲で計算
-        const progress: number = Math.min(elapsed / duration, 1);
-
-        // イージング関数（easeInOutQuart）
-        const easeProgress: number =
-          progress < 0.5
-            ? 8 * progress * progress * progress * progress
-            : 1 - Math.pow(-2 * progress + 2, 4) / 2;
-
-        // 現在のスクロール位置を計算
-        const currentBrowserPosition: number =
-          currentBrowserScrollTop +
-          (targetBrowserScrollTop - currentBrowserScrollTop) * easeProgress;
-
-        // Three.jsの現在のスクロール位置を計算
-        const currentThreePosition: number =
-          currentThreeScrollTop +
-          (targetThreeScrollTop - currentThreeScrollTop) * easeProgress;
-
-        document.documentElement.scrollTop = currentBrowserPosition;
-        document.body.scrollTop = currentBrowserPosition;
-
-        if (scroll.el) {
-          scroll.el.scrollTop = currentThreePosition;
-        }
-
-        lastBrowserScrollTop.current = currentBrowserPosition;
-        lastThreeScrollTop.current = currentThreePosition;
-
-        if (progress < 1) {
-          requestAnimationFrame(animateScroll);
-        } else {
-          isAnimating.current = false;
-          syncDirection.current = null;
-          console.log(`Scroll completed to ${sectionId}`);
-        }
-      };
-
-      animateScroll();
-    } else {
-      console.warn(`Section "${sectionId}" not found in calculated positions`);
-    }
-  };
-
-  /**
    * セクション位置を手動で再計算する関数
    */
-  const recalculatePositions: RecalculatePositionsFunction = (): void => {
-    calculateSectionPositions();
-  };
+  const recalculatePositions: RecalculatePositionsFunction =
+    useCallback((): void => {
+      calculateSectionPositions();
+    }, [calculateSectionPositions]);
+
+  /**
+   * 指定されたセクションまでスムーズスクロールする関数
+   */
+  const scrollToSection: ScrollToSectionFunction = useCallback(
+    (sectionId: string): void => {
+      // scrollが未初期化の場合は待機
+      if (!scroll?.el) {
+        console.warn('Scroll element not ready, retrying...');
+        setTimeout(() => scrollToSection(sectionId), 100);
+        return;
+      }
+
+      // セクション位置が未計算の場合は計算してから実行
+      if (Object.keys(sectionPositions.current).length === 0) {
+        console.log('Section positions not calculated, calculating...');
+        calculateSectionPositions();
+        setTimeout(() => scrollToSection(sectionId), 500);
+        return;
+      }
+
+      // ターゲットのvh位置を取得
+      const targetVh: number | undefined = sectionPositions.current[sectionId];
+
+      if (targetVh !== undefined) {
+        isAnimating.current = true;
+        syncDirection.current = 'three-to-browser';
+
+        // 現在のスクロール位置を取得
+        const currentBrowserScrollTop: number =
+          window.pageYOffset || document.documentElement.scrollTop;
+
+        // ターゲット位置を計算（vh -> px変換）
+        const vh: number = window.innerHeight / 100;
+        const targetBrowserScrollTop: number = targetVh * vh;
+
+        // Three.jsのスクロール同期計算
+        const documentScrollHeight: number = Math.max(
+          document.body.scrollHeight,
+          document.body.offsetHeight,
+          document.documentElement.clientHeight,
+          document.documentElement.scrollHeight,
+          document.documentElement.offsetHeight
+        );
+
+        // クライアントのビューポートの高さを取得
+        const documentClientHeight: number = window.innerHeight;
+        // 最大スクロール可能距離を計算
+        const documentMaxScroll: number =
+          documentScrollHeight - documentClientHeight;
+
+        // スクロール位置の割合を計算
+        const scrollPercentage: number =
+          documentMaxScroll > 0
+            ? targetBrowserScrollTop / documentMaxScroll
+            : 0;
+
+        // Three.jsのスクロールコンテナの最大スクロール可能距離を計算
+        const threeMaxScroll: number =
+          scroll.el.scrollHeight - scroll.el.clientHeight;
+        // Three.jsのターゲットスクロール位置を計算
+        const targetThreeScrollTop: number = scrollPercentage * threeMaxScroll;
+        // 現在のThree.jsのスクロール位置を取得
+        const currentThreeScrollTop: number = scroll.el.scrollTop;
+
+        // スムーズスクロールアニメーション
+        const duration: number = 1000;
+        // アニメーションの開始時間を記録
+        const startTime: number = Date.now();
+
+        // アニメーションループ
+        const animateScroll = (): void => {
+          // 経過時間を計算
+          const elapsed: number = Date.now() - startTime;
+
+          // 進行度を0-1の範囲で計算
+          const progress: number = Math.min(elapsed / duration, 1);
+
+          // イージング関数（easeInOutQuart）
+          const easeProgress: number =
+            progress < 0.5
+              ? 8 * progress * progress * progress * progress
+              : 1 - Math.pow(-2 * progress + 2, 4) / 2;
+
+          // 現在のスクロール位置を計算
+          const currentBrowserPosition: number =
+            currentBrowserScrollTop +
+            (targetBrowserScrollTop - currentBrowserScrollTop) * easeProgress;
+
+          // Three.jsの現在のスクロール位置を計算
+          const currentThreePosition: number =
+            currentThreeScrollTop +
+            (targetThreeScrollTop - currentThreeScrollTop) * easeProgress;
+
+          document.documentElement.scrollTop = currentBrowserPosition;
+          document.body.scrollTop = currentBrowserPosition;
+
+          if (scroll.el) {
+            scroll.el.scrollTop = currentThreePosition;
+          }
+
+          lastBrowserScrollTop.current = currentBrowserPosition;
+          lastThreeScrollTop.current = currentThreePosition;
+
+          if (progress < 1) {
+            requestAnimationFrame(animateScroll);
+          } else {
+            isAnimating.current = false;
+            syncDirection.current = null;
+            console.log(`Scroll completed to ${sectionId}`);
+          }
+        };
+
+        animateScroll();
+      } else {
+        console.warn(
+          `Section "${sectionId}" not found in calculated positions`
+        );
+      }
+    },
+    [scroll, calculateSectionPositions]
+  );
 
   // グローバル関数を設定（useEffectで実行）
   useEffect(() => {
@@ -233,32 +238,34 @@ const ScrollController = () => {
 
     // 初期化フラグを設定
     isInitialized.current = true;
-  }, [scroll]);
+  }, [scroll, scrollToSection, recalculatePositions]);
 
   // 初期化時とリサイズ時にセクション位置を再計算
   useEffect(() => {
-    const recalculatePositions = (): void => {
+    const recalculatePositionsHandler = (): void => {
       setTimeout(() => {
         calculateSectionPositions();
-      }, 300);
+      }, 500);
     };
 
-    // 初回計算
-    recalculatePositions();
+    // 初回計算（さらに遅延を追加）
+    setTimeout(() => {
+      recalculatePositionsHandler();
+    }, 1000);
 
     // リサイズ時に再計算
-    window.addEventListener('resize', recalculatePositions);
+    window.addEventListener('resize', recalculatePositionsHandler);
 
     // ページの読み込み完了後に再計算
     if (document.readyState === 'loading') {
-      window.addEventListener('load', recalculatePositions);
+      window.addEventListener('load', recalculatePositionsHandler);
     }
 
     return () => {
-      window.removeEventListener('resize', recalculatePositions);
-      window.removeEventListener('load', recalculatePositions);
+      window.removeEventListener('resize', recalculatePositionsHandler);
+      window.removeEventListener('load', recalculatePositionsHandler);
     };
-  }, []);
+  }, [calculateSectionPositions]);
 
   // ブラウザスクロールからThree.jsへの同期（修正版）
   useEffect(() => {

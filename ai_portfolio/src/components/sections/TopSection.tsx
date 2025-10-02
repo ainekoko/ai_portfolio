@@ -12,7 +12,7 @@ const TopSection = (props: SectionIdProps) => {
         className='
         text-8xl md:text-[8rem]
         drop-shadow-[1px_0px_35px_#383838] 
-        w-full lg:w-[55rem] 
+        w-full 
         text-white m-0 p-0 absolute 
         top-[30vh] left-4 
         font-bold
@@ -25,25 +25,25 @@ const TopSection = (props: SectionIdProps) => {
       <div
         id='hello'
         className='
-        absolute top-[150vh] 
-        left-1/2 transform -translate-x-1/2
-        lg:left-[30vw] lg:transform-none
-        w-full lg:w-auto
-        text-center lg:text-left
-      '
+          absolute top-[150vh] 
+          left-0 right-0
+          flex justify-center items-center
+          w-full      
+          '
       >
-        <h1
+        <h2
           className={`
+            text-center 
             text-7xl md:text-[8rem]
             drop-shadow-[1px_0px_35px_#383838] 
-            w-full lg:w-[55rem] 
+            w-full 
             text-white m-0 p-0 font-bold 
             transition-all duration-1000 ease-out 
             ${props.isVisible ? 'opacity-100' : 'opacity-20 -translate-y-20'}
           `}
         >
           - Hello -
-        </h1>
+        </h2>
       </div>
 
       {/* サブテキスト - レスポンシブ対応 */}

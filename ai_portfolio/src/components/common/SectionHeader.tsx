@@ -10,7 +10,7 @@ const SectionHeader = ({ isVisible, title, subtitle }: SectionTitleProps) => {
   return (
     <div className='flex items-center w-full relative my-6 md:my-10 mx-0'>
       {/* 左側の短い二重線 */}
-      <div className='w-8 md:w-16 relative mr-3 md:mr-6 overflow-hidden'>
+      <div className='md:block hidden w-8 md:w-16 relative mr-3 md:mr-6 overflow-hidden'>
         <div
           className={`bg-gray-400 transition-all duration-1000 ease-out ${
             isVisible
@@ -29,7 +29,7 @@ const SectionHeader = ({ isVisible, title, subtitle }: SectionTitleProps) => {
         ></div>
       </div>
       <h2
-        className={`relative px-2 md:px-3 py-3 md:py-5 text-4xl md:text-9xl inline-block text-right text-gray-800 ${
+        className={`relative px-2  md:px-3 py-3 md:py-5 text-7xl md:text-9xl inline-block text-right text-gray-800 ${
           isVisible ? '' : 'opacity-0'
         }`}
       >
@@ -54,13 +54,13 @@ const SectionHeader = ({ isVisible, title, subtitle }: SectionTitleProps) => {
           ))}
 
         <span
-          className={`text-xs md:text-sm ml-2 md:ml-4 italic text-gray-500 px-1 md:px-2 py-1 rounded transition-all duration-1000 ease-out delay-1000 ${
+          className={`lg:inline block text-xs md:text-sm ml-2 md:ml-4 italic text-gray-500 px-1 md:px-2 py-1 rounded transition-all duration-1000 ease-out delay-1000 ${
             isVisible
               ? 'translate-x-0 opacity-100 '
               : 'translate-x-4 opacity-0 bg-transparent'
           }`}
         >
-          {subtitle && <span>/ {subtitle}</span>}
+          {subtitle && <span className='lg:inline'>/ {subtitle}</span>}
         </span>
       </h2>
       {/* 右側の長い二重線 */}

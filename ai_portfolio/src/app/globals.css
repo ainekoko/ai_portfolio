@@ -137,9 +137,71 @@ canvas {
   height: 0 !important;
 }
 
-/* HTMLコンテンツがCanvasの上に表示されるように */
+/*\components\common\huwahuwa_img.tsx---------------------------------------- */
 .scroll-content {
   position: relative;
   z-index: 1;
   pointer-events: auto;
+}
+
+/* globals.cssまたはTailwind設定に追加 */
+
+/* ふわふわ浮遊アニメーション */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-15px) rotate(2deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(-1deg);
+  }
+  75% {
+    transform: translateY(-12px) rotate(1deg);
+  }
+}
+
+/* より滑らかなふわふわアニメーション（縦横両方） */
+@keyframes gentle-float {
+  0%,
+  100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  33% {
+    transform: translate(-8px, -12px) rotate(2deg);
+  }
+  66% {
+    transform: translate(8px, -8px) rotate(-2deg);
+  }
+}
+
+/* 風に揺られるようなアニメーション */
+@keyframes sway-float {
+  0%,
+  100% {
+    transform: translateY(0) translateX(0) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-10px) translateX(-5px) rotate(-3deg);
+  }
+  50% {
+    transform: translateY(-15px) translateX(0) rotate(0deg);
+  }
+  75% {
+    transform: translateY(-10px) translateX(5px) rotate(3deg);
+  }
+}
+
+/* Tailwindのカスタムクラスとして使用する場合 */
+.animate-gentle-float {
+  animation: gentle-float 5s ease-in-out infinite;
+}
+/* Tailwindのカスタムクラスとして使用する場合 */
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+.animate-sway-float {
+  animation: sway-float 6s ease-in-out infinite;
 }

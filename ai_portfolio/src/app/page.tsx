@@ -20,15 +20,15 @@ export default function Home() {
       {/* プロフィールsection */}
       <ProfileSection isVisible={isVisible} />
       {/* メッセージsection */}
-      <MessageSection />
+      {/* <MessageSection /> */}
       {/* Previous Experience */}
-      <ExperienceSection isVisible={isVisible} />
+      {/* <ExperienceSection isVisible={isVisible} /> */}
       {/* IT */}
-      <ItSection />
+      {/* <ItSection /> */}
       {/* スキル */}
-      <SkillSection isVisible={isVisible} />
+      {/* <SkillSection isVisible={isVisible} /> */}
       {/* message*/}
-      <ContactSection isVisible={isVisible} />
+      {/* <ContactSection isVisible={isVisible} /> */}
     </main>
   );
 }
