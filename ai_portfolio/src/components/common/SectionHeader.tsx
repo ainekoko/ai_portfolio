@@ -29,7 +29,7 @@ const SectionHeader = ({ isVisible, title, subtitle }: SectionTitleProps) => {
         ></div>
       </div>
       <h2
-        className={`relative px-2  md:px-3 py-3 md:py-5 text-7xl md:text-9xl inline-block text-right text-gray-800 text-left ${
+        className={`relative px-2  md:px-3 py-3 md:py-5 text-7xl md:text-9xl inline-block text-gray-800 text-left ${
           isVisible ? '' : 'opacity-0'
         }`}
       >

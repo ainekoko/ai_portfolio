@@ -18,7 +18,7 @@ const Input = ({ label, type, id, name }: InputProps) => {
         id={id}
         name={name}
         required
-        className='border border-[#bde7c4] rounded px-3 py-2 text-base'
+        className='text-center m-auto w-full border border-[#bde7c4] rounded px-3 py-2 text-base'
       />
     </>
   );

@@ -28,7 +28,7 @@ export default function Home() {
       {/* スキル */}
       <SkillSection isVisible={isVisible} />
       {/* message*/}
-      {/* <ContactSection isVisible={isVisible} /> */}
+      <ContactSection isVisible={isVisible} />
     </main>
   );
 }
