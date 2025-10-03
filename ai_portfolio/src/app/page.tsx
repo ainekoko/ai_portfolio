@@ -26,7 +26,7 @@ export default function Home() {
       {/* IT */}
       {/* <ItSection /> */}
       {/* スキル */}
-      {/* <SkillSection isVisible={isVisible} /> */}
+      <SkillSection isVisible={isVisible} />
       {/* message*/}
       {/* <ContactSection isVisible={isVisible} /> */}
     </main>

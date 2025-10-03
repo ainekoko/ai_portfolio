@@ -16,7 +16,6 @@ const MessageSection = () => {
   return (
     <section
       id='message'
-      feature/messagesection-responsive
       className='relative top-[320vh]  w-screen pb-16 p-8 mt-8 py-6'
     >
       <h2 className='text-[#834600] text-center text-3xl font-bold mb-3 z-10 relative'>

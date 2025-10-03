@@ -24,7 +24,7 @@ interface DocumentItem {
  */
 const DocumentSkill = ({ documentData }: DocumentSkillProps) => {
   return (
-    <div className='container bg-white p-8 rounded-lg shadow-sm'>
+    <div className='container bg-white p-8 rounded-lg shadow-sm m-auto mt-12 '>
       <h2 className='text-xl font-bold text-gray-800 mb-6'>設計書関連</h2>
 
       <ul className='space-y-4 list-none pl-0'>
