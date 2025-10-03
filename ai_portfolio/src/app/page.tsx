@@ -22,7 +22,7 @@ export default function Home() {
       {/* メッセージsection */}
       <MessageSection />
       {/* Previous Experience */}
-      {/* <ExperienceSection isVisible={isVisible} /> */}
+      <ExperienceSection isVisible={isVisible} />
       {/* IT */}
       {/* <ItSection /> */}
       {/* スキル */}

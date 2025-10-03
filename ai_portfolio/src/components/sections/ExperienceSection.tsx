@@ -20,32 +20,57 @@ const ExperienceSection = ({ isVisible }: SectionProps) => {
         title='Experience'
         subtitle='これまでの職務経歴'
       />
-      <div className='container  text-sm flex justify-left gap-4 flex-wrap justify-between m-auto'>
-        {/* 化粧品メーカー左側 */}
-        <div className='w-6/12 flex flex-col'>
-          <h3 className='text-3xl mb-1 pb-12'>
-            {JOB_INTRODUCTION_LEFT.jobName}
-            <span className='jp text-sm ml-2'>
-              {JOB_INTRODUCTION_LEFT.jobPeriod}
-            </span>
-          </h3>
-          <p className='leading-loose '>{JOB_INTRODUCTION_LEFT.content}</p>
+      <div className='max-w-7xl mx-auto px-8 py-16'>
+        <div className='flex items-center justify-between mb-20'>
+          <h1 className='text-6xl font-light tracking-wide'>
+            Previous Experience
+          </h1>
+          <p className='text-sm sans'>今までの仕事の紹介</p>
         </div>
-        {/* 化粧品メーカー右側 */}
-        <div className='bg-[#eaf4f4] z-10 p-5 mt-3.5 w-5/12 border-double shadow-[0_0_0_15px_#eaf4f4] border-white border-4'>
-          <div className='border-b border-gray-200 pb-6'>
-            {/* Experience Info List */}
-            <ExperienceInfoList />
+
+        <div className='mb-24 sans text-sm leading-relaxed'>
+          <p>私が今までに経験した仕事内容をご紹介いたします。</p>
+          <p>
+            もしろろしければMoreにて仕事内容の詳細を見て頂けたら嬉しいです。
+          </p>
+        </div>
+
+        {/* 化粧品メーカー Section */}
+        <div className='mb-32'>
+          <div className='flex items-center mb-8 relative'>
+            <h2 className='text-2xl font-light mr-12 whitespace-nowrap'>
+              化粧品メーカー
+            </h2>
+            <span className='text-sm mr-8 whitespace-nowrap'>2011〜2017</span>
+            <div className='flex-1 line-divider'></div>
+            <a href='#' className='ml-8 text-sm underline hover:no-underline'>
+              more_
+            </a>
+          </div>
+
+          <div className='text-[120px] leading-none font-light text-gray-300 tracking-tight'>
+            Nail/ EyeLash/ Manicur
           </div>
         </div>
-      </div>
-      <div className='absolute opacity-80 bottom-5 left-10'>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src='../assets/images/nail_1.png' alt='ネイル' className='' />
-      </div>
-      <div className='absolute left-1/2 bottom-0 -translate-x-1/2 -translate-y-1/2 text-[#7b9696] text-9xl md:text-[10rem] font-bold whitespace-nowrap pointer-events-none select-none z-0'>
-        NAIL
-      </div>
+
+        {/* IT業界 Section */}
+        <div>
+          <div className='flex items-center mb-8 relative'>
+            <h2 className='text-2xl font-light mr-12 whitespace-nowrap'>
+              IT業界
+            </h2>
+            <span className='text-sm mr-8 whitespace-nowrap'>2011〜2017</span>
+            <div className='flex-1 line-divider'></div>
+            <a href='#' className='ml-8 text-sm underline hover:no-underline'>
+              more_
+            </a>
+          </div>
+
+          <div className='text-[120px] leading-none font-light text-gray-300 tracking-tight'>
+            System Engineer/ Syst
+          </div>
+        </div>
+      </div>{' '}
     </section>
   );
 };
