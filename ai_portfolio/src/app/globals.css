@@ -205,3 +205,32 @@ canvas {
 .animate-sway-float {
   animation: sway-float 6s ease-in-out infinite;
 }
+
+/**
+* ExperienceSectionのテキストアニメーション
+*/
+@keyframes loop {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes loop2 {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-200%);
+  }
+}
+
+.animate-loop {
+  animation: loop 50s -25s linear infinite;
+}
+
+.animate-loop2 {
+  animation: loop2 50s linear infinite;
+}

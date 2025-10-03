@@ -48,8 +48,15 @@ const ExperienceSection = ({ isVisible }: SectionProps) => {
             </a>
           </div>
 
-          <div className='text-[120px] leading-none font-light text-gray-300 tracking-tight'>
-            Nail/ EyeLash/ Manicur
+          <div className='flex w-full h-[180px] overflow-hidden'>
+            <div className='flex-none whitespace-nowrap text-[150px] overflow-hidden text-green-500 animate-loop'>
+              Nailist&nbsp;Sales&nbsp;Original Equipment
+              Manufacturing&nbsp;Plane&nbsp;
+            </div>
+            <div className='flex-none whitespace-nowrap text-[150px] overflow-hidden text-red-500 animate-loop2'>
+              Nailist&nbsp;Sales&nbsp;Original Equipment
+              Manufacturing&nbsp;Plane&nbsp;
+            </div>
           </div>
         </div>
 
@@ -66,11 +73,16 @@ const ExperienceSection = ({ isVisible }: SectionProps) => {
             </a>
           </div>
 
-          <div className='text-[120px] leading-none font-light text-gray-300 tracking-tight'>
-            System Engineer/ Syst
+          <div className='flex w-full h-[180px] overflow-hidden'>
+            <div className='flex-none whitespace-nowrap text-[150px] overflow-hidden text-green-500 animate-loop'>
+              Engineer&nbsp;JavaScript&nbsp;HTML&nbsp;CSS&nbsp;
+            </div>
+            <div className='flex-none whitespace-nowrap text-[150px] overflow-hidden text-red-500 animate-loop2'>
+              Engineer&nbsp;JavaScript&nbsp;HTML&nbsp;CSS&nbsp;
+            </div>
           </div>
         </div>
-      </div>{' '}
+      </div>
     </section>
   );
 };
