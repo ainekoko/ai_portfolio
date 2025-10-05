@@ -1,46 +1,17 @@
 'use client';
-import React, { useRef, useState, useEffect } from 'react';
-import ProgressBer from './ProgressBer';
+import { COSME_CONTENTS } from '@/utils/CosmeContentsData';
 import PageIndicator from './PageIndicator';
+import React, { useRef, useState, useEffect } from 'react';
 
-// 横スクロールコンテンツ
+/**
+ * コスメ業界向けの横スクロールコンテンツコンポーネント
+ */
 function CosmeContents() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [currentIndex, setCurrentIndex] = useState(0);
+
   // サンプルデータ
-  const sections = [
-    {
-      title: 'ネイリスト',
-      color: '#ff6b9d',
-      year: '2011',
-      description: '店舗接客にてコミュニケーションスキルを身に着ける',
-    },
-    {
-      title: 'ルート営業',
-      color: '#c44569',
-      year: '2012~2016',
-      description: '全国の店舗へ直接出向き、商品の棚卸発注や新商品の紹介',
-    },
-    {
-      title: 'OEM営業',
-      color: '#6a5acd',
-      year: '2015~2017',
-      description: 'オリジナル商品の開発・製造をサポート',
-    },
-    {
-      title: 'フロントエンドエンジニア',
-      color: '#4682b4',
-      year: '2018~2020',
-      description: 'HTML/CSS/PHP/Laravelを使用した開発',
-    },
-    {
-      title: 'システムエンジニア',
-      color: '#20b2aa',
-      year: '2020~2024',
-      description: 'Vue.js/TypeScript/Jestを使用した大規模開発',
-    },
-  ];
 
   useEffect(() => {
     const container = containerRef.current;
@@ -52,9 +23,10 @@ function CosmeContents() {
       const maxScroll = container.scrollWidth - container.clientWidth;
       const progress = maxScroll > 0 ? (scrollLeft / maxScroll) * 100 : 0;
       setScrollProgress(progress);
+
       // 現在のインデックスを計算（四捨五入で最も近いセクションを判定）
       const index = Math.round(scrollLeft / containerWidth);
-      setCurrentIndex(Math.min(index, sections.length - 1));
+      setCurrentIndex(Math.min(index, COSME_CONTENTS.length - 1));
     };
 
     // マウスホイールで横スクロール
@@ -80,7 +52,7 @@ function CosmeContents() {
       container.removeEventListener('scroll', handleScroll);
       container.removeEventListener('wheel', handleWheel);
     };
-  }, []);
+  }, [COSME_CONTENTS.length]);
 
   return (
     <div className='w-screen h-screen bg-gradient-to-br from-purple-900 to-blue-900 relative overflow-hidden'>
@@ -95,9 +67,9 @@ function CosmeContents() {
       >
         <div
           className='flex h-full'
-          style={{ width: `${sections.length * 100}vw` }}
+          style={{ width: `${COSME_CONTENTS.length * 100}vw` }}
         >
-          {sections.map((section, index) => (
+          {COSME_CONTENTS.map((section, index) => (
             <div
               key={index}
               className='w-screen h-full flex-shrink-0 snap-center flex items-center justify-center relative'
@@ -132,32 +104,13 @@ function CosmeContents() {
         </div>
       </div>
 
-      {/* ページインジケーター */}
+      {/* ページインジケーター - currentIndexを追加 */}
       <PageIndicator
-        sections={sections}
+        sections={COSME_CONTENTS}
         scrollProgress={scrollProgress}
         containerRef={containerRef}
+        currentIndex={currentIndex}
       />
-
-      {/* Webkit系ブラウザのスクロールバーカスタマイズ */}
-      <style jsx global>{`
-        ::-webkit-scrollbar {
-          height: 8px;
-        }
-
-        ::-webkit-scrollbar-track {
-          background: rgba(0, 0, 0, 0.1);
-        }
-
-        ::-webkit-scrollbar-thumb {
-          background: rgba(255, 255, 255, 0.3);
-          border-radius: 4px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-          background: rgba(255, 255, 255, 0.5);
-        }
-      `}</style>
     </div>
   );
 }

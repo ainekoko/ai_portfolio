@@ -1,10 +1,9 @@
-import React from 'react';
-
 /**
  * ページインジケーターコンポーネント
- * @param sections: セクションの配列
- * @param scrollProgress: 現在のスクロール進捗（0〜100の範囲）
- * @param containerRef: 横スクロールコンテナのref
+ * @param sections セクション情報の配列
+ * @param scrollProgress スクロールの進捗（0から1の範囲）
+ * @param containerRef 横スクロールコンテナのRef
+ * @param currentIndex 現在のセクションインデックス
  */
 interface PageIndicatorProps {
   sections: {
@@ -13,17 +12,13 @@ interface PageIndicatorProps {
     year: string;
     description: string;
   }[];
-  scrollProgress: number;
   containerRef: React.RefObject<HTMLDivElement>;
   currentIndex: number;
 }
 
-/**
- * ページインジケーターコンポーネント
- */
+/* ページインジケーターコンポーネント */
 const PageIndicator = ({
   sections,
-  scrollProgress,
   containerRef,
   currentIndex,
 }: PageIndicatorProps) => {
