@@ -8,7 +8,6 @@ import {
   Text,
   Box,
 } from '@react-three/drei';
-import * as THREE from 'three';
 
 // 横スクロールコンテンツ
 function HorizontalContent({ isMobile }) {

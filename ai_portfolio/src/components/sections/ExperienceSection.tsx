@@ -39,7 +39,7 @@ const ExperienceSection = ({ isVisible }: SectionProps) => {
 
               {/* More Link with Arrow Animation */}
               <a
-                href='#'
+                href='/cosmetics'
                 className='ml-auto text-sm underline hover:no-underline group relative inline-flex items-center gap-1'
               >
                 <span>more</span>
