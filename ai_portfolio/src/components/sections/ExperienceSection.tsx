@@ -21,7 +21,7 @@ const ExperienceSection = ({ isVisible }: SectionProps) => {
         subtitle='これまでの職務経歴'
       />
       <div className='px-8 pb-10'>
-        <div className='mb-15 text-sm leading-relaxed'>
+        <div className='text-sm leading-relaxed'>
           <p>私が今までに経験した仕事内容をご紹介いたします。</p>
           <p>
             もしろろしければMoreにて仕事内容の詳細を見て頂けたら嬉しいです。
@@ -29,22 +29,25 @@ const ExperienceSection = ({ isVisible }: SectionProps) => {
         </div>
 
         {/* 化粧品メーカー Section */}
-        <div className=''>
+        <div className='mt-10'>
           <div className=' relative'>
             <div className='flex items-center'>
               <h2 className='text-2xl font-light mr-12 whitespace-nowrap'>
                 化粧品メーカー
               </h2>
               <span className='text-sm mr-8 whitespace-nowrap'>2011〜2017</span>
-
-              {/* More Link with Arrow Animation */}
-              <a
-                href='/cosmetics'
-                className='ml-auto text-sm underline hover:no-underline group relative inline-flex items-center gap-1'
-              >
-                <span>more</span>
-              </a>
             </div>
+
+            <p className='py-5 px-10'>
+              約6年間様々な経験をさせて頂き接客から営業、企画まで幅広く対応し、コミュニケーションスキルや提案力、企画力を培いました。
+            </p>
+            {/* More Link with Arrow Animation */}
+            <a
+              href='/cosmetics'
+              className='ml-auto text-sm underline hover:no-underline group relative inline-flex items-center gap-1'
+            >
+              <span>more</span>
+            </a>
 
             {/* 横線を下に配置し、右端に矢印 */}
             <div className='mt-4 relative h-[1px] bg-gray-300'>
@@ -66,22 +69,31 @@ const ExperienceSection = ({ isVisible }: SectionProps) => {
         </div>
 
         {/* IT業界 Section */}
-        <div>
+        <div className='mt-10'>
           <div className=' relative'>
             <div className='flex items-center'>
               <h2 className='text-2xl font-light mr-12 whitespace-nowrap'>
                 IT業界
               </h2>
               <span className='text-sm mr-8 whitespace-nowrap'>2011〜2017</span>
-
-              {/* More Link with Arrow Animation */}
-              <a
-                href='#'
-                className='ml-auto text-sm underline hover:no-underline group relative inline-flex items-center gap-1'
-              >
-                <span>more</span>
-              </a>
             </div>
+            <p className='py-5 px-10'>
+              ただIT業界と言っても右も左も分からない状態；
+              <br />
+              なのでスクールに通い友達のサイトを作成し、転職活動に挑みました！
+              <br />
+              有り難いことに拾って頂きSESとして未熟な私にも様々な現場で経験が出来、本当に感謝をしています。
+              <br />
+              契約の関係上、作成したサイトは転載する事が出来ませんがその現場での業務を記載しましたので見て頂けると幸いです。　
+            </p>
+
+            {/* More Link with Arrow Animation */}
+            <a
+              href='#'
+              className='ml-auto text-sm underline hover:no-underline group relative inline-flex items-center gap-1'
+            >
+              <span>more</span>
+            </a>
 
             {/* 横線を下に配置し、右端に矢印 */}
             <div className='mt-4 relative h-[1px] bg-gray-300'>

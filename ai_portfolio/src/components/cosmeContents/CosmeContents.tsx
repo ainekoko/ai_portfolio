@@ -76,7 +76,7 @@ function CosmeContents() {
             >
               {/* 背景カード */}
               <div
-                className='relative w-[600px] h-[400px] rounded-3xl shadow-2xl p-12 flex flex-col justify-center items-center'
+                className='relative w-[800px] h-[600px] rounded-3xl shadow-2xl p-12 flex flex-col justify-center items-center'
                 style={{ backgroundColor: section.color }}
               >
                 {/* 番号 */}
