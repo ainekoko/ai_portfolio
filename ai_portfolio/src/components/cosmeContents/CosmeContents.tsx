@@ -2,6 +2,7 @@
 import { COSME_CONTENTS } from '@/utils/CosmeContentsData';
 import PageIndicator from './PageIndicator';
 import React, { useRef, useState, useEffect } from 'react';
+import SectionHeader from '../common/SectionHeader';
 
 /**
  * コスメ業界向けの横スクロールコンテンツコンポーネント
@@ -55,7 +56,10 @@ function CosmeContents() {
   }, [COSME_CONTENTS.length]);
 
   return (
-    <div className='w-screen h-screen bg-gradient-to-br from-purple-900 to-blue-900 relative overflow-hidden'>
+    <div className='w-screen h-screen bg-white relative overflow-hidden'>
+      {/* Section Title */}
+      <SectionHeader isVisible title='Cosmetics' subtitle='化粧品企業' />
+
       {/* 横スクロールコンテナ */}
       <div
         ref={containerRef}

@@ -24,10 +24,9 @@ const ExperienceSection = ({ isVisible }: SectionProps) => {
         <div className='text-sm leading-relaxed'>
           <p>私が今までに経験した仕事内容をご紹介いたします。</p>
           <p>
-            もしろろしければMoreにて仕事内容の詳細を見て頂けたら嬉しいです。
+            もしよろしければMoreにて仕事内容の詳細を見て頂けたら嬉しいです。
           </p>
         </div>
-
         {/* 化粧品メーカー Section */}
         <div className='mt-10'>
           <div className=' relative'>
@@ -37,37 +36,33 @@ const ExperienceSection = ({ isVisible }: SectionProps) => {
               </h2>
               <span className='text-sm mr-8 whitespace-nowrap'>2011〜2017</span>
             </div>
-
             <p className='py-5 px-10'>
               約6年間様々な経験をさせて頂き接客から営業、企画まで幅広く対応し、コミュニケーションスキルや提案力、企画力を培いました。
             </p>
-            {/* More Link with Arrow Animation */}
-            <a
-              href='/cosmetics'
-              className='ml-auto text-sm underline hover:no-underline group relative inline-flex items-center gap-1'
-            >
-              <span>more</span>
-            </a>
-
-            {/* 横線を下に配置し、右端に矢印 */}
-            <div className='mt-4 relative h-[1px] bg-gray-300'>
-              {/* 右端の矢印 */}
-              <div className='absolute right-0 top-1/2 -translate-y-1/2 w-2 h-2 border-r border-t border-gray-300 rotate-45'></div>
+            {/* More */}
+            <div className='flex justify-end'>
+              <a href='#' className='inline-flex items-center gap-4 group'>
+                <span className='text-xl font-light text-gray-600 group-hover:text-gray-900 transition-colors duration-300'>
+                  more
+                </span>
+                <div className='relative w-32'>
+                  <div className='absolute left-0 top-1/2 -translate-y-1/2 h-[1px] bg-gray-400 w-6 origin-left group-hover:w-28 group-hover:bg-gray-900 transition-all duration-600 ease-out'></div>
+                  <div className='absolute left-6 top-1/2 -translate-y-1/2 w-2 h-2 border-r border-t border-gray-400 rotate-45 group-hover:border-gray-900 group-hover:scale-110 group-hover:left-28 transition-all duration-600 ease-out ml-[-1px]'></div>
+                </div>
+              </a>
             </div>
-          </div>
-
-          <div className='flex w-full h-[180px] overflow-hidden'>
-            <div className='flex-none whitespace-nowrap text-[150px] overflow-hidden text-green-500 animate-loop'>
-              Nailist&nbsp;Sales&nbsp;Original Equipment
-              Manufacturing&nbsp;Plane&nbsp;
-            </div>
-            <div className='flex-none whitespace-nowrap text-[150px] overflow-hidden text-red-500 animate-loop2'>
-              Nailist&nbsp;Sales&nbsp;Original Equipment
-              Manufacturing&nbsp;Plane&nbsp;
+            <div className='flex w-full h-[180px] overflow-hidden'>
+              <div className='flex-none whitespace-nowrap text-[150px] overflow-hidden text-gray-400 animate-loop'>
+                Nailist&nbsp;Sales&nbsp;Original Equipment
+                Manufacturing&nbsp;Plane&nbsp;
+              </div>
+              <div className='flex-none whitespace-nowrap text-[150px] overflow-hidden text-gray-200 animate-loop2'>
+                Nailist&nbsp;Sales&nbsp;Original Equipment
+                Manufacturing&nbsp;Plane&nbsp;
+              </div>
             </div>
           </div>
         </div>
-
         {/* IT業界 Section */}
         <div className='mt-10'>
           <div className=' relative'>
@@ -84,29 +79,27 @@ const ExperienceSection = ({ isVisible }: SectionProps) => {
               <br />
               有り難いことに拾って頂きSESとして未熟な私にも様々な現場で経験が出来、本当に感謝をしています。
               <br />
-              契約の関係上、作成したサイトは転載する事が出来ませんがその現場での業務を記載しましたので見て頂けると幸いです。　
+              契約の関係上、作成したサイトは転載する事が出来ませんが6年間で経験した現場での業務を記載しましたので見て頂けると幸いです。　
             </p>
-
-            {/* More Link with Arrow Animation */}
-            <a
-              href='#'
-              className='ml-auto text-sm underline hover:no-underline group relative inline-flex items-center gap-1'
-            >
-              <span>more</span>
-            </a>
-
-            {/* 横線を下に配置し、右端に矢印 */}
-            <div className='mt-4 relative h-[1px] bg-gray-300'>
-              {/* 右端の矢印 */}
-              <div className='absolute right-0 top-1/2 -translate-y-1/2 w-2 h-2 border-r border-t border-gray-300 rotate-45'></div>
+            {/* More */}
+            <div className='flex justify-end'>
+              <a href='#' className='inline-flex items-center gap-4 group'>
+                <span className='text-xl font-light text-gray-600 group-hover:text-gray-900 transition-colors duration-300'>
+                  more
+                </span>
+                <div className='relative w-32'>
+                  <div className='absolute left-0 top-1/2 -translate-y-1/2 h-[1px] bg-gray-400 w-6 origin-left group-hover:w-28 group-hover:bg-gray-900 transition-all duration-600 ease-out'></div>
+                  <div className='absolute left-6 top-1/2 -translate-y-1/2 w-2 h-2 border-r border-t border-gray-400 rotate-45 group-hover:border-gray-900 group-hover:scale-110 group-hover:left-28 transition-all duration-600 ease-out ml-[-1px]'></div>
+                </div>
+              </a>
             </div>
           </div>
 
           <div className='flex w-full h-[180px] overflow-hidden'>
-            <div className='flex-none whitespace-nowrap text-[150px] overflow-hidden text-green-500 animate-loop'>
+            <div className='flex-none whitespace-nowrap text-[150px] overflow-hidden text-gray-400 animate-loop'>
               Engineer&nbsp;JavaScript&nbsp;HTML&nbsp;CSS&nbsp;
             </div>
-            <div className='flex-none whitespace-nowrap text-[150px] overflow-hidden text-red-500 animate-loop2'>
+            <div className='flex-none whitespace-nowrap text-[150px] overflow-hidden text-gray-500 animate-loop2'>
               Engineer&nbsp;JavaScript&nbsp;HTML&nbsp;CSS&nbsp;
             </div>
           </div>

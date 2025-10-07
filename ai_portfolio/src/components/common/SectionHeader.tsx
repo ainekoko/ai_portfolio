@@ -6,7 +6,11 @@ import React from 'react';
  * @param props - isVisible: boolean
  * @returns
  */
-const SectionHeader = ({ isVisible, title, subtitle }: SectionTitleProps) => {
+const SectionHeader = ({
+  isVisible = true,
+  title,
+  subtitle,
+}: SectionTitleProps) => {
   return (
     <div className='flex items-center w-full relative my-6 md:my-10 mx-0'>
       {/* 左側の短い二重線 */}
