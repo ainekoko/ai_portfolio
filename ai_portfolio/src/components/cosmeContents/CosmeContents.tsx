@@ -11,8 +11,6 @@ import useEmblaCarousel from 'embla-carousel-react';
 import './sample.css';
 import SectionHeader from '../common/SectionHeader';
 import Huwahuwa_img from '../common/huwahuwa_img';
-import ScrollSync from '../ui/ScrollSync';
-import ScrollController from '../three/ScrollController';
 
 type PropType = {
   slides: number[];
@@ -35,6 +33,8 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
 
   const onWheel = useCallback(
     (event: WheelEvent) => {
+      // lg以下ではホイールイベントを無効化
+      if (window.innerWidth < 1024) return;
       if (!emblaApi) return;
       event.preventDefault();
 
@@ -48,6 +48,9 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
   );
 
   useEffect(() => {
+    // lg以下ではイベントリスナーを追加しない
+    if (window.innerWidth < 1024) return;
+
     const emblaNode = emblaApi?.rootNode();
     if (!emblaNode) return;
 
@@ -65,29 +68,35 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
         size='normal'
       />
 
-      {/* lg以上: カルーセル表示 */}
-      <section className='hidden lg:block embla w-screen px-8'>
+      {/* カルーセル: lg以上で有効、lg以下で無効 */}
+      <section className='embla w-screen px-4 lg:px-8'>
         <div className='embla__viewport bg-[#ffffff]' ref={emblaRef}>
-          <div className='embla__container'>
+          <div className='embla__container lg:flex lg:flex-row flex-col'>
             {slides.map((index) => (
-              <div className='embla__slide' key={index}>
-                <div className='grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-start w-full mx-auto px-4 lg:pl-16 pt-10'>
+              <div
+                className='embla__slide lg:flex-[0_0_100%] mb-8 lg:mb-0'
+                key={index}
+              >
+                <div className='grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-16 items-start w-full mx-auto lg:pl-16 pt-6 lg:pt-10'>
                   {/* Left Column */}
-                  <div className='space-y-8'>
-                    <div
-                      className='space-y-6 leading-relaxed'
-                      style={{ fontSize: '14px' }}
-                    >
-                      <div className='mb-10'>
+                  <div className='space-y-6 lg:space-y-8'>
+                    <div className='space-y-4 lg:space-y-6 leading-relaxed text-sm lg:text-[14px]'>
+                      <div className='mb-6 lg:mb-10'>
                         <p className='mb-2'>{index + 1}年目…</p>
-                        <p className='mb-1'>ネイリスト</p>
-                        <p>店舗接客/イベント接客/店舗サンプル作成/事務作業等</p>
+                        <p className='mb-1 font-medium lg:font-normal'>
+                          ネイリスト
+                        </p>
+                        <p className='text-gray-600 lg:text-black'>
+                          店舗接客/イベント接客/店舗サンプル作成/事務作業等
+                        </p>
                       </div>
                       <hr className='h-px bg-gradient-to-r from-transparent via-[#ccc] to-transparent border-none' />
-                      <div className='pt-5'>
-                        <h2 className='font-medium mb-4'>業務説明</h2>
+                      <div className='pt-4 lg:pt-5'>
+                        <h2 className='font-medium mb-3 lg:mb-4 text-base lg:text-[14px]'>
+                          業務説明
+                        </h2>
                         <div className='space-y-4'>
-                          <p className='leading-8'>
+                          <p className='leading-7 lg:leading-8 text-gray-700 lg:text-black'>
                             自社商品を卸している全国の店舗に赴き、商品紹介も兼ねてのネイル体験コーナーを行い小さいお子様から興味があるけど一歩踏み出せなかったお客様へ施術をし、コミュニケーションスキルが培われました。
                             <br />
                             店舗へ飾るサンプル品に関してもその時の流行りや大衆に好まれるデザインでなければいけないため、隙間時間はいつも雑誌を読み漁って手帳を埋めていました。
@@ -99,10 +108,10 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
                     </div>
                   </div>
                   {/* Right Column - Speech Bubble */}
-                  <div className='bg-[url(/assets/images/hukidashi_01.png)] bg-no-repeat bg-[length:350px_200px] bg-center flex justify-center items-start'>
+                  <div className='bg-[url(/assets/images/hukidashi_01.png)] bg-no-repeat bg-[length:300px_180px] lg:bg-[length:350px_200px] bg-center flex justify-center items-center lg:items-start py-8 lg:py-0'>
                     <div className='relative'>
-                      <div className='px-12 py-16 max-w-md'>
-                        <p className='text-sm leading-relaxed'>
+                      <div className='px-8 lg:px-12 py-12 lg:py-16 max-w-xs lg:max-w-md text-center lg:text-left'>
+                        <p className='text-xs lg:text-sm leading-relaxed'>
                           北は北海道、西は大阪等商品を卸している
                           <br />
                           店舗へネイルイベントの為
@@ -113,7 +122,7 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
                         </p>
                       </div>
                       {/* Bird Character */}
-                      <div className='absolute -bottom-8 -right-4'>
+                      <div className='absolute -bottom-6 lg:-bottom-8 -right-2 lg:-right-4'>
                         <Huwahuwa_img
                           image='profile-shimaenaga.png'
                           name='シマエナガ'
@@ -128,8 +137,8 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
           </div>
         </div>
 
-        {/* Embla Carousel Controls */}
-        <div className='embla__controls pb-6'>
+        {/* Embla Carousel Controls - lg以上のみ表示 */}
+        <div className='hidden lg:block embla__controls pb-6'>
           <div className='embla__buttons'>
             <PrevButton
               onClick={onPrevButtonClick}
