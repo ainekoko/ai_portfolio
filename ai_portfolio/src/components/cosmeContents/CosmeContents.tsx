@@ -1,122 +1,69 @@
 'use client';
-import { COSME_CONTENTS } from '@/utils/CosmeContentsData';
-import PageIndicator from './PageIndicator';
-import React, { useRef, useState, useEffect } from 'react';
+import React from 'react';
+import { EmblaOptionsType } from 'embla-carousel';
+import { DotButton, useDotButton } from './EmblaCarouselDotButton';
+import {
+  PrevButton,
+  NextButton,
+  usePrevNextButtons,
+} from './EmblaCarouselArrowButtons';
+import useEmblaCarousel from 'embla-carousel-react';
+import './sample.css';
 import SectionHeader from '../common/SectionHeader';
 
-/**
- * コスメ業界向けの横スクロールコンテンツコンポーネント
- */
-function CosmeContents() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [scrollProgress, setScrollProgress] = useState(0);
-  const [currentIndex, setCurrentIndex] = useState(0);
+type PropType = {
+  slides: number[];
+  options?: EmblaOptionsType;
+};
 
-  // サンプルデータ
+const EmblaCarousel: React.FC<PropType> = (props) => {
+  const { slides, options } = props;
+  const [emblaRef, emblaApi] = useEmblaCarousel(options);
 
-  useEffect(() => {
-    const container = containerRef.current;
-    if (!container) return;
+  const { selectedIndex, scrollSnaps, onDotButtonClick } =
+    useDotButton(emblaApi);
 
-    const handleScroll = () => {
-      const scrollLeft = container.scrollLeft;
-      const containerWidth = container.clientWidth;
-      const maxScroll = container.scrollWidth - container.clientWidth;
-      const progress = maxScroll > 0 ? (scrollLeft / maxScroll) * 100 : 0;
-      setScrollProgress(progress);
-
-      // 現在のインデックスを計算（四捨五入で最も近いセクションを判定）
-      const index = Math.round(scrollLeft / containerWidth);
-      setCurrentIndex(Math.min(index, COSME_CONTENTS.length - 1));
-    };
-
-    // マウスホイールで横スクロール
-    const handleWheel = (e: WheelEvent) => {
-      // 横スクロール可能な範囲内でのみ処理
-      const maxScroll = container.scrollWidth - container.clientWidth;
-      if (maxScroll > 0) {
-        e.preventDefault();
-        e.stopPropagation();
-
-        // スムーズなスクロール
-        container.scrollBy({
-          left: e.deltaY,
-          behavior: 'auto',
-        });
-      }
-    };
-
-    container.addEventListener('scroll', handleScroll, { passive: true });
-    container.addEventListener('wheel', handleWheel, { passive: false });
-
-    return () => {
-      container.removeEventListener('scroll', handleScroll);
-      container.removeEventListener('wheel', handleWheel);
-    };
-  }, [COSME_CONTENTS.length]);
+  const {
+    prevBtnDisabled,
+    nextBtnDisabled,
+    onPrevButtonClick,
+    onNextButtonClick,
+  } = usePrevNextButtons(emblaApi);
 
   return (
-    <div className='w-screen h-screen bg-white relative overflow-hidden'>
+    <section className='embla bg-[#ffffff]  w-screen pb-20 p-8 mt-8 py-6'>
       {/* Section Title */}
-      <SectionHeader isVisible title='Cosmetics' subtitle='化粧品企業' />
-
-      {/* 横スクロールコンテナ */}
-      <div
-        ref={containerRef}
-        className='w-full h-full overflow-x-auto overflow-y-hidden snap-x snap-mandatory'
-        style={{
-          scrollbarWidth: 'thin',
-          scrollbarColor: 'rgba(255,255,255,0.3) transparent',
-        }}
-      >
-        <div
-          className='flex h-full'
-          style={{ width: `${COSME_CONTENTS.length * 100}vw` }}
-        >
-          {COSME_CONTENTS.map((section, index) => (
-            <div
-              key={index}
-              className='w-screen h-full flex-shrink-0 snap-center flex items-center justify-center relative'
-            >
-              {/* 背景カード */}
-              <div
-                className='relative w-[800px] h-[600px] rounded-3xl shadow-2xl p-12 flex flex-col justify-center items-center'
-                style={{ backgroundColor: section.color }}
-              >
-                {/* 番号 */}
-                <div className='absolute top-8 right-8 text-white text-8xl font-bold opacity-20'>
-                  {String(index + 1).padStart(2, '0')}
-                </div>
-
-                {/* タイトル */}
-                <h2 className='text-white text-5xl font-bold mb-4 z-10'>
-                  {section.title}
-                </h2>
-
-                {/* 年度 */}
-                <div className='text-white text-xl mb-6 opacity-80'>
-                  {section.year}
-                </div>
-
-                {/* 説明文 */}
-                <p className='text-white text-lg text-center max-w-md opacity-90'>
-                  {section.description}
-                </p>
-              </div>
+      <SectionHeader isVisible title='Cosme' subtitle='化粧品企業' />
+      <div className='bg-amber-700 embla__viewport' ref={emblaRef}>
+        <div className='embla__container'>
+          {slides.map((index) => (
+            <div className='embla__slide' key={index}>
+              <div className='embla__slide__number'>{index + 1}</div>
             </div>
           ))}
         </div>
       </div>
 
-      {/* ページインジケーター - currentIndexを追加 */}
-      <PageIndicator
-        sections={COSME_CONTENTS}
-        scrollProgress={scrollProgress}
-        containerRef={containerRef}
-        currentIndex={currentIndex}
-      />
-    </div>
-  );
-}
+      <div className='embla__controls'>
+        <div className='embla__buttons'>
+          <PrevButton onClick={onPrevButtonClick} disabled={prevBtnDisabled} />
+          <NextButton onClick={onNextButtonClick} disabled={nextBtnDisabled} />
+        </div>
 
-export default CosmeContents;
+        <div className='embla__dots'>
+          {scrollSnaps.map((_, index) => (
+            <DotButton
+              key={index}
+              onClick={() => onDotButtonClick(index)}
+              className={'embla__dot'.concat(
+                index === selectedIndex ? ' embla__dot--selected' : ''
+              )}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default EmblaCarousel;
