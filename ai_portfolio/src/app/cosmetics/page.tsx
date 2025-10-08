@@ -1,4 +1,3 @@
-import SectionHeader from '@/components/common/SectionHeader';
 import EmblaCarousel from '@/components/cosmeContents/CosmeContents';
 import { EmblaOptionsType } from 'embla-carousel';
 /**

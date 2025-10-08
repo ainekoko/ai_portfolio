@@ -4,31 +4,36 @@ import ProfileSection from '@/components/sections/ProfileSection';
 import TopSection from '@/components/sections/TopSection';
 import MessageSection from '@/components/sections/Message';
 import ExperienceSection from '@/components/sections/ExperienceSection';
-import ItSection from '@/components/sections/ItSection';
 import SkillSection from '@/components/sections/SkillSection';
 import ContactSection from '@/components/sections/ContactSection';
 import { useVisibleSections } from '@/hooks';
+import ThreeScrollHandler from '@/components/ui/ScrollHandler';
 
 export default function Home() {
   const { setVisibleSections, isVisible } = useVisibleSections();
 
   return (
-    <main className='h-screen'>
-      <ThreeCanvas setVisibleSections={setVisibleSections} />
-      {/* 最初のsection */}
-      <TopSection isVisible={isVisible('hello')} />
-      {/* プロフィールsection */}
-      <ProfileSection isVisible={isVisible} />
-      {/* メッセージsection */}
-      <MessageSection />
-      {/* Previous Experience */}
-      <ExperienceSection isVisible={isVisible} />
-      {/* IT */}
-      {/* <ItSection /> */}
-      {/* スキル */}
-      <SkillSection isVisible={isVisible} />
-      {/* message*/}
-      <ContactSection isVisible={isVisible} />
-    </main>
+    <>
+      <ThreeScrollHandler
+        scrollSpeed={0.5} // スクロール速度（遅く: 0.1, 速く: 1.0）
+        smoothness={0.08} // 滑らかさ（滑らか: 0.05, 素早く: 0.15）
+        enableSmooth={true} // 滑らかスクロールのON/OFF
+      />
+      <main className='h-screen'>
+        <ThreeCanvas setVisibleSections={setVisibleSections} />
+        {/* 最初のsection */}
+        <TopSection isVisible={isVisible('hello')} />
+        {/* プロフィールsection */}
+        <ProfileSection isVisible={isVisible} />
+        {/* メッセージsection */}
+        <MessageSection />
+        {/* Previous Experience */}
+        <ExperienceSection isVisible={isVisible} />
+        {/* スキル */}
+        <SkillSection isVisible={isVisible} />
+        {/* message*/}
+        <ContactSection isVisible={isVisible} />
+      </main>
+    </>
   );
 }
