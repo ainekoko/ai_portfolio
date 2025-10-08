@@ -37,6 +37,7 @@
   justify-content: space-between;
   gap: 1.2rem;
   margin-top: 1.8rem;
+  position: relative; /* 追加 */
 }
 .embla__buttons {
   display: grid;
@@ -74,12 +75,17 @@
   height: 35%;
 }
 .embla__dots {
+  /* 以下を全て置き換え */
+  position: fixed;
+  right: 2rem;
+  top: 50%;
+  transform: translateY(-50%);
   display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-  align-items: center;
-  margin-right: calc((2.6rem - 1.4rem) / 2 * -1);
+  flex-direction: column; /* 縦方向に変更 */
+  gap: 1rem; /* ドット間の間隔 */
+  z-index: 10;
 }
+
 .embla__dot {
   -webkit-tap-highlight-color: rgba(var(--text-high-contrast-rgb-value), 0.5);
   -webkit-appearance: none;
@@ -99,15 +105,19 @@
   justify-content: center;
   border-radius: 50%;
 }
+
 .embla__dot:after {
-  box-shadow: inset 0 0 0 0.2rem var(--detail-medium-contrast);
+  box-shadow: inset 0 0 0 0.2rem #999; /* CSS変数の代わりに直接色を指定 */
   width: 1.4rem;
   height: 1.4rem;
   border-radius: 50%;
   display: flex;
   align-items: center;
   content: '';
+  background-color: transparent;
 }
+
 .embla__dot--selected:after {
-  box-shadow: inset 0 0 0 0.2rem var(--text-body);
+  box-shadow: inset 0 0 0 0.2rem #333; /* CSS変数の代わりに直接色を指定 */
+  background-color: #333; /* 選択されたドットに背景色を追加 */
 }

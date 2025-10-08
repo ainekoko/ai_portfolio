@@ -59,15 +59,7 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
   }, [scrollSnaps, selectedIndex]);
 
   return (
-    <section className='embla bg-[#ffffff] w-screen p-8 mt-8 py-6'>
-      {/* Section Title */}
-      <SectionHeader
-        isVisible
-        title='Cosmetics Company'
-        subtitle='化粧品企業'
-        size='normal'
-      />
-
+    <section className='embla bg-[#ffffff] w-screen min-h-screen flex flex-col p-8'>
       <div className='embla__viewport' ref={emblaRef}>
         <div className='embla__container'>
           {slides.map((index) => (
@@ -160,7 +152,6 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
           ))}
         </div>
       </div>
-
       {/* Embla Carousel Controls */}
       <div className='embla__controls'>
         <div className='embla__buttons'>
