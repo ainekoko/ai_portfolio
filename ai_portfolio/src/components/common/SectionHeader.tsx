@@ -13,7 +13,15 @@ const SectionHeader = ({
   size = 'large',
 }: SectionTitleProps) => {
   return (
-    <div className='flex items-center w-full relative my-6 md:my-10 mx-0'>
+    <div
+      className={`flex items-center w-full relative ${
+        size === 'large'
+          ? 'md:my-10 mx-0  my-6 '
+          : size === 'normal'
+          ? 'mt-15 mb-5'
+          : ''
+      }`}
+    >
       {/* 左側の短い二重線 */}
       <div className='md:block hidden w-8 md:w-16 relative mr-3 md:mr-6 overflow-hidden'>
         <div

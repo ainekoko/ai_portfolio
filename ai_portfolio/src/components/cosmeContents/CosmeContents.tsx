@@ -52,20 +52,22 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
     return () => emblaNode.removeEventListener('wheel', onWheel);
   }, [emblaApi, onWheel]);
 
-  // デバッグ用ログ追加
-  useEffect(() => {
-    console.log('scrollSnaps:', scrollSnaps);
-    console.log('selectedIndex:', selectedIndex);
-  }, [scrollSnaps, selectedIndex]);
-
   return (
     <>
-      <section className='embla w-screen min-h-screen flex flex-col px-8'>
+      {/* Section Title */}
+      <SectionHeader
+        isVisible
+        title='Cosmetics Company'
+        subtitle='化粧品企業'
+        size='normal'
+      />
+
+      <section className='embla w-screen flex flex-col px-8'>
         <div className='embla__viewport bg-[#ffffff] ' ref={emblaRef}>
           <div className='embla__container'>
             {slides.map((index) => (
               <div className='embla__slide' key={index}>
-                {/* Main Content */}
+                {/* Main Content - さらにコンパクト化 */}
                 <div className=' grid grid-cols-1 lg:grid-cols-2 gap-16 items-start max-w-7xl mx-auto px-8'>
                   {/* Left Column */}
                   <div className='space-y-8'>
@@ -154,6 +156,7 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
           </div>
         </div>
       </section>
+
       {/* Embla Carousel Controls */}
       <div className='embla__controls'>
         <div className='embla__buttons'>
@@ -172,8 +175,7 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
                   )}
                 />
               ))
-            : // フォールバック: scrollSnapsが空の場合はslidesを使用
-              slides.map((_, index) => (
+            : slides.map((_, index) => (
                 <DotButton
                   key={index}
                   onClick={() => onDotButtonClick(index)}

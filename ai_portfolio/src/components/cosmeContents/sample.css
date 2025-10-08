@@ -1,8 +1,11 @@
 .embla {
   margin: auto;
-  --slide-height: 24rem;
+  --slide-height: 60vh;
   --slide-spacing: 1rem;
   --slide-size: 100%;
+  height: 60vh;
+  display: flex;
+  flex-direction: column;
 }
 .embla__viewport {
   overflow: hidden;
@@ -82,7 +85,7 @@
   transform: translateY(-50%);
   display: flex;
   flex-direction: column; /* 縦方向に変更 */
-  gap: 1rem; /* ドット間の間隔 */
+  gap: 0.1rem; /* ドット間の間隔 */
   z-index: 10;
 }
 
@@ -99,7 +102,7 @@
   padding: 0;
   margin: 0;
   width: 2.6rem;
-  height: 2.6rem;
+  height: 2rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -108,8 +111,8 @@
 
 .embla__dot:after {
   box-shadow: inset 0 0 0 0.2rem #999; /* CSS変数の代わりに直接色を指定 */
-  width: 1.4rem;
-  height: 1.4rem;
+  width: 1rem;
+  height: 1rem;
   border-radius: 50%;
   display: flex;
   align-items: center;
