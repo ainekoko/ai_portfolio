@@ -10,6 +10,7 @@ import {
 import useEmblaCarousel from 'embla-carousel-react';
 import './sample.css';
 import SectionHeader from '../common/SectionHeader';
+import Huwahuwa_img from '../common/huwahuwa_img';
 
 type PropType = {
   slides: number[];
@@ -68,22 +69,28 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
             {slides.map((index) => (
               <div className='embla__slide' key={index}>
                 {/* Main Content - さらにコンパクト化 */}
-                <div className='grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-start w-full mx-auto px-4 md:px-8 py-5'>
+                <div className='grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-start w-full mx-auto px-4 md:pl-16 pt-10'>
                   {/* Left Column */}
                   <div className='space-y-8'>
-                    <div className='space-y-6 text-sm leading-relaxed'>
-                      <div>
+                    <div
+                      className='space-y-6 leading-relaxed'
+                      style={{ fontSize: '14px' }}
+                    >
+                      <div className='mb-10'>
                         <p className='mb-2'>1年目…</p>
                         <p className='mb-1'>ネイリスト</p>
                         <p>店舗接客/イベント接客/店舗サンプル作成/事務作業等</p>
                       </div>
+                      <hr />
 
-                      <div className='border-t border-dashed border-gray-300 pt-6'>
+                      <div className='pt-5'>
                         <h2 className='font-medium mb-4'>業務説明</h2>
                         <div className='space-y-4'>
                           <p className='leading-8'>
                             自社商品を卸している全国の店舗に赴き、商品紹介も兼ねてのネイル体験コーナーを行い小さいお子様から興味があるけど一歩踏み出せなかったお客様へ施術をし、コミュニケーションスキルが培われました。
+                            <br />
                             店舗へ飾るサンプル品に関してもその時の流行りや大衆に好まれるデザインでなければいけないため、隙間時間はいつも雑誌を読み漁って手帳を埋めていました。
+                            <br />{' '}
                             仕事終わりにはネイル教室に通い、資格を取得する為毎日が勉強の日々でしたがとても楽しかった思い出です。
                           </p>
                         </div>
@@ -91,9 +98,9 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
                     </div>
                   </div>
                   {/* Right Column - Speech Bubble */}
-                  <div className='flex justify-center items-start pt-20'>
+                  <div className='bg-[url(/assets/images/hukidashi_01.png)] bg-no-repeat flex justify-center items-start pt-20'>
                     <div className='relative'>
-                      <div className='border-2 border-gray-800 rounded-full px-12 py-16 max-w-md'>
+                      <div className='px-12 py-16 max-w-md'>
                         <p className='text-sm leading-relaxed'>
                           北は北海道、西は大阪等商品を卸している
                           <br />
@@ -106,46 +113,11 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
                       </div>
                       {/* Bird Character */}
                       <div className='absolute -bottom-8 -right-4'>
-                        <svg
-                          width='60'
-                          height='60'
-                          viewBox='0 0 60 60'
-                          fill='none'
-                          xmlns='http://www.w3.org/2000/svg'
-                        >
-                          <ellipse
-                            cx='30'
-                            cy='35'
-                            rx='18'
-                            ry='20'
-                            fill='white'
-                            stroke='black'
-                            strokeWidth='1.5'
-                          />
-                          <circle
-                            cx='30'
-                            cy='20'
-                            r='12'
-                            fill='white'
-                            stroke='black'
-                            strokeWidth='1.5'
-                          />
-                          <circle cx='26' cy='19' r='2' fill='black' />
-                          <circle cx='34' cy='19' r='2' fill='black' />
-                          <path d='M30 22 L28 25 L32 25 Z' fill='orange' />
-                          <path
-                            d='M15 35 Q12 38 15 40'
-                            stroke='black'
-                            strokeWidth='1.5'
-                            fill='none'
-                          />
-                          <path
-                            d='M45 35 Q48 38 45 40'
-                            stroke='black'
-                            strokeWidth='1.5'
-                            fill='none'
-                          />
-                        </svg>
+                        <Huwahuwa_img
+                          image='profile-shimaenaga.png'
+                          name='シマエナガ'
+                          move='gentle'
+                        />
                       </div>
                     </div>
                   </div>

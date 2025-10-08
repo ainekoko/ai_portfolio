@@ -9,7 +9,7 @@ export default function CosmeContentsPage() {
   const SLIDE_COUNT = 5;
   const SLIDES = Array.from(Array(SLIDE_COUNT).keys());
   return (
-    <div className='w-full h-full bg-gray-100'>
+    <div className='w-full h-full bg-white'>
       <EmblaCarousel slides={SLIDES} options={OPTIONS} />
     </div>
   );
