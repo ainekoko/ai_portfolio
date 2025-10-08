@@ -10,6 +10,7 @@ const SectionHeader = ({
   isVisible = true,
   title,
   subtitle,
+  size = 'large',
 }: SectionTitleProps) => {
   return (
     <div className='flex items-center w-full relative my-6 md:my-10 mx-0'>
@@ -33,9 +34,11 @@ const SectionHeader = ({
         ></div>
       </div>
       <h2
-        className={`relative px-2  md:px-3 py-3 md:py-5 text-7xl md:text-9xl inline-block text-gray-800 text-left ${
-          isVisible ? '' : 'opacity-0'
-        }`}
+        className={`relative px-2  md:px-3 py-3 md:py-5 inline-block text-gray-800 text-left 
+          ${isVisible ? '' : 'opacity-0'}
+          ${
+            size === 'large' ? 'text-7xl md:text-9xl ' : 'text-4xl md:text-8xl '
+          }`}
       >
         {title &&
           title.split('').map((letter, index) => (
