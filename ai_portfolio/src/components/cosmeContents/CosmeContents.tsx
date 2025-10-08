@@ -52,12 +52,18 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
     return () => emblaNode.removeEventListener('wheel', onWheel);
   }, [emblaApi, onWheel]);
 
+  // デバッグ用ログ追加
+  useEffect(() => {
+    console.log('scrollSnaps:', scrollSnaps);
+    console.log('selectedIndex:', selectedIndex);
+  }, [scrollSnaps, selectedIndex]);
+
   return (
-    <section className='embla bg-[#ffffff] w-screen pb-20 p-8 mt-8 py-6'>
+    <section className='embla bg-[#ffffff] w-screen p-8 mt-8 py-6'>
       {/* Section Title */}
       <SectionHeader
         isVisible
-        title='Cosme'
+        title='Cosmetics Company'
         subtitle='化粧品企業'
         size='normal'
       />
@@ -80,15 +86,9 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
                     <div className='border-t border-dashed border-gray-300 pt-6'>
                       <h2 className='font-medium mb-4'>業務説明</h2>
                       <div className='space-y-4'>
-                        <p>
+                        <p className='leading-8'>
                           自社商品を卸している全国の店舗に赴き、商品紹介も兼ねてのネイル体験コーナーを行い小さいお子様から興味があるけど一歩踏み出せなかったお客様へ施術をし、コミュニケーションスキルが培われました。
-                        </p>
-
-                        <p>
                           店舗へ飾るサンプル品に関してもその時の流行りや大衆に好まれるデザインでなければいけないため、隙間時間はいつも雑誌を読み漁って手帳を埋めていました。
-                        </p>
-
-                        <p>
                           仕事終わりにはネイル教室に通い、資格を取得する為毎日が勉強の日々でしたがとても楽しかった思い出です。
                         </p>
                       </div>
@@ -107,7 +107,7 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
                         <br />
                         月に2〜3回程巡征をした際、その地域の観
                         <br />
-                        光をする事が密かに楽しみでした（笑）
+                        光をする事が密かに楽しみでした(笑)
                       </p>
                     </div>
                     {/* Bird Character */}
@@ -169,15 +169,26 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
         </div>
 
         <div className='embla__dots'>
-          {scrollSnaps.map((_, index) => (
-            <DotButton
-              key={index}
-              onClick={() => onDotButtonClick(index)}
-              className={'embla__dot'.concat(
-                index === selectedIndex ? ' embla__dot--selected' : ''
-              )}
-            />
-          ))}
+          {scrollSnaps.length > 0
+            ? scrollSnaps.map((_, index) => (
+                <DotButton
+                  key={index}
+                  onClick={() => onDotButtonClick(index)}
+                  className={'embla__dot'.concat(
+                    index === selectedIndex ? ' embla__dot--selected' : ''
+                  )}
+                />
+              ))
+            : // フォールバック: scrollSnapsが空の場合はslidesを使用
+              slides.map((_, index) => (
+                <DotButton
+                  key={index}
+                  onClick={() => onDotButtonClick(index)}
+                  className={'embla__dot'.concat(
+                    index === selectedIndex ? ' embla__dot--selected' : ''
+                  )}
+                />
+              ))}
         </div>
       </div>
     </section>

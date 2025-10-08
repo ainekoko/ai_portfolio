@@ -37,7 +37,11 @@ const SectionHeader = ({
         className={`relative px-2  md:px-3 py-3 md:py-5 inline-block text-gray-800 text-left 
           ${isVisible ? '' : 'opacity-0'}
           ${
-            size === 'large' ? 'text-7xl md:text-9xl ' : 'text-4xl md:text-8xl '
+            size === 'large'
+              ? 'text-7xl md:text-9xl '
+              : size === 'normal'
+              ? 'text-4xl md:text-6xl '
+              : 'text-2xl md:text-4xl'
           }`}
       >
         {title &&
