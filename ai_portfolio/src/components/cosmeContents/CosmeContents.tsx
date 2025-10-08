@@ -68,7 +68,7 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
             {slides.map((index) => (
               <div className='embla__slide' key={index}>
                 {/* Main Content - さらにコンパクト化 */}
-                <div className=' grid grid-cols-1 lg:grid-cols-2 gap-16 items-start max-w-7xl mx-auto px-8'>
+                <div className='grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-start w-full mx-auto px-4 md:px-8 py-5'>
                   {/* Left Column */}
                   <div className='space-y-8'>
                     <div className='space-y-6 text-sm leading-relaxed'>
@@ -90,7 +90,6 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
                       </div>
                     </div>
                   </div>
-
                   {/* Right Column - Speech Bubble */}
                   <div className='flex justify-center items-start pt-20'>
                     <div className='relative'>
@@ -158,7 +157,7 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
       </section>
 
       {/* Embla Carousel Controls */}
-      <div className='embla__controls'>
+      <div className='embla__controls pb-6'>
         <div className='embla__buttons'>
           <PrevButton onClick={onPrevButtonClick} disabled={prevBtnDisabled} />
           <NextButton onClick={onNextButtonClick} disabled={nextBtnDisabled} />

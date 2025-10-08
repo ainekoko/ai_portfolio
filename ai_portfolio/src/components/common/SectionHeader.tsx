@@ -18,7 +18,7 @@ const SectionHeader = ({
         size === 'large'
           ? 'md:my-10 mx-0  my-6 '
           : size === 'normal'
-          ? 'mt-15 mb-5'
+          ? 'pt-13'
           : ''
       }`}
     >

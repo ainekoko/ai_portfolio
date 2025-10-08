@@ -1,9 +1,9 @@
 .embla {
   margin: auto;
-  --slide-height: 60vh;
+  --slide-height: 65vh;
   --slide-spacing: 1rem;
   --slide-size: 100%;
-  height: 60vh;
+  height: 65vh;
   display: flex;
   flex-direction: column;
 }
@@ -39,7 +39,6 @@
   grid-template-columns: auto 1fr;
   justify-content: space-between;
   gap: 1.2rem;
-  margin-top: 1.8rem;
   position: relative; /* 追加 */
 }
 .embla__buttons {
