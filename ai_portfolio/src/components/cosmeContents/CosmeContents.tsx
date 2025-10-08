@@ -69,7 +69,7 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
             {slides.map((index) => (
               <div className='embla__slide' key={index}>
                 {/* Main Content - さらにコンパクト化 */}
-                <div className='grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-start w-full mx-auto px-4 md:pl-16 pt-10'>
+                <div className='grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-start w-full mx-auto px-4 lg:pl-16 pt-10'>
                   {/* Left Column */}
                   <div className='space-y-8'>
                     <div
@@ -81,8 +81,7 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
                         <p className='mb-1'>ネイリスト</p>
                         <p>店舗接客/イベント接客/店舗サンプル作成/事務作業等</p>
                       </div>
-                      <hr />
-
+                      <hr className='h-px bg-gradient-to-r from-transparent via-[#ccc] to-transparent border-none' />
                       <div className='pt-5'>
                         <h2 className='font-medium mb-4'>業務説明</h2>
                         <div className='space-y-4'>
@@ -98,7 +97,8 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
                     </div>
                   </div>
                   {/* Right Column - Speech Bubble */}
-                  <div className='bg-[url(/assets/images/hukidashi_01.png)] bg-no-repeat flex justify-center items-start pt-20'>
+                  <div className='bg-[url(/assets/images/hukidashi_01.png)] bg-no-repeat bg-[length:350px_200px] bg-center flex justify-center items-start'>
+                    {' '}
                     <div className='relative'>
                       <div className='px-12 py-16 max-w-md'>
                         <p className='text-sm leading-relaxed'>
