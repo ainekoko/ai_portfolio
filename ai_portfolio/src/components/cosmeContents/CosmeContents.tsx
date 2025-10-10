@@ -78,9 +78,9 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
                 className='embla__slide lg:flex-[0_0_100%] mb-8 lg:mb-0'
                 key={index}
               >
-                <div className='grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-16 items-start w-full mx-auto lg:pl-16 pt-6 lg:pt-10'>
+                <div className='flex flex-col lg:flex-row items-start justify-center w-full mx-auto px-4 lg:px-16 pt-6 lg:pt-10 gap-6 lg:gap-8'>
                   {/* Left Column */}
-                  <div className='space-y-6 lg:space-y-8'>
+                  <div className='space-y-6 lg:space-y-8 flex-1 lg:max-w-[500px]'>
                     <div className='space-y-4 lg:space-y-6 leading-relaxed text-sm lg:text-[14px]'>
                       <div className='mb-6 lg:mb-10'>
                         <p className='mb-2'>{content.year}</p>
@@ -141,7 +141,7 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
             />
           </div>
 
-          <div className='embla__dots'>
+          <div className='embla__dots '>
             {scrollSnaps.length > 0
               ? scrollSnaps.map((_, index) => (
                   <DotButton
