@@ -19,4 +19,5 @@ export interface SectionTitleProps {
   isVisible: boolean;
   title: string;
   subtitle?: string;
+  size?: 'large' | 'normal' | 'small';
 }
