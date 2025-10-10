@@ -127,9 +127,8 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
             ))}
           </div>
         </div>
-
         {/* Embla Carousel Controls - lg以上のみ表示 */}
-        <div className='hidden lg:block embla__controls pb-6'>
+        <div className='embla__controls pb-6 lg:grid hidden '>
           <div className='embla__buttons'>
             <PrevButton
               onClick={onPrevButtonClick}
@@ -141,7 +140,7 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
             />
           </div>
 
-          <div className='embla__dots '>
+          <div className='embla__dots'>
             {scrollSnaps.length > 0
               ? scrollSnaps.map((_, index) => (
                   <DotButton
@@ -162,7 +161,7 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
                   />
                 ))}
           </div>
-        </div>
+        </div>{' '}
       </section>
     </>
   );
