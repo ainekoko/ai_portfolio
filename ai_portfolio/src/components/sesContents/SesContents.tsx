@@ -12,6 +12,7 @@ import './sample.css';
 import SectionHeader from '../common/SectionHeader';
 import Huwahuwa_img from '../common/huwahuwa_img';
 import { COSME_CONTENTS } from '@/utils/CosmeContentsData';
+import { ITJOB_INTRODUCTION } from '@/utils/itData';
 
 type PropType = {
   slides: number[];
@@ -22,7 +23,7 @@ type PropType = {
  * 化粧品業界向けの横スクロールコンテンツ
  * @param props
  */
-const CosmeContents: React.FC<PropType> = (props) => {
+const SesContents: React.FC<PropType> = (props) => {
   const { slides, options } = props;
   const [emblaRef, emblaApi] = useEmblaCarousel(options);
 
@@ -74,60 +75,89 @@ const CosmeContents: React.FC<PropType> = (props) => {
       />
 
       {/* カルーセル: lg以上で有効、lg以下で無効 */}
-      <section className='embla w-screen px-4 lg:px-8'>
+      <section className='embla w-screen px-4 lg:px-8 text-sm'>
         <div className='embla__viewport bg-[#ffffff]' ref={emblaRef}>
           <div className='embla__container lg:flex lg:flex-row flex-col'>
-            {COSME_CONTENTS.map((content, index) => (
-              <div
-                className='embla__slide lg:flex-[0_0_100%] mb-8 lg:mb-0'
-                key={index}
-              >
-                <div className='flex flex-col lg:flex-row items-start justify-center w-full mx-auto px-4 lg:px-16 pt-6 lg:pt-10 gap-6 lg:gap-8'>
-                  {/* Left Column */}
-                  <div className='space-y-6 lg:space-y-8 flex-1 lg:max-w-[500px]'>
-                    <div className='space-y-4 lg:space-y-6 leading-relaxed text-sm lg:text-[14px]'>
-                      <div className='mb-6 lg:mb-10'>
-                        <p className='mb-2'>{content.year}</p>
-                        <p className='mb-1 font-medium lg:font-normal'>
-                          {content.title}
-                        </p>
-                        <p className='text-gray-600 lg:text-black'>
-                          {content.description}
-                        </p>
+            {ITJOB_INTRODUCTION.map((content, index) => (
+              <>
+                {/* <!-- 職務経歴カード1 --> */}
+                <div className='border border-gray-300 p-8 md:p-12 mb-12 relative'>
+                  {/* <!-- 番号 --> */}
+                  <div className='absolute top-8 right-8 text-9xl font-light text-gray-300 leading-none'>
+                    0{index + 1}
+                  </div>
+
+                  <div className='grid grid-cols-1 md:grid-cols-2 gap-12'>
+                    {/* <!-- 左側 --> */}
+                    <div className='space-y-6'>
+                      <div className='flex mb-2'>
+                        <div className='w-24 font-light text-gray-600'>
+                          業種
+                        </div>
+                        <div className='flex-1'>
+                          {content.outsourcedCompany}
+                        </div>
+                      </div>
+
+                      <div className='flex mb-2'>
+                        <div className='w-24 font-light text-gray-600'>
+                          規模
+                        </div>
+                        <div className='flex-1'>{content.scale}</div>
+                      </div>
+
+                      <div className='flex mb-2'>
+                        <div className='w-24 font-light text-gray-600'>
+                          参画期間
+                        </div>
+                        <div className='flex-1'>{content.period}</div>
+                      </div>
+
+                      <div className='flex mb-2'>
+                        <div className='w-24 font-light text-gray-600'>
+                          業務内容
+                        </div>
+                        <div>
+                          <div className='mb-3'>{content.phase.join('/')}</div>
+                          <div className='flex-1' key={index}>
+                            {content.bussinessContent.map((item, i) => (
+                              <div key={i}>・{item}</div>
+                            ))}
+                          </div>
+                        </div>
                       </div>
                       <hr className='h-px bg-gradient-to-r from-transparent via-[#ccc] to-transparent border-none' />
-                      <div className='pt-4 lg:pt-5'>
-                        <h2 className='font-medium mb-3 lg:mb-4 text-base lg:text-[14px]'>
-                          業務説明
-                        </h2>
-                        <div className='space-y-4'>
-                          <p className='leading-7 lg:leading-8 text-gray-700 lg:text-black'>
-                            {content.businessContent}
-                          </p>
+
+                      <div>
+                        <div className='font-light mb-4'>開発環境</div>
+                        <div className='space-y-2 text-sm'>
+                          <div>
+                            <span className='font-medium'>【言語】</span>
+                            HTML/CSS/PHP
+                          </div>
+                          <div>
+                            <span className='font-medium'>【OS】</span> Windows
+                          </div>
+                          <div>
+                            <span className='font-medium'>【FW】</span> Laravel
+                          </div>
+                          <div>
+                            <span className='font-medium'>【ツール】</span>{' '}
+                            Chatwork/GitHub
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                  {/* Right Column - Speech Bubble */}
-                  <div className=' mt-auto bg-[url(/assets/images/hukidashi_01.png)] bg-no-repeat bg-[length:300px_180px] lg:bg-[length:350px_200px] bg-center flex justify-center items-center lg:items-start py-8 lg:py-0'>
-                    <div className='relative'>
-                      <div className='px-8 lg:px-12 py-12 lg:py-16 max-w-xs lg:max-w-md text-center lg:text-left'>
-                        <p className='text-xs lg:text-sm leading-relaxed'>
-                          {content.hukidashi}
-                        </p>
-                      </div>
-                      {/* Bird Character */}
-                      <div className='absolute -bottom-6 lg:-bottom-8 -right-2 lg:-right-4'>
-                        <Huwahuwa_img
-                          image='profile-shimaenaga.png'
-                          name='シマエナガ'
-                          move='gentle'
-                        />
+
+                    {/* <!-- 右側 --> */}
+                    <div className='space-y-6 m-auto w-4/5'>
+                      <div className='leading-relaxed text-gray-700'>
+                        {content.content}
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
+              </>
             ))}
           </div>
         </div>
@@ -171,4 +201,4 @@ const CosmeContents: React.FC<PropType> = (props) => {
   );
 };
 
-export default CosmeContents;
+export default SesContents;
