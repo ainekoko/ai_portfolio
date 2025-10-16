@@ -205,6 +205,10 @@ const SesContents: React.FC<PropType> = (props) => {
                 ))}
           </div>
         </div>
+        <button className='absolute bottom-0 right-0 w-32 h-32 rounded-full bg-white/20 backdrop-blur-md border-2 border-white/30 flex flex-col items-center justify-center gap-1.5 transition-all duration-300 hover:bg-white/30 hover:scale-110 cursor-pointer'>
+          <div className='text-3xl transition-all duration-300'>←</div>
+          <div className='text-sm font-semibold'>Back Page</div>
+        </button>
       </section>
     </>
   );
