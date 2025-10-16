@@ -82,10 +82,10 @@ const SesContents: React.FC<PropType> = (props) => {
                 className='embla__slide lg:flex-[0_0_100%] mb-8 lg:mb-0'
               >
                 {/* 上部配置用のラッパー */}
-                <div className='flex items-start justify-center w-full h-full px-4 lg:px-8 pt-3 lg:pt-8'>
+                <div className='flex items-start justify-center w-full h-full px-6 lg:px-8 pt-3 lg:pt-8'>
                   <div className='border border-gray-300 p-4 md:p-8 relative max-w-6xl w-full'>
                     {/* 番号 */}
-                    <div className='absolute top-4 md:top-8 right-4 md:right-8 text-6xl md:text-9xl font-light text-gray-300 leading-none'>
+                    <div className='-z-[99] absolute top-4 md:top-8 right-4 md:right-8 text-6xl md:text-[200px] font-light text-gray-300 leading-none'>
                       0{index + 1}
                     </div>
 
