@@ -9,7 +9,7 @@ export default function CosmeContentsPage() {
   const SLIDES = Array.from(Array(SLIDE_COUNT).keys());
   console.log(OPTIONS, SLIDES);
   return (
-    <div className='w-full h-full bg-white'>
+    <div className='w-screen h-screen bg-white overflow-hidden fixed inset-0'>
       <CosmeContents slides={SLIDES} options={OPTIONS} />
     </div>
   );
