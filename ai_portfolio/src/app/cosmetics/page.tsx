@@ -5,7 +5,7 @@ import { EmblaOptionsType } from 'embla-carousel';
  */
 export default function CosmeContentsPage() {
   const OPTIONS: EmblaOptionsType = { axis: 'y' };
-  const SLIDE_COUNT = 5;
+  const SLIDE_COUNT = 4;
   const SLIDES = Array.from(Array(SLIDE_COUNT).keys());
   console.log(OPTIONS, SLIDES);
   return (

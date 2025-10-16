@@ -42,7 +42,7 @@ const ExperienceSection = ({ isVisible }: SectionProps) => {
             {/* More */}
             <div className='flex justify-end'>
               <a
-                href='/cosmecics'
+                href='/cosmetics'
                 className='inline-flex items-center gap-4 group'
               >
                 <span className='text-xl font-light text-gray-600 group-hover:text-gray-900 transition-colors duration-300'>
