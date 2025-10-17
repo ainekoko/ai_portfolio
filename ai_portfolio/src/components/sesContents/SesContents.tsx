@@ -169,7 +169,6 @@ const SesContents: React.FC<PropType> = (props) => {
             ))}
           </div>
         </div>
-
         {/* Embla Carousel Controls - lg以上のみ表示 */}
         <div className='embla__controls pb-6 lg:grid hidden'>
           <div className='embla__buttons'>
@@ -205,10 +204,43 @@ const SesContents: React.FC<PropType> = (props) => {
                 ))}
           </div>
         </div>
-        <button className='absolute bottom-0 right-0 w-32 h-32 rounded-full bg-white/20 backdrop-blur-md border-2 border-white/30 flex flex-col items-center justify-center gap-1.5 transition-all duration-300 hover:bg-white/30 hover:scale-110 cursor-pointer'>
-          <div className='text-3xl transition-all duration-300'>←</div>
-          <div className='text-sm font-semibold'>Back Page</div>
-        </button>
+        <style>{`
+        .arrow {
+          position: relative;
+          display: inline-block;
+          pointer-events: none;
+        }
+        .arrow::after {
+          content: '';
+          position: absolute;
+          right: -35px;
+          width: 150px;
+          height: 10px;
+          border-bottom: solid 2px currentColor;
+          border-left: solid 2px currentColor;
+          transform: skew(-45deg);
+          transform-origin: right center;
+          transition: all 0.3s ease;
+          pointer-events: none;
+        }
+        .button-4:hover .arrow::after {
+          width: 180px;
+          border-color: #f59e0b;
+        }
+        
+        .arrow-reverse::after {
+          transform: skew(45deg);
+        }
+      `}</style>
+        {/* スタイル4: 上部にテキスト */}
+        <button className='z-50 absolute button-4 bottom-5 right-5 group pl-25 p-3 pointer-events-auto'>
+          <p className='text-center text-sm font-bold text-gray-800 group-hover:text-amber-600 transition-colors duration-300  pointer-events-none'>
+            Back Page
+          </p>
+          <div className='flex justify-center pointer-events-none'>
+            <div className='arrow text-gray-400'></div>
+          </div>
+        </button>{' '}
       </section>
     </>
   );
