@@ -18,7 +18,11 @@ type PropType = {
   options?: EmblaOptionsType;
 };
 
-const EmblaCarousel: React.FC<PropType> = (props) => {
+/**
+ * 化粧品業界向けの横スクロールコンテンツ
+ * @param props
+ */
+const CosmeContents: React.FC<PropType> = (props) => {
   const { slides, options } = props;
   const [emblaRef, emblaApi] = useEmblaCarousel(options);
 
@@ -70,58 +74,51 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
       />
 
       {/* カルーセル: lg以上で有効、lg以下で無効 */}
-      <section className='embla w-screen px-4 lg:px-8'>
+      <section className='embla w-screen px-4 lg:px-8 text-sm min-h-screen lg:h-screen'>
         <div className='embla__viewport bg-[#ffffff]' ref={emblaRef}>
           <div className='embla__container lg:flex lg:flex-row flex-col'>
             {COSME_CONTENTS.map((content, index) => (
               <div
-                className='embla__slide lg:flex-[0_0_100%] mb-8 lg:mb-0'
                 key={index}
+                className='embla__slide lg:flex-[0_0_100%] mb-8 lg:mb-0'
               >
-                <div className='flex flex-col lg:flex-row items-start justify-center w-full mx-auto px-4 lg:px-16 pt-6 lg:pt-10 gap-6 lg:gap-8'>
-                  {/* Left Column */}
-                  <div className='space-y-6 lg:space-y-8 flex-1 lg:max-w-[500px]'>
-                    <div className='space-y-4 lg:space-y-6 leading-relaxed text-sm lg:text-[14px]'>
-                      <div className='mb-6 lg:mb-10'>
-                        <p className='mb-2'>{content.year}</p>
-                        <p className='mb-1 font-medium lg:font-normal'>
-                          {content.title}
-                        </p>
-                        <p className='text-gray-600 lg:text-black'>
-                          {content.description}
-                        </p>
+                {/* 上部配置用のラッパー */}
+                <div className='flex items-start justify-center w-full h-full px-6 lg:px-8 pt-3 lg:pt-8'>
+                  <div className='border border-gray-300 p-4 md:p-8 relative max-w-6xl w-full'>
+                    {/* 番号 */}
+                    <div className='-z-[99] absolute top-4 md:top-8 right-4 md:right-8 text-6xl md:text-[200px] font-light text-gray-300 leading-none'>
+                      0{index + 1}
+                    </div>
+                    <div className='grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12'>
+                      {/* Left Column */}
+                      <div className='space-y-6 lg:space-y-8 flex-1 lg:max-w-[500px]'>
+                        <div className='space-y-4 lg:space-y-6 leading-relaxed text-sm lg:text-[14px]'>
+                          <div className='mb-6 lg:mb-10'>
+                            <p className='mb-2'>{content.year}</p>
+                            <p className='mb-1 font-medium lg:font-normal'>
+                              {content.title}
+                            </p>
+                            <p className='text-gray-600 lg:text-black'>
+                              {content.description}
+                            </p>
+                          </div>
+                          <hr className='h-px bg-gradient-to-r from-transparent via-[#ccc] to-transparent border-none' />
+                        </div>
                       </div>
-                      <hr className='h-px bg-gradient-to-r from-transparent via-[#ccc] to-transparent border-none' />
-                      <div className='pt-4 lg:pt-5'>
-                        <h2 className='font-medium mb-3 lg:mb-4 text-base lg:text-[14px]'>
-                          業務説明
-                        </h2>
-                        <div className='space-y-4'>
-                          <p className='leading-7 lg:leading-8 text-gray-700 lg:text-black'>
-                            {content.businessContent}
-                          </p>
+                      {/* Right Column - Speech Bubble */}
+                      {/* 右側 */}
+
+                      <div className='space-y-6 flex items-center'>
+                        <div className='leading-relaxed text-gray-700 text-sm md:text-base'>
+                          <h2 className='font-medium mb-3 lg:mb-4 text-base lg:text-[14px]'>
+                            業務説明
+                          </h2>
+
+                          {content.businessContent}
                         </div>
                       </div>
                     </div>
-                  </div>
-                  {/* Right Column - Speech Bubble */}
-                  <div className=' mt-auto bg-[url(/assets/images/hukidashi_01.png)] bg-no-repeat bg-[length:300px_180px] lg:bg-[length:350px_200px] bg-center flex justify-center items-center lg:items-start py-8 lg:py-0'>
-                    <div className='relative'>
-                      <div className='px-8 lg:px-12 py-12 lg:py-16 max-w-xs lg:max-w-md text-center lg:text-left'>
-                        <p className='text-xs lg:text-sm leading-relaxed'>
-                          {content.hukidashi}
-                        </p>
-                      </div>
-                      {/* Bird Character */}
-                      <div className='absolute -bottom-6 lg:-bottom-8 -right-2 lg:-right-4'>
-                        <Huwahuwa_img
-                          image='profile-shimaenaga.png'
-                          name='シマエナガ'
-                          move='gentle'
-                        />
-                      </div>
-                    </div>
-                  </div>
+                  </div>{' '}
                 </div>
               </div>
             ))}
@@ -167,4 +164,4 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
   );
 };
 
-export default EmblaCarousel;
+export default CosmeContents;
