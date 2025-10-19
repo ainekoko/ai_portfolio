@@ -153,7 +153,7 @@ const ScrollImg: React.FC = () => {
         {/* 白い背景プレーン - 最も奥に配置 */}
         <mesh position={[0, 0, -5]} scale={[width * 2, height * 7, 1]}>
           <planeGeometry args={[1, 1]} />
-          <meshBasicMaterial color='white' />
+          <meshBasicMaterial color='red' />
         </mesh>
 
         {images.map((img, index) => (
