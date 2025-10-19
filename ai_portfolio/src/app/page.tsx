@@ -41,7 +41,7 @@ const ThreeCanvas = () => {
           zIndex: 0,
         }}
       >
-        <ScrollControls pages={7.7} damping={0.3}>
+        <ScrollControls pages={12} damping={0.3}>
           <WindowScrollHandler setVisibleSections={setVisibleSections} />
           <ScrollImg />
 

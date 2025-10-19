@@ -33,7 +33,7 @@ const ThreeCanvas = ({ setVisibleSections }: ThreeCanvasProps) => {
           style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
         >
           {/* スクロール同期コントローラー */}
-          <ScrollController />
+          {/* <ScrollController /> */}
           {/* スクロール位置に応じて表示セクションを判定 */}
           <WindowScrollHandler setVisibleSections={setVisibleSections} />
 
