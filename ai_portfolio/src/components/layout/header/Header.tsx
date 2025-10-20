@@ -24,34 +24,19 @@ const Header = () => {
   const handleSectionClick = (sectionId: string) => {
     console.log('クリックされたセクションID:', sectionId);
 
-    interface ExtendedWindow extends Window {
-      scrollToSection?: (sectionId: string) => void;
+    const element = document.getElementById(sectionId);
+    if (element) {
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth',
+      });
     }
 
-    const extendedWindow = window as ExtendedWindow;
-    if (typeof window !== 'undefined' && extendedWindow.scrollToSection) {
-      extendedWindow.scrollToSection(sectionId);
-    } else {
-      console.warn(
-        'scrollError:scrollToSection function not available, retrying in 100ms...'
-      );
-      setTimeout(() => {
-        if (extendedWindow.scrollToSection) {
-          extendedWindow.scrollToSection(sectionId);
-        } else {
-          console.warn(
-            'scrollError:scrollToSection still not available, using native scroll fallback'
-          );
-          const element = document.getElementById(sectionId);
-          if (element) {
-            element.scrollIntoView({ behavior: 'smooth' });
-          }
-        }
-      }, 100);
-    }
     closeMenu();
   };
-
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape' && isMenuOpen) {

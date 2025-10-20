@@ -8,20 +8,21 @@ import ThreeScrollHandler from '@/components/ui/ScrollHandler';
 const geistSans = Geist({
   variable: '--font-geist-sans',
   subsets: ['latin'],
+  preload: false, // falseのまま維持
 });
 
 const geistMono = Geist_Mono({
   variable: '--font-geist-mono',
   subsets: ['latin'],
+  preload: false, // falseのまま維持
 });
 
-// src/app/layout.tsx
 const italiana = Italiana({
   weight: '400',
   subsets: ['latin'],
   variable: '--font-italiana',
   display: 'swap',
-  preload: false, // プリロードを無効化
+  preload: false, // falseのまま維持
 });
 export const metadata: Metadata = {
   title: "Ai's Portfolio",
