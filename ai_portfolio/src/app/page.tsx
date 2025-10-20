@@ -1,10 +1,5 @@
 'use client';
-import React, { useState } from 'react';
-import { Canvas } from '@react-three/fiber';
-import { Scroll, ScrollControls } from '@react-three/drei';
-import ScrollImg from '@/components/templetes/scroll-img';
-import * as THREE from 'three';
-import WindowScrollHandler from '@/components/three/WindowScrollHandler';
+import React, { useState, useEffect, useCallback } from 'react';
 import ProfileSection from '@/components/sections/ProfileSection';
 import TopSection from '@/components/sections/TopSection';
 import ExperienceSection from '@/components/sections/ExperienceSection';
@@ -13,51 +8,129 @@ import ContactSection from '@/components/sections/ContactSection';
 import MessageSection from '@/components/sections/Message';
 
 const ThreeCanvas = () => {
-  /* 表示されているセクションのIDを格納するSet ['Hello', 'Profile'...ets] */
   const [visibleSections, setVisibleSections] = useState<Set<string>>(
     new Set()
   );
 
-  /**
-   * セクションの表示状態を判定
-   * @param sectionId - セクションのID{"hello", "profile"...}
-   * @returns セクションが表示されているかどうか真偽値
-   */
   const isVisible = (sectionId: string) => visibleSections.has(sectionId);
 
+  // スクロールイベントハンドラー
+  const handleScroll = useCallback(() => {
+    console.log('🔍 handleScroll called', window.scrollY);
+
+    const sectionIds = [
+      'topSection',
+      'hello',
+      'profile',
+      'message',
+      'experience',
+      'skill',
+      'contact',
+    ];
+
+    const newVisibleSections = new Set<string>();
+
+    sectionIds.forEach((sectionId) => {
+      const element = document.getElementById(sectionId);
+
+      if (!element) {
+        console.log(`❌ Element not found: ${sectionId}`);
+        return;
+      }
+
+      const rect = element.getBoundingClientRect();
+      const elementTop = rect.top;
+      const elementBottom = rect.bottom;
+      const windowHeight = window.innerHeight;
+
+      const isElementVisible = elementTop < windowHeight && elementBottom > 0;
+      const visibleHeight =
+        Math.min(elementBottom, windowHeight) - Math.max(elementTop, 0);
+      const elementHeight = rect.height;
+      const visibilityRatio = Math.max(0, visibleHeight) / elementHeight;
+
+      console.log(`📊 ${sectionId}:`, {
+        elementTop,
+        elementBottom,
+        windowHeight,
+        visibilityRatio: visibilityRatio.toFixed(2),
+        isElementVisible,
+      });
+
+      // 要素の30%以上が表示されている場合に表示とみなす
+      if (isElementVisible && visibilityRatio > 0.3) {
+        newVisibleSections.add(sectionId);
+        console.log(`✅ ${sectionId} is visible!`);
+      }
+    });
+
+    console.log('👀 Visible sections:', Array.from(newVisibleSections));
+    setVisibleSections(newVisibleSections);
+  }, []);
+
+  useEffect(() => {
+    console.log('🚀 Component mounted, setting up scroll listener');
+
+    // 初回実行
+    handleScroll();
+
+    // スクロールイベントリスナー
+    let ticking = false;
+    const scrollListener = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          handleScroll();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
+    window.addEventListener('scroll', scrollListener, { passive: true });
+
+    // リサイズイベントも追加
+    window.addEventListener('resize', handleScroll, { passive: true });
+
+    return () => {
+      console.log('🧹 Cleaning up scroll listener');
+      window.removeEventListener('scroll', scrollListener);
+      window.removeEventListener('resize', handleScroll);
+    };
+  }, [handleScroll]);
+
+  // visibleSectionsが変更されたらログ出力
+  useEffect(() => {
+    console.log('🔄 visibleSections updated:', Array.from(visibleSections));
+  }, [visibleSections]);
+
   return (
-    <div style={{ width: '100vw', height: '100vh', position: 'relative' }}>
-      {/* <Canvas
-        gl={{
-          toneMapping: THREE.NoToneMapping,
-          toneMappingExposure: 1.0,
+    <div style={{ width: '100vw', minHeight: '100vh', position: 'relative' }}>
+      {/* デバッグ用の固定表示 */}
+      <div
+        style={{
+          position: 'fixed',
+          top: '100px',
+          right: '20px',
+          background: 'rgba(0,0,0,0.8)',
+          color: 'white',
+          padding: '10px',
+          borderRadius: '5px',
+          zIndex: 9999,
+          fontSize: '12px',
         }}
       >
-        <ScrollControls pages={12} damping={0.3}>
-          <WindowScrollHandler setVisibleSections={setVisibleSections} />
-          <ScrollImg />
+        <div>Visible Sections:</div>
+        {Array.from(visibleSections).map((id) => (
+          <div key={id}>✓ {id}</div>
+        ))}
+      </div>
 
-          <Scroll html style={{ width: '100vw' }}> */}
-      {/* 最初のセクション */}
       <TopSection isVisible={isVisible('hello')} />
-
-      {/* プロフィール */}
       <ProfileSection isVisible={isVisible} />
-
-      {/* メッセージ */}
       <MessageSection />
-
-      {/* 職務経歴 */}
       <ExperienceSection isVisible={isVisible} />
-
-      {/* スキル */}
       <SkillSection isVisible={isVisible} />
-
-      {/* お問い合わせ */}
       <ContactSection isVisible={isVisible} />
-      {/* </Scroll>
-        </ScrollControls>
-      </Canvas> */}
     </div>
   );
 };
