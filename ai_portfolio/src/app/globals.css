@@ -126,10 +126,10 @@ canvas {
 }
 
 /* Three.jsのスクロールコンテナのスクロールバーを非表示 */
-[data-scrollcontrols] {
+/* [data-scrollcontrols] {
   scrollbar-width: none !important;
   -ms-overflow-style: none !important;
-}
+} */
 
 [data-scrollcontrols]::-webkit-scrollbar {
   display: none !important;

@@ -22,17 +22,21 @@ const Header = () => {
    * @param sectionId - スクロール先のセクションID
    */
   const handleSectionClick = (sectionId: string) => {
-    console.log('クリックされたセクションID:', sectionId);
+    console.log('🔥🔥🔥 関数が呼ばれました!', sectionId);
 
     const element = document.getElementById(sectionId);
     if (element) {
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset;
+      console.log('✅ 要素を発見:', element);
 
-      window.scrollTo({
-        top: offsetPosition,
+      // 要素までスクロール（シンプルな方法）
+      element.scrollIntoView({
         behavior: 'smooth',
+        block: 'start',
       });
+
+      console.log('📍 scrollIntoView実行');
+    } else {
+      console.log('❌ 要素が見つかりません:', sectionId);
     }
 
     closeMenu();
@@ -146,6 +150,7 @@ const Header = () => {
                       <a
                         href={`#${item.sectionId}`}
                         onClick={(e) => {
+                          console.log('🖱️ クリックされました:', item.sectionId);
                           e.preventDefault();
                           handleSectionClick(item.sectionId);
                         }}
@@ -179,6 +184,7 @@ const Header = () => {
                 key={index}
                 href={`#${link.href}`}
                 onClick={(e) => {
+                  console.log('🖱️ デスクトップナビクリック:', link.href);
                   e.preventDefault();
                   handleSectionClick(link.href);
                 }}

@@ -27,7 +27,7 @@ const ThreeCanvas = () => {
 
   return (
     <div style={{ width: '100vw', height: '100vh', position: 'relative' }}>
-      <Canvas
+      {/* <Canvas
         gl={{
           toneMapping: THREE.NoToneMapping,
           toneMappingExposure: 1.0,
@@ -37,27 +37,27 @@ const ThreeCanvas = () => {
           <WindowScrollHandler setVisibleSections={setVisibleSections} />
           <ScrollImg />
 
-          <Scroll html style={{ width: '100vw' }}>
-            {/* 最初のセクション */}
-            <TopSection isVisible={isVisible('hello')} />
+          <Scroll html style={{ width: '100vw' }}> */}
+      {/* 最初のセクション */}
+      <TopSection isVisible={isVisible('hello')} />
 
-            {/* プロフィール */}
-            <ProfileSection isVisible={isVisible} />
+      {/* プロフィール */}
+      <ProfileSection isVisible={isVisible} />
 
-            {/* メッセージ */}
-            <MessageSection />
+      {/* メッセージ */}
+      <MessageSection />
 
-            {/* 職務経歴 */}
-            <ExperienceSection isVisible={isVisible} />
+      {/* 職務経歴 */}
+      <ExperienceSection isVisible={isVisible} />
 
-            {/* スキル */}
-            <SkillSection isVisible={isVisible} />
+      {/* スキル */}
+      <SkillSection isVisible={isVisible} />
 
-            {/* お問い合わせ */}
-            <ContactSection isVisible={isVisible} />
-          </Scroll>
+      {/* お問い合わせ */}
+      <ContactSection isVisible={isVisible} />
+      {/* </Scroll>
         </ScrollControls>
-      </Canvas>
+      </Canvas> */}
     </div>
   );
 };
