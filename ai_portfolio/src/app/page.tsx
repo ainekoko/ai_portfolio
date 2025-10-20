@@ -32,14 +32,6 @@ const ThreeCanvas = () => {
           toneMapping: THREE.NoToneMapping,
           toneMappingExposure: 1.0,
         }}
-        style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: '100%',
-          zIndex: 0,
-        }}
       >
         <ScrollControls pages={12} damping={0.3}>
           <WindowScrollHandler setVisibleSections={setVisibleSections} />
