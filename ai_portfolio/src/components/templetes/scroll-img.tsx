@@ -16,8 +16,6 @@ const ScrollImg: React.FC = () => {
   const group = useRef<Group>(null!);
   const imageRefs = useRef<(THREE.Mesh | null)[]>([]);
 
-  // ページ数を定数として定義
-  const TOTAL_PAGES = 7.7;
   // ProfileSectionまでの高さ（305vh = 3.05ページ）
   const BACKGROUND_HEIGHT = 3.05;
 
@@ -149,6 +147,7 @@ const ScrollImg: React.FC = () => {
 
         {images.map((img, index) => (
           <React.Fragment key={index}>
+            {/* eslint-disable-next-line jsx-a11y/alt-text */}
             <Image
               key={index}
               url={img.url}

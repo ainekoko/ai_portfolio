@@ -6,7 +6,6 @@ import ExperienceSection from '@/components/sections/ExperienceSection';
 import SkillSection from '@/components/sections/SkillSection';
 import ContactSection from '@/components/sections/ContactSection';
 import MessageSection from '@/components/sections/Message';
-import ImageSection from '@/components/sections/ImageSection';
 
 const ThreeCanvas = () => {
   const [visibleSections, setVisibleSections] = useState<Set<string>>(

@@ -1,7 +1,5 @@
 import { SectionProps } from '@/types/component';
 import SectionHeader from '../common/SectionHeader';
-import ExperienceInfoList from '../experience/ExperienceInfoList';
-import { JOB_INTRODUCTION_LEFT } from '@/utils/ExperienceData';
 
 /**
  * ExperienceSection.tsx

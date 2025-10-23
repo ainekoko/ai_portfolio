@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect, useRef, useState, RefObject } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 // Intersection Observer を使用したカスタムフック
 const useFadeInOnScroll = () => {
@@ -7,12 +7,16 @@ const useFadeInOnScroll = () => {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const currentRef = ref.current; // ここで保存
+
+    if (!currentRef) return; // early return
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsVisible(true);
-          if (ref.current) {
-            observer.unobserve(ref.current);
+          if (currentRef) {
+            observer.unobserve(currentRef);
           }
         }
       },
@@ -22,13 +26,11 @@ const useFadeInOnScroll = () => {
       }
     );
 
-    if (ref.current) {
-      observer.observe(ref.current);
-    }
+    observer.observe(currentRef);
 
     return () => {
-      if (ref.current) {
-        observer.unobserve(ref.current);
+      if (currentRef) {
+        observer.unobserve(currentRef);
       }
     };
   }, []);
