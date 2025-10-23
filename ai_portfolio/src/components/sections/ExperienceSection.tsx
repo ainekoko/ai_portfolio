@@ -1,7 +1,5 @@
 import { SectionProps } from '@/types/component';
 import SectionHeader from '../common/SectionHeader';
-import ExperienceInfoList from '../experience/ExperienceInfoList';
-import { JOB_INTRODUCTION_LEFT } from '@/utils/ExperienceData';
 
 /**
  * ExperienceSection.tsx
@@ -12,7 +10,7 @@ const ExperienceSection = ({ isVisible }: SectionProps) => {
   return (
     <section
       id='experience'
-      className='bg-[#ffffff] relative top-[340vh] w-screen pb-20 p-8 mt-8 py-6'
+      className='bg-[#ffffff] relative w-screen pb-20 p-8 mt-8 py-6'
     >
       {/* Section Title */}
       <SectionHeader

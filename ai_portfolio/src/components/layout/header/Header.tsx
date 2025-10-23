@@ -22,36 +22,25 @@ const Header = () => {
    * @param sectionId - スクロール先のセクションID
    */
   const handleSectionClick = (sectionId: string) => {
-    console.log('クリックされたセクションID:', sectionId);
+    console.log('🔥🔥🔥 関数が呼ばれました!', sectionId);
 
-    interface ExtendedWindow extends Window {
-      scrollToSection?: (sectionId: string) => void;
-    }
+    const element = document.getElementById(sectionId);
+    if (element) {
+      console.log('✅ 要素を発見:', element);
 
-    const extendedWindow = window as ExtendedWindow;
-    if (typeof window !== 'undefined' && extendedWindow.scrollToSection) {
-      extendedWindow.scrollToSection(sectionId);
+      // 要素までスクロール（シンプルな方法）
+      element.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+      });
+
+      console.log('📍 scrollIntoView実行');
     } else {
-      console.warn(
-        'scrollError:scrollToSection function not available, retrying in 100ms...'
-      );
-      setTimeout(() => {
-        if (extendedWindow.scrollToSection) {
-          extendedWindow.scrollToSection(sectionId);
-        } else {
-          console.warn(
-            'scrollError:scrollToSection still not available, using native scroll fallback'
-          );
-          const element = document.getElementById(sectionId);
-          if (element) {
-            element.scrollIntoView({ behavior: 'smooth' });
-          }
-        }
-      }, 100);
+      console.log('❌ 要素が見つかりません:', sectionId);
     }
+
     closeMenu();
   };
-
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape' && isMenuOpen) {
@@ -161,6 +150,7 @@ const Header = () => {
                       <a
                         href={`#${item.sectionId}`}
                         onClick={(e) => {
+                          console.log('🖱️ クリックされました:', item.sectionId);
                           e.preventDefault();
                           handleSectionClick(item.sectionId);
                         }}
@@ -194,6 +184,7 @@ const Header = () => {
                 key={index}
                 href={`#${link.href}`}
                 onClick={(e) => {
+                  console.log('🖱️ デスクトップナビクリック:', link.href);
                   e.preventDefault();
                   handleSectionClick(link.href);
                 }}

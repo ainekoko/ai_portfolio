@@ -27,7 +27,6 @@ html {
 
 html,
 body {
-  overflow: auto !important;
   scrollbar-width: thin;
   scrollbar-color: rgba(155, 155, 155, 0.7) transparent;
 }
@@ -126,10 +125,10 @@ canvas {
 }
 
 /* Three.jsのスクロールコンテナのスクロールバーを非表示 */
-[data-scrollcontrols] {
+/* [data-scrollcontrols] {
   scrollbar-width: none !important;
   -ms-overflow-style: none !important;
-}
+} */
 
 [data-scrollcontrols]::-webkit-scrollbar {
   display: none !important;

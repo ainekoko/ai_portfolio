@@ -1,39 +1,118 @@
 'use client';
-import ThreeCanvas from '@/components/three/ThreeCanvas';
+import React, { useState, useEffect, useCallback } from 'react';
 import ProfileSection from '@/components/sections/ProfileSection';
 import TopSection from '@/components/sections/TopSection';
-import MessageSection from '@/components/sections/Message';
 import ExperienceSection from '@/components/sections/ExperienceSection';
 import SkillSection from '@/components/sections/SkillSection';
 import ContactSection from '@/components/sections/ContactSection';
-import { useVisibleSections } from '@/hooks';
-import ThreeScrollHandler from '@/components/ui/ScrollHandler';
+import MessageSection from '@/components/sections/Message';
 
-export default function Home() {
-  const { setVisibleSections, isVisible } = useVisibleSections();
+const ThreeCanvas = () => {
+  const [visibleSections, setVisibleSections] = useState<Set<string>>(
+    new Set()
+  );
+
+  const isVisible = (sectionId: string) => visibleSections.has(sectionId);
+
+  // スクロールイベントハンドラー
+  const handleScroll = useCallback(() => {
+    console.log('🔍 handleScroll called', window.scrollY);
+
+    const sectionIds = [
+      'topSection',
+      'hello',
+      'profile',
+      'message',
+      'experience',
+      'skill',
+      'contact',
+    ];
+
+    const newVisibleSections = new Set<string>();
+
+    sectionIds.forEach((sectionId) => {
+      const element = document.getElementById(sectionId);
+
+      if (!element) {
+        console.log(`❌ Element not found: ${sectionId}`);
+        return;
+      }
+
+      const rect = element.getBoundingClientRect();
+      const elementTop = rect.top;
+      const elementBottom = rect.bottom;
+      const windowHeight = window.innerHeight;
+
+      const isElementVisible = elementTop < windowHeight && elementBottom > 0;
+      const visibleHeight =
+        Math.min(elementBottom, windowHeight) - Math.max(elementTop, 0);
+      const elementHeight = rect.height;
+      const visibilityRatio = Math.max(0, visibleHeight) / elementHeight;
+
+      console.log(`📊 ${sectionId}:`, {
+        elementTop,
+        elementBottom,
+        windowHeight,
+        visibilityRatio: visibilityRatio.toFixed(2),
+        isElementVisible,
+      });
+
+      // 要素の30%以上が表示されている場合に表示とみなす
+      if (isElementVisible && visibilityRatio > 0.3) {
+        newVisibleSections.add(sectionId);
+        console.log(`✅ ${sectionId} is visible!`);
+      }
+    });
+
+    console.log('👀 Visible sections:', Array.from(newVisibleSections));
+    setVisibleSections(newVisibleSections);
+  }, []);
+
+  useEffect(() => {
+    console.log('🚀 Component mounted, setting up scroll listener');
+
+    // 初回実行
+    handleScroll();
+
+    // スクロールイベントリスナー
+    let ticking = false;
+    const scrollListener = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          handleScroll();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
+    window.addEventListener('scroll', scrollListener, { passive: true });
+
+    // リサイズイベントも追加
+    window.addEventListener('resize', handleScroll, { passive: true });
+
+    return () => {
+      console.log('🧹 Cleaning up scroll listener');
+      window.removeEventListener('scroll', scrollListener);
+      window.removeEventListener('resize', handleScroll);
+    };
+  }, [handleScroll]);
+
+  // visibleSectionsが変更されたらログ出力
+  useEffect(() => {
+    console.log('🔄 visibleSections updated:', Array.from(visibleSections));
+  }, [visibleSections]);
 
   return (
     <>
-      <ThreeScrollHandler
-        scrollSpeed={0.5} // スクロール速度（遅く: 0.1, 速く: 1.0）
-        smoothness={0.08} // 滑らかさ（滑らか: 0.05, 素早く: 0.15）
-        enableSmooth={true} // 滑らかスクロールのON/OFF
-      />
-      <main className='h-screen'>
-        <ThreeCanvas setVisibleSections={setVisibleSections} />
-        {/* 最初のsection */}
-        <TopSection isVisible={isVisible('hello')} />
-        {/* プロフィールsection */}
-        <ProfileSection isVisible={isVisible} />
-        {/* メッセージsection */}
-        <MessageSection />
-        {/* Previous Experience */}
-        <ExperienceSection isVisible={isVisible} />
-        {/* スキル */}
-        <SkillSection isVisible={isVisible} />
-        {/* message*/}
-        <ContactSection isVisible={isVisible} />
-      </main>
+      <TopSection isVisible={isVisible('hello')} />
+      <ProfileSection isVisible={isVisible} />
+      <MessageSection />
+      <ExperienceSection isVisible={isVisible} />
+      <SkillSection isVisible={isVisible} />
+      <ContactSection isVisible={isVisible} />
     </>
   );
-}
+};
+
+export default ThreeCanvas;
