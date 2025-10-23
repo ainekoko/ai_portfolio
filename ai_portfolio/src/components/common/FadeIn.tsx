@@ -1,18 +1,16 @@
 'use client';
-import Image from 'next/image';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, RefObject } from 'react';
 
 // Intersection Observer を使用したカスタムフック
 const useFadeInOnScroll = () => {
   const [isVisible, setIsVisible] = useState(false);
-  const ref = useRef(null);
+  const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsVisible(true);
-          // 一度表示されたら監視を解除
           if (ref.current) {
             observer.unobserve(ref.current);
           }
@@ -35,18 +33,26 @@ const useFadeInOnScroll = () => {
     };
   }, []);
 
-  return [ref, isVisible];
+  return [ref, isVisible] as const;
 };
 
-// フェードインコンポーネント
-const FadeInElement = ({ children, direction = 'up', delay = 0 }) => {
+interface FadeInElementProps {
+  children?: React.ReactNode;
+  direction?: 'up' | 'down' | 'left' | 'right';
+  delay?: number;
+}
+
+const FadeInElement = ({
+  children,
+  direction = 'up',
+  delay = 0,
+}: FadeInElementProps) => {
   const [ref, isVisible] = useFadeInOnScroll();
 
-  // アニメーション方向の設定
-  const getTransform = (d) => {
+  const getTransform = (d: 'up' | 'down' | 'left' | 'right') => {
     switch (d) {
       case 'up':
-        return 'translateY(50px)'; // 移動距離を少し短く
+        return 'translateY(50px)';
       case 'down':
         return 'translateY(-50px)';
       case 'left':
@@ -65,7 +71,7 @@ const FadeInElement = ({ children, direction = 'up', delay = 0 }) => {
         opacity: isVisible ? 1 : 0,
         transform: isVisible ? 'translate(0, 0)' : getTransform(direction),
         transition: `opacity 1.5s ease-out ${delay}s, transform 1.5s ease-out ${delay}s`,
-        willChange: 'opacity, transform', // パフォーマンス向上
+        willChange: 'opacity, transform',
       }}
     >
       {children}
