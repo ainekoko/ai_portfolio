@@ -14,10 +14,7 @@ const MessageSection = () => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   return (
-    <section
-      id='message'
-      className='relative top-[320vh]  w-screen pb-16 p-8 mt-8 py-6'
-    >
+    <section id='message' className='relative w-screen pb-16 p-8 mt-8 py-6'>
       <h2 className='text-[#834600] text-center text-3xl font-bold mb-3 z-10 relative'>
         Message
       </h2>
@@ -28,7 +25,7 @@ const MessageSection = () => {
       </div>
 
       {/* QAセクション - ホバー対応アコーディオン */}
-      <div className='mx-3 md:w-[800px] md:m-auto z-10 relative'>
+      <div className='mx-3 md:max-w-[800px] md:m-auto z-10 relative'>
         <h3 className='text-[#834600] text-center text-base font-semibold mb-8'>
           よく化粧品業界からIT業界へ転職した際に聞かれる質問をまとめてみました！
         </h3>

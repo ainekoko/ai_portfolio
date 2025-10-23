@@ -9,7 +9,7 @@ import Image from 'next/image';
 const TopSection = (props: SectionIdProps) => {
   return (
     <section id='topSection' className='w-screen'>
-      <div className='relative h-[1300] md:w-[1025px] m-auto'>
+      <div className='relative h-[1300] w-auto lg:w-[1025px] m-auto'>
         <FadeInElement direction='up' delay={0}>
           <div className='absolute right-40 top-0'>
             <Image
@@ -47,7 +47,7 @@ const TopSection = (props: SectionIdProps) => {
         </h1>
       </div>
 
-      <div id='hello' className='h-[1000] w-[1025px] m-auto relative'>
+      <div id='hello' className='h-[1000] w-auto lg:w-[1025px] m-auto relative'>
         <FadeInElement direction='up'>
           <div className='absolute right-40 top-0'>
             <Image
@@ -95,7 +95,7 @@ const TopSection = (props: SectionIdProps) => {
           className='
               absolute top-[30vh] 
               transform -translate-x-1/2
-              left-[550px] transform-none
+              left-[55%] transform-none
               text-left
               text-sm  md:text-graduate
               w-1 
@@ -108,7 +108,7 @@ const TopSection = (props: SectionIdProps) => {
           className='
               absolute top-[30vh] 
               transform -translate-x-1/2
-              left-[500px] transform-none
+              left-1/2 transform-none
               text-left
               tetext-base 
               w-1 
