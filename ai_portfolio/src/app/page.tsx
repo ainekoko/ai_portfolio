@@ -6,6 +6,7 @@ import ExperienceSection from '@/components/sections/ExperienceSection';
 import SkillSection from '@/components/sections/SkillSection';
 import ContactSection from '@/components/sections/ContactSection';
 import MessageSection from '@/components/sections/Message';
+import ImageSection from '@/components/sections/ImageSection';
 
 const ThreeCanvas = () => {
   const [visibleSections, setVisibleSections] = useState<Set<string>>(
@@ -104,34 +105,14 @@ const ThreeCanvas = () => {
   }, [visibleSections]);
 
   return (
-    <div style={{ width: '100vw', minHeight: '100vh', position: 'relative' }}>
-      {/* デバッグ用の固定表示 */}
-      <div
-        style={{
-          position: 'fixed',
-          top: '100px',
-          right: '20px',
-          background: 'rgba(0,0,0,0.8)',
-          color: 'white',
-          padding: '10px',
-          borderRadius: '5px',
-          zIndex: 9999,
-          fontSize: '12px',
-        }}
-      >
-        <div>Visible Sections:</div>
-        {Array.from(visibleSections).map((id) => (
-          <div key={id}>✓ {id}</div>
-        ))}
-      </div>
-
+    <>
       <TopSection isVisible={isVisible('hello')} />
       <ProfileSection isVisible={isVisible} />
       <MessageSection />
       <ExperienceSection isVisible={isVisible} />
       <SkillSection isVisible={isVisible} />
       <ContactSection isVisible={isVisible} />
-    </div>
+    </>
   );
 };
 
