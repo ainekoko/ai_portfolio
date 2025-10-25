@@ -11,7 +11,7 @@ const ContactSection = ({ isVisible }: SectionProps) => {
       <AnimatedWaveBackground />
       <section
         id='contact'
-        className='relative top-w-screen p-8  py-6 pb-16 bg-[#ffffffe8]'
+        className='relative top-w-screen p-8  py-6 pb-16 bg-[#f5fffd]'
       >
         {/* Section Title */}
         <SectionHeader
