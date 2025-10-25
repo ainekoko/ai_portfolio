@@ -8,8 +8,6 @@ export default function SesContentsPage() {
 
   return (
     <div className='w-screen h-screen bg-white overflow-hidden fixed inset-0'>
-      {' '}
-      {/* 修正 */}
       <SesContents slides={SLIDES} options={OPTIONS} />
     </div>
   );

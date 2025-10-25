@@ -27,17 +27,17 @@ const ExperienceSection = ({ isVisible }: SectionProps) => {
         </div>
         {/* 化粧品メーカー Section */}
         <div className='mt-10 relative'>
-          <div className='flex items-center'>
+          <div className='flex items-center relative z-10'>
             <h2 className='text-2xl font-light mr-12 whitespace-nowrap'>
               化粧品メーカー
             </h2>
             <span className='text-sm mr-8 whitespace-nowrap'>2011〜2017</span>
           </div>
-          <p className='py-5 px-10'>
+          <p className='py-5 px-10 relative z-10'>
             約6年間様々な経験をさせて頂き接客から営業、企画まで幅広く対応し、コミュニケーションスキルや提案力、企画力を培いました。
           </p>
           {/* More */}
-          <div className='flex justify-end'>
+          <div className='flex justify-end relative z-10'>
             <a
               href='/cosmetics'
               className='inline-flex items-center gap-4 group'
@@ -63,13 +63,13 @@ const ExperienceSection = ({ isVisible }: SectionProps) => {
         </div>
         {/* IT業界 Section */}
         <div className='mt-10 relative'>
-          <div className='flex items-center'>
+          <div className='flex items-center relative z-10'>
             <h2 className='text-2xl font-light mr-12 whitespace-nowrap'>
               IT業界
             </h2>
             <span className='text-sm mr-8 whitespace-nowrap'>2011〜2017</span>
           </div>
-          <p className='py-5 px-10'>
+          <p className='py-5 px-10 relative z-10'>
             ただIT業界と言っても右も左も分からない状態；
             <br />
             なのでスクールに通い友達のサイトを作成し、転職活動に挑みました！
@@ -79,8 +79,8 @@ const ExperienceSection = ({ isVisible }: SectionProps) => {
             契約の関係上、作成したサイトは転載する事が出来ませんが6年間で経験した現場での業務を記載しましたので見て頂けると幸いです。　
           </p>
           {/* More */}
-          <div className='flex justify-end'>
-            <a href='#' className='inline-flex items-center gap-4 group'>
+          <div className='flex justify-end relative z-10'>
+            <a href='/ses' className='inline-flex items-center gap-4 group'>
               <span className='text-xl font-light text-gray-600 group-hover:text-gray-900 transition-colors duration-300'>
                 more
               </span>
@@ -90,7 +90,8 @@ const ExperienceSection = ({ isVisible }: SectionProps) => {
               </div>
             </a>
           </div>
-          <div className='absolute top-0 flex w-full h-[180px] overflow-hidden'>
+          {/* 背景スクロール文字 */}
+          <div className='absolute top-0 flex w-full h-[180px] overflow-hidden z-0'>
             <div className='flex-none whitespace-nowrap text-[150px] overflow-hidden text-gray-400 animate-loop'>
               Engineer&nbsp;JavaScript&nbsp;HTML&nbsp;CSS&nbsp;
             </div>
