@@ -11,7 +11,7 @@ const ContactSection = ({ isVisible }: SectionProps) => {
       <AnimatedWaveBackground />
       <section
         id='contact'
-        className='relative top-w-screen p-8  py-6 pb-16 bg-[#ffffffe8]'
+        className='relative top-w-screen p-8  py-6 pb-16 bg-[#f5fffd]'
       >
         {/* Section Title */}
         <SectionHeader
@@ -21,7 +21,7 @@ const ContactSection = ({ isVisible }: SectionProps) => {
         />
 
         <div className=''>
-          <form className='md:w-[800px] flex flex-col gap-3 mx-auto py-4'>
+          <form className='md:max-w-[800px] flex flex-col gap-3 mx-auto py-4'>
             <Input label={'Name'} type={'text'} id={'name'} name={'Name'} />
             <Input
               label={'Mail Address'}

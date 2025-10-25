@@ -11,6 +11,7 @@ import useEmblaCarousel from 'embla-carousel-react';
 import './sample.css';
 import SectionHeader from '../common/SectionHeader';
 import { ITJOB_INTRODUCTION } from '@/utils/itData';
+import Link from 'next/link';
 
 type PropType = {
   slides: number[];
@@ -18,7 +19,7 @@ type PropType = {
 };
 
 /**
- * SES業界向けの横スクロールコンテンツ
+ * SES業界
  * @param props
  */
 const SesContents: React.FC<PropType> = (props) => {
@@ -233,14 +234,17 @@ const SesContents: React.FC<PropType> = (props) => {
         }
       `}</style>
         {/* スタイル4: 上部にテキスト */}
-        <button className='z-50 absolute button-4 bottom-5 right-5 group pl-25 p-3 pointer-events-auto'>
-          <p className='text-center text-sm font-bold text-gray-800 group-hover:text-amber-600 transition-colors duration-300  pointer-events-none'>
+        <Link
+          href='/'
+          className='z-50 absolute button-4 bottom-5 right-5 group pl-25 p-3 pointer-events-auto block'
+        >
+          <p className='text-center text-sm font-bold text-gray-800 group-hover:text-amber-600 transition-colors duration-300 pointer-events-none'>
             Back Page
           </p>
           <div className='flex justify-center pointer-events-none'>
             <div className='arrow text-gray-400'></div>
           </div>
-        </button>{' '}
+        </Link>
       </section>
     </>
   );

@@ -123,22 +123,28 @@ const Header = () => {
                       delay: 'delay-[400ms]',
                     },
                     {
+                      en: 'Message',
+                      ja: 'メッセージ',
+                      sectionId: 'message',
+                      delay: 'delay-[500ms]',
+                    },
+                    {
                       en: 'Experience',
                       ja: '職務経歴',
                       sectionId: 'experience',
-                      delay: 'delay-[500ms]',
+                      delay: 'delay-[600ms]',
                     },
                     {
                       en: 'Skills',
                       ja: 'スキル',
                       sectionId: 'skill',
-                      delay: 'delay-[600ms]',
+                      delay: 'delay-[700ms]',
                     },
                     {
                       en: 'Contact',
                       ja: 'お問い合わせ',
                       sectionId: 'contact',
-                      delay: 'delay-[700ms]',
+                      delay: 'delay-[800ms]',
                     },
                   ].map((item, index) => (
                     <li
