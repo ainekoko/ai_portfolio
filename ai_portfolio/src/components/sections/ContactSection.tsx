@@ -21,7 +21,7 @@ const ContactSection = ({ isVisible }: SectionProps) => {
         />
 
         <div className=''>
-          <form className='md:w-[800px] flex flex-col gap-3 mx-auto py-4'>
+          <form className='md:max-w-[800px] flex flex-col gap-3 mx-auto py-4'>
             <Input label={'Name'} type={'text'} id={'name'} name={'Name'} />
             <Input
               label={'Mail Address'}

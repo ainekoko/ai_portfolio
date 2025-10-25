@@ -11,24 +11,24 @@ const TopSection = (props: SectionIdProps) => {
     <section id='topSection' className='w-screen'>
       <div className='relative h-[1300] w-auto lg:w-[1025px] m-auto'>
         <FadeInElement direction='up' delay={0}>
-          <div className='absolute right-40 top-0'>
+          <div className='absolute left-0 sm:top-20 top-0   '>
             <Image
-              src='/assets/images/top_1.jpg'
+              src='/assets/images/top_1.png'
               alt='Image1'
-              className='rounded-lg shadow-xl'
-              width={300}
-              height={350}
+              className=' shadow-xl max-sm:w-[640px]'
+              width={450}
+              height={500}
             />
           </div>
         </FadeInElement>
 
-        <FadeInElement direction='up' delay={0.2}>
-          <div className='absolute left-10 top-20'>
+        <FadeInElement direction='up' delay={0.5}>
+          <div className='absolute right-0 sm:top-[600px] max-sm:left-0 max-sm:top-[calc(135vw*500/450)]'>
             <Image
               src='/assets/images/top_2.jpg'
               alt='Image2'
-              className='rounded-lg shadow-xl'
-              width={400}
+              className='shadow-xl  max-sm:w-[640px]'
+              width={550}
               height={400}
             />
           </div>
@@ -36,10 +36,11 @@ const TopSection = (props: SectionIdProps) => {
         {/* メインタイトル */}
         <h1
           className='
+        mr-2.5
         text-8xl md:text-[8rem]
         drop-shadow-[1px_0px_35px_#383838] 
         text-white m-0 p-0 absolute 
-        top-[30vh] left-4 
+        top-[30vh] right-0 
         font-bold
       '
         >
@@ -49,30 +50,30 @@ const TopSection = (props: SectionIdProps) => {
 
       <div id='hello' className='h-[1000] w-auto lg:w-[1025px] m-auto relative'>
         <FadeInElement direction='up'>
-          <div className='absolute right-40 top-0'>
-            <Image
-              src='/assets/images/top_1.jpg'
-              alt='Image1'
-              className='rounded-lg shadow-xl'
-              width={300}
-              height={400}
-            />
-          </div>
-          <div className='absolute right-50 top-0'>
-            <Image
-              src='/assets/images/top_2.jpg'
-              alt='Image2'
-              className='rounded-lg shadow-xl'
-              width={300}
-              height={400}
-            />
-          </div>
-          <div className='absolute right-20 top-0'>
+          <div className='absolute rleft-0 top-0'>
             <Image
               src='/assets/images/top_3.jpg'
-              alt='Image3'
-              className='rounded-lg shadow-xl'
+              alt='Image1'
+              className='shadow-xl'
               width={300}
+              height={400}
+            />
+          </div>
+          <div className='absolute right-[420px] top-40'>
+            <Image
+              src='/assets/images/top_4.png'
+              alt='Image2'
+              className='shadow-xl'
+              width={200}
+              height={400}
+            />
+          </div>
+          <div className='absolute right-0 top-0'>
+            <Image
+              src='/assets/images/top_5.jpg'
+              alt='Image3'
+              className='shadow-xl'
+              width={250}
               height={400}
             />
           </div>
@@ -95,7 +96,7 @@ const TopSection = (props: SectionIdProps) => {
           className='
               absolute top-[30vh] 
               transform -translate-x-1/2
-              left-[55%] transform-none
+              left-[50%] transform-none
               text-left
               text-sm  md:text-graduate
               w-1 
@@ -108,7 +109,7 @@ const TopSection = (props: SectionIdProps) => {
           className='
               absolute top-[30vh] 
               transform -translate-x-1/2
-              left-1/2 transform-none
+              left-[45%] transform-none
               text-left
               tetext-base 
               w-1 
