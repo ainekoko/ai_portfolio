@@ -6,15 +6,15 @@ type NavigationProps = {
   /** メニューが開いているかどうか */
   isMenuOpen: boolean;
   /** セクションクリックハンドラー */
-  handleSectionClick: (sectionId: string) => void;
+  onSectionClick: (sectionId: string) => void;
 };
 
 /**
  * ナビゲーションコンポーネント
  * @param isMenuOpen - メニューが開いているかどうか
- * @param handleSectionClick - セクションクリックハンドラー
+ * @param onSectionClick - セクションクリックハンドラー
  */
-const Navigation = ({ isMenuOpen, handleSectionClick }: NavigationProps) => {
+const Navigation = ({ isMenuOpen, onSectionClick }: NavigationProps) => {
   const navRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -80,7 +80,7 @@ const Navigation = ({ isMenuOpen, handleSectionClick }: NavigationProps) => {
                 href={`#${item.sectionId}`}
                 onClick={(e) => {
                   e.preventDefault();
-                  handleSectionClick(item.sectionId);
+                  onSectionClick(item.sectionId);
                 }}
                 className='relative inline-block py-3 md:py-5 px-3 md:px-5 text-2xl md:text-3xl text-white no-underline overflow-hidden hover:text-pink-400 transition-colors duration-500'
               >

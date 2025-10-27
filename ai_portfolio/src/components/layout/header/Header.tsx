@@ -14,7 +14,7 @@ const Header = () => {
 
   const toggleMenu = useCallback(() => {
     setIsMenuOpen(!isMenuOpen);
-  }, [isMenuOpen]);
+  }, []);
 
   const closeMenu = useCallback(() => {
     setIsMenuOpen(false);
@@ -23,7 +23,7 @@ const Header = () => {
    * セクションへスクロールするハンドラー
    * @param sectionId - スクロール先のセクションID
    */
-  const handleSectionClick = useCallback(
+  const onSectionClick = useCallback(
     (sectionId: string) => {
       const element = document.getElementById(sectionId);
       element?.scrollIntoView({
@@ -55,23 +55,18 @@ const Header = () => {
 
       <header>
         <nav className='pointer-events-none z-10 fixed top-0 right-0 w-full md:w-64 h-full flex flex-col'>
-          <div className='header'>
-            {/* Hamburger Button */}
-            <HamburgerButton isOpen={isMenuOpen} onClick={toggleMenu} />
+          {/* Hamburger Button */}
+          <HamburgerButton isOpen={isMenuOpen} onClick={toggleMenu} />
 
-            {/* hamburger Menu */}
-            <Navigation
-              isMenuOpen={isMenuOpen}
-              handleSectionClick={handleSectionClick}
-            />
-          </div>
+          {/* hamburger Menu */}
+          <Navigation isMenuOpen={isMenuOpen} onSectionClick={onSectionClick} />
 
           {/* 右側ナビゲーションメニュー（デスクトップのみ） */}
-          <HeaderNav handleSectionClick={handleSectionClick} />
+          <HeaderNav onSectionClick={onSectionClick} />
         </nav>
 
         {/* ロゴ */}
-        <Logo handleSectionClick={handleSectionClick} />
+        <Logo onSectionClick={onSectionClick} />
       </header>
     </>
   );

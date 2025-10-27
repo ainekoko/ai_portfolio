@@ -1,6 +1,13 @@
 import React from 'react';
 import styles from './Header.module.css';
-import { HamburgerButtonProps } from '@/types/header';
+
+type HamburgerButtonProps = {
+  /** メニューが開いているかどうか */
+  isOpen: boolean;
+  /** クリックハンドラー */
+  onClick: () => void;
+};
+
 /**
  * ハンバーガーボタンコンポーネント
  * @param isOpen - メニューが開いているかどうか
