@@ -40,7 +40,7 @@ export const Page: React.FC = () => {
         <ul>
           <li>
             Use a higher-level connected component. Storybook helps you compose
-            such data from the &quot;"&quot;args"&quot; of child component
+            such data from the &quot;args&quot; of child component stories
             stories
           </li>
           <li>
