@@ -1,8 +1,6 @@
 'use client';
 import { useState, useEffect, useCallback } from 'react';
-import styles from './Header.module.css';
 import CustomCursor from '@/components/ui/CustomCursor';
-import { NAV_MENU, SIDE_MENU } from '@/utils/HeaderData';
 import HamburgerButton from './HamburgerButton';
 import Navigation from './Navigation';
 import HeaderNav from './HeaderNav';
@@ -14,27 +12,28 @@ import Logo from './Logo';
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const toggleMenu = () => {
+  const toggleMenu = useCallback(() => {
     setIsMenuOpen(!isMenuOpen);
-  };
+  }, [isMenuOpen]);
 
-  const closeMenu = () => {
+  const closeMenu = useCallback(() => {
     setIsMenuOpen(false);
-  };
-
+  }, []);
   /**
    * セクションへスクロールするハンドラー
    * @param sectionId - スクロール先のセクションID
    */
-  const handleSectionClick = useCallback((sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    element?.scrollIntoView({
-      behavior: 'smooth',
-      block: 'start',
-    });
-
-    closeMenu();
-  }, []);
+  const handleSectionClick = useCallback(
+    (sectionId: string) => {
+      const element = document.getElementById(sectionId);
+      element?.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+      });
+      closeMenu();
+    },
+    [closeMenu]
+  );
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -45,7 +44,7 @@ const Header = () => {
 
     document.addEventListener('keydown', handleKeyDown);
     return () => document.removeEventListener('keydown', handleKeyDown);
-  }, [isMenuOpen]);
+  }, [isMenuOpen, closeMenu]);
 
   return (
     <>
@@ -60,14 +59,14 @@ const Header = () => {
             {/* Hamburger Button */}
             <HamburgerButton isOpen={isMenuOpen} onClick={toggleMenu} />
 
-            {/* Navigation Menu */}
+            {/* hamburger Menu */}
             <Navigation
               isMenuOpen={isMenuOpen}
               handleSectionClick={handleSectionClick}
             />
           </div>
 
-          {/* ナビゲーションメニュー（デスクトップのみ） */}
+          {/* 右側ナビゲーションメニュー（デスクトップのみ） */}
           <HeaderNav handleSectionClick={handleSectionClick} />
         </nav>
 

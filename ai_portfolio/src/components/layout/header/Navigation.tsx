@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import styles from './Header.module.css';
 import { NAV_MENU } from '@/utils/HeaderData';
 
@@ -15,9 +15,53 @@ type NavigationProps = {
  * @param handleSectionClick - セクションクリックハンドラー
  */
 const Navigation = ({ isMenuOpen, handleSectionClick }: NavigationProps) => {
+  const navRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    // メニューが閉じている場合は何もしない
+    if (!isMenuOpen) return;
+
+    const nav = navRef.current;
+    if (!nav) return;
+
+    // フォーカス可能な要素を取得
+    const focusableElements = nav.querySelectorAll(
+      'a[href], button:not([disabled])'
+    );
+    const firstElement = focusableElements[0] as HTMLElement;
+    const lastElement = focusableElements[
+      focusableElements.length - 1
+    ] as HTMLElement;
+
+    // Tabキーの挙動を制御（ナビを開いている最中は他のボタンのフォーカスを制御する）
+    const handleTabKey = (e: KeyboardEvent) => {
+      console.log('e', e);
+      if (e.key !== 'Tab') return;
+      if (e.shiftKey) {
+        if (document.activeElement === firstElement) {
+          e.preventDefault();
+          lastElement.focus(); // 最初→最後にループ
+        }
+      }
+      // Tab（順方向）
+      else {
+        if (document.activeElement === lastElement) {
+          e.preventDefault();
+          firstElement.focus(); // 最後→最初にループ
+        }
+      }
+    };
+
+    document.addEventListener('keydown', handleTabKey);
+    firstElement?.focus(); // 最初の要素にフォーカス
+    return () => document.removeEventListener('keydown', handleTabKey);
+  }, [isMenuOpen]);
+
   return (
     <nav
       id='morph-menu'
+      ref={navRef}
+      inert={!isMenuOpen || undefined}
       className={`fixed top-0 left-0 w-full h-screen bg-gray-900/[0.98] transition-all duration-700 ease-out z-[900] pointer-events-auto ${
         isMenuOpen ? styles.navClipActive : styles.navClipInitial
       }`}

@@ -17,12 +17,7 @@ const HamburgerButton = ({ isOpen, onClick }: HamburgerButtonProps) => {
       aria-controls='morph-menu'
       aria-expanded={isOpen}
     >
-      <svg
-        className='w-full h-full'
-        width='48'
-        height='48'
-        viewBox='0 0 100 100'
-      >
+      <svg className='w-full h-full' viewBox='0 0 100 100'>
         <path
           className={styles.hamburgerLine}
           d='M 20,29 H 80 C 80,29 94.5,28.817352 94.532987,66.711331 94.543142,77.980673 90.966081,81.670246 85.259173,81.668997 79.552261,81.667751 75.000211,74.999942 75.000211,74.999942 L 25.000021,25.000058'
