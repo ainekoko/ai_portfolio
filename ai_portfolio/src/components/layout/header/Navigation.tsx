@@ -2,9 +2,17 @@ import React, { useEffect, useRef } from 'react';
 import styles from './Header.module.css';
 import { NAV_MENU } from '@/utils/HeaderData';
 
+/**
+ * ナビゲーションコンポーネントのプロパティ
+ * @property isMenuOpen - メニューが開いているかどうか
+ * @property onClose - メニューを閉じるコールバック
+ * @property onSectionClick - セクションクリックハンドラー
+ */
 type NavigationProps = {
   /** メニューが開いているかどうか */
   isMenuOpen: boolean;
+  /** メニューを閉じるコールバック */
+  onClose: () => void;
   /** セクションクリックハンドラー */
   onSectionClick: (sectionId: string) => void;
 };
@@ -18,43 +26,49 @@ const Navigation = ({ isMenuOpen, onSectionClick }: NavigationProps) => {
   const navRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    // メニューが閉じている場合は何もしない
     if (!isMenuOpen) return;
 
     const nav = navRef.current;
     if (!nav) return;
 
     // フォーカス可能な要素を取得
-    const focusableElements = nav.querySelectorAll(
+    const focusableElements = nav.querySelectorAll<HTMLElement>(
       'a[href], button:not([disabled])'
     );
-    const firstElement = focusableElements[0] as HTMLElement;
-    const lastElement = focusableElements[
-      focusableElements.length - 1
-    ] as HTMLElement;
 
-    // Tabキーの挙動を制御（ナビを開いている最中は他のボタンのフォーカスを制御する）
+    if (focusableElements.length === 0) return;
+
+    const firstElement = focusableElements[0];
+    const lastElement = focusableElements[focusableElements.length - 1];
+
+    // Tabキーの挙動を制御（フォーカストラップ）
     const handleTabKey = (e: KeyboardEvent) => {
-      console.log('e', e);
       if (e.key !== 'Tab') return;
+
       if (e.shiftKey) {
+        // Shift + Tab（逆方向）
         if (document.activeElement === firstElement) {
           e.preventDefault();
-          lastElement.focus(); // 最初→最後にループ
+          lastElement.focus();
         }
-      }
-      // Tab（順方向）
-      else {
+      } else {
+        // Tab（順方向）
         if (document.activeElement === lastElement) {
           e.preventDefault();
-          firstElement.focus(); // 最後→最初にループ
+          firstElement.focus();
         }
       }
     };
 
+    // イベントリスナーを追加
     document.addEventListener('keydown', handleTabKey);
-    firstElement?.focus(); // 最初の要素にフォーカス
-    return () => document.removeEventListener('keydown', handleTabKey);
+
+    // 最初の要素にフォーカス
+    firstElement.focus();
+
+    return () => {
+      document.removeEventListener('keydown', handleTabKey);
+    };
   }, [isMenuOpen]);
 
   return (
@@ -66,15 +80,19 @@ const Navigation = ({ isMenuOpen, onSectionClick }: NavigationProps) => {
         isMenuOpen ? styles.navClipActive : styles.navClipInitial
       }`}
       aria-hidden={!isMenuOpen}
+      role='dialog'
+      aria-modal='true'
+      aria-label='メインメニュー'
     >
       <div className='flex items-center justify-center w-full h-full'>
-        <ul className='m-0 p-0 list-none text-center'>
-          {NAV_MENU.map((item, index) => (
+        <ul className='m-0 p-0 list-none text-center' role='menu'>
+          {NAV_MENU.map((item) => (
             <li
-              key={index}
+              key={item.sectionId}
               className={`opacity-0 translate-y-7 transition-all duration-[400ms] ease-out ${
                 item.delay
               } ${isMenuOpen ? styles.navItemEnter : ''}`}
+              role='none'
             >
               <a
                 href={`#${item.sectionId}`}
@@ -83,6 +101,8 @@ const Navigation = ({ isMenuOpen, onSectionClick }: NavigationProps) => {
                   onSectionClick(item.sectionId);
                 }}
                 className='relative inline-block py-3 md:py-5 px-3 md:px-5 text-2xl md:text-3xl text-white no-underline overflow-hidden hover:text-pink-400 transition-colors duration-500'
+                role='menuitem'
+                tabIndex={isMenuOpen ? 0 : -1}
               >
                 <span className='block pointer-events-none'>
                   {item.en}

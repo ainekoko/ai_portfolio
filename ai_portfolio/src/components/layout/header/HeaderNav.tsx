@@ -1,20 +1,27 @@
 import React from 'react';
 import { SIDE_MENU } from '@/utils/HeaderData';
 
+/**
+ * ヘッダーナビゲーションのプロパティ
+ * @property onSectionClick - セクションクリックハンドラー
+ */
 type HeaderNavProps = {
   /** セクションクリックハンドラー */
   onSectionClick: (sectionId: string) => void;
 };
 
 /**
- * ヘッダーナビゲーションコンポーネント
+ * デスクトップ用サイドナビゲーションコンポーネント
  */
 const HeaderNav = ({ onSectionClick }: HeaderNavProps) => {
   return (
-    <div className='hidden lg:flex flex-col items-end pr-8 gap-1 mt-20 pointer-events-auto'>
-      {SIDE_MENU.map((link, index) => (
+    <nav
+      className='hidden lg:flex flex-col items-end pr-8 gap-1 mt-20 pointer-events-auto'
+      aria-label='サイドナビゲーション'
+    >
+      {SIDE_MENU.map((link) => (
         <a
-          key={index}
+          key={link.href}
           href={`#${link.href}`}
           onClick={(e) => {
             e.preventDefault();
@@ -25,7 +32,7 @@ const HeaderNav = ({ onSectionClick }: HeaderNavProps) => {
           {link.text}
         </a>
       ))}
-    </div>
+    </nav>
   );
 };
 

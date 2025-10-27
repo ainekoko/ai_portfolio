@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import CustomCursor from '@/components/ui/CustomCursor';
 import HamburgerButton from './HamburgerButton';
 import Navigation from './Navigation';
@@ -7,26 +7,30 @@ import HeaderNav from './HeaderNav';
 import Logo from './Logo';
 
 /**
- *  ヘッダーコンポーネント
+ * ヘッダーコンポーネント
  */
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  // メニュー開閉のトグル
   const toggleMenu = useCallback(() => {
-    setIsMenuOpen(!isMenuOpen);
+    setIsMenuOpen((prev) => !prev);
   }, []);
 
+  // メニューを閉じる
   const closeMenu = useCallback(() => {
     setIsMenuOpen(false);
   }, []);
+
   /**
    * セクションへスクロールするハンドラー
    * @param sectionId - スクロール先のセクションID
    */
-  const onSectionClick = useCallback(
+  const handleSectionClick = useCallback(
     (sectionId: string) => {
       const element = document.getElementById(sectionId);
-      element?.scrollIntoView({
+      if (!element) return;
+      element.scrollIntoView({
         behavior: 'smooth',
         block: 'start',
       });
@@ -54,19 +58,25 @@ const Header = () => {
       </div>
 
       <header>
-        <nav className='pointer-events-none z-10 fixed top-0 right-0 w-full md:w-64 h-full flex flex-col'>
-          {/* Hamburger Button */}
+        <nav
+          className='pointer-events-none z-10 fixed top-0 right-0 w-full md:w-64 h-full flex flex-col'
+          aria-label='メインナビゲーション'
+        >
+          {/* ハンバーガーメニュー */}
           <HamburgerButton isOpen={isMenuOpen} onClick={toggleMenu} />
 
-          {/* hamburger Menu */}
-          <Navigation isMenuOpen={isMenuOpen} onSectionClick={onSectionClick} />
+          {/* モバイルナビゲーション */}
+          <Navigation
+            isMenuOpen={isMenuOpen}
+            onSectionClick={handleSectionClick}
+          />
 
-          {/* 右側ナビゲーションメニュー（デスクトップのみ） */}
-          <HeaderNav onSectionClick={onSectionClick} />
+          {/* デスクトップナビゲーション */}
+          <HeaderNav onSectionClick={handleSectionClick} />
         </nav>
 
         {/* ロゴ */}
-        <Logo onSectionClick={onSectionClick} />
+        <Logo onSectionClick={handleSectionClick} />
       </header>
     </>
   );

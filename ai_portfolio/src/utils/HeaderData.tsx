@@ -1,20 +1,49 @@
-interface NavMenuItem {
+/**
+ * ナビゲーションメニューアイテム
+ * @example
+ * {
+ *   en: 'Home',
+ *   ja: 'ホーム',
+ *   sectionId: 'topSection',
+ *   delay: 'delay-[300ms]'
+ * }
+ */
+type NavMenuItem = {
+  /** 英語表記 */
   en: string;
+  /** 日本語表記 */
   ja: string;
+  /** セクションID */
   sectionId: string;
+  /** アニメーション遅延クラス */
   delay: string;
-}
+};
 
-interface SideMenuItem {
+/**
+ * サイドメニューアイテム
+ * @example
+ * {
+ *   href: 'topSection',
+ *   text: 'Top'
+ * }
+ */
+type SideMenuItem = {
+  /** セクションID（href） */
   href: string;
+  /** 表示テキスト */
   text: string;
-}
+};
 
 /**
  * ナビゲーションメニューのデータ配列
  * 各オブジェクトはメニュー項目を表し、英語名、日本語名、セクションID、アニメーション遅延を含む
- * 例: { en: 'Home', ja: 'ホーム', sectionId: 'topSection', delay: 'delay-[300ms]' }
- * @returns {NavMenuItem[]} ナビゲーションメニューのデータ配列
+ * @example
+ * {
+ *   en: 'Home',
+ *   ja: 'ホーム',
+ *   sectionId: 'topSection',
+ *   delay: 'delay-[300ms]'
+ * }
  */
 export const NAV_MENU: NavMenuItem[] = [
   {
@@ -55,9 +84,18 @@ export const NAV_MENU: NavMenuItem[] = [
   },
 ];
 
+/**
+ * サイドメニューのデータ配列
+ * @example
+ * {
+ *   href: 'topSection',
+ *   text: 'Top'
+ * }
+ */
 export const SIDE_MENU: SideMenuItem[] = [
   { href: 'topSection', text: 'Top' },
   { href: 'profile', text: 'Profile' },
+  { href: 'message', text: 'Message' },
   { href: 'experience', text: 'Previous Experience' },
   { href: 'skill', text: 'Skills' },
   { href: 'contact', text: 'Contact' },

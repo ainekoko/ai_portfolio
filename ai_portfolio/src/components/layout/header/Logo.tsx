@@ -1,5 +1,9 @@
 import React from 'react';
 
+/**
+ * ロゴコンポーネントのプロパティ
+ * @property onSectionClick - セクションクリックハンドラー
+ */
 type LogoProps = {
   /** セクションクリックハンドラー */
   onSectionClick: (sectionId: string) => void;
@@ -19,6 +23,7 @@ const Logo = ({ onSectionClick }: LogoProps) => {
             onSectionClick('topSection');
           }}
           className='text-[#3b3b3b] text-lg md:text-2xl font-bold tracking-wider'
+          aria-label='トップページへ戻る'
         >
           Ai&rsquo;s Portfolio
         </a>
