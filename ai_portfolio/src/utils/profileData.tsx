@@ -1,5 +1,7 @@
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { faGithub, faXTwitter } from '@fortawesome/free-brands-svg-icons';
+import Num from '@/components/common/Font';
+import Font from '@/components/common/Font';
 
 /**
  * プロフィールデータ
@@ -15,9 +17,13 @@ export const PROFILE_DATA = [
   },
   {
     label: '自己紹介',
-    content: `1988年生まれ。
-東京にて化粧品メーカーに就職。その後SESへ転職。
-現在は子供二人に恵まれ北海道を満喫しながら過ごしています。`,
+    content: (
+      <>
+        <Num>1988</Num>年生まれ。
+        東京にて化粧品メーカーに就職。その後SESへ転職。 現在は子供<Num>2</Num>
+        人に恵まれ北海道を満喫しながら過ごしています。
+      </>
+    ),
   },
   {
     label: '趣味',
@@ -34,7 +40,9 @@ export const PROFILE_DATA = [
     label: '尊敬する人',
     content: (
       <ul>
-        <li>Shin codeさん</li>
+        <li>
+          <Font>Shin code</Font>さん
+        </li>
         <li>コードマフィアさん</li>
         <div>
           細かい部分も教授して下さり、youtubeやUdemyで勉強の際本当にお世話になっています！
