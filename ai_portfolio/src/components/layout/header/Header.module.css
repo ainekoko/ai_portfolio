@@ -1,4 +1,4 @@
-/* SVG Path Animation */
+/* Hamburger SVG Path Animation */
 .hamburgerLine {
   fill: none;
   stroke: #000;
@@ -34,7 +34,7 @@
   stroke-dashoffset: -134;
 }
 
-/* Clip-path animation */
+/* Navigation Clip-path animation */
 .navClipInitial {
   clip-path: circle(0% at calc(100% - 44px) 44px);
 }
