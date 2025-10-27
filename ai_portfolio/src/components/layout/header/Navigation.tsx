@@ -5,14 +5,11 @@ import { NAV_MENU } from '@/utils/HeaderData';
 /**
  * ナビゲーションコンポーネントのプロパティ
  * @property isMenuOpen - メニューが開いているかどうか
- * @property onClose - メニューを閉じるコールバック
  * @property onSectionClick - セクションクリックハンドラー
  */
 type NavigationProps = {
   /** メニューが開いているかどうか */
   isMenuOpen: boolean;
-  /** メニューを閉じるコールバック */
-  onClose: () => void;
   /** セクションクリックハンドラー */
   onSectionClick: (sectionId: string) => void;
 };
