@@ -71,12 +71,6 @@ body {
   }
 }
 
-@media (min-width: 768px) {
-  * {
-    cursor: none !important;
-  }
-}
-
 /* ページ全体のスクロールを滑らかに */
 * {
   scroll-behavior: auto;
