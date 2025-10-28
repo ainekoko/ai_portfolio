@@ -2,7 +2,7 @@
 import { useState, useCallback, useEffect } from 'react';
 import CustomCursor from '@/components/ui/CustomCursor';
 import HamburgerButton from './HamburgerButton';
-import Navigation from './Navigation';
+import Navigation from './navigation/Navigation';
 import HeaderNav from './HeaderNav';
 import Logo from './logo/Logo';
 
