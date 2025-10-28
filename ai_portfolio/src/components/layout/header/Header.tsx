@@ -4,7 +4,7 @@ import CustomCursor from '@/components/ui/CustomCursor';
 import HamburgerButton from './HamburgerButton';
 import Navigation from './Navigation';
 import HeaderNav from './HeaderNav';
-import Logo from './Logo';
+import Logo from './logo/Logo';
 
 /**
  * ヘッダーコンポーネント
