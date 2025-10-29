@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Italiana&display=swap');
 @import 'tailwindcss';
 
 :root {
@@ -10,7 +11,7 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-  --font-italiana: var(--font-italiana); /* Italiana変数を追加 */
+  --font-italiana: 'Italiana', serif; /* 修正: フォント名を直接指定 */
 }
 
 @media (prefers-color-scheme: dark) {
@@ -40,8 +41,8 @@ body {
   background-repeat: no-repeat, no-repeat;
   background-attachment: fixed, fixed;
   color: var(--foreground);
-  /* next/font/google で読み込んだItalianaフォントを使用 */
-  font-family: var(--font-italiana), Arial, Helvetica, sans-serif;
+  /* Google Fontsから読み込んだItalianaフォントを使用 */
+  font-family: 'Italiana', Arial, Helvetica, sans-serif;
   cursor: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48Y2lyY2xlIGN4PSIxNiIgY3k9IjE2IiByPSIxMCIgZmlsbD0iYmxhY2siLz48L3N2Zz4='),
     auto;
 }

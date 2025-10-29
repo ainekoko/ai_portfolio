@@ -4,7 +4,7 @@ import Logo from './Logo';
 
 const meta: Meta<typeof Logo> = {
   component: Logo,
-  title: 'components/Logo',
+  title: 'components/Header/Logo',
   args: {
     onSectionClick: action('section-clicked'),
   },

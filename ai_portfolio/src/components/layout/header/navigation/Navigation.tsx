@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import styles from './Header.module.css';
+import styles from '../Header.module.css';
 import { NAV_MENU } from '@/utils/HeaderData';
 
 /**

@@ -1,10 +1,10 @@
 'use client';
 import { useState, useCallback, useEffect } from 'react';
 import CustomCursor from '@/components/ui/CustomCursor';
-import HamburgerButton from './HamburgerButton';
-import Navigation from './Navigation';
-import HeaderNav from './HeaderNav';
-import Logo from './Logo';
+import HamburgerBtn from './humburger/HamburgerBtn';
+import Navigation from './navigation/Navigation';
+import HeaderNav from './headerNav/HeaderNav';
+import Logo from './logo/Logo';
 
 /**
  * ヘッダーコンポーネント
@@ -63,7 +63,7 @@ const Header = () => {
           aria-label='メインナビゲーション'
         >
           {/* ハンバーガーメニュー */}
-          <HamburgerButton isOpen={isMenuOpen} onClick={toggleMenu} />
+          <HamburgerBtn isOpen={isMenuOpen} onClick={toggleMenu} />
 
           {/* モバイルナビゲーション */}
           <Navigation
