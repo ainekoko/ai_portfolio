@@ -1,20 +1,20 @@
 import { Meta, StoryObj } from '@storybook/nextjs-vite';
 import { action } from 'storybook/actions';
-import Navigation from './Navigation';
+import HamburgerBtn from './HamburgerBtn';
 
-const meta: Meta<typeof Navigation> = {
-  component: Navigation,
-  title: 'components/Header/Navigation',
+const meta: Meta<typeof HamburgerBtn> = {
+  component: HamburgerBtn,
+  title: 'components/Header/HamburgerBtn',
   args: {
-    isMenuOpen: false,
-    onSectionClick: action('section-clicked'),
+    isOpen: false,
+    onClick: action('section-clicked'),
   },
   argTypes: {
-    isMenuOpen: {
+    isOpen: {
       control: 'boolean',
       description: 'メニューの開閉状態',
     },
-    onSectionClick: {
+    onClick: {
       description: 'セクションクリック時のハンドラー',
     },
   },
@@ -37,7 +37,7 @@ type Story = StoryObj<typeof meta>;
  */
 export const Closed: Story = {
   args: {
-    isMenuOpen: false,
+    isOpen: false,
   },
 };
 
@@ -46,6 +46,6 @@ export const Closed: Story = {
  */
 export const Open: Story = {
   args: {
-    isMenuOpen: true,
+    isOpen: true,
   },
 };

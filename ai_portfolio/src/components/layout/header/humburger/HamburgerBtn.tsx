@@ -1,12 +1,12 @@
 import React from 'react';
-import styles from './Header.module.css';
+import styles from '../Header.module.css';
 
 /**
  * ハンバーガーボタンのプロパティ
  * @property isOpen - メニューが開いているかどうか
  * @property onClick - クリックハンドラー
  */
-type HamburgerButtonProps = {
+type HamburgerBtnProps = {
   /** メニューが開いているかどうか */
   isOpen: boolean;
   /** クリックハンドラー */
@@ -18,7 +18,7 @@ type HamburgerButtonProps = {
  * @param isOpen - メニューが開いているかどうか
  * @param onClick - クリックハンドラー
  */
-const HamburgerButton = ({ isOpen, onClick }: HamburgerButtonProps) => {
+const HamburgerBtn = ({ isOpen, onClick }: HamburgerBtnProps) => {
   return (
     <button
       onClick={onClick}
@@ -45,4 +45,4 @@ const HamburgerButton = ({ isOpen, onClick }: HamburgerButtonProps) => {
   );
 };
 
-export default HamburgerButton;
+export default HamburgerBtn;
