@@ -80,6 +80,7 @@ const Navigation = ({ isMenuOpen, onSectionClick }: NavigationProps) => {
       role='dialog'
       aria-modal='true'
       aria-label='メインメニュー'
+      data-testid='morph-menu'
     >
       <div className='flex items-center justify-center w-full h-full'>
         <ul className='m-0 p-0 list-none text-center' role='menu'>

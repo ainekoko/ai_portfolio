@@ -28,8 +28,13 @@ const Header = () => {
    */
   const handleSectionClick = useCallback(
     (sectionId: string) => {
+      console.log('１入った！:', sectionId);
       const element = document.getElementById(sectionId);
+      console.log('element', element);
+
       if (!element) return;
+      console.log('２入った！:', sectionId);
+
       element.scrollIntoView({
         behavior: 'smooth',
         block: 'start',
@@ -65,7 +70,7 @@ const Header = () => {
           {/* ハンバーガーメニュー */}
           <HamburgerBtn isOpen={isMenuOpen} onClick={toggleMenu} />
 
-          {/* モバイルナビゲーション */}
+          {/* ナビゲーション */}
           <Navigation
             isMenuOpen={isMenuOpen}
             onSectionClick={handleSectionClick}

@@ -13,7 +13,6 @@ export const useVisibleSections = () => {
    * @returns セクションが表示されているかどうか真偽値
    */
   const isVisible = (sectionId: string) => visibleSections.has(sectionId);
-  console.log('カスタムフック', visibleSections);
   return {
     visibleSections,
     setVisibleSections,
