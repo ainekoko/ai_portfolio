@@ -14,6 +14,7 @@ const Header = () => {
 
   // メニュー開閉のトグル
   const toggleMenu = useCallback(() => {
+    console.log(isMenuOpen);
     setIsMenuOpen((prev) => !prev);
   }, []);
 
