@@ -29,7 +29,11 @@ const Header = () => {
   const handleSectionClick = useCallback(
     (sectionId: string) => {
       const element = document.getElementById(sectionId);
-      if (!element) return;
+      if (!element) {
+        console.warn(`Section with id "${sectionId}" not found`);
+        return;
+      }
+
       element.scrollIntoView({
         behavior: 'smooth',
         block: 'start',
@@ -65,7 +69,7 @@ const Header = () => {
           {/* ハンバーガーメニュー */}
           <HamburgerBtn isOpen={isMenuOpen} onClick={toggleMenu} />
 
-          {/* モバイルナビゲーション */}
+          {/* ナビゲーション */}
           <Navigation
             isMenuOpen={isMenuOpen}
             onSectionClick={handleSectionClick}

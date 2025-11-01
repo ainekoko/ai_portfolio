@@ -18,6 +18,7 @@ const HeaderNav = ({ onSectionClick }: HeaderNavProps) => {
     <nav
       className='hidden lg:flex flex-col items-end pr-8 gap-1 mt-20 pointer-events-auto'
       aria-label='サイドナビゲーション'
+      data-testid='side-nav'
     >
       {SIDE_MENU.map((link) => (
         <a

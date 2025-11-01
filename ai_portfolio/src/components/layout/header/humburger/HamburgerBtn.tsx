@@ -29,6 +29,7 @@ const HamburgerBtn = ({ isOpen, onClick }: HamburgerBtnProps) => {
       aria-controls='morph-menu'
       aria-expanded={isOpen}
       type='button'
+      data-testid='hamburger-button'
     >
       <svg className='w-full h-full' viewBox='0 0 100 100' aria-hidden='true'>
         <path

@@ -16,8 +16,6 @@ const ThreeCanvas = () => {
 
   // スクロールイベントハンドラー
   const handleScroll = useCallback(() => {
-    console.log('🔍 handleScroll called', window.scrollY);
-
     const sectionIds = [
       'topSection',
       'hello',
@@ -34,7 +32,6 @@ const ThreeCanvas = () => {
       const element = document.getElementById(sectionId);
 
       if (!element) {
-        console.log(`❌ Element not found: ${sectionId}`);
         return;
       }
 
@@ -49,28 +46,16 @@ const ThreeCanvas = () => {
       const elementHeight = rect.height;
       const visibilityRatio = Math.max(0, visibleHeight) / elementHeight;
 
-      console.log(`📊 ${sectionId}:`, {
-        elementTop,
-        elementBottom,
-        windowHeight,
-        visibilityRatio: visibilityRatio.toFixed(2),
-        isElementVisible,
-      });
-
       // 要素の30%以上が表示されている場合に表示とみなす
       if (isElementVisible && visibilityRatio > 0.3) {
         newVisibleSections.add(sectionId);
-        console.log(`✅ ${sectionId} is visible!`);
       }
     });
 
-    console.log('👀 Visible sections:', Array.from(newVisibleSections));
     setVisibleSections(newVisibleSections);
   }, []);
 
   useEffect(() => {
-    console.log('🚀 Component mounted, setting up scroll listener');
-
     // 初回実行
     handleScroll();
 
@@ -92,16 +77,13 @@ const ThreeCanvas = () => {
     window.addEventListener('resize', handleScroll, { passive: true });
 
     return () => {
-      console.log('🧹 Cleaning up scroll listener');
       window.removeEventListener('scroll', scrollListener);
       window.removeEventListener('resize', handleScroll);
     };
   }, [handleScroll]);
 
   // visibleSectionsが変更されたらログ出力
-  useEffect(() => {
-    console.log('🔄 visibleSections updated:', Array.from(visibleSections));
-  }, [visibleSections]);
+  useEffect(() => {}, [visibleSections]);
 
   return (
     <>
