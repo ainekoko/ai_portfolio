@@ -28,12 +28,11 @@ const Header = () => {
    */
   const handleSectionClick = useCallback(
     (sectionId: string) => {
-      console.log('１入った！:', sectionId);
       const element = document.getElementById(sectionId);
-      console.log('element', element);
-
-      if (!element) return;
-      console.log('２入った！:', sectionId);
+      if (!element) {
+        console.warn(`Section with id "${sectionId}" not found`);
+        return;
+      }
 
       element.scrollIntoView({
         behavior: 'smooth',
