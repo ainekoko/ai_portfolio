@@ -19,6 +19,7 @@ type HamburgerBtnProps = {
  * @param onClick - クリックハンドラー
  */
 const HamburgerBtn = ({ isOpen, onClick }: HamburgerBtnProps) => {
+  console.log('HamburgerBtn rendered. isOpen:', isOpen);
   return (
     <button
       onClick={onClick}

@@ -12,20 +12,28 @@ type NavigationProps = {
   isMenuOpen: boolean;
   /** セクションクリックハンドラー */
   onSectionClick: (sectionId: string) => void;
+  /** ナビゲーションメニューのデータ配列 */
+  navMenuData: typeof NAV_MENU;
 };
 
 /**
  * ナビゲーションコンポーネント
  * @param isMenuOpen - メニューが開いているかどうか
  * @param onSectionClick - セクションクリックハンドラー
+ * @param navMenuData - ナビゲーションメニューのデータ配列
  */
-const Navigation = ({ isMenuOpen, onSectionClick }: NavigationProps) => {
+const Navigation = ({
+  isMenuOpen,
+  onSectionClick,
+  navMenuData,
+}: NavigationProps) => {
   const navRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     if (!isMenuOpen) return;
 
     const nav = navRef.current;
+    console.log('Nav');
     if (!nav) return;
 
     // フォーカス可能な要素を取得
@@ -44,9 +52,12 @@ const Navigation = ({ isMenuOpen, onSectionClick }: NavigationProps) => {
 
       if (e.shiftKey) {
         // Shift + Tab（逆方向）
+        console.log('Shift+Tab');
         if (document.activeElement === firstElement) {
           e.preventDefault();
           lastElement.focus();
+        } else {
+          return;
         }
       } else {
         // Tab（順方向）
@@ -84,7 +95,7 @@ const Navigation = ({ isMenuOpen, onSectionClick }: NavigationProps) => {
     >
       <div className='flex items-center justify-center w-full h-full'>
         <ul className='m-0 p-0 list-none text-center' role='menu'>
-          {NAV_MENU.map((item) => (
+          {navMenuData.map((item) => (
             <li
               key={item.sectionId}
               className={`opacity-0 translate-y-7 transition-all duration-[400ms] ease-out ${
