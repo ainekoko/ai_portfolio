@@ -23,13 +23,13 @@ export type backImg = {
 export const BACK_IMG: backImg[] = [
   {
     src: '/assets/images/top_1.png',
-    alt: '長女',
+    alt: '女の子１',
     width: 450,
     height: 500,
   },
   {
     src: '/assets/images/top_2.jpg',
-    alt: '次女',
+    alt: '女の子２',
     width: 550,
     height: 400,
   },

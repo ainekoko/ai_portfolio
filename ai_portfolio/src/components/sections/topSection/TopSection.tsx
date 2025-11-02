@@ -126,7 +126,6 @@ const TopSection = (props: SectionIdProps) => {
           このサイトで少しでも私の事を知って頂けたら幸いです
         </p>
       </div>
-      {/* サブテキスト - レスポンシブ対応 */}
     </section>
   );
 };
