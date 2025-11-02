@@ -5,6 +5,7 @@ import HamburgerBtn from './humburger/HamburgerBtn';
 import Navigation from './navigation/Navigation';
 import HeaderNav from './headerNav/HeaderNav';
 import Logo from './logo/Logo';
+import { NAV_MENU, SIDE_MENU } from '@/utils/HeaderData';
 
 /**
  * ヘッダーコンポーネント
@@ -74,10 +75,14 @@ const Header = () => {
           <Navigation
             isMenuOpen={isMenuOpen}
             onSectionClick={handleSectionClick}
+            navMenuData={NAV_MENU}
           />
 
           {/* デスクトップナビゲーション */}
-          <HeaderNav onSectionClick={handleSectionClick} />
+          <HeaderNav
+            onSectionClick={handleSectionClick}
+            sideMenuData={SIDE_MENU}
+          />
         </nav>
 
         {/* ロゴ */}

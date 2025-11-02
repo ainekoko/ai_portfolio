@@ -12,14 +12,21 @@ type NavigationProps = {
   isMenuOpen: boolean;
   /** セクションクリックハンドラー */
   onSectionClick: (sectionId: string) => void;
+  /** ナビゲーションメニューのデータ配列 */
+  navMenuData: typeof NAV_MENU;
 };
 
 /**
  * ナビゲーションコンポーネント
  * @param isMenuOpen - メニューが開いているかどうか
  * @param onSectionClick - セクションクリックハンドラー
+ * @param navMenuData - ナビゲーションメニューのデータ配列
  */
-const Navigation = ({ isMenuOpen, onSectionClick }: NavigationProps) => {
+const Navigation = ({
+  isMenuOpen,
+  onSectionClick,
+  navMenuData,
+}: NavigationProps) => {
   const navRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -88,7 +95,7 @@ const Navigation = ({ isMenuOpen, onSectionClick }: NavigationProps) => {
     >
       <div className='flex items-center justify-center w-full h-full'>
         <ul className='m-0 p-0 list-none text-center' role='menu'>
-          {NAV_MENU.map((item) => (
+          {navMenuData.map((item) => (
             <li
               key={item.sectionId}
               className={`opacity-0 translate-y-7 transition-all duration-[400ms] ease-out ${

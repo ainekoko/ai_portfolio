@@ -1,7 +1,7 @@
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import HeaderNav from './HeaderNav';
-
+import { SIDE_MENU } from '../../../../utils/HeaderData';
 describe('HeaderNav', () => {
   const mockOnSectionClick = jest.fn();
 
@@ -10,7 +10,9 @@ describe('HeaderNav', () => {
   });
 
   it('コンポーネントが正しくレンダリングされる', () => {
-    render(<HeaderNav onSectionClick={mockOnSectionClick} />);
+    render(
+      <HeaderNav onSectionClick={mockOnSectionClick} sideMenuData={SIDE_MENU} />
+    );
 
     const link = screen.getAllByRole('link');
     expect(link[0]).toHaveAttribute('href', '#topSection');
@@ -22,7 +24,9 @@ describe('HeaderNav', () => {
   });
 
   it('リンクをクリックするとonSectionClickが呼ばれる', () => {
-    render(<HeaderNav onSectionClick={mockOnSectionClick} />);
+    render(
+      <HeaderNav onSectionClick={mockOnSectionClick} sideMenuData={SIDE_MENU} />
+    );
 
     const link = screen.getAllByRole('link');
     fireEvent.click(link[0]);

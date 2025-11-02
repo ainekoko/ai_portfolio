@@ -8,19 +8,21 @@ import { SIDE_MENU } from '@/utils/HeaderData';
 type HeaderNavProps = {
   /** セクションクリックハンドラー */
   onSectionClick: (sectionId: string) => void;
+  /** サイドメニューのデータ配列 */
+  sideMenuData: typeof SIDE_MENU;
 };
 
 /**
  * デスクトップ用サイドナビゲーションコンポーネント
  */
-const HeaderNav = ({ onSectionClick }: HeaderNavProps) => {
+const HeaderNav = ({ onSectionClick, sideMenuData }: HeaderNavProps) => {
   return (
     <nav
       className='hidden lg:flex flex-col items-end pr-8 gap-1 mt-20 pointer-events-auto'
       aria-label='サイドナビゲーション'
       data-testid='side-nav'
     >
-      {SIDE_MENU.map((link) => (
+      {sideMenuData.map((link) => (
         <a
           key={link.href}
           href={`#${link.href}`}

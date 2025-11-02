@@ -1,7 +1,7 @@
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import Navigation from './Navigation';
-import React from 'react';
+import { NAV_MENU } from '../../../../utils/HeaderData';
 
 describe('Navigation', () => {
   const mockOnClick = jest.fn();
@@ -14,7 +14,13 @@ describe('Navigation', () => {
   describe('正常系', () => {
     describe('ナビが開いている時', () => {
       it('コンポーネントが正しくレンダリングされる', () => {
-        render(<Navigation isMenuOpen={true} onSectionClick={mockOnClick} />);
+        render(
+          <Navigation
+            isMenuOpen={true}
+            onSectionClick={mockOnClick}
+            navMenuData={NAV_MENU}
+          />
+        );
         waitFor(() => expect(screen.getByRole('menuitem')));
         const link = screen.getAllByRole('menuitem');
         expect(link[0]).toHaveAttribute('href', '#topSection');
@@ -24,7 +30,13 @@ describe('Navigation', () => {
         expect(link[4]).toHaveAttribute('href', '#mypage');
       });
       it('リンクをクリックするとonSectionClickが呼ばれる', () => {
-        render(<Navigation isMenuOpen={true} onSectionClick={mockOnClick} />);
+        render(
+          <Navigation
+            isMenuOpen={true}
+            onSectionClick={mockOnClick}
+            navMenuData={NAV_MENU}
+          />
+        );
 
         const link = screen.getAllByRole('menuitem')[0];
         fireEvent.click(link);
@@ -36,14 +48,26 @@ describe('Navigation', () => {
     });
     describe('ナビが閉じている時', () => {
       it('リンクは表示されていない', () => {
-        render(<Navigation isMenuOpen={false} onSectionClick={mockOnClick} />);
+        render(
+          <Navigation
+            isMenuOpen={false}
+            onSectionClick={mockOnClick}
+            navMenuData={NAV_MENU}
+          />
+        );
         const nav = screen.getByTestId('morph-menu');
         expect(nav).toHaveAttribute('aria-hidden', 'true');
       });
     });
     describe('キーボード操作', () => {
       it('メニューが開くと最初の要素にフォーカス', async () => {
-        render(<Navigation isMenuOpen={true} onSectionClick={mockOnClick} />);
+        render(
+          <Navigation
+            isMenuOpen={true}
+            onSectionClick={mockOnClick}
+            navMenuData={NAV_MENU}
+          />
+        );
 
         const menuItems = screen.getAllByRole('menuitem');
 
@@ -53,7 +77,13 @@ describe('Navigation', () => {
       });
 
       it('最初の要素でShift+Tabを押すと最後に移動する', async () => {
-        render(<Navigation isMenuOpen={true} onSectionClick={mockOnClick} />);
+        render(
+          <Navigation
+            isMenuOpen={true}
+            onSectionClick={mockOnClick}
+            navMenuData={NAV_MENU}
+          />
+        );
 
         const menuItems = screen.getAllByRole('menuitem');
 
@@ -69,7 +99,13 @@ describe('Navigation', () => {
         expect(document.activeElement).toBe(menuItems[4]);
       });
       it('3番目の要素にフォーカスがある状態でShift+Tab:3番目のままである事', async () => {
-        render(<Navigation isMenuOpen={true} onSectionClick={mockOnClick} />);
+        render(
+          <Navigation
+            isMenuOpen={true}
+            onSectionClick={mockOnClick}
+            navMenuData={NAV_MENU}
+          />
+        );
 
         const menuItems = screen.getAllByRole('menuitem');
         // 3番目の要素にフォーカスを設定
@@ -79,7 +115,13 @@ describe('Navigation', () => {
         expect(document.activeElement).toBe(menuItems[2]);
       });
       it('最後の要素でTabを押すと最初に戻る', () => {
-        render(<Navigation isMenuOpen={true} onSectionClick={mockOnClick} />);
+        render(
+          <Navigation
+            isMenuOpen={true}
+            onSectionClick={mockOnClick}
+            navMenuData={NAV_MENU}
+          />
+        );
 
         const menuItems = screen.getAllByRole('menuitem');
 
@@ -95,7 +137,13 @@ describe('Navigation', () => {
       });
 
       it('中間要素でTabを押してもフォーカストラップは発動しない', () => {
-        render(<Navigation isMenuOpen={true} onSectionClick={mockOnClick} />);
+        render(
+          <Navigation
+            isMenuOpen={true}
+            onSectionClick={mockOnClick}
+            navMenuData={NAV_MENU}
+          />
+        );
 
         const menuItems = screen.getAllByRole('menuitem');
 
@@ -110,7 +158,13 @@ describe('Navigation', () => {
       });
 
       it('Tab以外のキーでは何も起こらない', async () => {
-        render(<Navigation isMenuOpen={true} onSectionClick={mockOnClick} />);
+        render(
+          <Navigation
+            isMenuOpen={true}
+            onSectionClick={mockOnClick}
+            navMenuData={NAV_MENU}
+          />
+        );
 
         const menuItems = screen.getAllByRole('menuitem');
 
@@ -134,7 +188,13 @@ describe('Navigation', () => {
     it('フォーカス可能な要素が0個の場合、早期リターンする', () => {
       // NAV_MENUが空配列なので、<a>要素が生成されない
       expect(() => {
-        render(<Navigation isMenuOpen={true} onSectionClick={mockOnClick} />);
+        render(
+          <Navigation
+            isMenuOpen={true}
+            onSectionClick={mockOnClick}
+            navMenuData={NAV_MENU}
+          />
+        );
       }).not.toThrow();
 
       // エラーが起きずに正常にレンダリングされることを確認
