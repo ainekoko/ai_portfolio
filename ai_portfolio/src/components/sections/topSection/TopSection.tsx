@@ -23,7 +23,7 @@ const TopSection = ({ isVisible }: SectionIdProps) => {
       className='w-screen overflow-hidden'
       aria-label='トップセクション'
     >
-      <div className='relative h-[1300px]  max-sm:h-[calc(130vw*500/450+135vw*400/550)] w-auto lg:w-[1025px] m-auto'>
+      <div className='relative h-[1500px]  max-sm:h-[calc(130vw*500/450+135vw*400/550)] w-auto lg:w-[1025px] m-auto'>
         <FadeInElement direction='up' delay={0}>
           <div className='absolute left-0 sm:top-20 top-0   '>
             <Image
@@ -63,7 +63,7 @@ const TopSection = ({ isVisible }: SectionIdProps) => {
       </div>
       <div
         id='hello'
-        className='h-[1100px] w-auto lg:w-[1025px] m-auto relative'
+        className='h-[1200px] w-auto lg:w-[1025px] m-auto relative'
       >
         <FadeInElement direction='up'>
           <div className='absolute top-0 max-sm:hidden'>
@@ -103,16 +103,16 @@ const TopSection = ({ isVisible }: SectionIdProps) => {
             w-full 
             text-white m-0 p-0 font-bold 
             transition-all duration-1000 ease-out 
-            ${isVisible ? 'opacity-100' : 'opacity-20 -translate-y-20'}
+            ${isVisible ? 'opacity-100' : 'opacity-0 -translate-y-20'}
           `}
         >
           - Hello -
         </h2>
         <p
           className='
-              absolute top-[30vh] 
+              absolute top-[25vh] 
               transform -translate-x-1/2
-              left-[50%]
+              left-[52%]
               text-left
               text-sm  md:text-graduate
               w-1 
@@ -125,7 +125,7 @@ const TopSection = ({ isVisible }: SectionIdProps) => {
           className='
               absolute top-[30vh] 
               transform -translate-x-1/2
-              left-[45%] transform-none
+              left-[48%] transform-none
               text-left
               text-base 
               w-1 

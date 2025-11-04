@@ -36,7 +36,7 @@ describe('TopSection', () => {
       });
 
       // opacity-20 があることを確認
-      expect(helloHeading).toHaveClass('opacity-20');
+      expect(helloHeading).toHaveClass('opacity-0');
       expect(helloHeading).not.toHaveClass('opacity-100');
     });
 
@@ -52,7 +52,7 @@ describe('TopSection', () => {
 
       // falseに変更
       rerender(<TopSection isVisible={false} />);
-      expect(helloHeading).toHaveClass('opacity-20');
+      expect(helloHeading).toHaveClass('opacity-0');
 
       // 再度trueに変更
       rerender(<TopSection isVisible={true} />);
