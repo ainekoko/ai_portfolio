@@ -1,13 +1,22 @@
-import { SectionIdProps } from '@/types/component';
 import FadeInElement from '../../common/FadeIn';
 import Image from 'next/image';
 import { BACK_IMG } from '@/utils/TopData';
+
+/**
+ * @param isVisible - 指定id表示されているかどうか
+ * @type boolean
+ */
+export type SectionIdProps = {
+  isVisible: boolean;
+};
+
 /**
  * TopSection.tsx
  * 最初のセクションを表示するコンポーネント
  * @param props - isVisible: boolean
  */
-const TopSection = (props: SectionIdProps) => {
+const TopSection = ({ isVisible }: SectionIdProps) => {
+  console.log('TopSection isVisible:', isVisible);
   return (
     <section
       id='topSection'
@@ -94,7 +103,7 @@ const TopSection = (props: SectionIdProps) => {
             w-full 
             text-white m-0 p-0 font-bold 
             transition-all duration-1000 ease-out 
-            ${props.isVisible ? 'opacity-100' : 'opacity-20 -translate-y-20'}
+            ${isVisible ? 'opacity-100' : 'opacity-20 -translate-y-20'}
           `}
         >
           - Hello -

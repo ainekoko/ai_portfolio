@@ -12,6 +12,8 @@ const preview: Preview = {
     a11y: {
       test: 'todo',
     },
+    layout: 'centered', // デフォルトレイアウト
+    // viewport設定は削除（Storybook 9のデフォルトを使用）
   },
 };
 
