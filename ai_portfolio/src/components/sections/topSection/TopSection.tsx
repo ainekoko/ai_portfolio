@@ -1,34 +1,49 @@
-import { SectionIdProps } from '@/types/component';
-import FadeInElement from '../common/FadeIn';
+import FadeInElement from '../../common/FadeIn';
 import Image from 'next/image';
+import { BACK_IMG } from '@/utils/TopData';
+
+/**
+ * @param isVisible - 指定id表示されているかどうか
+ * @type boolean
+ */
+export type SectionIdProps = {
+  isVisible: boolean;
+};
+
 /**
  * TopSection.tsx
  * 最初のセクションを表示するコンポーネント
  * @param props - isVisible: boolean
  */
-const TopSection = (props: SectionIdProps) => {
+const TopSection = ({ isVisible }: SectionIdProps) => {
+  console.log('TopSection isVisible:', isVisible);
   return (
-    <section id='topSection' className='w-screen'>
-      <div className='relative h-[1300px]  max-sm:h-[calc(130vw*500/450+135vw*400/550)] w-auto lg:w-[1025px] m-auto'>
+    <section
+      id='topSection'
+      className='w-screen overflow-hidden'
+      aria-label='トップセクション'
+    >
+      <div className='relative h-[1500px]  max-sm:h-[calc(130vw*500/450+135vw*400/550)] w-auto lg:w-[1025px] m-auto'>
         <FadeInElement direction='up' delay={0}>
           <div className='absolute left-0 sm:top-20 top-0   '>
             <Image
-              src='/assets/images/top_1.png'
-              alt='Image1'
+              src={BACK_IMG[0].src}
+              alt={BACK_IMG[0].alt}
+              width={BACK_IMG[0].width}
+              height={BACK_IMG[0].height}
               className=' shadow-xl max-sm:w-[640px]'
-              width={450}
-              height={500}
             />
           </div>
         </FadeInElement>
+
         <FadeInElement direction='up' delay={0.5}>
-          <div className='absolute right-0 sm:top-[600px] max-sm:left-0 max-sm:top-[calc(135vw*500/450)]'>
+          <div className='absolute left-0 sm:left-auto sm:right-0 top-[calc(100vw*500/450)] sm:top-[600px] w-full sm:w-auto'>
             <Image
-              src='/assets/images/top_2.jpg'
-              alt='Image2'
+              src={BACK_IMG[1].src}
+              alt={BACK_IMG[1].alt}
+              width={BACK_IMG[1].width}
+              height={BACK_IMG[1].height}
               className='shadow-xl  max-sm:w-[640px]'
-              width={550}
-              height={400}
             />
           </div>
         </FadeInElement>
@@ -46,56 +61,58 @@ const TopSection = (props: SectionIdProps) => {
           Ai&rsquo;s Portfolio
         </h1>
       </div>
-
-      <div id='hello' className='h-[1000] w-auto lg:w-[1025px] m-auto relative'>
+      <div
+        id='hello'
+        className='h-[1200px] w-auto lg:w-[1025px] m-auto relative'
+      >
         <FadeInElement direction='up'>
           <div className='absolute top-0 max-sm:hidden'>
             <Image
-              src='/assets/images/top_3.jpg'
-              alt='Image1'
+              src={BACK_IMG[2].src}
+              alt={BACK_IMG[2].alt}
+              width={BACK_IMG[2].width}
+              height={BACK_IMG[2].height}
               className='shadow-xl'
-              width={300}
-              height={400}
             />
           </div>
           <div className='absolute left-1/2 -translate-x-1/2  top-44'>
             <Image
-              src='/assets/images/top_4.png'
-              alt='Image2'
+              src={BACK_IMG[3].src}
+              alt={BACK_IMG[3].alt}
+              width={BACK_IMG[3].width}
+              height={BACK_IMG[3].height}
               className='shadow-xl'
-              width={200}
-              height={400}
             />
           </div>
           <div className='absolute right-0 top-0 max-sm:hidden'>
             <Image
-              src='/assets/images/top_5.jpg'
-              alt='Image3'
+              src={BACK_IMG[4].src}
+              alt={BACK_IMG[4].alt}
+              width={BACK_IMG[4].width}
+              height={BACK_IMG[4].height}
               className='shadow-xl'
-              width={250}
-              height={400}
             />
           </div>
         </FadeInElement>
 
         <h2
           className={`
-      text-center 
-      text-8xl md:text-[8rem]
-      drop-shadow-[1px_0px_35px_#383838] 
-      w-full 
-      text-white m-0 p-0 font-bold 
-      transition-all duration-1000 ease-out 
-      ${props.isVisible ? 'opacity-100' : 'opacity-20 -translate-y-20'}
-    `}
+            text-center 
+            text-8xl md:text-[8rem]
+            drop-shadow-[1px_0px_35px_#383838] 
+            w-full 
+            text-white m-0 p-0 font-bold 
+            transition-all duration-1000 ease-out 
+            ${isVisible ? 'opacity-100' : 'opacity-0 -translate-y-20'}
+          `}
         >
           - Hello -
         </h2>
         <p
           className='
-              absolute top-[30vh] 
+              absolute top-[25vh] 
               transform -translate-x-1/2
-              left-[50%] transform-none
+              left-[52%]
               text-left
               text-sm  md:text-graduate
               w-1 
@@ -108,9 +125,9 @@ const TopSection = (props: SectionIdProps) => {
           className='
               absolute top-[30vh] 
               transform -translate-x-1/2
-              left-[45%] transform-none
+              left-[48%] transform-none
               text-left
-              tetext-base 
+              text-base 
               w-1 
               drop-shadow-[0_0_3px_white]
           '
@@ -118,8 +135,6 @@ const TopSection = (props: SectionIdProps) => {
           このサイトで少しでも私の事を知って頂けたら幸いです
         </p>
       </div>
-
-      {/* サブテキスト - レスポンシブ対応 */}
     </section>
   );
 };

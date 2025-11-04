@@ -11,7 +11,7 @@ const config: StorybookConfig = {
     '@storybook/addon-docs',
   ],
   framework: {
-    name: '@storybook/nextjs', // ← スラッシュであることを確認
+    name: '@storybook/nextjs',
     options: {},
   },
   staticDirs: ['../public'],

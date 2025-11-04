@@ -2219,6 +2219,11 @@
     "@storybook/global" "^5.0.0"
     ts-dedent "^2.0.0"
 
+"@storybook/addon-viewport@^9.0.8":
+  version "9.0.8"
+  resolved "https://registry.yarnpkg.com/@storybook/addon-viewport/-/addon-viewport-9.0.8.tgz#def767425a92a4bab91c2a09e884fbfb1810e3c5"
+  integrity sha512-HgIFDzNXvMx0zQBM5mhwBoAJlrF9KRlxNCZnJbqrFLCJO4Ps2PMtB0HRGHcg0gm3RLcqyps0DpiF7wll3udb7Q==
+
 "@storybook/addon-vitest@10.0.0":
   version "10.0.0"
   resolved "https://registry.yarnpkg.com/@storybook/addon-vitest/-/addon-vitest-10.0.0.tgz#6f021a5bbc204f366fb3a55523f4411439e8ce42"
