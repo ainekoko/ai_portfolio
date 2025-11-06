@@ -1,6 +1,7 @@
 import { Meta, StoryObj } from '@storybook/nextjs-vite';
 import { action } from 'storybook/actions';
 import Navigation from './Navigation';
+import { NAV_MENU } from '@/utils/HeaderData';
 
 const meta: Meta<typeof Navigation> = {
   component: Navigation,
@@ -8,6 +9,7 @@ const meta: Meta<typeof Navigation> = {
   args: {
     isMenuOpen: false,
     onSectionClick: action('section-clicked'),
+    navMenuData: NAV_MENU,
   },
   argTypes: {
     isMenuOpen: {
@@ -16,6 +18,10 @@ const meta: Meta<typeof Navigation> = {
     },
     onSectionClick: {
       description: 'セクションクリック時のハンドラー',
+      action: 'section-clicked',
+    },
+    navMenuData: {
+      description: 'ナビゲーションメニューのデータ配列',
     },
   },
   tags: ['autodocs'],

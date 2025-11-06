@@ -1,16 +1,21 @@
 import { Meta, StoryObj } from '@storybook/nextjs-vite';
-import { action } from 'storybook/actions';
+import { fn } from '@storybook/test';
 import HeaderNav from './HeaderNav';
+import { SIDE_MENU } from '@/utils/HeaderData';
 
 const meta: Meta<typeof HeaderNav> = {
   component: HeaderNav,
   title: 'components/Header/HeaderNav',
   args: {
-    onSectionClick: action('section-clicked'),
+    onSectionClick: fn(),
+    sideMenuData: SIDE_MENU,
   },
   argTypes: {
     onSectionClick: {
       description: 'セクションクリック時のハンドラー',
+    },
+    sideMenuData: {
+      description: 'サイドメニューのデータ配列',
     },
   },
   tags: ['autodocs'],

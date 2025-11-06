@@ -1,6 +1,6 @@
 'use client';
 import React, { useState, useEffect, useCallback } from 'react';
-import ProfileSection from '@/components/sections/ProfileSection';
+import ProfileSection from '@/components/sections/profileSection/ProfileSection';
 import TopSection from '@/components/sections/topSection/TopSection';
 import ExperienceSection from '@/components/sections/ExperienceSection';
 import SkillSection from '@/components/sections/SkillSection';
