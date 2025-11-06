@@ -1,5 +1,5 @@
 import React from 'react';
-import ContactButtons from '@/components/profile/ContactButtons';
+import ContactButtons from '@/components/profile/contactButtons/ContactButtons';
 import ProfileInfoTable from '@/components/profile/ProfileInfoTable';
 import { CONTACT_BUTTONS, PROFILE_DATA } from '@/utils/profileData';
 import SectionHeader from '@/components/common/SectionHeader';

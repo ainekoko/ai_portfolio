@@ -2,16 +2,16 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 
-interface ContactButton {
+type ContactButton = {
   icon: IconDefinition;
   text: string;
   href?: string;
   color: string;
-}
+};
 
-interface ContactButtonsProps {
+type ContactButtonsProps = {
   contacts: ContactButton[];
-}
+};
 
 /**
  * 連絡先ボタンのコンポーネント
