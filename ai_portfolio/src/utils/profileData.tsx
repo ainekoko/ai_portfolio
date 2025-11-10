@@ -45,7 +45,7 @@ export const PROFILE_DATA = [
         </li>
         <li>コードマフィアさん</li>
         <div>
-          細かい部分も教授して下さり、youtubeやUdemyで勉強の際本当にお世話になっています！
+          細かい部分も教授して下さり、youtubeやUdemyで勉強の際本当にお世話になっています!
         </div>
       </ul>
     ),
@@ -58,20 +58,23 @@ export const PROFILE_DATA = [
 export const CONTACT_BUTTONS = [
   {
     icon: faEnvelope,
-    text: 'ai.ebata.contact@gmail.com',
-    color: 'rose-300',
+    text: 'Email',
+    fullText: 'ai.ebata.contact@gmail.com',
+    color: 'rose-300' as const,
     href: 'mailto:ai.ebata.contact@gmail.com',
   },
   {
     icon: faGithub,
-    text: 'https://github.com/ainekoko/ai_portfolio',
-    color: 'purple-400',
+    text: 'GitHub',
+    fullText: 'https://github.com/ainekoko/ai_portfolio',
+    color: 'purple-400' as const,
     href: 'https://github.com/ainekoko/ai_portfolio',
   },
   {
     icon: faXTwitter,
-    text: 'ai.ebata.contact@gmail.com',
-    color: 'indigo-500',
-    href: '#',
+    text: 'X (Twitter)',
+    fullText: '@your_twitter',
+    color: 'indigo-500' as const,
+    href: 'https://twitter.com/your_twitter',
   },
 ];
