@@ -59,18 +59,21 @@ export const CONTACT_BUTTONS = [
   {
     icon: faEnvelope,
     text: 'Email',
+    fullText: 'ai.ebata.contact@gmail.com',
     color: 'rose-300' as const,
     href: 'mailto:ai.ebata.contact@gmail.com',
   },
   {
     icon: faGithub,
     text: 'GitHub',
+    fullText: 'https://github.com/ainekoko/ai_portfolio',
     color: 'purple-400' as const,
     href: 'https://github.com/ainekoko/ai_portfolio',
   },
   {
     icon: faXTwitter,
     text: 'X (Twitter)',
+    fullText: '@your_twitter',
     color: 'indigo-500' as const,
     href: 'https://twitter.com/your_twitter',
   },
