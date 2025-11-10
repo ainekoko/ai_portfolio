@@ -11,18 +11,21 @@ const meta: Meta<typeof ContactButtons> = {
       {
         icon: faEnvelope,
         text: 'ai.ebata.contact@gmail.com',
+        fullText: 'ai.ebata.contact@gmail.com',
         color: 'rose-300' as const,
         href: 'mailto:ai.ebata.contact@gmail.com',
       },
       {
         icon: faGithub,
         text: 'https://github.com/ainekoko/ai_portfolio',
+        fullText: 'https://github.com/ainekoko/ai_portfolio',
         color: 'purple-400' as const,
         href: 'https://github.com/ainekoko/ai_portfolio',
       },
       {
         icon: faXTwitter,
         text: 'ai.ebata.contact@gmail.com',
+        fullText: '@your_twitter',
         color: 'indigo-500' as const,
         href: '#',
       },
