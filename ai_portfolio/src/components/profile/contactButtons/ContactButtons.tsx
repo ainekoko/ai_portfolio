@@ -1,20 +1,10 @@
 // src/components/profile/ContactButtons.tsx
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
-
-type ColorType = 'rose-300' | 'purple-400' | 'indigo-500';
-
-interface ContactButton {
-  icon: IconDefinition;
-  text: string;
-  fullText?: string;
-  href: string;
-  color: ColorType;
-}
+import { ColorType, Contact } from '@/types/profile';
 
 interface ContactButtonsProps {
-  contacts: ContactButton[];
+  contacts: Contact[];
 }
 
 /**

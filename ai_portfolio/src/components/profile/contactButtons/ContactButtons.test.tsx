@@ -2,25 +2,25 @@ import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import ContactButtons from './ContactButtons';
 import { CONTACT_BUTTONS } from '../../../utils/profileData';
-
-// モックデータを直接定義
-const mockContacts = [
+import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
+import { Contact } from '../../../types/profile';
+const mockContacts: Contact[] = [
   {
-    icon: {} as any,
+    icon: {} as IconDefinition,
     text: 'Email',
     fullText: 'ai.ebata.contact@gmail.com',
     color: 'rose-300' as const,
     href: 'mailto:ai.ebata.contact@gmail.com',
   },
   {
-    icon: {} as any,
+    icon: {} as IconDefinition,
     text: 'GitHub',
     fullText: 'https://github.com/ainekoko/ai_portfolio',
     color: 'purple-400' as const,
     href: 'https://github.com/ainekoko/ai_portfolio',
   },
   {
-    icon: {} as any,
+    icon: {} as IconDefinition,
     text: 'X (Twitter)',
     fullText: '@your_twitter',
     color: 'indigo-500' as const,

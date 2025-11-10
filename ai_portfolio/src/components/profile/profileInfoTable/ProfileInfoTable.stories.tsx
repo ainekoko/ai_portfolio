@@ -1,8 +1,5 @@
 import { Meta, StoryObj } from '@storybook/nextjs-vite';
 import ProfileInfoTable from './ProfileInfoTable';
-import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
-import { faGithub, faXTwitter } from '@fortawesome/free-brands-svg-icons';
-
 const meta: Meta<typeof ProfileInfoTable> = {
   component: ProfileInfoTable,
   title: 'components/profile/ProfileInfoTable',
