@@ -8,14 +8,15 @@ import { SectionProps } from '@/types/component';
 import FadeInElement from '@/components/common/FadeIn';
 
 /**
- * TopSection.tsx
- * 最初のセクションを表示するコンポーネント
+ * ProfileSection.tsx
+ * プロフィールセクションを表示するコンポーネント
  * @param props - isVisible: boolean
  */
 const ProfileSection = ({ isVisible }: SectionProps) => {
   return (
     <section
       id='profile'
+      aria-label='プロフィール'
       className='bg-[url(/assets/images/snow-town.png)] bg-repeat-x bg-bottom bg-[length:auto_200px] relative w-screen pt-16 pb-28'
     >
       {/* グラデーションオーバーレイ（上部100pxのみ） */}

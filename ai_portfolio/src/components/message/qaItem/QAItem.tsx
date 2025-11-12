@@ -1,17 +1,11 @@
 // components/message/QAItem.tsx
+import { QAItemData } from '@/utils/messageData';
 import React, { useState } from 'react';
 
-// QAItemの型定義
-export interface QAItemData {
-  id: string;
-  question: string;
-  answer: string;
-}
-
-interface QAItemProps {
+type QAItemProps = {
   item: QAItemData;
   index: number;
-}
+};
 
 const QAItem: React.FC<QAItemProps> = ({ item, index }) => {
   const headingId = `qa-heading-${index}`;

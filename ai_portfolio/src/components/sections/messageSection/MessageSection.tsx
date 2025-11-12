@@ -1,6 +1,6 @@
 'use client';
 import FadeInElement from '@/components/common/FadeIn';
-import QAItem from '@/components/message/QAItem';
+import QAItem from '@/components/message/qaItem/QAItem';
 import { QAITEMS, SELF_INTRODUCTION } from '@/utils/messageData';
 import React from 'react';
 
@@ -13,7 +13,7 @@ const MessageSection = () => {
     <section
       id='message'
       className='relative w-screen pt-35 pb-28'
-      aria-labelledby='message-title'
+      aria-label='メッセージ'
     >
       <h2
         id='message-title'
@@ -23,7 +23,7 @@ const MessageSection = () => {
       </h2>
 
       {/* 自己紹介部分 */}
-      <FadeInElement delay={0.5}>
+      <FadeInElement delay={0.3}>
         <div className='w-10/12 md:w-[650px] text-base leading-relaxed z-10 relative m-auto mb-12'>
           {SELF_INTRODUCTION.content}
         </div>

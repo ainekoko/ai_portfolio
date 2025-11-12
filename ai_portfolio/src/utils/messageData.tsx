@@ -1,5 +1,5 @@
 // utils/messageData.tsx
-export interface QAItem {
+export interface QAItemData {
   id: string;
   question: string;
   answer: string;
@@ -33,7 +33,7 @@ export const SELF_INTRODUCTION: SelfIntroduction = {
 /**
  * メッセージデータ - QA項目
  */
-export const QAITEMS: QAItem[] = [
+export const QAITEMS: QAItemData[] = [
   {
     id: 'career-change',
     question: '化粧品業界から何故エンジニアへの転職をしたのか？',
