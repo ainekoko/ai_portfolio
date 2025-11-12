@@ -9,18 +9,26 @@ import Font from '@/components/common/Font';
 export const PROFILE_DATA = [
   {
     label: '出身',
-    content: '群馬県/東京に約15年程住み、現在は北海道へ移住',
+    content: (
+      <>
+        群馬県/東京に約<Num>15</Num>年程住み、現在は北海道へ移住
+      </>
+    ),
   },
   {
     label: '学歴',
-    content: '東京国際大学へ入学、1年間アメリカのオレゴン州へ留学',
+    content: (
+      <>
+        東京国際大学へ入学、<Num>1</Num>年間アメリカのオレゴン州へ留学
+      </>
+    ),
   },
   {
     label: '自己紹介',
     content: (
       <>
-        <Num>1988</Num>年生まれ。
-        東京にて化粧品メーカーに就職。その後SESへ転職。 現在は子供<Num>2</Num>
+        <Num>1988</Num>年生まれ。 東京にて化粧品メーカーに就職。その後
+        <Font>SES</Font>へ転職。 現在は子供<Num>2</Num>
         人に恵まれ北海道を満喫しながら過ごしています。
       </>
     ),
@@ -45,7 +53,8 @@ export const PROFILE_DATA = [
         </li>
         <li>コードマフィアさん</li>
         <div>
-          細かい部分も教授して下さり、youtubeやUdemyで勉強の際本当にお世話になっています!
+          細かい部分も教授して下さり、<Font>youtube</Font>や<Font>Udemy</Font>
+          で勉強の際本当にお世話になっています!
         </div>
       </ul>
     ),

@@ -5,6 +5,7 @@ import { CONTACT_BUTTONS, PROFILE_DATA } from '@/utils/profileData';
 import SectionHeader from '@/components/common/SectionHeader';
 import Huwahuwa_img from '@/components/common/huwahuwa_img';
 import { SectionProps } from '@/types/component';
+import FadeInElement from '@/components/common/FadeIn';
 
 /**
  * TopSection.tsx
@@ -30,7 +31,10 @@ const ProfileSection = ({ isVisible }: SectionProps) => {
         />
         <div className=''>
           {/* Profile Info Table */}
-          <ProfileInfoTable profileData={PROFILE_DATA} />
+          <FadeInElement delay={0.5}>
+            <ProfileInfoTable profileData={PROFILE_DATA} />
+          </FadeInElement>
+
           {/* Contact Buttons */}
           <ContactButtons contacts={CONTACT_BUTTONS} />
           <div className='absolute left-10 lg:left-3/5 bottom-16 lg:bottom-56'>

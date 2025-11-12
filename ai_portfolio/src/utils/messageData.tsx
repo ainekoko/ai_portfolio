@@ -1,7 +1,18 @@
+// utils/messageData.tsx
+export interface QAItem {
+  id: string;
+  question: string;
+  answer: string;
+}
+
+export interface SelfIntroduction {
+  content: React.ReactNode;
+}
+
 /**
  * メッセージデータ - 自己紹介
  */
-export const SELF_INTRODUCTION = {
+export const SELF_INTRODUCTION: SelfIntroduction = {
   content: (
     <>
       <p className='mb-6'>
@@ -22,18 +33,21 @@ export const SELF_INTRODUCTION = {
 /**
  * メッセージデータ - QA項目
  */
-export const QAITEMS = [
+export const QAITEMS: QAItem[] = [
   {
+    id: 'career-change',
     question: '化粧品業界から何故エンジニアへの転職をしたのか？',
     answer:
       '自分が担当になった商品が＠コスメによって大ヒットし、売上が急増した事でネットでの宣伝の重要性を痛感しました。それから独学でHTML/CSS/JavaScriptを学び、プログラミングの楽しさに目覚め、もっと深く学びたいと思い、転職を決意しました。',
   },
   {
+    id: 'work-style',
     question: '1日PCに向かう仕事になって辛い？',
     answer:
       'お客様との接客はとても大好きですが、ゲームが大好きな事もあり1日15時間ぶっ通しでやっていた経験もある為、画面を見続けて作業する事にさほど抵抗はありませんでした。',
   },
   {
+    id: 'hokkaido-move',
     question: '北海道への移住',
     answer:
       '仕事で1回しか言った事なく無謀だと皆からいわれました（笑）私自身仕事も出来なくなるのでは？と心配もありましたが、近年リモートの敷居も下がり、子育てしやすい環境に住みたいという思いが強くなり主人の地元である北海道の移住へ踏み切りました！',
