@@ -9,12 +9,16 @@ interface BackgroundScrollTextProps {
 
 /**
  * BackgroundScrollText - 背景スクロールテキストコンポーネント
+ * @param text: string,
+ * @param position?: 'top' | 'bottom' | 'custom',
+ * @param customTop?: string,
+ * @param customLeft?: string,
+ * @param zIndex?: number
  */
 const BackgroundScrollText = ({
   text,
   position = 'top',
   customTop,
-  customLeft = '0',
   zIndex = 0,
 }: BackgroundScrollTextProps) => {
   const repeatedText = `${text} `.repeat(4);
@@ -26,9 +30,7 @@ const BackgroundScrollText = ({
   };
 
   const positionStyle =
-    position === 'custom' && customTop
-      ? { top: customTop, left: customLeft }
-      : {};
+    position === 'custom' && customTop ? { top: customTop } : {};
 
   return (
     <div
