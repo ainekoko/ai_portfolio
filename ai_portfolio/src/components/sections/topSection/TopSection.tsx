@@ -48,8 +48,9 @@ const TopSection = ({ isVisible }: SectionIdProps) => {
           </div>
         </FadeInElement>
         {/* メインタイトル */}
-        <h1
-          className='
+        <FadeInElement direction='up' delay={0}>
+          <h1
+            className='
         mr-2.5
         text-8xl md:text-[8rem]
         drop-shadow-[1px_0px_35px_#383838] 
@@ -57,9 +58,10 @@ const TopSection = ({ isVisible }: SectionIdProps) => {
         top-[30vh] right-0 
         font-bold
       '
-        >
-          Ai&rsquo;s Portfolio
-        </h1>
+          >
+            Ai&rsquo;s Portfolio
+          </h1>
+        </FadeInElement>
       </div>
       <div
         id='hello'

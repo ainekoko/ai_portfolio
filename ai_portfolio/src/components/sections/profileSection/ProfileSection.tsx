@@ -5,16 +5,18 @@ import { CONTACT_BUTTONS, PROFILE_DATA } from '@/utils/profileData';
 import SectionHeader from '@/components/common/SectionHeader';
 import Huwahuwa_img from '@/components/common/huwahuwa_img';
 import { SectionProps } from '@/types/component';
+import FadeInElement from '@/components/common/FadeIn';
 
 /**
- * TopSection.tsx
- * 最初のセクションを表示するコンポーネント
+ * ProfileSection.tsx
+ * プロフィールセクションを表示するコンポーネント
  * @param props - isVisible: boolean
  */
 const ProfileSection = ({ isVisible }: SectionProps) => {
   return (
     <section
       id='profile'
+      aria-label='プロフィール'
       className='bg-[url(/assets/images/snow-town.png)] bg-repeat-x bg-bottom bg-[length:auto_200px] relative w-screen pt-16 pb-28'
     >
       {/* グラデーションオーバーレイ（上部100pxのみ） */}
@@ -30,7 +32,10 @@ const ProfileSection = ({ isVisible }: SectionProps) => {
         />
         <div className=''>
           {/* Profile Info Table */}
-          <ProfileInfoTable profileData={PROFILE_DATA} />
+          <FadeInElement delay={0.5}>
+            <ProfileInfoTable profileData={PROFILE_DATA} />
+          </FadeInElement>
+
           {/* Contact Buttons */}
           <ContactButtons contacts={CONTACT_BUTTONS} />
           <div className='absolute left-10 lg:left-3/5 bottom-16 lg:bottom-56'>

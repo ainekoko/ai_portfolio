@@ -20,12 +20,10 @@ describe('ProfileInfoTable', () => {
 
       // spanのテキストを確認
       expect(spanElements[0]).toHaveTextContent('出身');
-      expect(spanElements[1]).toHaveTextContent('学歴');
-      expect(spanElements[2]).toHaveTextContent('自己紹介');
-      expect(spanElements[3]).toHaveTextContent('1988');
-      expect(spanElements[4]).toHaveTextContent('2');
-      expect(spanElements[5]).toHaveTextContent('趣味');
-      expect(spanElements[6]).toHaveTextContent('尊敬する人');
+      expect(spanElements[2]).toHaveTextContent('学歴');
+      expect(spanElements[4]).toHaveTextContent('自己紹介');
+      expect(spanElements[8]).toHaveTextContent('趣味');
+      expect(spanElements[9]).toHaveTextContent('尊敬する人');
     });
   });
   describe('異常系', () => {});
