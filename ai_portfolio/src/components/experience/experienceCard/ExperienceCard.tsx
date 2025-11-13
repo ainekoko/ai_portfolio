@@ -1,13 +1,11 @@
 import Link from 'next/link';
 import React from 'react';
-import BackgroundScrollText from './BackgroundScrollText';
 
 type ExperienceCardProps = {
   title: string;
   period: string;
   description: string;
   link: string;
-  backgroundText?: string;
 };
 
 const ExperienceCard = ({

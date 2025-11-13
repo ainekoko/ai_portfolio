@@ -3,8 +3,6 @@ interface BackgroundScrollTextProps {
   text: string;
   position?: 'top' | 'bottom' | 'custom';
   customTop?: string;
-  customLeft?: string;
-  zIndex?: number;
 }
 
 /**
@@ -12,14 +10,11 @@ interface BackgroundScrollTextProps {
  * @param text: string,
  * @param position?: 'top' | 'bottom' | 'custom',
  * @param customTop?: string,
- * @param customLeft?: string,
- * @param zIndex?: number
  */
 const BackgroundScrollText = ({
   text,
   position = 'top',
   customTop,
-  zIndex = 0,
 }: BackgroundScrollTextProps) => {
   const repeatedText = `${text} `.repeat(4);
 
@@ -35,7 +30,7 @@ const BackgroundScrollText = ({
   return (
     <div
       className={`absolute ${positionClasses[position]} left-0 flex w-full h-[120px] md:h-[180px] overflow-hidden pointer-events-none`}
-      style={{ zIndex, ...positionStyle }}
+      style={{ ...positionStyle }}
       aria-hidden='true'
     >
       <div className='flex-none whitespace-nowrap text-[80px] md:text-[150px] overflow-hidden text-gray-100 animate-loop'>

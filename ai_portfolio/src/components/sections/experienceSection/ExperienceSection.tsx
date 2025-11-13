@@ -1,7 +1,7 @@
 import { SectionProps } from '@/types/component';
 import SectionHeader from '@/components/common/SectionHeader';
-import ExperienceCard from '@/components/experience/ExperienceCard';
-import BackgroundScrollText from '@/components/experience/BackgroundScrollText';
+import ExperienceCard from '@/components/experience/experienceCard/ExperienceCard';
+import BackgroundScrollText from '@/components/experience/backgroundScrollText/BackgroundScrollText';
 import { EXPERIENCE_CARDS } from '@/utils/ExperienceData';
 
 /**
