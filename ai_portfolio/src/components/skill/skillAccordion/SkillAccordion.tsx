@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import SkillItemList from './SkillItemList';
+import SkillItemList from '@/components/skill/skillItemList/SkillItemList';
 import { SKILL_DATA } from '@/utils/skillData';
 
 interface SkillAccordionProps {
@@ -26,6 +26,7 @@ const SkillAccordion = ({ id, skillData }: SkillAccordionProps) => {
         <div
           className='flex justify-between items-center relative px-8 py-4 text-gray-800 font-semibold cursor-pointer'
           onClick={toggleAccordion}
+          data-testid='accordion-click'
         >
           その他
           <div
@@ -53,6 +54,7 @@ const SkillAccordion = ({ id, skillData }: SkillAccordionProps) => {
           className={`overflow-hidden transition-all duration-700 ease-in-out border-t-[0.5px] border-gray-400 ${
             isOpen ? 'opacity-100' : 'max-h-0 opacity-0'
           }`}
+          data-testid='accordion-content'
         >
           <div className='container flex'>
             <div id='another' className='w-full'>

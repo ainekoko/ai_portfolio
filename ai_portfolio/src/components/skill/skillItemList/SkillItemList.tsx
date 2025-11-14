@@ -1,5 +1,6 @@
 import { SkillItemsType } from '@/types/skill';
 import React from 'react';
+import Num from '@/components/common/Font';
 
 interface SkillItemListProps {
   id: string;
@@ -27,7 +28,9 @@ const SkillItemList = ({ id, title, skillData }: SkillItemListProps) => {
               className='text-xl w-18 h-18 inline-block pb-2.5'
             />
             <p>{item.label}</p>
-            <p className='text-sm text-gray-500'>{item.year} years</p>
+            <p className='text-sm text-gray-500'>
+              <Num>{item.year} </Num>years
+            </p>
           </li>
         ))}
       </ul>
