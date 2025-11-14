@@ -1,22 +1,13 @@
+import { DocumentItem } from '@/utils/skillData';
 import React from 'react';
 
 /**
  * 設計書関連コンポーネントのプロパティ
  * @param documentData - 設計書関連のデータ配列
  */
-interface DocumentSkillProps {
+type DocumentSkillProps = {
   documentData: DocumentItem[];
-}
-
-/**
- * 設計書関連のデータアイテム
- * @param title - 設計書のタイトル
- * @param description - 設計書の説明
- */
-interface DocumentItem {
-  title: string;
-  description: string;
-}
+};
 
 /**
  * 設計書関連コンポーネント
@@ -30,7 +21,7 @@ const DocumentSkill = ({ documentData }: DocumentSkillProps) => {
       <ul className='space-y-4 list-none pl-0'>
         {documentData.map((item, index) => (
           <li key={index} className='relative pl-6'>
-            <span className='absolute left-0 top-1 text-gray-600'>-</span>
+            <span className='absolute left-0 top-1 text-gray-800'>-</span>
             <div>
               <span className='text-gray-800 font-medium'>{item.title}</span>
               <span className='text-gray-600 ml-2'>{item.description}</span>

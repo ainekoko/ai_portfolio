@@ -3,7 +3,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import ProfileSection from '@/components/sections/profileSection/ProfileSection';
 import TopSection from '@/components/sections/topSection/TopSection';
 import ExperienceSection from '@/components/sections/experienceSection/ExperienceSection';
-import SkillSection from '@/components/sections/SkillSection';
+import SkillSection from '@/components/sections/skillSection/SkillSection';
 import ContactSection from '@/components/sections/ContactSection';
 import MessageSection from '@/components/sections/messageSection/MessageSection';
 

@@ -1,3 +1,13 @@
+/**
+ * 設計書関連のデータアイテム
+ * @param title - 設計書のタイトル
+ * @param description - 設計書の説明
+ */
+export type DocumentItem = {
+  title: string;
+  description: string;
+};
+
 export const SKILL_DATA = {
   programmingLanguage: [
     {
@@ -146,7 +156,7 @@ export const SKILL_DATA = {
   ],
 };
 
-export const DOCUMENT_SKILL = [
+export const DOCUMENT_SKILL: DocumentItem[] = [
   {
     title: '要件概要書',
     description: 'QAの資料作成等',
