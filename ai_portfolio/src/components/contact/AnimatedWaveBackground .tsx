@@ -2,7 +2,7 @@ import React from 'react';
 
 const AnimatedWaveBackground = () => {
   return (
-    <div className='bg-[#f8fdfa] relative w-full h-[200px] overflow-hidden'>
+    <div className='bg-white relative w-full h-[200px] overflow-hidden'>
       {/* 波アニメーション 1層目（背景の大きな波） */}
       <div className='absolute inset-0'>
         <svg
