@@ -2,11 +2,7 @@
 import { SectionProps } from '@/types/component';
 import React, { useState, FormEvent } from 'react';
 import SectionHeader from '../common/SectionHeader';
-import Input from '../contact/Input';
-import Button_form from '../common/Button_form';
 import AnimatedWaveBackground from '../contact/AnimatedWaveBackground ';
-import { submitForm } from '@/action/action';
-import { sendContactEmail } from '@/server/contact';
 
 /**
  * フォームデータの型定義
@@ -39,21 +35,36 @@ const ContactSection = ({ isVisible }: SectionProps) => {
     setSubmitStatus('submitting');
     setErrorMessage('');
 
-    const response = await fetch('/api/contact', {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        name: formData.name,
-        email: formData.email,
-        message: formData.message,
-      }),
-    });
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
 
-    const data = await response.json();
-    console.log(data);
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'メール送信に失敗しました');
+      }
+
+      setSubmitStatus('success');
+      // フォームをリセット
+      setFormData({ name: '', email: '', message: '' });
+
+      // 3秒後にサクセスメッセージを消す
+      setTimeout(() => {
+        setSubmitStatus('idle');
+      }, 3000);
+    } catch (error) {
+      console.error('送信エラー:', error);
+      setSubmitStatus('error');
+      setErrorMessage(
+        error instanceof Error ? error.message : 'メール送信に失敗しました'
+      );
+    }
   };
 
   /**
@@ -83,7 +94,7 @@ const ContactSection = ({ isVisible }: SectionProps) => {
 
         <div>
           <form
-            className='md:max-w-[800px] flex flex-col gap-3 mx-auto py-4'
+            className='md:max-w-[800px] flex flex-col gap-3 mx-auto py-4 px-4'
             onSubmit={handleSubmit}
             aria-label='お問い合わせフォーム'
           >
