@@ -1,17 +1,11 @@
 'use client';
 import { SectionProps } from '@/types/component';
-import React, { useState, FormEvent } from 'react';
+import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
 import SectionHeader from '../common/SectionHeader';
 import AnimatedWaveBackground from '../contact/AnimatedWaveBackground ';
-
-/**
- * フォームデータの型定義
- */
-interface ContactFormData {
-  name: string;
-  email: string;
-  message: string;
-}
+import { ContactFormValues, ContactSchema } from '@/validations/contracts';
 
 /**
  * フォーム送信状態の型定義
@@ -19,19 +13,27 @@ interface ContactFormData {
 type SubmitStatus = 'idle' | 'submitting' | 'success' | 'error';
 
 const ContactSection = ({ isVisible }: SectionProps) => {
-  const [formData, setFormData] = useState<ContactFormData>({
-    name: '',
-    email: '',
-    message: '',
-  });
   const [submitStatus, setSubmitStatus] = useState<SubmitStatus>('idle');
   const [errorMessage, setErrorMessage] = useState<string>('');
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors, isSubmitting },
+  } = useForm<ContactFormValues>({
+    resolver: zodResolver(ContactSchema),
+    defaultValues: {
+      name: '',
+      email: '',
+      message: '',
+    },
+  });
 
   /**
    * フォーム送信ハンドラー
    */
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const onSubmit = async (data: ContactFormValues) => {
     setSubmitStatus('submitting');
     setErrorMessage('');
 
@@ -41,18 +43,17 @@ const ContactSection = ({ isVisible }: SectionProps) => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(data),
       });
 
-      const data = await response.json();
+      const result = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.error || 'メール送信に失敗しました');
+        throw new Error(result.error || 'メール送信に失敗しました');
       }
 
       setSubmitStatus('success');
-      // フォームをリセット
-      setFormData({ name: '', email: '', message: '' });
+      reset(); // ✅ react-hook-formのreset()を使う
 
       // 3秒後にサクセスメッセージを消す
       setTimeout(() => {
@@ -67,16 +68,6 @@ const ContactSection = ({ isVisible }: SectionProps) => {
     }
   };
 
-  /**
-   * 入力変更ハンドラー
-   */
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
-
   return (
     <>
       <AnimatedWaveBackground />
@@ -85,7 +76,6 @@ const ContactSection = ({ isVisible }: SectionProps) => {
         className='relative w-screen pt-16 pb-16 bg-[#f5fffd]'
         aria-labelledby='contact-heading'
       >
-        {/* Section Title */}
         <SectionHeader
           isVisible={isVisible('contact')}
           title='Contact'
@@ -95,22 +85,24 @@ const ContactSection = ({ isVisible }: SectionProps) => {
         <div>
           <form
             className='md:max-w-[800px] flex flex-col gap-3 mx-auto py-4 px-4'
-            onSubmit={handleSubmit}
+            onSubmit={handleSubmit(onSubmit)}
             aria-label='お問い合わせフォーム'
           >
             {/* Name Input */}
             <div>
               <label htmlFor='name' className='text-[#348a58] text-sm'>
                 Name <span className='text-red-500'>*</span>
+                {errors.name && (
+                  <span className='text-red-500 text-sm mt-1'>
+                    {errors.name.message}
+                  </span>
+                )}
               </label>
               <input
                 type='text'
                 id='name'
-                name='name'
-                value={formData.name}
-                onChange={handleChange}
-                required
-                disabled={submitStatus === 'submitting'}
+                {...register('name')}
+                disabled={isSubmitting}
                 className='text-center m-auto w-full border border-[#bde7c4] rounded px-3 py-2 text-base disabled:opacity-50 disabled:cursor-not-allowed'
                 aria-required='true'
               />
@@ -120,15 +112,17 @@ const ContactSection = ({ isVisible }: SectionProps) => {
             <div>
               <label htmlFor='email' className='text-[#348a58] text-sm'>
                 Mail Address <span className='text-red-500'>*</span>
+                {errors.email && (
+                  <span className='text-red-500 text-sm mt-1'>
+                    {errors.email.message}
+                  </span>
+                )}
               </label>
               <input
                 type='email'
                 id='email'
-                name='email'
-                value={formData.email}
-                onChange={handleChange}
-                required
-                disabled={submitStatus === 'submitting'}
+                {...register('email')} // ✅ registerを使う
+                disabled={isSubmitting}
                 className='text-center m-auto w-full border border-[#bde7c4] rounded px-3 py-2 text-base disabled:opacity-50 disabled:cursor-not-allowed'
                 aria-required='true'
               />
@@ -141,15 +135,17 @@ const ContactSection = ({ isVisible }: SectionProps) => {
                 className='text-[#348a58] text-sm'
               >
                 Comment <span className='text-red-500'>*</span>
+                {errors.message && (
+                  <span className='text-red-500 text-sm mt-1'>
+                    {errors.message.message}
+                  </span>
+                )}
               </label>
               <textarea
                 id='contactMessage'
-                name='message'
                 rows={4}
-                value={formData.message}
-                onChange={handleChange}
-                required
-                disabled={submitStatus === 'submitting'}
+                {...register('message')} // ✅ registerを使う
+                disabled={isSubmitting}
                 className='mb-7 border border-[#bde7c4] rounded px-3 py-2 text-base w-full disabled:opacity-50 disabled:cursor-not-allowed'
                 aria-required='true'
               />
@@ -178,10 +174,10 @@ const ContactSection = ({ isVisible }: SectionProps) => {
             {/* Submit Button */}
             <button
               type='submit'
-              disabled={submitStatus === 'submitting'}
+              disabled={isSubmitting} // ✅ isSubmittingを使う
               className='w-64 m-auto bg-green-700/50 hover:bg-green-700/20 text-white font-semibold py-3 px-6 rounded-xl backdrop-blur-md border border-white/30 transform transition-all duration-300 ease-out hover:scale-95 hover:translate-y-1 shadow-lg hover:shadow-md disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 disabled:hover:translate-y-0'
             >
-              {submitStatus === 'submitting' ? '送信中...' : '送信'}
+              {isSubmitting ? '送信中...' : '送信'}
             </button>
           </form>
         </div>
