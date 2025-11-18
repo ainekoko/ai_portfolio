@@ -11,4 +11,4 @@ export const ContactSchema = z.object({
     .email({ message: '正しいメールアドレスを入力してください' }),
   message: z.string().min(5, { message: '問い合わせ内容は5文字以上必要です' }),
 });
-export type ContactFormValues = z.infer<typeof contactSchema>;
+export type ContactFormValues = z.infer<typeof ContactSchema>;

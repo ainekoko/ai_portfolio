@@ -3,8 +3,8 @@ import { SectionProps } from '@/types/component';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import SectionHeader from '../common/SectionHeader';
-import AnimatedWaveBackground from '../contact/AnimatedWaveBackground ';
+import SectionHeader from '@/components/common/SectionHeader';
+import AnimatedWaveBackground from '@/components/contact/AnimatedWaveBackground ';
 import { ContactFormValues, ContactSchema } from '@/validations/contracts';
 
 /**
@@ -28,6 +28,7 @@ const ContactSection = ({ isVisible }: SectionProps) => {
       email: '',
       message: '',
     },
+    mode: 'onBlur',
   });
 
   /**
@@ -49,11 +50,11 @@ const ContactSection = ({ isVisible }: SectionProps) => {
       const result = await response.json();
 
       if (!response.ok) {
-        throw new Error(result.error || 'メール送信に失敗しました');
+        throw new Error(result.error || 'メールの送信に失敗しました');
       }
 
       setSubmitStatus('success');
-      reset(); // ✅ react-hook-formのreset()を使う
+      reset();
 
       // 3秒後にサクセスメッセージを消す
       setTimeout(() => {
@@ -63,7 +64,7 @@ const ContactSection = ({ isVisible }: SectionProps) => {
       console.error('送信エラー:', error);
       setSubmitStatus('error');
       setErrorMessage(
-        error instanceof Error ? error.message : 'メール送信に失敗しました'
+        error instanceof Error ? error.message : 'メールの送信に失敗しました'
       );
     }
   };
@@ -87,44 +88,63 @@ const ContactSection = ({ isVisible }: SectionProps) => {
             className='md:max-w-[800px] flex flex-col gap-3 mx-auto py-4 px-4'
             onSubmit={handleSubmit(onSubmit)}
             aria-label='お問い合わせフォーム'
+            noValidate
           >
             {/* Name Input */}
             <div>
-              <label htmlFor='name' className='text-[#348a58] text-sm'>
+              <label
+                htmlFor='name'
+                className='text-[#348a58] text-sm block mb-1'
+              >
                 Name <span className='text-red-500'>*</span>
-                {errors.name && (
-                  <span className='text-red-500 text-sm mt-1'>
-                    {errors.name.message}
-                  </span>
-                )}
               </label>
+              {errors.name && (
+                <span className='text-red-500 text-sm block mb-1'>
+                  {errors.name.message}
+                </span>
+              )}
               <input
                 type='text'
                 id='name'
                 {...register('name')}
                 disabled={isSubmitting}
-                className='text-center m-auto w-full border border-[#bde7c4] rounded px-3 py-2 text-base disabled:opacity-50 disabled:cursor-not-allowed'
+                className='text-center m-auto w-full border border-[#bde7c4] rounded px-3 py-2 text-base disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-[#348a58]'
                 aria-required='true'
+                {...(errors.name && {
+                  'aria-invalid': 'true',
+                  'aria-describedby': 'name-error',
+                })}
               />
             </div>
 
             {/* Email Input */}
             <div>
-              <label htmlFor='email' className='text-[#348a58] text-sm'>
+              <label
+                htmlFor='email'
+                className='text-[#348a58] text-sm block mb-1'
+              >
                 Mail Address <span className='text-red-500'>*</span>
-                {errors.email && (
-                  <span className='text-red-500 text-sm mt-1'>
-                    {errors.email.message}
-                  </span>
-                )}
               </label>
+              {errors.email && (
+                <span
+                  className='text-red-500 text-sm block mb-1'
+                  id='email-error'
+                >
+                  {errors.email.message}
+                </span>
+              )}
               <input
                 type='email'
                 id='email'
-                {...register('email')} // ✅ registerを使う
+                {...register('email')}
                 disabled={isSubmitting}
-                className='text-center m-auto w-full border border-[#bde7c4] rounded px-3 py-2 text-base disabled:opacity-50 disabled:cursor-not-allowed'
+                className='text-center m-auto w-full border border-[#bde7c4] rounded px-3 py-2 text-base disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-[#348a58]'
                 aria-required='true'
+                aria-describedby={errors.email ? 'email-error' : undefined}
+                {...(errors.email && {
+                  'aria-invalid': 'true',
+                  'aria-describedby': 'email-error',
+                })}
               />
             </div>
 
@@ -132,22 +152,29 @@ const ContactSection = ({ isVisible }: SectionProps) => {
             <div>
               <label
                 htmlFor='contactMessage'
-                className='text-[#348a58] text-sm'
+                className='text-[#348a58] text-sm block mb-1'
               >
                 Comment <span className='text-red-500'>*</span>
-                {errors.message && (
-                  <span className='text-red-500 text-sm mt-1'>
-                    {errors.message.message}
-                  </span>
-                )}
               </label>
+              {errors.message && (
+                <span
+                  className='text-red-500 text-sm block mb-1'
+                  id='message-error'
+                >
+                  {errors.message.message}
+                </span>
+              )}
               <textarea
                 id='contactMessage'
                 rows={4}
-                {...register('message')} // ✅ registerを使う
+                {...register('message')}
                 disabled={isSubmitting}
-                className='mb-7 border border-[#bde7c4] rounded px-3 py-2 text-base w-full disabled:opacity-50 disabled:cursor-not-allowed'
+                className='mb-7 border border-[#bde7c4] rounded px-3 py-2 text-base w-full disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-[#348a58]'
                 aria-required='true'
+                {...(errors.message && {
+                  'aria-invalid': 'true',
+                  'aria-describedby': 'message-error',
+                })}
               />
             </div>
 
@@ -156,6 +183,7 @@ const ContactSection = ({ isVisible }: SectionProps) => {
               <div
                 className='text-red-600 text-sm text-center bg-red-50 p-3 rounded'
                 role='alert'
+                aria-live='assertive'
               >
                 {errorMessage}
               </div>
@@ -166,6 +194,7 @@ const ContactSection = ({ isVisible }: SectionProps) => {
               <div
                 className='text-green-600 text-sm text-center bg-green-50 p-3 rounded'
                 role='status'
+                aria-live='polite'
               >
                 送信が完了しました!
               </div>
@@ -174,8 +203,9 @@ const ContactSection = ({ isVisible }: SectionProps) => {
             {/* Submit Button */}
             <button
               type='submit'
-              disabled={isSubmitting} // ✅ isSubmittingを使う
+              disabled={isSubmitting}
               className='w-64 m-auto bg-green-700/50 hover:bg-green-700/20 text-white font-semibold py-3 px-6 rounded-xl backdrop-blur-md border border-white/30 transform transition-all duration-300 ease-out hover:scale-95 hover:translate-y-1 shadow-lg hover:shadow-md disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 disabled:hover:translate-y-0'
+              {...(isSubmitting && { 'aria-busy': 'true' })}
             >
               {isSubmitting ? '送信中...' : '送信'}
             </button>
