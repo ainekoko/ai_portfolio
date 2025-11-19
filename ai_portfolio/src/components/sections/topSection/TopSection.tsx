@@ -16,7 +16,6 @@ export type SectionIdProps = {
  * @param props - isVisible: boolean
  */
 const TopSection = ({ isVisible }: SectionIdProps) => {
-  console.log('TopSection isVisible:', isVisible);
   return (
     <section
       id='topSection'

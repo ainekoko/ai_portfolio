@@ -15,7 +15,7 @@ const SkillSection = ({ isVisible }: SectionProps) => {
     <section
       id='skill'
       aria-label='スキルセクション'
-      className='bg-[#ffffff] relative w-screen pt-16 pb-28'
+      className='bg-[#ffffff] relative w-screen pt-16 pb-40'
     >
       {/* Section Title */}
       <SectionHeader
