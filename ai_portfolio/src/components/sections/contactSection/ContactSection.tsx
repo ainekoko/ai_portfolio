@@ -4,8 +4,10 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import SectionHeader from '@/components/common/SectionHeader';
-import AnimatedWaveBackground from '@/components/contact/AnimatedWaveBackground ';
+import AnimatedWaveBackground from '@/components/contact/animatedWaveBackground/AnimatedWaveBackground ';
 import { ContactFormValues, ContactSchema } from '@/validations/contracts';
+import Font from '@/components/common/Font';
+import { postContactEmailApi } from '@/services/contactApi';
 
 /**
  * フォーム送信状態の型定義
@@ -39,20 +41,7 @@ const ContactSection = ({ isVisible }: SectionProps) => {
     setErrorMessage('');
 
     try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      });
-
-      const result = await response.json();
-
-      if (!response.ok) {
-        throw new Error(result.error || 'メールの送信に失敗しました');
-      }
-
+      await postContactEmailApi(data);
       setSubmitStatus('success');
       reset();
 
@@ -103,18 +92,20 @@ const ContactSection = ({ isVisible }: SectionProps) => {
                   {errors.name.message}
                 </span>
               )}
-              <input
-                type='text'
-                id='name'
-                {...register('name')}
-                disabled={isSubmitting}
-                className='text-center m-auto w-full border border-[#bde7c4] rounded px-3 py-2 text-base disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-[#348a58]'
-                aria-required='true'
-                {...(errors.name && {
-                  'aria-invalid': 'true',
-                  'aria-describedby': 'name-error',
-                })}
-              />
+              <Font>
+                <input
+                  type='text'
+                  id='name'
+                  {...register('name')}
+                  disabled={isSubmitting}
+                  className='text-center m-auto w-full border border-[#bde7c4] rounded px-3 py-2 text-base disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-[#348a58]'
+                  aria-required='true'
+                  {...(errors.name && {
+                    'aria-invalid': 'true',
+                    'aria-describedby': 'name-error',
+                  })}
+                />
+              </Font>
             </div>
 
             {/* Email Input */}
@@ -133,19 +124,21 @@ const ContactSection = ({ isVisible }: SectionProps) => {
                   {errors.email.message}
                 </span>
               )}
-              <input
-                type='email'
-                id='email'
-                {...register('email')}
-                disabled={isSubmitting}
-                className='text-center m-auto w-full border border-[#bde7c4] rounded px-3 py-2 text-base disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-[#348a58]'
-                aria-required='true'
-                aria-describedby={errors.email ? 'email-error' : undefined}
-                {...(errors.email && {
-                  'aria-invalid': 'true',
-                  'aria-describedby': 'email-error',
-                })}
-              />
+              <Font>
+                <input
+                  type='email'
+                  id='email'
+                  {...register('email')}
+                  disabled={isSubmitting}
+                  className='text-center m-auto w-full border border-[#bde7c4] rounded px-3 py-2 text-base disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-[#348a58]'
+                  aria-required='true'
+                  aria-describedby={errors.email ? 'email-error' : undefined}
+                  {...(errors.email && {
+                    'aria-invalid': 'true',
+                    'aria-describedby': 'email-error',
+                  })}
+                />
+              </Font>
             </div>
 
             {/* Message Textarea */}
@@ -164,18 +157,20 @@ const ContactSection = ({ isVisible }: SectionProps) => {
                   {errors.message.message}
                 </span>
               )}
-              <textarea
-                id='contactMessage'
-                rows={4}
-                {...register('message')}
-                disabled={isSubmitting}
-                className='mb-7 border border-[#bde7c4] rounded px-3 py-2 text-base w-full disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-[#348a58]'
-                aria-required='true'
-                {...(errors.message && {
-                  'aria-invalid': 'true',
-                  'aria-describedby': 'message-error',
-                })}
-              />
+              <Font>
+                <textarea
+                  id='contactMessage'
+                  rows={4}
+                  {...register('message')}
+                  disabled={isSubmitting}
+                  className='mb-7 border border-[#bde7c4] rounded px-3 py-2 text-base w-full disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-[#348a58]'
+                  aria-required='true'
+                  {...(errors.message && {
+                    'aria-invalid': 'true',
+                    'aria-describedby': 'message-error',
+                  })}
+                />
+              </Font>
             </div>
 
             {/* Error Message */}
