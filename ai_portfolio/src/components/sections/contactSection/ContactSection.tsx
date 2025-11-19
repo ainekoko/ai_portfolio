@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import SectionHeader from '@/components/common/SectionHeader';
-import AnimatedWaveBackground from '@/components/contact/animatedWaveBackground/AnimatedWaveBackground ';
+import AnimatedWaveBackground from '@/components/contact/animatedWaveBackground/AnimatedWaveBackground';
 import { ContactFormValues, ContactSchema } from '@/validations/contracts';
 import Font from '@/components/common/Font';
 import { postContactEmailApi } from '@/services/contactApi';

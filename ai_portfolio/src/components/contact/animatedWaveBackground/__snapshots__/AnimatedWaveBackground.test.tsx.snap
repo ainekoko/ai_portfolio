@@ -1,0 +1,62 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`AnimatedWaveBackground スナップショットテスト コンポーネントの構造が変わっていない 1`] = `
+<div>
+  <div
+    class="bg-white relative w-full h-[200px] overflow-hidden"
+  >
+    <div
+      class="absolute inset-0"
+    >
+      <svg
+        class="absolute bottom-0 w-full h-64"
+        preserveAspectRatio="none"
+        viewBox="0 0 1200 250"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M0,120 C150,180 250,180 400,140 C550,100 650,60 800,80 C950,100 1050,140 1200,100 L1200,250 L0,250 Z"
+          fill="#7DFFE1"
+          fill-opacity="0.8"
+        >
+          <animate
+            attributeName="d"
+            dur="7s"
+            repeatCount="indefinite"
+            values="M0,120 C150,180 250,180 400,140 C550,100 650,60 800,80 C950,100 1050,140 1200,100 L1200,250 L0,250 Z;
+                      M0,100 C150,60 250,60 400,120 C550,180 650,180 800,160 C950,140 1050,80 1200,120 L1200,250 L0,250 Z;
+                      M0,140 C150,100 250,100 400,80 C550,60 650,120 800,140 C950,160 1050,160 1200,80 L1200,250 L0,250 Z;
+                      M0,120 C150,180 250,180 400,140 C550,100 650,60 800,80 C950,100 1050,140 1200,100 L1200,250 L0,250 Z"
+          />
+        </path>
+      </svg>
+    </div>
+    <div
+      class="absolute inset-0"
+    >
+      <svg
+        class="absolute bottom-0 w-full h-48"
+        preserveAspectRatio="none"
+        viewBox="0 0 1200 180"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M0,90 C120,130 180,130 300,100 C420,70 480,50 600,60 C720,70 780,110 900,120 C1020,130 1080,110 1200,80 L1200,180 L0,180 Z"
+          fill="#ffffff"
+          fill-opacity="0.9"
+        >
+          <animate
+            attributeName="d"
+            dur="5s"
+            repeatCount="indefinite"
+            values="M0,90 C120,130 180,130 300,100 C420,70 480,50 600,60 C720,70 780,110 900,120 C1020,130 1080,110 1200,80 L1200,180 L0,180 Z;
+                      M0,70 C120,50 180,50 300,80 C420,110 480,130 600,120 C720,110 780,70 900,60 C1020,50 1080,70 1200,100 L1200,180 L0,180 Z;
+                      M0,110 C120,90 180,90 300,60 C420,30 480,70 600,90 C720,110 780,130 900,140 C1020,150 1080,130 1200,90 L1200,180 L0,180 Z;
+                      M0,90 C120,130 180,130 300,100 C420,70 480,50 600,60 C720,70 780,110 900,120 C1020,130 1080,110 1200,80 L1200,180 L0,180 Z"
+          />
+        </path>
+      </svg>
+    </div>
+  </div>
+</div>
+`;

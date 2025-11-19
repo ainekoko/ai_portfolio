@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from '@storybook/nextjs-vite';
-import AnimatedWaveBackground from './AnimatedWaveBackground ';
+import AnimatedWaveBackground from './AnimatedWaveBackground';
 const meta: Meta<typeof AnimatedWaveBackground> = {
   component: AnimatedWaveBackground,
   title: 'components/contact/AnimatedWaveBackground',
