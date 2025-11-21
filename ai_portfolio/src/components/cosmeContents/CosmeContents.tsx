@@ -99,7 +99,7 @@ const CosmeContents: React.FC<PropType> = (props) => {
       />
 
       {/* カルーセル: lg以上で有効、lg以下で無効 */}
-      <section className='embla w-screen px-4 lg:px-8 text-sm min-h-screen lg:h-screen'>
+      <section className='embla w-screen px-2 text-sm min-h-screen lg:h-screen'>
         <div className='embla__viewport bg-[#ffffff]' ref={emblaRef}>
           <div className='embla__container lg:flex lg:flex-row flex-col'>
             {COSME_CONTENTS.map((content, index) => (
@@ -108,13 +108,13 @@ const CosmeContents: React.FC<PropType> = (props) => {
                 className='embla__slide lg:flex-[0_0_100%] mb-8 lg:mb-0'
               >
                 {/* モダンなカードデザイン */}
-                <div className='flex items-center justify-center w-full h-full px-4 lg:px-8 py-6 lg:py-8'>
+                <div className='flex items-start justify-center w-full h-full px-4 lg:px-8'>
                   <div className='relative max-w-5xl w-full'>
                     {/* メインカード */}
                     <div className='bg-white rounded-3xl shadow-2xl overflow-hidden transform transition-all duration-300 hover:shadow-3xl'>
                       {/* ヘッダーセクション - グラデーション背景 */}
                       <div
-                        className='relative px-8 py-12 lg:px-12 lg:py-16'
+                        className='relative px-8 py-5 '
                         style={{
                           background: `linear-gradient(135deg, ${content.color}15 0%, ${content.color}30 100%)`,
                         }}
@@ -129,22 +129,19 @@ const CosmeContents: React.FC<PropType> = (props) => {
 
                         {/* タイトルと年度 */}
                         <div className='relative z-10'>
-                          <div className='inline-block mb-3'>
+                          {/* 年度 - 控えめに */}
+                          <div className='mb-4'>
                             <span
-                              className='text-xs lg:text-sm font-semibold px-4 py-1.5 rounded-full text-white'
-                              style={{ backgroundColor: content.color }}
+                              className='text-xs lg:text-sm font-medium tracking-widest uppercase opacity-80'
+                              style={{ color: content.color }}
                             >
                               {content.year}
                             </span>
                           </div>
-                          <h1 className='text-3xl lg:text-5xl font-bold text-gray-900 mb-4'>
+                          {/* タイトル - 落ち着いたサイズ */}
+                          <h1 className='text-2xl lg:text-3xl font-semibold text-gray-900 tracking-wide'>
                             {content.title}
                           </h1>
-                          {/* 装飾線 */}
-                          <div
-                            className='h-1 w-20 rounded-full'
-                            style={{ backgroundColor: content.color }}
-                          ></div>
                         </div>
                       </div>
 
@@ -154,24 +151,24 @@ const CosmeContents: React.FC<PropType> = (props) => {
                           {/* 左側:業務内容 */}
                           <div className='space-y-6'>
                             <div>
-                              <h2 className='text-xl font-bold text-gray-900 mb-4 flex items-center gap-3'>
-                                <span
-                                  className='w-2 h-8 rounded-full'
-                                  style={{ backgroundColor: content.color }}
-                                ></span>
-                                業務内容
-                              </h2>
-                              <div className='space-y-3 pl-5'>
+                              <div className='mb-6 pb-3 border-b border-gray-200'>
+                                <h2 className='text-sm font-medium text-gray-500 tracking-widest'>
+                                  WORK CONTENT
+                                </h2>
+                              </div>
+                              <div className='space-y-2'>
                                 {content.description.map((item, idx) => (
                                   <div
                                     key={idx}
-                                    className='flex items-start gap-3 group'
+                                    className='flex items-start gap-3'
                                   >
-                                    <div
-                                      className='w-2 h-2 rounded-full mt-2 flex-shrink-0 group-hover:scale-125 transition-transform'
-                                      style={{ backgroundColor: content.color }}
-                                    ></div>
-                                    <p className='text-gray-700 text-sm lg:text-base leading-relaxed'>
+                                    <span
+                                      className='text-xs font-bold mt-0.5'
+                                      style={{ color: content.color }}
+                                    >
+                                      ▸
+                                    </span>
+                                    <p className='text-gray-800 text-sm lg:text-base leading-relaxed flex-1'>
                                       {item}
                                     </p>
                                   </div>
@@ -180,32 +177,45 @@ const CosmeContents: React.FC<PropType> = (props) => {
                             </div>
 
                             {/* 思い出セクション */}
-                            <div
-                              className='mt-8 p-6 rounded-2xl border-2'
-                              style={{
-                                borderColor: `${content.color}40`,
-                                backgroundColor: `${content.color}08`,
-                              }}
-                            >
-                              <h3 className='text-lg font-bold text-gray-900 mb-3 flex items-center gap-2'>
-                                <span className='text-xl'>💭</span>
-                                思い出
-                              </h3>
-                              <p className='text-gray-600 text-sm lg:text-base leading-relaxed italic'>
-                                {content.hukidashi}
-                              </p>
+                            <div className='mt-8'>
+                              <div
+                                className='relative bg-gradient-to-br from-white to-gray-50 rounded-3xl p-6 shadow-lg border-2'
+                                style={{ borderColor: `${content.color}60` }}
+                              >
+                                {/* 吹き出しの三角 */}
+                                <div
+                                  className='absolute -top-3 left-8 w-6 h-6 rotate-45 border-l-2 border-t-2'
+                                  style={{
+                                    borderColor: `${content.color}60`,
+                                    background:
+                                      'linear-gradient(135deg, white 0%, rgb(249, 250, 251) 100%)',
+                                  }}
+                                ></div>
+                                <div className='relative'>
+                                  <div className='flex items-center gap-2 mb-3'>
+                                    <span className='text-2xl'>💭</span>
+                                    <h3
+                                      className='text-base font-bold tracking-wide'
+                                      style={{ color: content.color }}
+                                    >
+                                      思い出
+                                    </h3>
+                                  </div>
+                                  <p className='text-gray-700 text-sm lg:text-base leading-relaxed italic'>
+                                    {content.hukidashi}
+                                  </p>
+                                </div>
+                              </div>
                             </div>
                           </div>
 
                           {/* 右側:詳細説明 */}
                           <div>
-                            <h2 className='text-xl font-bold text-gray-900 mb-4 flex items-center gap-3'>
-                              <span
-                                className='w-2 h-8 rounded-full'
-                                style={{ backgroundColor: content.color }}
-                              ></span>
-                              詳細
-                            </h2>
+                            <div className='mb-6 pb-3 border-b border-gray-200'>
+                              <h2 className='text-sm font-medium text-gray-500 tracking-widest'>
+                                DETAILS
+                              </h2>
+                            </div>
                             <div className='prose prose-sm lg:prose-base max-w-none'>
                               <p className='text-gray-700 leading-relaxed text-sm lg:text-base'>
                                 {content.businessContent}
