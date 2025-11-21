@@ -89,37 +89,58 @@ const CosmeContents: React.FC<PropType> = (props) => {
                     <div className='-z-[99] absolute top-4 md:top-8 right-4 md:right-8 text-6xl md:text-[200px] font-light text-gray-300 leading-none'>
                       0{index + 1}
                     </div>
-                    <div className='grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12'>
-                      {/* Left Column */}
-                      <div className='space-y-6 lg:space-y-8 flex-1 lg:max-w-[500px]'>
-                        <div className='space-y-4 lg:space-y-6 leading-relaxed text-sm lg:text-[14px]'>
-                          <div className='mb-6 lg:mb-10'>
-                            <p className='mb-2'>{content.year}</p>
-                            <p className='mb-1 font-medium lg:font-normal'>
-                              {content.title}
-                            </p>
-                            <p className='text-gray-600 lg:text-black'>
-                              {content.description}
-                            </p>
+                    <div className='relative px-8 py-8 '>
+                      <div className='flex items-end gap-6'>
+                        <h1 className='text-4xl font-bold text-gray-900 tracking-tight'>
+                          {content.title}
+                        </h1>
+                        <p className='text-gray-400 text-lg font-light pb-1'>
+                          {content.year}
+                        </p>
+                      </div>
+                    </div>
+                    {/* コンテンツ部分 */}
+                    <div className='p-8'>
+                      <div className='grid grid-cols-2 gap-8'>
+                        {/* 左側：業務内容と思い出 */}
+                        <div className='space-y-6'>
+                          <h2 className='text-lg font-bold text-gray-900 mb-4'>
+                            業務内容
+                          </h2>
+                          <div className='space-y-3'>
+                            {content.description.map((item, index) => (
+                              <div
+                                key={index}
+                                className='pl-4 py-1 text-gray-900 text-sm font-light tracking-wide border-l border-gray-900'
+                              >
+                                {item}
+                              </div>
+                            ))}
                           </div>
-                          <hr className='h-px bg-gradient-to-r from-transparent via-[#ccc] to-transparent border-none' />
+                        </div>
+                        {/* 思い出 */}
+                        <div>
+                          <h2 className='text-lg font-bold text-gray-900 mb-4'>
+                            思い出
+                          </h2>
+                          <p className='text-gray-600 leading-relaxed text-sm'>
+                            {content.hukidashi}
+                          </p>
                         </div>
                       </div>
-                      {/* Right Column - Speech Bubble */}
-                      {/* 右側 */}
 
-                      <div className='space-y-6 flex items-center'>
-                        <div className='leading-relaxed text-gray-700 text-sm md:text-base'>
-                          <h2 className='font-medium mb-3 lg:mb-4 text-base lg:text-[14px]'>
-                            業務説明
-                          </h2>
-
+                      {/* 右側：詳細説明 */}
+                      <div>
+                        <h2 className='text-lg font-bold text-gray-900 mb-4'>
+                          詳細
+                        </h2>
+                        <div className='text-gray-600 leading-relaxed text-sm'>
                           {content.businessContent}
                         </div>
                       </div>
                     </div>
                   </div>{' '}
-                </div>
+                </div>{' '}
               </div>
             ))}
           </div>

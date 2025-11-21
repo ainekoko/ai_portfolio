@@ -3,7 +3,7 @@ interface CosmeContent {
   title: string;
   color: string;
   year: string;
-  description: string;
+  description: string[] | string;
   businessContent?: React.ReactNode;
   hukidashi?: React.ReactNode;
 }
@@ -12,7 +12,7 @@ export const COSME_CONTENTS: CosmeContent[] = [
     title: 'ネイリスト',
     color: '#ff6b9d',
     year: '2011~2014',
-    description: '店舗接客/イベント接客/店舗サンプル作成/事務作業等',
+    description: ['店舗接客', 'イベント接客', '店舗サンプル作成', '事務作業等'],
     businessContent: (
       <>
         自社商品を卸している全国の店舗に赴き、商品紹介も兼ねてのネイル体験コーナーを行い小さいお子様から興味があるけど一歩踏み出せなかったお客様へ施術をし、コミュニケーションスキルが培われました。
@@ -38,8 +38,12 @@ export const COSME_CONTENTS: CosmeContent[] = [
     title: 'ルート営業',
     color: '#c44569',
     year: '2012~2014',
-    description:
-      '店舗へ直接出向き、棚卸や新商品の紹介,販促物の提案,イベント企画等',
+    description: [
+      '店舗へ直接出向き',
+      '棚卸や新商品の紹介',
+      '販促物の提案',
+      'イベント企画等',
+    ],
     businessContent: (
       <>
         お取引のある店舗の方と何度も顔を合わせる中で信頼関係を築き、販売促進のためのキャンペーン企画を提案したり販促物の作成にも携わりました。
@@ -61,8 +65,10 @@ export const COSME_CONTENTS: CosmeContent[] = [
     title: 'OEM営業',
     color: '#6a5acd',
     year: '2015~2019',
-    description:
-      '新規開拓/「他社ブランドの製品を製造する」ための、企画・開発・品質管理・納期調整・納品までを担当',
+    description: [
+      '新規開拓',
+      '「他社ブランドの製品を製造する」ための、企画・開発・品質管理・納期調整・納品までを担当',
+    ],
     businessContent: (
       <>
         「こんなのが作成したい」
@@ -90,7 +96,7 @@ export const COSME_CONTENTS: CosmeContent[] = [
     title: '企画',
     color: '#4682b4',
     year: '2018~2020',
-    description: '自社商品の企画/販促物のデザイン制作',
+    description: ['自社商品の企画/販促物のデザイン制作'],
     businessContent: (
       <>
         目標にしていた自社商品の企画に携わる事ができ、商品コンセプトの立案からパッケージデザイン、販促物の制作まで一貫して担当しました。
