@@ -142,7 +142,7 @@ const CosmeContents: React.FC<PropType> = (props) => {
                       </div>
 
                       {/* コンテンツセクション */}
-                      <div className='px-6 py-8 lg:px-12 lg:py-12'>
+                      <div className='px-6 py-2 lg:px-12 '>
                         <div className='grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12'>
                           {/* 左側:業務内容 */}
                           <div className='space-y-6'>
