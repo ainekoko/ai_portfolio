@@ -11,6 +11,7 @@ import useEmblaCarousel from 'embla-carousel-react';
 import './sample.css';
 import SectionHeader from '../common/SectionHeader';
 import { COSME_CONTENTS } from '@/utils/CosmeContentsData';
+import Link from 'next/link';
 
 type PropType = {
   slides: number[];
@@ -100,7 +101,7 @@ const CosmeContents: React.FC<PropType> = (props) => {
 
       {/* カルーセル: lg以上で有効、lg以下で無効 */}
       <section className='embla w-screen px-2 text-sm min-h-screen lg:h-screen'>
-        <div className='embla__viewport bg-[#ffffff]' ref={emblaRef}>
+        <div className='embla__viewport ' ref={emblaRef}>
           <div className='embla__container lg:flex lg:flex-row flex-col'>
             {COSME_CONTENTS.map((content, index) => (
               <div
@@ -111,14 +112,9 @@ const CosmeContents: React.FC<PropType> = (props) => {
                 <div className='flex items-start justify-center w-full h-full px-4 lg:px-8'>
                   <div className='relative max-w-5xl w-full'>
                     {/* メインカード */}
-                    <div className='bg-white rounded-3xl shadow-2xl overflow-hidden transform transition-all duration-300 hover:shadow-3xl'>
+                    <div className='bg-white  overflow-hidden transform transition-all duration-300 hover:shadow-3xl'>
                       {/* ヘッダーセクション - グラデーション背景 */}
-                      <div
-                        className='relative px-8 py-5 '
-                        style={{
-                          background: `linear-gradient(135deg, ${content.color}15 0%, ${content.color}30 100%)`,
-                        }}
-                      >
+                      <div className='relative px-8 py-5 '>
                         {/* 装飾的な番号 */}
                         <div
                           className='absolute top-6 right-6 lg:top-8 lg:right-8 text-7xl lg:text-9xl font-bold opacity-10'
@@ -224,14 +220,6 @@ const CosmeContents: React.FC<PropType> = (props) => {
                           </div>
                         </div>
                       </div>
-
-                      {/* フッター装飾 */}
-                      <div
-                        className='h-2'
-                        style={{
-                          background: `linear-gradient(90deg, ${content.color} 0%, ${content.color}80 100%)`,
-                        }}
-                      ></div>
                     </div>
                   </div>
                 </div>
@@ -274,6 +262,46 @@ const CosmeContents: React.FC<PropType> = (props) => {
                 ))}
           </div>
         </div>
+        <style>{`
+        .arrow {
+          position: relative;
+          display: inline-block;
+          pointer-events: none;
+        }
+        .arrow::after {
+          content: '';
+          position: absolute;
+          right: -35px;
+          width: 150px;
+          height: 10px;
+          border-bottom: solid 2px currentColor;
+          border-left: solid 2px currentColor;
+          transform: skew(-45deg);
+          transform-origin: right center;
+          transition: all 0.3s ease;
+          pointer-events: none;
+        }
+        .button-4:hover .arrow::after {
+          width: 180px;
+          border-color: #f59e0b;
+        }
+        
+        .arrow-reverse::after {
+          transform: skew(45deg);
+        }
+      `}</style>
+        {/* スタイル4: 上部にテキスト */}
+        <Link
+          href='/'
+          className='z-50 absolute button-4 bottom-5 right-5 group pl-25 p-3 pointer-events-auto block'
+        >
+          <p className='text-center text-sm font-bold text-gray-800 group-hover:text-amber-600 transition-colors duration-300 pointer-events-none'>
+            Back Page
+          </p>
+          <div className='flex justify-center pointer-events-none'>
+            <div className='arrow text-gray-400'></div>
+          </div>
+        </Link>
       </section>
     </>
   );
