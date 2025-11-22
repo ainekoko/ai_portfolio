@@ -109,15 +109,15 @@ const CosmeContents: React.FC<PropType> = (props) => {
                 className='embla__slide lg:flex-[0_0_100%] mb-8 lg:mb-0'
               >
                 {/* モダンなカードデザイン */}
-                <div className='flex items-start justify-center w-full h-full px-4 lg:px-8'>
-                  <div className='relative max-w-5xl w-full'>
+                <div className='mb-25 flex items-start justify-center w-full h-full px-4 lg:px-8 pt-6 lg:pt-8 pb-6 lg:pb-8'>
+                  <div className='relative max-w-5xl w-full h-full lg:max-h-[85vh] flex flex-col'>
                     {/* メインカード */}
-                    <div className='bg-white  overflow-hidden transform transition-all duration-300 hover:shadow-3xl'>
+                    <div className='bg-white overflow-hidden transform transition-all duration-300 hover:shadow-3xl flex flex-col h-full'>
                       {/* ヘッダーセクション - グラデーション背景 */}
-                      <div className='relative px-8 py-5 '>
+                      <div className='relative p-10 shrink-0'>
                         {/* 装飾的な番号 */}
                         <div
-                          className='absolute top-6 right-6 lg:top-8 lg:right-8 text-7xl lg:text-9xl font-bold opacity-10'
+                          className='absolute top-6 right-6 lg:top-8 lg:right-8 text-7xl lg:text-[15rem] font-bold opacity-10'
                           style={{ color: content.color }}
                         >
                           0{index + 1}
@@ -142,7 +142,7 @@ const CosmeContents: React.FC<PropType> = (props) => {
                       </div>
 
                       {/* コンテンツセクション */}
-                      <div className='px-6 py-2 lg:px-12 '>
+                      <div className='px-6 py-2 lg:px-12 flex-1 overflow-y-auto'>
                         <div className='grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12'>
                           {/* 左側:業務内容 */}
                           <div className='space-y-6'>
