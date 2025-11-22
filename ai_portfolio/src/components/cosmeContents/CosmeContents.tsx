@@ -1,5 +1,5 @@
 'use client';
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { EmblaOptionsType } from 'embla-carousel';
 import { DotButton, useDotButton } from './EmblaCarouselDotButton';
 import {
@@ -13,8 +13,10 @@ import SectionHeader from '../common/SectionHeader';
 import { COSME_CONTENTS } from '@/utils/CosmeContentsData';
 import Link from 'next/link';
 
+// ブレークポイント定数
+const LG_BREAKPOINT = 1024;
+
 type PropType = {
-  slides: number[];
   options?: EmblaOptionsType;
 };
 
@@ -23,8 +25,9 @@ type PropType = {
  * @param props
  */
 const CosmeContents: React.FC<PropType> = (props) => {
-  const { slides, options } = props;
+  const { options } = props;
   const [emblaRef, emblaApi] = useEmblaCarousel(options);
+  const [isLargeScreen, setIsLargeScreen] = useState(true);
 
   const { selectedIndex, scrollSnaps, onDotButtonClick } =
     useDotButton(emblaApi);
@@ -36,10 +39,26 @@ const CosmeContents: React.FC<PropType> = (props) => {
     onNextButtonClick,
   } = usePrevNextButtons(emblaApi);
 
+  // 画面サイズの監視
+  useEffect(() => {
+    // クライアントサイドでのみ実行
+    if (typeof window === 'undefined') return;
+
+    const handleResize = () => {
+      setIsLargeScreen(window.innerWidth >= LG_BREAKPOINT);
+    };
+
+    // 初期値設定
+    handleResize();
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   const onWheel = useCallback(
     (event: WheelEvent) => {
       // lg以下ではホイールイベントを無効化
-      if (window.innerWidth < 1024) return;
+      if (!isLargeScreen) return;
       if (!emblaApi) return;
       event.preventDefault();
 
@@ -49,27 +68,30 @@ const CosmeContents: React.FC<PropType> = (props) => {
         emblaApi.scrollPrev();
       }
     },
-    [emblaApi]
+    [emblaApi, isLargeScreen]
   );
 
   useEffect(() => {
     // lg以下ではホイールイベントリスナーを追加しない
-    if (window.innerWidth < 1024) return;
+    if (!isLargeScreen) return;
 
     const emblaNode = emblaApi?.rootNode();
     if (!emblaNode) return;
 
     emblaNode.addEventListener('wheel', onWheel, { passive: false });
     return () => emblaNode.removeEventListener('wheel', onWheel);
-  }, [emblaApi, onWheel]);
+  }, [emblaApi, onWheel, isLargeScreen]);
 
-  // キーボード操作のハンドラー
+  // キーボード操作のハンドラー（カルーセル領域にフォーカスがある時のみ有効）
   useEffect(() => {
-    if (!emblaApi) return;
+    if (!emblaApi || !isLargeScreen) return;
+
+    const emblaNode = emblaApi.rootNode();
+    if (!emblaNode) return;
 
     const handleKeyDown = (event: KeyboardEvent) => {
-      // lg以下では無効化
-      if (window.innerWidth < 1024) return;
+      // カルーセル要素またはその子要素にフォーカスがある場合のみ反応
+      if (!emblaNode.contains(document.activeElement)) return;
 
       switch (event.key) {
         case 'ArrowDown':
@@ -87,7 +109,7 @@ const CosmeContents: React.FC<PropType> = (props) => {
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [emblaApi]);
+  }, [emblaApi, isLargeScreen]);
 
   return (
     <>
@@ -101,7 +123,7 @@ const CosmeContents: React.FC<PropType> = (props) => {
 
       {/* カルーセル: lg以上で有効、lg以下で無効 */}
       <section className='embla w-screen px-2 text-sm min-h-screen lg:h-screen'>
-        <div className='embla__viewport ' ref={emblaRef}>
+        <div className='embla__viewport ' ref={emblaRef} tabIndex={0}>
           <div className='embla__container lg:flex lg:flex-row flex-col'>
             {COSME_CONTENTS.map((content, index) => (
               <div
@@ -241,55 +263,17 @@ const CosmeContents: React.FC<PropType> = (props) => {
           </div>
 
           <div className='embla__dots'>
-            {scrollSnaps.length > 0
-              ? scrollSnaps.map((_, index) => (
-                  <DotButton
-                    key={index}
-                    onClick={() => onDotButtonClick(index)}
-                    className={'embla__dot'.concat(
-                      index === selectedIndex ? ' embla__dot--selected' : ''
-                    )}
-                  />
-                ))
-              : slides.map((_, index) => (
-                  <DotButton
-                    key={index}
-                    onClick={() => onDotButtonClick(index)}
-                    className={'embla__dot'.concat(
-                      index === selectedIndex ? ' embla__dot--selected' : ''
-                    )}
-                  />
-                ))}
+            {scrollSnaps.map((_, index) => (
+              <DotButton
+                key={index}
+                onClick={() => onDotButtonClick(index)}
+                className={'embla__dot'.concat(
+                  index === selectedIndex ? ' embla__dot--selected' : ''
+                )}
+              />
+            ))}
           </div>
         </div>
-        <style>{`
-        .arrow {
-          position: relative;
-          display: inline-block;
-          pointer-events: none;
-        }
-        .arrow::after {
-          content: '';
-          position: absolute;
-          right: -35px;
-          width: 150px;
-          height: 10px;
-          border-bottom: solid 2px currentColor;
-          border-left: solid 2px currentColor;
-          transform: skew(-45deg);
-          transform-origin: right center;
-          transition: all 0.3s ease;
-          pointer-events: none;
-        }
-        .button-4:hover .arrow::after {
-          width: 180px;
-          border-color: #f59e0b;
-        }
-        
-        .arrow-reverse::after {
-          transform: skew(45deg);
-        }
-      `}</style>
         {/* スタイル4: 上部にテキスト */}
         <Link
           href='/'
