@@ -36,6 +36,11 @@
   }
 }
 
+/* コンテンツカラー用クラス */
+.cosme-content-color {
+  color: var(--content-color);
+}
+
 /* lg以下(1024px未満)はカルーセルを無効化 */
 @media (max-width: 1023px) {
   .embla {
