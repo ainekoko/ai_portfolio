@@ -4,7 +4,7 @@ import { EmblaOptionsType } from 'embla-carousel';
 import {
   DotButton,
   useDotButton,
-} from '../common/EmblaCarouselDotButton/EmblaCarouselDotButton';
+} from '@/components/common/EmblaCarouselDotButton/EmblaCarouselDotButton';
 import {
   PrevButton,
   NextButton,
