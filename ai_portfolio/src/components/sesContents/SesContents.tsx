@@ -15,6 +15,7 @@ import '@/styles/embla-carousel.css';
 import SectionHeader from '../common/SectionHeader';
 import { ITJOB_INTRODUCTION } from '@/utils/itData';
 import Link from 'next/link';
+import Huwahuwa_img from '../common/huwahuwa_img';
 
 // ブレークポイント定数
 const LG_BREAKPOINT = 1024;
@@ -135,7 +136,14 @@ const SesContents: React.FC<PropType> = (props) => {
                 key={index}
                 className='embla__slide mb-8 lg:flex-[0_0_100%] lg:mb-0'
               >
-                {/* モダンなカードデザイン */}
+                {/* キャラクター画像 - 右下に固定 */}
+                <Huwahuwa_img
+                  image='flourish.png'
+                  name='キャラクター'
+                  move='gentle'
+                  top='50px'
+                />
+
                 <div
                   className='flex items-start justify-center w-full h-full px-4 lg:px-8 pt-6 lg:pt-8 pb-6 lg:pb-8'
                   style={
