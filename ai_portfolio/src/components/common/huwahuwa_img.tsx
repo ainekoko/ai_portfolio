@@ -56,12 +56,12 @@ const Huwahuwa_img = ({
       {/* 吹き出し */}
       {speech && (
         <div
-          className='absolute -top-25 -left-8 bg-white rounded-2xl px-4 py-2 shadow-lg border-2 border-gray-200'
+          className='absolute -top-25 -right-15 bg-white rounded-2xl px-4 py-2 shadow-lg border border-gray-300'
           style={{ width: speechWidth }}
         >
           <p className='text-sm font-medium text-gray-800'>{speech}</p>
           {/* 吹き出しの三角形 */}
-          <div className='absolute -bottom-2 right-8 w-4 h-4 bg-white border-r-2 border-b-2 border-gray-200 transform rotate-45'></div>
+          <div className='absolute -bottom-2 left-8 w-4 h-4 bg-white border-r border-b border-gray-300 transform rotate-45'></div>
         </div>
       )}
       {/* eslint-disable-next-line @next/next/no-img-element */}
