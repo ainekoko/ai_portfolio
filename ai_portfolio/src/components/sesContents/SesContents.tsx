@@ -227,7 +227,7 @@ const SesContents: React.FC<PropType> = (props) => {
                             {/* 右側:開発環境と詳細説明 */}
                             <div className='space-y-6'>
                               {/* 開発環境セクション */}
-                              <div className='border border-gray-200 rounded-lg p-4 lg:p-6'>
+                              <div>
                                 <div className='mb-6 pb-3 border-b border-gray-200'>
                                   <h2 className='text-sm font-medium text-gray-500 tracking-widest'>
                                     DEVELOPMENT ENVIRONMENT
