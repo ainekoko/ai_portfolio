@@ -7,6 +7,7 @@ import {
   usePrevNextButtons,
 } from './EmblaCarouselArrowButtons';
 import { renderHook } from '@testing-library/react';
+import { EmblaCarouselType } from 'embla-carousel';
 
 describe('PrevButton', () => {
   it('正しくレンダリングされる', () => {
@@ -98,7 +99,7 @@ describe('usePrevNextButtons', () => {
       canScrollPrev: vi.fn(() => true),
       canScrollNext: vi.fn(() => true),
       on: vi.fn(() => ({ on: vi.fn() })),
-    } as any;
+    } as unknown as EmblaCarouselType;
 
     const { result } = renderHook(() => usePrevNextButtons(mockEmblaApi));
 
@@ -114,7 +115,7 @@ describe('usePrevNextButtons', () => {
       canScrollPrev: vi.fn(() => true),
       canScrollNext: vi.fn(() => true),
       on: vi.fn(() => ({ on: vi.fn() })),
-    } as any;
+    } as unknown as EmblaCarouselType;
 
     const { result } = renderHook(() => usePrevNextButtons(mockEmblaApi));
 

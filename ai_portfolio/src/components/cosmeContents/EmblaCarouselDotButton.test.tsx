@@ -3,6 +3,7 @@ import { vi } from 'vitest';
 import '@testing-library/jest-dom';
 import { DotButton, useDotButton } from './EmblaCarouselDotButton';
 import { renderHook } from '@testing-library/react';
+import { EmblaCarouselType } from 'embla-carousel';
 
 describe('DotButton', () => {
   it('正しくレンダリングされる', () => {
@@ -68,7 +69,7 @@ describe('useDotButton', () => {
       scrollSnapList: vi.fn(() => [0, 1, 2, 3]),
       selectedScrollSnap: vi.fn(() => 0),
       on: vi.fn(() => ({ on: vi.fn(() => ({ on: vi.fn() })) })),
-    } as unknown as any;
+    } as unknown as EmblaCarouselType;
 
     const { result } = renderHook(() => useDotButton(mockEmblaApi));
 
@@ -83,7 +84,7 @@ describe('useDotButton', () => {
       scrollSnapList: vi.fn(() => mockScrollSnapList),
       selectedScrollSnap: vi.fn(() => 0),
       on: vi.fn(() => ({ on: vi.fn(() => ({ on: vi.fn() })) })),
-    } as unknown as any;
+    } as unknown as EmblaCarouselType;
 
     const { result } = renderHook(() => useDotButton(mockEmblaApi));
 
@@ -96,7 +97,7 @@ describe('useDotButton', () => {
       scrollSnapList: vi.fn(() => [0, 1, 2, 3]),
       selectedScrollSnap: vi.fn(() => 2),
       on: vi.fn(() => ({ on: vi.fn(() => ({ on: vi.fn() })) })),
-    } as unknown as any;
+    } as unknown as EmblaCarouselType;
 
     const { result } = renderHook(() => useDotButton(mockEmblaApi));
 

@@ -7,7 +7,7 @@ describe('SkillSection', () => {
     beforeEach(() => {});
     afterEach(() => {});
     it('コンポーネントが正しくレンダリングされる', () => {
-      const mockIsVisible = jest.fn((sectionId: string) => true);
+      const mockIsVisible = jest.fn(() => true);
       render(<SkillSection isVisible={mockIsVisible} />);
       // section要素が存在するか
       const section = screen.getByRole('region', { name: 'スキルセクション' });
