@@ -234,7 +234,7 @@ const CosmeContents: React.FC<PropType> = (props) => {
           </div>
         </div>
         {/* Embla Carousel Controls - lg以上のみ表示 */}
-        <div className='embla__controls pb-6 lg:grid hidden '>
+        <div className='embla__controls pb-6 lg:grid'>
           <div className='embla__buttons'>
             <PrevButton
               onClick={onPrevButtonClick}
