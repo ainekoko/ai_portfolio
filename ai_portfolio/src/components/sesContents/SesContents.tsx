@@ -136,14 +136,6 @@ const SesContents: React.FC<PropType> = (props) => {
                 key={index}
                 className='embla__slide mb-8 lg:flex-[0_0_100%] lg:mb-0'
               >
-                {/* キャラクター画像 - 右下に固定 */}
-                <Huwahuwa_img
-                  image='flourish.png'
-                  name='キャラクター'
-                  move='gentle'
-                  top='50px'
-                />
-
                 <div
                   className='flex items-start justify-center w-full h-full px-4 lg:px-8 pt-6 lg:pt-8 pb-6 lg:pb-8'
                   style={
@@ -151,6 +143,15 @@ const SesContents: React.FC<PropType> = (props) => {
                   }
                 >
                   <div className='relative max-w-5xl w-full h-full lg:max-h-[75vh] flex flex-col'>
+                    {/* キャラクター画像 - 右下に固定 */}
+                    <Huwahuwa_img
+                      image='flourish.png'
+                      name='キャラクター'
+                      move='gentle'
+                      bottom='0'
+                      speech={content.hukidashi}
+                    />
+
                     {/* メインカード */}
                     <div className='bg-white overflow-hidden transform transition-all duration-300 hover:shadow-3xl flex flex-col h-full'>
                       {/* ヘッダーセクション */}
