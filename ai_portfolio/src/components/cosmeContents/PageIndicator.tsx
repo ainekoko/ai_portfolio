@@ -12,7 +12,7 @@ interface PageIndicatorProps {
     year: string;
     description: string;
   }[];
-  containerRef: React.RefObject<HTMLDivElement>;
+  containerRef?: React.RefObject<HTMLDivElement | null>;
   currentIndex: number;
 }
 
@@ -33,7 +33,7 @@ const PageIndicator = ({
               : 'bg-white/40 hover:bg-white/60'
           }`}
           onClick={() => {
-            containerRef.current?.scrollTo({
+            containerRef?.current?.scrollTo({
               left: index * window.innerWidth,
               behavior: 'smooth',
             });

@@ -42,14 +42,18 @@ const mockSections = [
 ];
 
 export const Default: Story = {
-  render: () => {
+  args: {
+    sections: mockSections,
+    currentIndex: 0,
+  },
+  render: (args) => {
     const containerRef = useRef<HTMLDivElement>(null);
     return (
       <div className='relative w-96 h-96 bg-gray-100'>
         <PageIndicator
-          sections={mockSections}
+          sections={args.sections}
           containerRef={containerRef}
-          currentIndex={0}
+          currentIndex={args.currentIndex}
         />
       </div>
     );
@@ -57,14 +61,18 @@ export const Default: Story = {
 };
 
 export const SecondItemActive: Story = {
-  render: () => {
+  args: {
+    sections: mockSections,
+    currentIndex: 1,
+  },
+  render: (args) => {
     const containerRef = useRef<HTMLDivElement>(null);
     return (
       <div className='relative w-96 h-96 bg-gray-100'>
         <PageIndicator
-          sections={mockSections}
+          sections={args.sections}
           containerRef={containerRef}
-          currentIndex={1}
+          currentIndex={args.currentIndex}
         />
       </div>
     );
@@ -72,14 +80,18 @@ export const SecondItemActive: Story = {
 };
 
 export const LastItemActive: Story = {
-  render: () => {
+  args: {
+    sections: mockSections,
+    currentIndex: 3,
+  },
+  render: (args) => {
     const containerRef = useRef<HTMLDivElement>(null);
     return (
       <div className='relative w-96 h-96 bg-gray-100'>
         <PageIndicator
-          sections={mockSections}
+          sections={args.sections}
           containerRef={containerRef}
-          currentIndex={3}
+          currentIndex={args.currentIndex}
         />
       </div>
     );
@@ -87,14 +99,18 @@ export const LastItemActive: Story = {
 };
 
 export const TwoSections: Story = {
-  render: () => {
+  args: {
+    sections: mockSections.slice(0, 2),
+    currentIndex: 0,
+  },
+  render: (args) => {
     const containerRef = useRef<HTMLDivElement>(null);
     return (
       <div className='relative w-96 h-96 bg-gray-100'>
         <PageIndicator
-          sections={mockSections.slice(0, 2)}
+          sections={args.sections}
           containerRef={containerRef}
-          currentIndex={0}
+          currentIndex={args.currentIndex}
         />
       </div>
     );
