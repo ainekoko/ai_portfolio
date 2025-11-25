@@ -1,5 +1,5 @@
 'use client';
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { EmblaOptionsType } from 'embla-carousel';
 import { DotButton, useDotButton } from './EmblaCarouselDotButton';
 import {
@@ -8,13 +8,15 @@ import {
   usePrevNextButtons,
 } from './EmblaCarouselArrowButtons';
 import useEmblaCarousel from 'embla-carousel-react';
-import './sample.css';
+import '@/styles/embla-carousel.css';
 import SectionHeader from '../common/SectionHeader';
 import { ITJOB_INTRODUCTION } from '@/utils/itData';
 import Link from 'next/link';
 
+// ブレークポイント定数
+const LG_BREAKPOINT = 1024;
+
 type PropType = {
-  slides: number[];
   options?: EmblaOptionsType;
 };
 
@@ -23,8 +25,9 @@ type PropType = {
  * @param props
  */
 const SesContents: React.FC<PropType> = (props) => {
-  const { slides, options } = props;
+  const { options } = props;
   const [emblaRef, emblaApi] = useEmblaCarousel(options);
+  const [isLargeScreen, setIsLargeScreen] = useState(true);
 
   const { selectedIndex, scrollSnaps, onDotButtonClick } =
     useDotButton(emblaApi);
@@ -35,11 +38,26 @@ const SesContents: React.FC<PropType> = (props) => {
     onPrevButtonClick,
     onNextButtonClick,
   } = usePrevNextButtons(emblaApi);
+  // 画面サイズの監視
+  useEffect(() => {
+    // クライアントサイドでのみ実行
+    if (typeof window === 'undefined') return;
+
+    const handleResize = () => {
+      setIsLargeScreen(window.innerWidth >= LG_BREAKPOINT);
+    };
+
+    // 初期値設定
+    handleResize();
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const onWheel = useCallback(
     (event: WheelEvent) => {
       // lg以下ではホイールイベントを無効化
-      if (window.innerWidth < 1024) return;
+      if (!isLargeScreen) return;
       if (!emblaApi) return;
       event.preventDefault();
 
@@ -49,19 +67,47 @@ const SesContents: React.FC<PropType> = (props) => {
         emblaApi.scrollPrev();
       }
     },
-    [emblaApi]
+    [emblaApi, isLargeScreen]
   );
-
   useEffect(() => {
-    // lg以下ではイベントリスナーを追加しない
-    if (window.innerWidth < 1024) return;
+    // lg以下ではホイールイベントリスナーを追加しない
+    if (!isLargeScreen) return;
 
     const emblaNode = emblaApi?.rootNode();
     if (!emblaNode) return;
 
     emblaNode.addEventListener('wheel', onWheel, { passive: false });
     return () => emblaNode.removeEventListener('wheel', onWheel);
-  }, [emblaApi, onWheel]);
+  }, [emblaApi, onWheel, isLargeScreen]);
+
+  // キーボード操作のハンドラー（カルーセル領域にフォーカスがある時のみ有効）
+  useEffect(() => {
+    if (!emblaApi || !isLargeScreen) return;
+
+    const emblaNode = emblaApi.rootNode();
+    if (!emblaNode) return;
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      // カルーセル要素またはその子要素にフォーカスがある場合のみ反応
+      if (!emblaNode.contains(document.activeElement)) return;
+
+      switch (event.key) {
+        case 'ArrowDown':
+        case 'ArrowRight':
+          event.preventDefault();
+          emblaApi.scrollNext();
+          break;
+        case 'ArrowUp':
+        case 'ArrowLeft':
+          event.preventDefault();
+          emblaApi.scrollPrev();
+          break;
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [emblaApi, isLargeScreen]);
 
   return (
     <>
@@ -184,25 +230,15 @@ const SesContents: React.FC<PropType> = (props) => {
           </div>
 
           <div className='embla__dots'>
-            {scrollSnaps.length > 0
-              ? scrollSnaps.map((_, index) => (
-                  <DotButton
-                    key={index}
-                    onClick={() => onDotButtonClick(index)}
-                    className={'embla__dot'.concat(
-                      index === selectedIndex ? ' embla__dot--selected' : ''
-                    )}
-                  />
-                ))
-              : slides.map((_, index) => (
-                  <DotButton
-                    key={index}
-                    onClick={() => onDotButtonClick(index)}
-                    className={'embla__dot'.concat(
-                      index === selectedIndex ? ' embla__dot--selected' : ''
-                    )}
-                  />
-                ))}
+            {scrollSnaps.map((_, index) => (
+              <DotButton
+                key={index}
+                onClick={() => onDotButtonClick(index)}
+                className={'embla__dot'.concat(
+                  index === selectedIndex ? ' embla__dot--selected' : ''
+                )}
+              />
+            ))}
           </div>
         </div>
         <style>{`

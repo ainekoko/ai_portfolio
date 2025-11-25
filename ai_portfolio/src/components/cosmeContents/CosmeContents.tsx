@@ -11,7 +11,7 @@ import {
   usePrevNextButtons,
 } from '../common/EmblaCarouselArrowButtons/EmblaCarouselArrowButtons';
 import useEmblaCarousel from 'embla-carousel-react';
-import './sample.css';
+import '@/styles/embla-carousel.css';
 import SectionHeader from '../common/SectionHeader';
 import { COSME_CONTENTS } from '@/utils/CosmeContentsData';
 import Link from 'next/link';
