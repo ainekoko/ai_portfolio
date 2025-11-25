@@ -1,12 +1,15 @@
 'use client';
 import React, { useCallback, useEffect, useState } from 'react';
 import { EmblaOptionsType } from 'embla-carousel';
-import { DotButton, useDotButton } from './EmblaCarouselDotButton';
+import {
+  DotButton,
+  useDotButton,
+} from '../common/EmblaCarouselDotButton/EmblaCarouselDotButton';
 import {
   PrevButton,
   NextButton,
   usePrevNextButtons,
-} from './EmblaCarouselArrowButtons';
+} from '../common/EmblaCarouselArrowButtons/EmblaCarouselArrowButtons';
 import useEmblaCarousel from 'embla-carousel-react';
 import './sample.css';
 import SectionHeader from '../common/SectionHeader';
