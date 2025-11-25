@@ -1,5 +1,11 @@
+/* Embla Carousel 共通スタイル */
+
 /* lg以上(1024px以上)のみカルーセルを有効化 */
 @media (min-width: 1024px) {
+  .embla__controls {
+    display: grid;
+  }
+
   .embla {
     margin: auto;
     --slide-height: 100vh;
@@ -8,11 +14,10 @@
     height: 100vh;
     display: flex;
     flex-direction: column;
-    overflow: hidden; /* 追加 */
   }
 
   .embla__viewport {
-    overflow: hidden;
+    overflow: hidden !important;
     height: 100%;
   }
 
@@ -21,7 +26,7 @@
     touch-action: pan-y pinch-zoom;
     height: 100%;
     flex-direction: column;
-    width: 100%; /* 追加 */
+    width: 100%;
   }
 
   .embla__slide {
@@ -31,8 +36,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 100vw; /* 追加 */
-    max-width: 100vw; /* 追加 */
+    width: 100vw;
+    max-width: 100vw;
   }
 }
 
@@ -43,18 +48,16 @@
     display: block;
     height: auto;
     padding-bottom: 4rem;
-    overflow-x: hidden; /* 追加 */
   }
 
   .embla__viewport {
     overflow: visible;
-    overflow-x: hidden; /* 追加 */
   }
 
   .embla__container {
     display: block;
     height: auto;
-    width: 100%; /* 追加 */
+    width: 100%;
   }
 
   .embla__slide {
@@ -63,6 +66,10 @@
     min-height: 0;
     padding-top: 0;
     margin-bottom: 2rem;
+  }
+
+  .embla__controls {
+    display: none;
   }
 }
 
@@ -79,7 +86,6 @@
 }
 
 .embla__controls {
-  display: grid;
   grid-template-columns: auto 1fr;
   justify-content: space-between;
   gap: 1.2rem;
@@ -175,4 +181,39 @@
 .embla__dot--selected:after {
   box-shadow: inset 0 0 0 0.2rem #333;
   background-color: #333;
+}
+
+/* 矢印スタイル */
+.arrow {
+  position: relative;
+  display: inline-block;
+  pointer-events: none;
+}
+
+.arrow::after {
+  content: '';
+  position: absolute;
+  right: -35px;
+  width: 150px;
+  height: 10px;
+  border-bottom: solid 2px currentColor;
+  border-left: solid 2px currentColor;
+  transform: skew(-45deg);
+  transform-origin: right center;
+  transition: all 0.3s ease;
+  pointer-events: none;
+}
+
+.button-4:hover .arrow::after {
+  width: 180px;
+  border-color: #f59e0b;
+}
+
+.arrow-reverse::after {
+  transform: skew(45deg);
+}
+
+/* コンテンツカラー用クラス */
+.cosme-content-color {
+  color: var(--content-color);
 }

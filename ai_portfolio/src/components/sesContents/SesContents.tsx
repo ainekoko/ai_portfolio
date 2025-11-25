@@ -1,20 +1,27 @@
 'use client';
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { EmblaOptionsType } from 'embla-carousel';
-import { DotButton, useDotButton } from './EmblaCarouselDotButton';
+import {
+  DotButton,
+  useDotButton,
+} from '@/components/common/EmblaCarouselDotButton/EmblaCarouselDotButton';
 import {
   PrevButton,
   NextButton,
   usePrevNextButtons,
-} from './EmblaCarouselArrowButtons';
+} from '@/components/common/EmblaCarouselArrowButtons/EmblaCarouselArrowButtons';
 import useEmblaCarousel from 'embla-carousel-react';
-import './sample.css';
+import '@/styles/embla-carousel.css';
 import SectionHeader from '../common/SectionHeader';
 import { ITJOB_INTRODUCTION } from '@/utils/itData';
 import Link from 'next/link';
+import Huwahuwa_img from '../common/huwahuwa_img';
+import Font from '../common/Font';
+
+// ブレークポイント定数
+const LG_BREAKPOINT = 1024;
 
 type PropType = {
-  slides: number[];
   options?: EmblaOptionsType;
 };
 
@@ -23,8 +30,9 @@ type PropType = {
  * @param props
  */
 const SesContents: React.FC<PropType> = (props) => {
-  const { slides, options } = props;
+  const { options } = props;
   const [emblaRef, emblaApi] = useEmblaCarousel(options);
+  const [isLargeScreen, setIsLargeScreen] = useState(true);
 
   const { selectedIndex, scrollSnaps, onDotButtonClick } =
     useDotButton(emblaApi);
@@ -35,11 +43,26 @@ const SesContents: React.FC<PropType> = (props) => {
     onPrevButtonClick,
     onNextButtonClick,
   } = usePrevNextButtons(emblaApi);
+  // 画面サイズの監視
+  useEffect(() => {
+    // クライアントサイドでのみ実行
+    if (typeof window === 'undefined') return;
+
+    const handleResize = () => {
+      setIsLargeScreen(window.innerWidth >= LG_BREAKPOINT);
+    };
+
+    // 初期値設定
+    handleResize();
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const onWheel = useCallback(
     (event: WheelEvent) => {
       // lg以下ではホイールイベントを無効化
-      if (window.innerWidth < 1024) return;
+      if (!isLargeScreen) return;
       if (!emblaApi) return;
       event.preventDefault();
 
@@ -49,19 +72,47 @@ const SesContents: React.FC<PropType> = (props) => {
         emblaApi.scrollPrev();
       }
     },
-    [emblaApi]
+    [emblaApi, isLargeScreen]
   );
-
   useEffect(() => {
-    // lg以下ではイベントリスナーを追加しない
-    if (window.innerWidth < 1024) return;
+    // lg以下ではホイールイベントリスナーを追加しない
+    if (!isLargeScreen) return;
 
     const emblaNode = emblaApi?.rootNode();
     if (!emblaNode) return;
 
     emblaNode.addEventListener('wheel', onWheel, { passive: false });
     return () => emblaNode.removeEventListener('wheel', onWheel);
-  }, [emblaApi, onWheel]);
+  }, [emblaApi, onWheel, isLargeScreen]);
+
+  // キーボード操作のハンドラー（カルーセル領域にフォーカスがある時のみ有効）
+  useEffect(() => {
+    if (!emblaApi || !isLargeScreen) return;
+
+    const emblaNode = emblaApi.rootNode();
+    if (!emblaNode) return;
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      // カルーセル要素またはその子要素にフォーカスがある場合のみ反応
+      if (!emblaNode.contains(document.activeElement)) return;
+
+      switch (event.key) {
+        case 'ArrowDown':
+        case 'ArrowRight':
+          event.preventDefault();
+          emblaApi.scrollNext();
+          break;
+        case 'ArrowUp':
+        case 'ArrowLeft':
+          event.preventDefault();
+          emblaApi.scrollPrev();
+          break;
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [emblaApi, isLargeScreen]);
 
   return (
     <>
@@ -73,105 +124,212 @@ const SesContents: React.FC<PropType> = (props) => {
         size='normal'
       />
 
-      {/* カルーセル: lg以上で有効、lg以下で無効 */}
-      <section className='embla w-screen px-4 lg:px-8 text-sm min-h-screen lg:h-screen'>
-        <div className='embla__viewport bg-[#ffffff]' ref={emblaRef}>
-          <div className='embla__container lg:flex lg:flex-row flex-col'>
-            {ITJOB_INTRODUCTION.map((content, index) => (
-              <div
-                key={index}
-                className='embla__slide lg:flex-[0_0_100%] mb-8 lg:mb-0'
-              >
-                {/* 上部配置用のラッパー */}
-                <div className='flex items-start justify-center w-full h-full px-6 lg:px-8 pt-3 lg:pt-8'>
-                  <div className='border border-gray-300 p-4 md:p-8 relative max-w-6xl w-full'>
-                    {/* 番号 */}
-                    <div className='-z-[99] absolute top-4 md:top-8 right-4 md:right-8 text-6xl md:text-[200px] font-light text-gray-300 leading-none'>
-                      0{index + 1}
-                    </div>
+      {/* カルーセル: lg以上で有効、lg未満で無効 */}
+      <section className='embla w-screen px-2 text-sm lg:min-h-screen lg:h-screen'>
+        <Font>
+          <div
+            className='embla__viewport overflow-visible lg:overflow-hidden'
+            ref={isLargeScreen ? emblaRef : null}
+            tabIndex={0}
+          >
+            <div className='embla__container block lg:flex lg:flex-row'>
+              {ITJOB_INTRODUCTION.map((content, index) => (
+                <div
+                  key={index}
+                  className='embla__slide mb-8 lg:flex-[0_0_100%] lg:mb-0'
+                >
+                  <div
+                    className='flex items-start justify-center w-full h-full px-4 lg:px-8 pt-6 lg:pt-8 pb-6 lg:pb-8'
+                    style={
+                      { '--content-color': '#4a90e2' } as React.CSSProperties
+                    }
+                  >
+                    <div className='relative max-w-5xl w-full h-full lg:max-h-[75vh] flex flex-col'>
+                      {/* キャラクター画像 - 右下に固定 */}
+                      <Huwahuwa_img
+                        image='flourish.png'
+                        name='キャラクター'
+                        move='gentle'
+                        bottom='0px'
+                        left='50px'
+                        speech={content.hukidashi}
+                      />
 
-                    <div className='grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12'>
-                      {/* 左側 */}
-                      <div className='space-y-4 md:space-y-6'>
-                        <div className='flex mb-2'>
-                          <div className='w-20 md:w-24 font-light text-gray-600'>
-                            業種
-                          </div>
-                          <div className='flex-1'>
-                            {content.outsourcedCompany}
-                          </div>
-                        </div>
-
-                        <div className='flex mb-2'>
-                          <div className='w-20 md:w-24 font-light text-gray-600'>
-                            規模
-                          </div>
-                          <div className='flex-1'>{content.scale}</div>
-                        </div>
-
-                        <div className='flex mb-2'>
-                          <div className='w-20 md:w-24 font-light text-gray-600'>
-                            参画期間
-                          </div>
-                          <div className='flex-1'>{content.period}</div>
-                        </div>
-
-                        <div className='flex mb-2'>
-                          <div className='w-20 md:w-24 font-light text-gray-600'>
-                            業務内容
-                          </div>
-                          <div>
-                            <div className='mb-3'>
-                              {content.phase.join('/')}
-                            </div>
-                            <div className='flex-1'>
-                              {content.bussinessContent.map((item, i) => (
-                                <div key={i}>・{item}</div>
-                              ))}
-                            </div>
+                      {/* メインカード */}
+                      <div className='bg-white overflow-hidden transform transition-all duration-300 hover:shadow-3xl flex flex-col h-full'>
+                        {/* ヘッダーセクション */}
+                        <div className='relative p-6 lg:p-8 shrink-0'>
+                          {/* 装飾的な番号 */}
+                          <div className='absolute top-6 right-6 lg:top-8 lg:right-8 text-[15rem] font-bold opacity-10 text-[#4a90e2]'>
+                            0{index + 1}
                           </div>
                         </div>
 
-                        <hr className='h-px bg-gradient-to-r from-transparent via-[#ccc] to-transparent border-none' />
+                        {/* コンテンツセクション */}
+                        <div className='px-6 py-0 lg:px-12 flex-1 overflow-y-auto'>
+                          <div className='grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12'>
+                            {/* 左側:業務内容 */}
+                            <div className='space-y-6'>
+                              {/* タイトルと期間 */}
+                              <div className='relative z-10'>
+                                {/* 期間 */}
+                                <div className='mb-2'>
+                                  <span className='text-xs lg:text-sm font-medium tracking-widest uppercase opacity-80 text-[#4a90e2]'>
+                                    {content.period}
+                                  </span>
+                                </div>
+                                {/* 業種 */}
+                                <h1 className='text-lg lg:text-xl font-semibold text-gray-900 tracking-wide'>
+                                  {content.outsourcedCompany}
+                                </h1>
+                              </div>
 
-                        <div>
-                          <div className='font-light mb-4'>開発環境</div>
-                          <div className='space-y-2 text-sm'>
-                            <div>
-                              <span className='font-medium'>【言語】</span>
-                              {content.devenvironment.language?.join(' / ')}
+                              <div className='mb-6 pb-3 border-b border-gray-200'>
+                                <h2 className='text-sm font-medium text-gray-500 tracking-widest'>
+                                  WORK CONTENT
+                                </h2>
+                              </div>
+                              <div className='space-y-4'>
+                                <div className='flex gap-3'>
+                                  <span className='text-xs font-bold text-gray-500 min-w-16'>
+                                    規模
+                                  </span>
+                                  <p className='text-gray-800 text-xs lg:text-sm leading-relaxed flex-1'>
+                                    {content.scale}
+                                  </p>
+                                </div>
+                                <div className='flex gap-3'>
+                                  <span className='text-xs font-bold text-gray-500 min-w-16'>
+                                    フェーズ
+                                  </span>
+                                  <p className='text-gray-800 text-xs lg:text-sm leading-relaxed flex-1'>
+                                    {content.phase.join(' / ')}
+                                  </p>
+                                </div>
+                                <div className='space-y-2'>
+                                  {content.bussinessContent.map((item, i) => (
+                                    <div
+                                      key={i}
+                                      className='flex items-start gap-3'
+                                    >
+                                      <span className='text-xs font-bold mt-0.5 text-[#4a90e2]'>
+                                        ▸
+                                      </span>
+                                      <p className='text-gray-800 text-xs lg:text-sm leading-relaxed flex-1'>
+                                        {item}
+                                      </p>
+                                    </div>
+                                  ))}
+                                </div>
+                              </div>
                             </div>
-                            <div>
-                              <span className='font-medium'>【OS】</span>{' '}
-                              {content.devenvironment.os}
-                            </div>
-                            <div>
-                              <span className='font-medium'>【FW】</span>{' '}
-                              {content.devenvironment.framework?.join(' / ')}
-                            </div>
-                            <div>
-                              <span className='font-medium'>【ツール】</span>{' '}
-                              {content.devenvironment.tool?.join(' / ')}
+
+                            {/* 右側:開発環境と詳細説明 */}
+                            <div className='space-y-6'>
+                              {/* 開発環境セクション */}
+                              <div>
+                                <div className='mb-6 pb-3 border-b border-gray-200'>
+                                  <h2 className='text-sm font-medium text-gray-500 tracking-widest'>
+                                    DEVELOPMENT ENVIRONMENT
+                                  </h2>
+                                </div>
+                                <div className='space-y-2 text-sm'>
+                                  {content.devenvironment.language && (
+                                    <div className='flex gap-2'>
+                                      <span className='font-medium text-gray-700'>
+                                        言語:
+                                      </span>
+                                      <div className='flex flex-wrap gap-1.5'>
+                                        {content.devenvironment.language.map(
+                                          (lang, i) => (
+                                            <span
+                                              key={i}
+                                              className='px-2.5 py-0.5 bg-blue-100 text-blue-700 rounded-full text-xs font-medium'
+                                            >
+                                              {lang}
+                                            </span>
+                                          )
+                                        )}
+                                      </div>
+                                    </div>
+                                  )}
+                                  {content.devenvironment.os && (
+                                    <div className='flex gap-2'>
+                                      <span className='font-medium text-gray-700'>
+                                        OS:
+                                      </span>
+                                      <span className='px-2.5 py-0.5 bg-gray-100 text-gray-700 rounded-full text-xs font-medium'>
+                                        {content.devenvironment.os}
+                                      </span>
+                                    </div>
+                                  )}
+                                  {content.devenvironment.framework && (
+                                    <div className='flex gap-2'>
+                                      <span className='font-medium text-gray-700'>
+                                        FW:
+                                      </span>
+                                      <div className='flex flex-wrap gap-1.5'>
+                                        {content.devenvironment.framework.map(
+                                          (fw, i) => (
+                                            <span
+                                              key={i}
+                                              className='px-2.5 py-0.5 bg-green-100 text-green-700 rounded-full text-xs font-medium'
+                                            >
+                                              {fw}
+                                            </span>
+                                          )
+                                        )}
+                                      </div>
+                                    </div>
+                                  )}
+                                  {content.devenvironment.tool && (
+                                    <div className='flex gap-2'>
+                                      <span className='font-medium text-gray-700'>
+                                        ツール:
+                                      </span>
+                                      <div className='flex flex-wrap gap-1.5'>
+                                        {content.devenvironment.tool.map(
+                                          (tool, i) => (
+                                            <span
+                                              key={i}
+                                              className='px-2.5 py-0.5 bg-purple-100 text-purple-700 rounded-full text-xs font-medium'
+                                            >
+                                              {tool}
+                                            </span>
+                                          )
+                                        )}
+                                      </div>
+                                    </div>
+                                  )}
+                                </div>
+                              </div>
+
+                              {/* 詳細説明 */}
+                              <div>
+                                <div className='mb-6 pb-3 border-b border-gray-200'>
+                                  <h2 className='text-sm font-medium text-gray-500 tracking-widest'>
+                                    DETAILS
+                                  </h2>
+                                </div>
+                                <div className='prose prose-sm lg:prose-base max-w-none'>
+                                  <p className='text-gray-700 leading-relaxed text-sm lg:text-base'>
+                                    {content.content}
+                                  </p>
+                                </div>
+                              </div>
                             </div>
                           </div>
-                        </div>
-                      </div>
-
-                      {/* 右側 */}
-                      <div className='space-y-6 flex items-center'>
-                        <div className='leading-relaxed text-gray-700 text-sm md:text-base'>
-                          {content.content}
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-        </div>
+        </Font>
         {/* Embla Carousel Controls - lg以上のみ表示 */}
-        <div className='embla__controls pb-6 lg:grid hidden'>
+        <div className='embla__controls pb-6 hidden lg:grid'>
           <div className='embla__buttons'>
             <PrevButton
               onClick={onPrevButtonClick}
@@ -184,55 +342,17 @@ const SesContents: React.FC<PropType> = (props) => {
           </div>
 
           <div className='embla__dots'>
-            {scrollSnaps.length > 0
-              ? scrollSnaps.map((_, index) => (
-                  <DotButton
-                    key={index}
-                    onClick={() => onDotButtonClick(index)}
-                    className={'embla__dot'.concat(
-                      index === selectedIndex ? ' embla__dot--selected' : ''
-                    )}
-                  />
-                ))
-              : slides.map((_, index) => (
-                  <DotButton
-                    key={index}
-                    onClick={() => onDotButtonClick(index)}
-                    className={'embla__dot'.concat(
-                      index === selectedIndex ? ' embla__dot--selected' : ''
-                    )}
-                  />
-                ))}
+            {scrollSnaps.map((_, index) => (
+              <DotButton
+                key={index}
+                onClick={() => onDotButtonClick(index)}
+                className={'embla__dot'.concat(
+                  index === selectedIndex ? ' embla__dot--selected' : ''
+                )}
+              />
+            ))}
           </div>
         </div>
-        <style>{`
-        .arrow {
-          position: relative;
-          display: inline-block;
-          pointer-events: none;
-        }
-        .arrow::after {
-          content: '';
-          position: absolute;
-          right: -35px;
-          width: 150px;
-          height: 10px;
-          border-bottom: solid 2px currentColor;
-          border-left: solid 2px currentColor;
-          transform: skew(-45deg);
-          transform-origin: right center;
-          transition: all 0.3s ease;
-          pointer-events: none;
-        }
-        .button-4:hover .arrow::after {
-          width: 180px;
-          border-color: #f59e0b;
-        }
-        
-        .arrow-reverse::after {
-          transform: skew(45deg);
-        }
-      `}</style>
         {/* スタイル4: 上部にテキスト */}
         <Link
           href='/'

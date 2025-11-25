@@ -1,8 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/nextjs';
-import { PrevButton, NextButton } from './EmblaCarouselArrowButtons';
+import {
+  PrevButton,
+  NextButton,
+} from '@/components/common/EmblaCarouselArrowButtons/EmblaCarouselArrowButtons';
 
 const meta = {
-  title: 'Components/CosmeContents/ArrowButtons',
+  title: 'Components/Common/ArrowButtons',
   component: PrevButton,
   parameters: {
     layout: 'centered',
