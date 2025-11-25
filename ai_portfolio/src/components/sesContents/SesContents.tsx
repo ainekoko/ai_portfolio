@@ -150,7 +150,7 @@ const SesContents: React.FC<PropType> = (props) => {
                         image='flourish.png'
                         name='キャラクター'
                         move='gentle'
-                        bottom='50px'
+                        bottom='0px'
                         left='50px'
                         speech={content.hukidashi}
                       />
@@ -160,7 +160,7 @@ const SesContents: React.FC<PropType> = (props) => {
                         {/* ヘッダーセクション */}
                         <div className='relative p-6 lg:p-8 shrink-0'>
                           {/* 装飾的な番号 */}
-                          <div className='absolute top-6 right-6 lg:top-8 lg:right-8 text-7xl lg:text-[15rem] font-bold opacity-10 text-[#4a90e2]'>
+                          <div className='absolute top-6 right-6 lg:top-8 lg:right-8 text-[15rem] font-bold opacity-10 text-[#4a90e2]'>
                             0{index + 1}
                           </div>
                         </div>
@@ -194,7 +194,7 @@ const SesContents: React.FC<PropType> = (props) => {
                                   <span className='text-xs font-bold text-gray-500 min-w-16'>
                                     規模
                                   </span>
-                                  <p className='text-gray-800 text-sm lg:text-base leading-relaxed flex-1'>
+                                  <p className='text-gray-800 text-xs lg:text-sm leading-relaxed flex-1'>
                                     {content.scale}
                                   </p>
                                 </div>
@@ -202,7 +202,7 @@ const SesContents: React.FC<PropType> = (props) => {
                                   <span className='text-xs font-bold text-gray-500 min-w-16'>
                                     フェーズ
                                   </span>
-                                  <p className='text-gray-800 text-sm lg:text-base leading-relaxed flex-1'>
+                                  <p className='text-gray-800 text-xs lg:text-sm leading-relaxed flex-1'>
                                     {content.phase.join(' / ')}
                                   </p>
                                 </div>
@@ -215,7 +215,7 @@ const SesContents: React.FC<PropType> = (props) => {
                                       <span className='text-xs font-bold mt-0.5 text-[#4a90e2]'>
                                         ▸
                                       </span>
-                                      <p className='text-gray-800 text-sm lg:text-base leading-relaxed flex-1'>
+                                      <p className='text-gray-800 text-xs lg:text-sm leading-relaxed flex-1'>
                                         {item}
                                       </p>
                                     </div>
@@ -239,11 +239,18 @@ const SesContents: React.FC<PropType> = (props) => {
                                       <span className='font-medium text-gray-700'>
                                         言語:
                                       </span>
-                                      <span className='text-gray-600'>
-                                        {content.devenvironment.language.join(
-                                          ' / '
+                                      <div className='flex flex-wrap gap-1.5'>
+                                        {content.devenvironment.language.map(
+                                          (lang, i) => (
+                                            <span
+                                              key={i}
+                                              className='px-2.5 py-0.5 bg-blue-100 text-blue-700 rounded-full text-xs font-medium'
+                                            >
+                                              {lang}
+                                            </span>
+                                          )
                                         )}
-                                      </span>
+                                      </div>
                                     </div>
                                   )}
                                   {content.devenvironment.os && (
@@ -251,7 +258,7 @@ const SesContents: React.FC<PropType> = (props) => {
                                       <span className='font-medium text-gray-700'>
                                         OS:
                                       </span>
-                                      <span className='text-gray-600'>
+                                      <span className='px-2.5 py-0.5 bg-gray-100 text-gray-700 rounded-full text-xs font-medium'>
                                         {content.devenvironment.os}
                                       </span>
                                     </div>
@@ -261,11 +268,18 @@ const SesContents: React.FC<PropType> = (props) => {
                                       <span className='font-medium text-gray-700'>
                                         FW:
                                       </span>
-                                      <span className='text-gray-600'>
-                                        {content.devenvironment.framework.join(
-                                          ' / '
+                                      <div className='flex flex-wrap gap-1.5'>
+                                        {content.devenvironment.framework.map(
+                                          (fw, i) => (
+                                            <span
+                                              key={i}
+                                              className='px-2.5 py-0.5 bg-green-100 text-green-700 rounded-full text-xs font-medium'
+                                            >
+                                              {fw}
+                                            </span>
+                                          )
                                         )}
-                                      </span>
+                                      </div>
                                     </div>
                                   )}
                                   {content.devenvironment.tool && (
@@ -273,11 +287,18 @@ const SesContents: React.FC<PropType> = (props) => {
                                       <span className='font-medium text-gray-700'>
                                         ツール:
                                       </span>
-                                      <span className='text-gray-600'>
-                                        {content.devenvironment.tool.join(
-                                          ' / '
+                                      <div className='flex flex-wrap gap-1.5'>
+                                        {content.devenvironment.tool.map(
+                                          (tool, i) => (
+                                            <span
+                                              key={i}
+                                              className='px-2.5 py-0.5 bg-purple-100 text-purple-700 rounded-full text-xs font-medium'
+                                            >
+                                              {tool}
+                                            </span>
+                                          )
                                         )}
-                                      </span>
+                                      </div>
                                     </div>
                                   )}
                                 </div>

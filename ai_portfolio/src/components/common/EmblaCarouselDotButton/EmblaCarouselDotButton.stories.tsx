@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/nextjs';
-import { DotButton } from '../../cosmeContents/EmblaCarouselDotButton';
+import { DotButton } from '@/components/common/EmblaCarouselDotButton/EmblaCarouselDotButton';
 
 const meta = {
   title: 'Components/CosmeContents/DotButton',

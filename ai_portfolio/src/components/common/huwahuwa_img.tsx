@@ -8,7 +8,7 @@ interface HuwahuwaImgProps {
   left?: string;
   bottom?: string;
   move?: string;
-  speech?: string;
+  speech?: string | React.ReactElement;
   speechWidth?: string;
 }
 
@@ -56,7 +56,7 @@ const Huwahuwa_img = ({
       {/* 吹き出し */}
       {speech && (
         <div
-          className='absolute -top-25 -right-15 bg-white rounded-2xl px-4 py-2 shadow-lg border border-gray-300'
+          className='absolute -top-23 -right-15 bg-white rounded-2xl px-4 py-2 shadow-lg border border-gray-300'
           style={{ width: speechWidth }}
         >
           <p className='text-sm font-medium text-gray-800'>{speech}</p>
