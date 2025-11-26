@@ -1,6 +1,6 @@
 import { SkillItemsType } from '@/types/skill';
 import React from 'react';
-import Num from '@/components/common/Font';
+import Num from '@/components/common/font/Font';
 
 interface SkillItemListProps {
   id: string;

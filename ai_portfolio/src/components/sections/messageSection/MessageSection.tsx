@@ -1,5 +1,5 @@
 'use client';
-import FadeInElement from '@/components/common/FadeIn';
+import FadeInElement from '@/components/common/fadeIn/FadeIn';
 import QAItem from '@/components/message/qaItem/QAItem';
 import { QAITEMS, SELF_INTRODUCTION } from '@/utils/messageData';
 import React from 'react';
