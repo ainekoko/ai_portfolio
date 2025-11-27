@@ -1,5 +1,4 @@
 import { render, screen, fireEvent } from '@testing-library/react';
-import { vi } from 'vitest';
 import '@testing-library/jest-dom';
 import { DotButton, useDotButton } from './EmblaCarouselDotButton';
 import { renderHook } from '@testing-library/react';
@@ -14,7 +13,7 @@ describe('DotButton', () => {
   });
 
   it('クリックイベントが発火する', () => {
-    const handleClick = vi.fn();
+    const handleClick = jest.fn();
     render(<DotButton onClick={handleClick} />);
 
     const button = screen.getByRole('button');
@@ -63,12 +62,12 @@ describe('useDotButton', () => {
   });
 
   it('onDotButtonClickが正しく動作する', () => {
-    const mockScrollTo = vi.fn();
+    const mockScrollTo = jest.fn();
     const mockEmblaApi = {
       scrollTo: mockScrollTo,
-      scrollSnapList: vi.fn(() => [0, 1, 2, 3]),
-      selectedScrollSnap: vi.fn(() => 0),
-      on: vi.fn(() => ({ on: vi.fn(() => ({ on: vi.fn() })) })),
+      scrollSnapList: jest.fn(() => [0, 1, 2, 3]),
+      selectedScrollSnap: jest.fn(() => 0),
+      on: jest.fn(() => ({ on: jest.fn(() => ({ on: jest.fn() })) })),
     } as unknown as EmblaCarouselType;
 
     const { result } = renderHook(() => useDotButton(mockEmblaApi));
@@ -80,10 +79,10 @@ describe('useDotButton', () => {
   it('scrollSnapsが正しく設定される', () => {
     const mockScrollSnapList = [0, 1, 2, 3];
     const mockEmblaApi = {
-      scrollTo: vi.fn(),
-      scrollSnapList: vi.fn(() => mockScrollSnapList),
-      selectedScrollSnap: vi.fn(() => 0),
-      on: vi.fn(() => ({ on: vi.fn(() => ({ on: vi.fn() })) })),
+      scrollTo: jest.fn(),
+      scrollSnapList: jest.fn(() => mockScrollSnapList),
+      selectedScrollSnap: jest.fn(() => 0),
+      on: jest.fn(() => ({ on: jest.fn(() => ({ on: jest.fn() })) })),
     } as unknown as EmblaCarouselType;
 
     const { result } = renderHook(() => useDotButton(mockEmblaApi));
@@ -93,10 +92,10 @@ describe('useDotButton', () => {
 
   it('selectedIndexが正しく設定される', () => {
     const mockEmblaApi = {
-      scrollTo: vi.fn(),
-      scrollSnapList: vi.fn(() => [0, 1, 2, 3]),
-      selectedScrollSnap: vi.fn(() => 2),
-      on: vi.fn(() => ({ on: vi.fn(() => ({ on: vi.fn() })) })),
+      scrollTo: jest.fn(),
+      scrollSnapList: jest.fn(() => [0, 1, 2, 3]),
+      selectedScrollSnap: jest.fn(() => 2),
+      on: jest.fn(() => ({ on: jest.fn(() => ({ on: jest.fn() })) })),
     } as unknown as EmblaCarouselType;
 
     const { result } = renderHook(() => useDotButton(mockEmblaApi));

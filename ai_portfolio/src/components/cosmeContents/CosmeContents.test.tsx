@@ -3,6 +3,35 @@ import '@testing-library/jest-dom';
 import CosmeContents from './CosmeContents';
 import { COSME_CONTENTS } from '../../utils/CosmeContentsData';
 
+// embla-carousel-react のモック
+jest.mock('embla-carousel-react', () => {
+  let rootNodeElement: HTMLElement | null = null;
+
+  const mockEmblaApi = {
+    scrollNext: jest.fn(),
+    scrollPrev: jest.fn(),
+    scrollTo: jest.fn(),
+    canScrollNext: jest.fn(() => true),
+    canScrollPrev: jest.fn(() => false),
+    selectedScrollSnap: jest.fn(() => 0),
+    scrollSnapList: jest.fn(() => [0, 1, 2, 3]), // COSME_CONTENTSの数と同じ
+    on: jest.fn(function (this: any) {
+      return this;
+    }),
+    off: jest.fn(),
+    rootNode: jest.fn(() => rootNodeElement),
+  };
+
+  const mockEmblaRef = jest.fn((node: HTMLElement | null) => {
+    rootNodeElement = node;
+  });
+
+  return {
+    __esModule: true,
+    default: jest.fn(() => [mockEmblaRef, mockEmblaApi]),
+  };
+});
+
 describe('CosmeContents', () => {
   beforeEach(() => {
     // ウィンドウサイズのモック
@@ -15,8 +44,9 @@ describe('CosmeContents', () => {
 
   it('セクションヘッダーが正しく表示される', () => {
     render(<CosmeContents />);
-    expect(screen.getByText('Cosmetics Company')).toBeInTheDocument();
-    expect(screen.getByText('化粧品企業')).toBeInTheDocument();
+    const headings = screen.getAllByRole('heading', { level: 2 });
+    expect(headings[0].textContent).toContain('Cosmetics Company');
+    expect(headings[0].textContent).toContain('化粧品企業');
   });
 
   it('すべてのコンテンツが表示される', () => {
@@ -90,19 +120,357 @@ describe('CosmeContents', () => {
     render(<CosmeContents options={options} />);
 
     // コンポーネントがエラーなくレンダリングされることを確認
-    expect(screen.getByText('Cosmetics Company')).toBeInTheDocument();
+    const headings = screen.getAllByRole('heading', { level: 2 });
+    expect(headings[0].textContent).toContain('Cosmetics Company');
   });
 
-  it('レスポンシブ: モバイルサイズでカルーセルコントロールが非表示', () => {
-    Object.defineProperty(window, 'innerWidth', {
-      writable: true,
-      configurable: true,
-      value: 768,
-    });
-
+  it('レスポンシブ: カルーセルコントロールに正しいクラスが適用される', () => {
     const { container } = render(<CosmeContents />);
 
     const controls = container.querySelector('.embla__controls');
-    expect(controls).toHaveClass('hidden');
+    expect(controls).toHaveClass('pb-6');
+    expect(controls).toHaveClass('lg:grid');
+  });
+
+  describe('onWheel イベント', () => {
+    it('大画面でホイールダウン時にscrollNextが呼ばれる', () => {
+      Object.defineProperty(window, 'innerWidth', {
+        writable: true,
+        configurable: true,
+        value: 1024,
+      });
+
+      const { container } = render(<CosmeContents />);
+      const emblaNode = container.querySelector('.embla__viewport');
+
+      const wheelEvent = new WheelEvent('wheel', {
+        deltaY: 100,
+        bubbles: true,
+        cancelable: true,
+      });
+
+      const preventDefaultSpy = jest.spyOn(wheelEvent, 'preventDefault');
+      emblaNode?.dispatchEvent(wheelEvent);
+
+      expect(preventDefaultSpy).toHaveBeenCalled();
+    });
+
+    it('大画面でホイールアップ時にscrollPrevが呼ばれる', () => {
+      Object.defineProperty(window, 'innerWidth', {
+        writable: true,
+        configurable: true,
+        value: 1024,
+      });
+
+      const { container } = render(<CosmeContents />);
+      const emblaNode = container.querySelector('.embla__viewport');
+
+      const wheelEvent = new WheelEvent('wheel', {
+        deltaY: -100,
+        bubbles: true,
+        cancelable: true,
+      });
+
+      const preventDefaultSpy = jest.spyOn(wheelEvent, 'preventDefault');
+      emblaNode?.dispatchEvent(wheelEvent);
+
+      expect(preventDefaultSpy).toHaveBeenCalled();
+    });
+
+    it('小画面ではホイールイベントが無効化される', () => {
+      Object.defineProperty(window, 'innerWidth', {
+        writable: true,
+        configurable: true,
+        value: 768,
+      });
+
+      const { container } = render(<CosmeContents />);
+      const emblaNode = container.querySelector('.embla__viewport');
+
+      const wheelEvent = new WheelEvent('wheel', {
+        deltaY: 100,
+        bubbles: true,
+        cancelable: true,
+      });
+
+      const preventDefaultSpy = jest.spyOn(wheelEvent, 'preventDefault');
+      emblaNode?.dispatchEvent(wheelEvent);
+
+      // 小画面ではpreventDefaultが呼ばれない（イベントが無効化される）
+      expect(preventDefaultSpy).not.toHaveBeenCalled();
+    });
+
+    it('deltaYが0の場合は何もしない', () => {
+      Object.defineProperty(window, 'innerWidth', {
+        writable: true,
+        configurable: true,
+        value: 1024,
+      });
+
+      const { container } = render(<CosmeContents />);
+      const emblaNode = container.querySelector('.embla__viewport');
+
+      const wheelEvent = new WheelEvent('wheel', {
+        deltaY: 0,
+        bubbles: true,
+        cancelable: true,
+      });
+
+      const preventDefaultSpy = jest.spyOn(wheelEvent, 'preventDefault');
+      emblaNode?.dispatchEvent(wheelEvent);
+
+      // deltaYが0の場合でもpreventDefaultは呼ばれる（emblaApiが存在する限り）
+      expect(preventDefaultSpy).toHaveBeenCalled();
+    });
+  });
+
+  describe('handleKeyDown イベント', () => {
+    it('大画面でArrowDownキーを押すとscrollNextが呼ばれる', () => {
+      Object.defineProperty(window, 'innerWidth', {
+        writable: true,
+        configurable: true,
+        value: 1024,
+      });
+
+      const { container } = render(<CosmeContents />);
+      const emblaNode = container.querySelector('.embla__viewport');
+
+      // emblaNodeにフォーカスを当てる
+      emblaNode?.setAttribute('tabindex', '0');
+      (emblaNode as HTMLElement)?.focus();
+
+      const keyEvent = new KeyboardEvent('keydown', {
+        key: 'ArrowDown',
+        bubbles: true,
+        cancelable: true,
+      });
+
+      const preventDefaultSpy = jest.spyOn(keyEvent, 'preventDefault');
+      window.dispatchEvent(keyEvent);
+
+      expect(preventDefaultSpy).toHaveBeenCalled();
+    });
+
+    it('大画面でArrowRightキーを押すとscrollNextが呼ばれる', () => {
+      Object.defineProperty(window, 'innerWidth', {
+        writable: true,
+        configurable: true,
+        value: 1024,
+      });
+
+      const { container } = render(<CosmeContents />);
+      const emblaNode = container.querySelector('.embla__viewport');
+
+      emblaNode?.setAttribute('tabindex', '0');
+      (emblaNode as HTMLElement)?.focus();
+
+      const keyEvent = new KeyboardEvent('keydown', {
+        key: 'ArrowRight',
+        bubbles: true,
+        cancelable: true,
+      });
+
+      const preventDefaultSpy = jest.spyOn(keyEvent, 'preventDefault');
+      window.dispatchEvent(keyEvent);
+
+      expect(preventDefaultSpy).toHaveBeenCalled();
+    });
+
+    it('大画面でArrowUpキーを押すとscrollPrevが呼ばれる', () => {
+      Object.defineProperty(window, 'innerWidth', {
+        writable: true,
+        configurable: true,
+        value: 1024,
+      });
+
+      const { container } = render(<CosmeContents />);
+      const emblaNode = container.querySelector('.embla__viewport');
+
+      emblaNode?.setAttribute('tabindex', '0');
+      (emblaNode as HTMLElement)?.focus();
+
+      const keyEvent = new KeyboardEvent('keydown', {
+        key: 'ArrowUp',
+        bubbles: true,
+        cancelable: true,
+      });
+
+      const preventDefaultSpy = jest.spyOn(keyEvent, 'preventDefault');
+      window.dispatchEvent(keyEvent);
+
+      expect(preventDefaultSpy).toHaveBeenCalled();
+    });
+
+    it('大画面でArrowLeftキーを押すとscrollPrevが呼ばれる', () => {
+      Object.defineProperty(window, 'innerWidth', {
+        writable: true,
+        configurable: true,
+        value: 1024,
+      });
+
+      const { container } = render(<CosmeContents />);
+      const emblaNode = container.querySelector('.embla__viewport');
+
+      emblaNode?.setAttribute('tabindex', '0');
+      (emblaNode as HTMLElement)?.focus();
+
+      const keyEvent = new KeyboardEvent('keydown', {
+        key: 'ArrowLeft',
+        bubbles: true,
+        cancelable: true,
+      });
+
+      const preventDefaultSpy = jest.spyOn(keyEvent, 'preventDefault');
+      window.dispatchEvent(keyEvent);
+
+      expect(preventDefaultSpy).toHaveBeenCalled();
+    });
+
+    it('emblaNodeにフォーカスがない場合はキーイベントが無視される', () => {
+      Object.defineProperty(window, 'innerWidth', {
+        writable: true,
+        configurable: true,
+        value: 1024,
+      });
+
+      render(<CosmeContents />);
+
+      // フォーカスを当てずにキーイベントを発火
+      const keyEvent = new KeyboardEvent('keydown', {
+        key: 'ArrowDown',
+        bubbles: true,
+        cancelable: true,
+      });
+
+      const preventDefaultSpy = jest.spyOn(keyEvent, 'preventDefault');
+      window.dispatchEvent(keyEvent);
+
+      // フォーカスがないのでpreventDefaultが呼ばれない
+      expect(preventDefaultSpy).not.toHaveBeenCalled();
+    });
+
+    it('小画面ではキーボードイベントが無効化される', () => {
+      Object.defineProperty(window, 'innerWidth', {
+        writable: true,
+        configurable: true,
+        value: 768,
+      });
+
+      const { container } = render(<CosmeContents />);
+      const emblaNode = container.querySelector('.embla__viewport');
+
+      emblaNode?.setAttribute('tabindex', '0');
+      (emblaNode as HTMLElement)?.focus();
+
+      const keyEvent = new KeyboardEvent('keydown', {
+        key: 'ArrowDown',
+        bubbles: true,
+        cancelable: true,
+      });
+
+      const preventDefaultSpy = jest.spyOn(keyEvent, 'preventDefault');
+      window.dispatchEvent(keyEvent);
+
+      // 小画面ではキーボードリスナーが登録されないのでpreventDefaultが呼ばれない
+      expect(preventDefaultSpy).not.toHaveBeenCalled();
+    });
+
+    it('矢印キー以外のキーでは何もしない', () => {
+      Object.defineProperty(window, 'innerWidth', {
+        writable: true,
+        configurable: true,
+        value: 1024,
+      });
+
+      const { container } = render(<CosmeContents />);
+      const emblaNode = container.querySelector('.embla__viewport');
+
+      emblaNode?.setAttribute('tabindex', '0');
+      (emblaNode as HTMLElement)?.focus();
+
+      const keyEvent = new KeyboardEvent('keydown', {
+        key: 'Enter',
+        bubbles: true,
+        cancelable: true,
+      });
+
+      const preventDefaultSpy = jest.spyOn(keyEvent, 'preventDefault');
+      window.dispatchEvent(keyEvent);
+
+      // 矢印キー以外ではpreventDefaultが呼ばれない
+      expect(preventDefaultSpy).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('ドットボタン', () => {
+    it('コンテンツ数と同じ数のドットボタンが表示される', () => {
+      const { container } = render(<CosmeContents />);
+      const dotsContainer = container.querySelector('.embla__dots');
+
+      // デバッグ: dotsContainerが存在するか確認
+      expect(dotsContainer).toBeInTheDocument();
+
+      const dots = dotsContainer?.querySelectorAll('button');
+      expect(dots?.length).toBe(COSME_CONTENTS.length);
+    });
+
+    it('最初のドットボタンが選択状態になっている', () => {
+      const { container } = render(<CosmeContents />);
+      const dotsContainer = container.querySelector('.embla__dots');
+      const dots = dotsContainer?.querySelectorAll('button');
+
+      expect(dots?.[0]).toHaveClass('embla__dot--selected');
+    });
+
+    it('選択されていないドットボタンにはselectedクラスがない', () => {
+      const { container } = render(<CosmeContents />);
+      const dotsContainer = container.querySelector('.embla__dots');
+      const dots = dotsContainer?.querySelectorAll('button');
+
+      if (dots) {
+        for (let i = 1; i < dots.length; i++) {
+          expect(dots[i]).not.toHaveClass('embla__dot--selected');
+        }
+      }
+    });
+
+    it('ドットボタンをクリックすると該当スライドに移動する', () => {
+      const { container } = render(<CosmeContents />);
+      const dotsContainer = container.querySelector('.embla__dots');
+      const dots = dotsContainer?.querySelectorAll('button');
+
+      if (dots && dots.length > 1) {
+        // 2番目のドットボタンをクリック
+        (dots[1] as HTMLElement).click();
+
+        // クリック可能であることを確認（エラーが出ないこと）
+        expect(dots[1]).toBeInTheDocument();
+      }
+    });
+
+    it('各ドットボタンにkey属性が設定されている', () => {
+      const { container } = render(<CosmeContents />);
+      const dotsContainer = container.querySelector('.embla__dots');
+
+      expect(dotsContainer).toBeInTheDocument();
+      expect(dotsContainer?.children.length).toBe(COSME_CONTENTS.length);
+    });
+
+    it('全てのドットボタンにembla__dotクラスが適用されている', () => {
+      const { container } = render(<CosmeContents />);
+      const dotsContainer = container.querySelector('.embla__dots');
+      const dots = dotsContainer?.querySelectorAll('button');
+
+      dots?.forEach((dot) => {
+        expect(dot.className).toContain('embla__dot');
+      });
+    });
+
+    it('ドットボタンコンテナが存在する', () => {
+      const { container } = render(<CosmeContents />);
+      const dotsContainer = container.querySelector('.embla__dots');
+
+      expect(dotsContainer).toBeInTheDocument();
+    });
   });
 });

@@ -1,5 +1,4 @@
 import { render, screen, fireEvent } from '@testing-library/react';
-import { vi } from 'vitest';
 import '@testing-library/jest-dom';
 import PageIndicator from './PageIndicator';
 import { useRef } from 'react';
@@ -83,7 +82,7 @@ describe('PageIndicator', () => {
   });
 
   it('ボタンをクリックすると適切な位置にスクロールする', () => {
-    const mockScrollTo = vi.fn();
+    const mockScrollTo = jest.fn();
 
     const TestWrapperWithMock = () => {
       const containerRef = useRef<HTMLDivElement>({
