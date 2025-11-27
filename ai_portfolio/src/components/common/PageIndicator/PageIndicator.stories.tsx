@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/nextjs';
-import PageIndicator from '@/components/common/pageIndicator/PageIndicator';
+import PageIndicator from './PageIndicator';
 import { useRef } from 'react';
 
 const meta = {
