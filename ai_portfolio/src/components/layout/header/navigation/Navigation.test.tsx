@@ -21,7 +21,6 @@ describe('Navigation', () => {
             navMenuData={NAV_MENU}
           />
         );
-        waitFor(() => expect(screen.getByRole('menuitem')));
         const link = screen.getAllByRole('menuitem');
         expect(link[0]).toHaveAttribute('href', '#topSection');
         expect(link[1]).toHaveAttribute('href', '#cosmetics');

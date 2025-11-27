@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/nextjs';
 import {
   PrevButton,
   NextButton,
-} from '@/components/common/EmblaCarouselArrowButtons/EmblaCarouselArrowButtons';
+} from '@/components/common/emblaCarouselArrowButtons/EmblaCarouselArrowButtons';
 
 const meta = {
   title: 'Components/Common/ArrowButtons',

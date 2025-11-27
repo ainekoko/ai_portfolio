@@ -1,6 +1,6 @@
 'use client';
 import { useState, useCallback, useEffect } from 'react';
-import CustomCursor from '@/components/ui/CustomCursor';
+import CustomCursor from '@/components/ui/CustomCursor/CustomCursor';
 import HamburgerBtn from './humburger/HamburgerBtn';
 import Navigation from './navigation/Navigation';
 import HeaderNav from './headerNav/HeaderNav';

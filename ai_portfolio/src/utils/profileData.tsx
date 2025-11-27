@@ -1,7 +1,7 @@
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { faGithub, faXTwitter } from '@fortawesome/free-brands-svg-icons';
-import Num from '@/components/common/Font';
-import Font from '@/components/common/Font';
+import Num from '@/components/common/font/Font';
+import Font from '@/components/common/font/Font';
 
 /**
  * プロフィールデータ

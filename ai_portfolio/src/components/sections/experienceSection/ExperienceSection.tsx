@@ -1,5 +1,5 @@
 import { SectionProps } from '@/types/component';
-import SectionHeader from '@/components/common/SectionHeader';
+import SectionHeader from '@/components/common/sectionHeader/SectionHeader';
 import ExperienceCard from '@/components/experience/experienceCard/ExperienceCard';
 import BackgroundScrollText from '@/components/experience/backgroundScrollText/BackgroundScrollText';
 import { EXPERIENCE_CARDS } from '@/utils/ExperienceData';

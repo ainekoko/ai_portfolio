@@ -1,6 +1,6 @@
 import { SectionProps } from '@/types/component';
 import React from 'react';
-import SectionHeader from '@/components/common/SectionHeader';
+import SectionHeader from '@/components/common/sectionHeader/SectionHeader';
 import SkillItemList from '@/components/skill/skillItemList/SkillItemList';
 import DocumentSkill from '@/components/skill/skillDocument/SkillDocument';
 import SkillAccordion from '@/components/skill/skillAccordion/SkillAccordion';

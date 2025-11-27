@@ -4,15 +4,15 @@ import { EmblaOptionsType } from 'embla-carousel';
 import {
   DotButton,
   useDotButton,
-} from '@/components/common/EmblaCarouselDotButton/EmblaCarouselDotButton';
+} from '@/components/common/emblaCarouselDotButton/EmblaCarouselDotButton';
 import {
   PrevButton,
   NextButton,
   usePrevNextButtons,
-} from '../common/EmblaCarouselArrowButtons/EmblaCarouselArrowButtons';
+} from '../common/emblaCarouselArrowButtons/EmblaCarouselArrowButtons';
 import useEmblaCarousel from 'embla-carousel-react';
 import '@/styles/embla-carousel.css';
-import SectionHeader from '../common/SectionHeader';
+import SectionHeader from '../common/sectionHeader/SectionHeader';
 import { COSME_CONTENTS } from '@/utils/CosmeContentsData';
 import Link from 'next/link';
 

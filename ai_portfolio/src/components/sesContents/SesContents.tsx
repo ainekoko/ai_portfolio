@@ -4,19 +4,19 @@ import { EmblaOptionsType } from 'embla-carousel';
 import {
   DotButton,
   useDotButton,
-} from '@/components/common/EmblaCarouselDotButton/EmblaCarouselDotButton';
+} from '@/components/common/emblaCarouselDotButton/EmblaCarouselDotButton';
 import {
   PrevButton,
   NextButton,
   usePrevNextButtons,
-} from '@/components/common/EmblaCarouselArrowButtons/EmblaCarouselArrowButtons';
+} from '@/components/common/emblaCarouselArrowButtons/EmblaCarouselArrowButtons';
 import useEmblaCarousel from 'embla-carousel-react';
 import '@/styles/embla-carousel.css';
-import SectionHeader from '../common/SectionHeader';
+import SectionHeader from '../common/sectionHeader/SectionHeader';
 import { ITJOB_INTRODUCTION } from '@/utils/itData';
 import Link from 'next/link';
-import Huwahuwa_img from '../common/huwahuwa_img';
-import Font from '../common/Font';
+import Huwahuwa_img from '../common/huwahuwaImg/Huwahuwa_img';
+import Font from '../common/font/Font';
 
 // ブレークポイント定数
 const LG_BREAKPOINT = 1024;

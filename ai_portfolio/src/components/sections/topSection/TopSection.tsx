@@ -1,4 +1,4 @@
-import FadeInElement from '../../common/FadeIn';
+import FadeInElement from '../../common/fadeIn/FadeIn';
 import Image from 'next/image';
 import { BACK_IMG } from '@/utils/TopData';
 

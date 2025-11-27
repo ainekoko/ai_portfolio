@@ -1,5 +1,4 @@
 import { render, screen, fireEvent } from '@testing-library/react';
-import { vi } from 'vitest';
 import '@testing-library/jest-dom';
 import {
   PrevButton,
@@ -18,7 +17,7 @@ describe('PrevButton', () => {
   });
 
   it('クリックイベントが発火する', () => {
-    const handleClick = vi.fn();
+    const handleClick = jest.fn();
     render(<PrevButton onClick={handleClick} />);
 
     const button = screen.getByRole('button');
@@ -55,7 +54,7 @@ describe('NextButton', () => {
   });
 
   it('クリックイベントが発火する', () => {
-    const handleClick = vi.fn();
+    const handleClick = jest.fn();
     render(<NextButton onClick={handleClick} />);
 
     const button = screen.getByRole('button');
@@ -92,13 +91,13 @@ describe('usePrevNextButtons', () => {
   });
 
   it('onPrevButtonClickが正しく動作する', () => {
-    const mockScrollPrev = vi.fn();
+    const mockScrollPrev = jest.fn();
     const mockEmblaApi = {
       scrollPrev: mockScrollPrev,
-      scrollNext: vi.fn(),
-      canScrollPrev: vi.fn(() => true),
-      canScrollNext: vi.fn(() => true),
-      on: vi.fn(() => ({ on: vi.fn() })),
+      scrollNext: jest.fn(),
+      canScrollPrev: jest.fn(() => true),
+      canScrollNext: jest.fn(() => true),
+      on: jest.fn(() => ({ on: jest.fn() })),
     } as unknown as EmblaCarouselType;
 
     const { result } = renderHook(() => usePrevNextButtons(mockEmblaApi));
@@ -108,13 +107,13 @@ describe('usePrevNextButtons', () => {
   });
 
   it('onNextButtonClickが正しく動作する', () => {
-    const mockScrollNext = vi.fn();
+    const mockScrollNext = jest.fn();
     const mockEmblaApi = {
-      scrollPrev: vi.fn(),
+      scrollPrev: jest.fn(),
       scrollNext: mockScrollNext,
-      canScrollPrev: vi.fn(() => true),
-      canScrollNext: vi.fn(() => true),
-      on: vi.fn(() => ({ on: vi.fn() })),
+      canScrollPrev: jest.fn(() => true),
+      canScrollNext: jest.fn(() => true),
+      on: jest.fn(() => ({ on: jest.fn() })),
     } as unknown as EmblaCarouselType;
 
     const { result } = renderHook(() => usePrevNextButtons(mockEmblaApi));

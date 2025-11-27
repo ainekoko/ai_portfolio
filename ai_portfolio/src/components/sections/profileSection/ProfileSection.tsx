@@ -2,10 +2,10 @@ import React from 'react';
 import ContactButtons from '@/components/profile/contactButtons/ContactButtons';
 import ProfileInfoTable from '@/components/profile/profileInfoTable/ProfileInfoTable';
 import { CONTACT_BUTTONS, PROFILE_DATA } from '@/utils/profileData';
-import SectionHeader from '@/components/common/SectionHeader';
-import Huwahuwa_img from '@/components/common/huwahuwa_img';
+import SectionHeader from '@/components/common/sectionHeader/SectionHeader';
+import Huwahuwa_img from '@/components/common/huwahuwaImg/Huwahuwa_img';
 import { SectionProps } from '@/types/component';
-import FadeInElement from '@/components/common/FadeIn';
+import FadeInElement from '@/components/common/fadeIn/FadeIn';
 
 /**
  * ProfileSection.tsx
