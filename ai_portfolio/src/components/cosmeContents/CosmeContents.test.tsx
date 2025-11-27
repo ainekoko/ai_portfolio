@@ -7,7 +7,18 @@ import { COSME_CONTENTS } from '../../utils/CosmeContentsData';
 jest.mock('embla-carousel-react', () => {
   let rootNodeElement: HTMLElement | null = null;
 
-  const mockEmblaApi = {
+  const mockEmblaApi: {
+    scrollNext: jest.Mock;
+    scrollPrev: jest.Mock;
+    scrollTo: jest.Mock;
+    canScrollNext: jest.Mock;
+    canScrollPrev: jest.Mock;
+    selectedScrollSnap: jest.Mock;
+    scrollSnapList: jest.Mock;
+    on: jest.Mock;
+    off: jest.Mock;
+    rootNode: jest.Mock;
+  } = {
     scrollNext: jest.fn(),
     scrollPrev: jest.fn(),
     scrollTo: jest.fn(),
@@ -15,7 +26,7 @@ jest.mock('embla-carousel-react', () => {
     canScrollPrev: jest.fn(() => false),
     selectedScrollSnap: jest.fn(() => 0),
     scrollSnapList: jest.fn(() => [0, 1, 2, 3]), // COSME_CONTENTSの数と同じ
-    on: jest.fn(function (this: any) {
+    on: jest.fn(function (this: typeof mockEmblaApi) {
       return this;
     }),
     off: jest.fn(),
