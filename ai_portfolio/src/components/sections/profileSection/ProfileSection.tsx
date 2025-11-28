@@ -17,7 +17,7 @@ const ProfileSection = ({ isVisible }: SectionProps) => {
     <section
       id='profile'
       aria-label='プロフィール'
-      className='bg-white relative w-screen pt-16 pb-28'
+      className='bg-white relative w-screen pt-16 pb-28 bg-[url(/assets/images/snow-town.png)] bg-repeat-x bg-bottom bg-size-[auto_200px]'
     >
       {/* 白背景（100px以降） */}
       <div className='absolute top-[100px] left-0 right-0 bottom-0  -z-10' />
