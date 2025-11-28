@@ -19,7 +19,7 @@ const TopSection = ({ isVisible }: SectionIdProps) => {
   return (
     <section
       id='topSection'
-      className='w-screen overflow-hidden'
+      className='w-screen overflow-hidden bg-white'
       aria-label='トップセクション'
     >
       <div className='relative h-[1500px]  max-sm:h-[calc(130vw*500/450+135vw*400/550)] w-auto lg:w-[1025px] m-auto'>
