@@ -32,7 +32,7 @@ const MessageSection = () => {
       {/* QAセクション - ホバー対応アコーディオン */}
       <div className='mx-3 md:max-w-[800px] md:m-auto z-10 relative'>
         <h3 className='text-[#834600] text-center text-base font-semibold mb-8'>
-          よく化粧品業界からIT業界へ転職した際に聞かれる質問をまとめてみました！
+          化粧品業界からIT業界へ転職した際に聞かれる質問をまとめてみました！
         </h3>
 
         <div className='space-y-3' role='list'>

@@ -36,12 +36,11 @@ body {
   position: relative;
   color: var(--foreground);
   background: var(--background);
-  background-image: url('/assets/images/bg_flower_left.png'),
-    url('/assets/images/bg_flower_right.png');
-  background-position: left center, right center;
-  background-repeat: no-repeat, no-repeat;
-  background-attachment: fixed, fixed;
-  background-size: auto 100%, auto 100%;
+  background-image: url('/assets/images/bg_flower_back.png');
+  background-position: bottom center;
+  background-repeat: repeat-x;
+  background-attachment: fixed;
+  background-size: auto;
   /* Google Fontsから読み込んだItalianaフォントを使用 */
   font-family: 'Italiana', Arial, Helvetica, sans-serif;
   cursor: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48Y2lyY2xlIGN4PSIxNiIgY3k9IjE2IiByPSIxMCIgZmlsbD0iYmxhY2siLz48L3N2Zz4='),
@@ -51,8 +50,8 @@ body {
 /* レスポンシブ対応追加 */
 @media (max-width: 768px) {
   body {
-    background-size: 80% auto, 80% auto;
-    background-position: left top, right top;
+    background-size: auto;
+    background-position: bottom center;
   }
 
   /* モバイルでカスタムカーソルを無効化 */
