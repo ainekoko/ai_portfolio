@@ -16,13 +16,13 @@ const ExperienceCard = ({
 }: ExperienceCardProps) => {
   return (
     <div className='mt-20 relative'>
-      <div className='flex items-center relative z-10'>
+      <div className='flex items-center relative z-0'>
         <h2 className='text-2xl font-light mr-12 whitespace-nowrap'>{title}</h2>
         <span className='text-sm mr-8 whitespace-nowrap'>{period}</span>
       </div>
-      <p className='py-5 px-10 relative z-10'>{description}</p>
+      <p className='py-5 px-10 relative z-0'>{description}</p>
       {/* More */}
-      <div className='flex justify-end relative z-10'>
+      <div className='flex justify-end relative z-0'>
         <Link href={link} className='inline-flex items-center gap-4 group'>
           <span className=' text-xl font-bold text-gray-600 group-hover:text-gray-900 transition-colors duration-300'>
             more

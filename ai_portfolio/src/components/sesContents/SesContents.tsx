@@ -124,19 +124,15 @@ const SesContents: React.FC<PropType> = (props) => {
         size='normal'
       />
 
-      {/* カルーセル: lg以上で有効、lg未満で無効 */}
-      <section className='embla w-screen px-2 text-sm lg:min-h-screen lg:h-screen'>
+      {/* カルーセル: lg以上で有効、lg以下で無効 */}
+      <section className='embla w-screen px-2 text-sm min-h-screen lg:h-screen'>
         <Font>
-          <div
-            className='embla__viewport overflow-visible lg:overflow-hidden'
-            ref={isLargeScreen ? emblaRef : null}
-            tabIndex={0}
-          >
-            <div className='embla__container block lg:flex lg:flex-row'>
+          <div className='embla__viewport ' ref={emblaRef} tabIndex={0}>
+            <div className='embla__container lg:flex lg:flex-row flex-col'>
               {ITJOB_INTRODUCTION.map((content, index) => (
                 <div
                   key={index}
-                  className='embla__slide mb-8 lg:flex-[0_0_100%] lg:mb-0'
+                  className='embla__slide lg:flex-[0_0_100%] mb-8 lg:mb-0'
                 >
                   <div
                     className='flex items-start justify-center w-full h-full px-4 lg:px-8 pt-6 lg:pt-8 pb-6 lg:pb-8'
@@ -147,16 +143,16 @@ const SesContents: React.FC<PropType> = (props) => {
                     <div className='relative max-w-5xl w-full h-full lg:max-h-[75vh] flex flex-col'>
                       {/* キャラクター画像 - 右下に固定 */}
                       <Huwahuwa_img
-                        image='flourish.png'
+                        image='shimaenaga-03.png'
                         name='キャラクター'
                         move='gentle'
-                        bottom='0px'
-                        left='50px'
+                        bottom='50px'
+                        left='-180px'
                         speech={content.hukidashi}
                       />
 
                       {/* メインカード */}
-                      <div className='bg-white overflow-hidden transform transition-all duration-300 hover:shadow-3xl flex flex-col h-full'>
+                      <div className='bg-white/80 overflow-hidden transform transition-all duration-300 hover:shadow-3xl flex flex-col h-full'>
                         {/* ヘッダーセクション */}
                         <div className='relative p-6 lg:p-8 shrink-0'>
                           {/* 装飾的な番号 */}
@@ -329,7 +325,7 @@ const SesContents: React.FC<PropType> = (props) => {
           </div>
         </Font>
         {/* Embla Carousel Controls - lg以上のみ表示 */}
-        <div className='embla__controls pb-6 hidden lg:grid'>
+        <div className='embla__controls pb-6 lg:grid'>
           <div className='embla__buttons'>
             <PrevButton
               onClick={onPrevButtonClick}

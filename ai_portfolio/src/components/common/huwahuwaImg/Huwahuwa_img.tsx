@@ -45,7 +45,7 @@ const Huwahuwa_img = ({
 
   return (
     <div
-      className='absolute z-40 w-fit h-fit'
+      className='absolute z-0 w-fit h-fit'
       style={{
         top: top,
         right: right,
