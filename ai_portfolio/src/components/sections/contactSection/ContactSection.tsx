@@ -63,7 +63,7 @@ const ContactSection = ({ isVisible }: SectionProps) => {
       <AnimatedWaveBackground />
       <section
         id='contact'
-        className='relative w-screen pt-16 pb-16 bg-[#f5fffd]'
+        className='relative w-screen pt-16 pb-16 '
         aria-labelledby='contact-heading'
       >
         <SectionHeader
