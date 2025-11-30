@@ -24,7 +24,7 @@ const ExperienceCard = ({
       {/* More */}
       <div className='flex justify-end relative z-10'>
         <Link href={link} className='inline-flex items-center gap-4 group'>
-          <span className='text-xl font-light text-gray-600 group-hover:text-gray-900 transition-colors duration-300'>
+          <span className=' text-xl font-bold text-gray-600 group-hover:text-gray-900 transition-colors duration-300'>
             more
           </span>
           <div className='relative w-32'>

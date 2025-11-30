@@ -142,7 +142,7 @@ const CosmeContents: React.FC<PropType> = (props) => {
                 >
                   <div className='relative max-w-5xl w-full h-full lg:max-h-[75vh] flex flex-col'>
                     {/* メインカード */}
-                    <div className='bg-white overflow-hidden transform transition-all duration-300 hover:shadow-3xl flex flex-col h-full'>
+                    <div className='bg-white/80 overflow-hidden transform transition-all duration-300 hover:shadow-3xl flex flex-col h-full'>
                       {/* ヘッダーセクション - グラデーション背景 */}
                       <div className='relative p-10 shrink-0'>
                         {/* 装飾的な番号 */}
