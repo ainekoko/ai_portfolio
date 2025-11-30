@@ -45,17 +45,19 @@ export const PROFILE_DATA = [
     ),
   },
   {
-    label: '尊敬する人',
+    label: '資格',
     content: (
       <ul>
         <li>
-          <Font>Shin code</Font>さん
+          <Num>簿記2級</Num>
         </li>
-        <li>コードマフィアさん</li>
-        <div>
-          細かい部分も教授して下さり、<Font>youtube</Font>や<Font>Udemy</Font>
-          で勉強の際本当にお世話になっています!
-        </div>
+        <li>
+          <Font>Niellist技能検定2級</Font>
+        </li>
+        <li>
+          <Font>Excel</Font>
+        </li>
+        <li>普通自動車免許</li>
       </ul>
     ),
   },
@@ -75,15 +77,15 @@ export const CONTACT_BUTTONS = [
   {
     icon: faGithub,
     text: 'GitHub',
-    fullText: 'https://github.com/ainekoko/ai_portfolio',
+    fullText: 'https://github.com/ainekoko',
     color: 'purple-400' as const,
-    href: 'https://github.com/ainekoko/ai_portfolio',
+    href: 'https://github.com/ainekoko',
   },
   {
     icon: faXTwitter,
     text: 'X (Twitter)',
-    fullText: '@your_twitter',
+    fullText: '@ainekoko',
     color: 'indigo-500' as const,
-    href: 'https://twitter.com/your_twitter',
+    href: 'https://twitter.com/ainekoko',
   },
 ];
