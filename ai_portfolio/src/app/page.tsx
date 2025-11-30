@@ -6,8 +6,10 @@ import ExperienceSection from '@/components/sections/experienceSection/Experienc
 import SkillSection from '@/components/sections/skillSection/SkillSection';
 import ContactSection from '@/components/sections/contactSection/ContactSection';
 import MessageSection from '@/components/sections/messageSection/MessageSection';
+import Loading from '@/components/common/loading/Loading';
 
 const ThreeCanvas = () => {
+  const [isLoading, setIsLoading] = useState(true);
   const [visibleSections, setVisibleSections] = useState<Set<string>>(
     new Set()
   );
@@ -59,6 +61,11 @@ const ThreeCanvas = () => {
     // 初回実行
     handleScroll();
 
+    // ページ読み込み完了後にローディングを非表示
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 800);
+
     // スクロールイベントリスナー
     let ticking = false;
     const scrollListener = () => {
@@ -77,6 +84,7 @@ const ThreeCanvas = () => {
     window.addEventListener('resize', handleScroll, { passive: true });
 
     return () => {
+      clearTimeout(timer);
       window.removeEventListener('scroll', scrollListener);
       window.removeEventListener('resize', handleScroll);
     };
@@ -87,6 +95,7 @@ const ThreeCanvas = () => {
 
   return (
     <>
+      {isLoading && <Loading />}
       <TopSection isVisible={isVisible('hello')} />
       <ProfileSection isVisible={isVisible} />
       <MessageSection />
