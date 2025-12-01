@@ -1,171 +1,185 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 const Loading = () => {
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setProgress((prevProgress) => {
+        if (prevProgress >= 100) {
+          clearInterval(timer);
+          return 100;
+        }
+        return prevProgress + 2;
+      });
+    }, 30);
+
+    return () => clearInterval(timer);
+  }, []);
+
   return (
-    <div className='fixed inset-0 z-[10001] bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50 flex items-center justify-center overflow-hidden'>
-      {/* 背景の浮遊する円 */}
-      <div className='absolute inset-0'>
-        <div className='absolute top-20 left-20 w-32 h-32 bg-pink-200 rounded-full opacity-20 animate-float'></div>
-        <div className='absolute top-40 right-32 w-24 h-24 bg-purple-200 rounded-full opacity-20 animate-float-delay-1'></div>
-        <div className='absolute bottom-32 left-40 w-28 h-28 bg-blue-200 rounded-full opacity-20 animate-float-delay-2'></div>
-        <div className='absolute bottom-20 right-20 w-36 h-36 bg-teal-200 rounded-full opacity-20 animate-float-delay-3'></div>
-      </div>
+    <div className='fixed inset-0 z-[10001] bg-gradient-to-br from-rose-50 via-white to-blue-50 flex items-center justify-center transition-opacity duration-500'>
+      <div className='relative'>
+        {/* Main loading animation */}
+        <div className='relative w-32 h-32'>
+          {/* Flower petals */}
+          <div className='absolute inset-0 animate-spin-slow'>
+            {[...Array(6)].map((_, i) => (
+              <div
+                key={i}
+                className='absolute top-1/2 left-1/2 w-12 h-12 -ml-6 -mt-6 origin-center'
+                style={{
+                  transform: `rotate(${i * 60}deg) translateY(-24px)`,
+                }}
+              >
+                <div className='w-12 h-12 bg-gradient-to-br from-rose-300 to-pink-200 rounded-full opacity-70'></div>
+              </div>
+            ))}
+          </div>
 
-      <div className='relative text-center'>
-        {/* キラキラエフェクト */}
-        <div className='absolute -top-8 left-1/2 transform -translate-x-1/2'>
-          <span className='text-4xl animate-sparkle'>✨</span>
+          {/* Center circle */}
+          <div className='absolute inset-0 flex items-center justify-center'>
+            <div className='w-16 h-16 bg-gradient-to-br from-rose-400 via-pink-300 to-purple-300 rounded-full shadow-lg animate-pulse'></div>
+          </div>
+
+          {/* Inner white dot */}
+          <div className='absolute inset-0 flex items-center justify-center'>
+            <div className='w-6 h-6 bg-white rounded-full shadow-md'></div>
+          </div>
+
+          {/* Decorative floating dots */}
+          <div className='absolute -top-2 left-1/2 w-3 h-3 bg-rose-400 rounded-full animate-float-1'></div>
+          <div className='absolute top-1/2 -right-2 w-2 h-2 bg-blue-400 rounded-full animate-float-2'></div>
+          <div className='absolute -bottom-2 left-1/4 w-2.5 h-2.5 bg-purple-300 rounded-full animate-float-3'></div>
         </div>
 
-        {/* メインタイトル */}
-        <h1 className='text-6xl font-bold mb-6 relative'>
-          <span className='inline-block animate-bounce-slow text-pink-400'>
-            A
-          </span>
-          <span className='inline-block animate-bounce-slow animation-delay-100 text-purple-400'>
-            i
-          </span>
-          <span className='inline-block animate-bounce-slow animation-delay-200 text-pink-400'>
-            &apos;
-          </span>
-          <span className='inline-block animate-bounce-slow animation-delay-300 text-blue-400'>
-            s
-          </span>
-          <span className='mx-2'></span>
-          <span className='inline-block animate-bounce-slow animation-delay-400 text-purple-400'>
-            p
-          </span>
-          <span className='inline-block animate-bounce-slow animation-delay-500 text-teal-400'>
-            o
-          </span>
-          <span className='inline-block animate-bounce-slow animation-delay-600 text-pink-400'>
-            r
-          </span>
-          <span className='inline-block animate-bounce-slow animation-delay-700 text-purple-400'>
-            t
-          </span>
-          <span className='inline-block animate-bounce-slow animation-delay-800 text-blue-400'>
-            f
-          </span>
-          <span className='inline-block animate-bounce-slow animation-delay-900 text-teal-400'>
-            o
-          </span>
-          <span className='inline-block animate-bounce-slow animation-delay-1000 text-pink-400'>
-            l
-          </span>
-          <span className='inline-block animate-bounce-slow animation-delay-1100 text-purple-400'>
-            i
-          </span>
-          <span className='inline-block animate-bounce-slow animation-delay-1200 text-blue-400'>
-            o
-          </span>
-        </h1>
+        {/* Portfolio title */}
+        <div className='mt-8 text-center'>
+          <h1 className='text-2xl font-light text-gray-700 tracking-wide mb-4 animate-fade-in'>
+            Ai&apos;s portfolio
+          </h1>
 
-        {/* 可愛いローディングドット */}
-        <div className='flex justify-center gap-2 mb-4'>
-          <div className='w-3 h-3 bg-pink-400 rounded-full animate-bounce'></div>
-          <div className='w-3 h-3 bg-purple-400 rounded-full animate-bounce animation-delay-200'></div>
-          <div className='w-3 h-3 bg-blue-400 rounded-full animate-bounce animation-delay-400'></div>
-        </div>
+          {/* Loading text */}
+          <p className='text-gray-500 text-xs font-light tracking-wider animate-fade-in-delay'>
+            Loading...
+          </p>
 
-        <p className='text-gray-500 text-sm font-medium tracking-wider'>
-          Loading...
-        </p>
+          {/* Progress bar */}
+          <div className='mt-4 w-48 h-1 bg-gray-200 rounded-full overflow-hidden mx-auto'>
+            <div
+              className='h-full bg-gradient-to-r from-rose-400 via-purple-400 to-blue-400 transition-all duration-300 ease-out rounded-full'
+              style={{ width: `${progress}%` }}
+            ></div>
+          </div>
 
-        {/* 下部のキラキラ */}
-        <div className='absolute -bottom-8 right-0'>
-          <span className='text-3xl animate-sparkle animation-delay-500'>
-            💫
-          </span>
+          {/* Percentage */}
+          <p className='mt-2 text-xs text-gray-400 font-light'>{progress}%</p>
         </div>
       </div>
 
       <style jsx>{`
-        @keyframes float {
-          0%,
-          100% {
-            transform: translateY(0px) translateX(0px);
+        @keyframes spin-slow {
+          from {
+            transform: rotate(0deg);
           }
-          50% {
-            transform: translateY(-20px) translateX(10px);
+          to {
+            transform: rotate(360deg);
           }
         }
-        @keyframes bounce-slow {
+
+        @keyframes bounce-subtle {
           0%,
           100% {
             transform: translateY(0);
           }
           50% {
-            transform: translateY(-10px);
+            transform: translateY(-8px);
           }
         }
-        @keyframes sparkle {
+
+        @keyframes float-1 {
           0%,
           100% {
-            opacity: 1;
-            transform: scale(1) rotate(0deg);
+            transform: translate(0, 0);
+            opacity: 0.6;
           }
           50% {
-            opacity: 0.5;
-            transform: scale(1.2) rotate(180deg);
+            transform: translate(10px, -15px);
+            opacity: 1;
           }
         }
-        .animate-float {
-          animation: float 3s ease-in-out infinite;
+
+        @keyframes float-2 {
+          0%,
+          100% {
+            transform: translate(0, 0);
+            opacity: 0.5;
+          }
+          50% {
+            transform: translate(-15px, 10px);
+            opacity: 1;
+          }
         }
-        .animate-float-delay-1 {
-          animation: float 3s ease-in-out infinite;
-          animation-delay: 0.5s;
+
+        @keyframes float-3 {
+          0%,
+          100% {
+            transform: translate(0, 0);
+            opacity: 0.7;
+          }
+          50% {
+            transform: translate(12px, 12px);
+            opacity: 1;
+          }
         }
-        .animate-float-delay-2 {
-          animation: float 3s ease-in-out infinite;
-          animation-delay: 1s;
+
+        @keyframes fade-in {
+          from {
+            opacity: 0;
+          }
+          to {
+            opacity: 1;
+          }
         }
-        .animate-float-delay-3 {
-          animation: float 3s ease-in-out infinite;
-          animation-delay: 1.5s;
+
+        @keyframes fade-in-delay {
+          0% {
+            opacity: 0;
+          }
+          50% {
+            opacity: 0;
+          }
+          100% {
+            opacity: 1;
+          }
         }
-        .animate-bounce-slow {
-          animation: bounce-slow 1.5s ease-in-out infinite;
+
+        .animate-spin-slow {
+          animation: spin-slow 3s linear infinite;
         }
-        .animate-sparkle {
-          animation: sparkle 2s ease-in-out infinite;
+
+        .animate-bounce-subtle {
+          animation: bounce-subtle 2s ease-in-out infinite;
         }
-        .animation-delay-100 {
-          animation-delay: 0.1s;
+
+        .animate-float-1 {
+          animation: float-1 3s ease-in-out infinite;
         }
-        .animation-delay-200 {
-          animation-delay: 0.2s;
+
+        .animate-float-2 {
+          animation: float-2 3.5s ease-in-out infinite;
         }
-        .animation-delay-300 {
-          animation-delay: 0.3s;
+
+        .animate-float-3 {
+          animation: float-3 2.8s ease-in-out infinite;
         }
-        .animation-delay-400 {
-          animation-delay: 0.4s;
+
+        .animate-fade-in {
+          animation: fade-in 1s ease-in;
         }
-        .animation-delay-500 {
-          animation-delay: 0.5s;
-        }
-        .animation-delay-600 {
-          animation-delay: 0.6s;
-        }
-        .animation-delay-700 {
-          animation-delay: 0.7s;
-        }
-        .animation-delay-800 {
-          animation-delay: 0.8s;
-        }
-        .animation-delay-900 {
-          animation-delay: 0.9s;
-        }
-        .animation-delay-1000 {
-          animation-delay: 1s;
-        }
-        .animation-delay-1100 {
-          animation-delay: 1.1s;
-        }
-        .animation-delay-1200 {
-          animation-delay: 1.2s;
+
+        .animate-fade-in-delay {
+          animation: fade-in-delay 1.5s ease-in;
         }
       `}</style>
     </div>

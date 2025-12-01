@@ -29,7 +29,7 @@ const BackgroundScrollText = ({
 
   return (
     <div
-      className={`absolute ${positionClasses[position]} left-0 flex w-full h-[120px] md:h-[180px] overflow-hidden pointer-events-none`}
+      className={`absolute ${positionClasses[position]} left-0 flex w-full h-[120px] md:h-[180px] overflow-hidden pointer-events-none z-0`}
       style={{ ...positionStyle }}
       aria-hidden='true'
     >

@@ -84,7 +84,7 @@ const Navigation = ({
       id='morph-menu'
       ref={navRef}
       inert={!isMenuOpen || undefined}
-      className={`fixed top-0 left-0 w-full h-screen bg-gray-900/[0.98] transition-all duration-700 ease-out z-[9999] pointer-events-auto ${
+      className={`fixed top-0 left-0 w-full h-screen bg-gray-900/[0.98] transition-all duration-700 ease-out z-[99999] pointer-events-auto ${
         isMenuOpen ? styles.navClipActive : styles.navClipInitial
       }`}
       aria-hidden={!isMenuOpen}

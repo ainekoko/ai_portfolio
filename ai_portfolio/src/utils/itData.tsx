@@ -34,7 +34,7 @@ export const ITJOB_INTRODUCTION = [
     hukidashi: '仲の良い同期と毎月飲み会をして本当に楽しかったです！',
   },
   {
-    outsourcedCompany: 'クラウドサービス会社（自社）',
+    outsourcedCompany: 'クラウドサービス（自社）',
     period: '常駐先/出社/6か月',
     scale: 'PM2名、その他15名',
     phase: ['カスタマーサポート', '技術講師'],
@@ -70,13 +70,13 @@ export const ITJOB_INTRODUCTION = [
     scale: '営業1名、PM4名、デザイナー3名、FE8名、BE8名',
     phase: ['UI/UXデザイン', '詳細設計', '開発', 'テスト'],
     bussinessContent: [
-      'デザイン案の作成とプレゼンテーション',
       '保険シミュレーションページ作成',
+      'デザイン案の作成とプレゼンテーション',
       'レガシーコードのVue.js移行',
       '単体テスト・結合テスト',
     ],
     devenvironment: {
-      language: ['HTML', 'CSS', 'SASS', 'JavaScript'],
+      language: ['HTML', 'CSS', 'SASS', 'JavaScript', 'TypeScript'],
       framework: ['Vue.js', 'Jest'],
       database: ['MySQL'],
       os: 'Windows',
@@ -102,7 +102,7 @@ export const ITJOB_INTRODUCTION = [
     ),
   },
   {
-    outsourcedCompany: '化粧品ECサイト運営会社（自社）',
+    outsourcedCompany: '化粧品ECサイト運営（自社）',
     period: '常駐先/ハイブリッド/6か月',
     scale: 'PM1名、SEO1名、FE1名、BE3名',
     phase: ['UI/UXデザイン', '開発', 'テスト'],
@@ -138,7 +138,7 @@ export const ITJOB_INTRODUCTION = [
     ),
   },
   {
-    outsourcedCompany: '新聞オンライン版運営会社（自社）',
+    outsourcedCompany: '新聞オンライン版運営（自社）',
     period: '常駐先/ハイブリッド/2年',
     scale: 'PM2名、デザイナー1名、コーダー1名、FE1名、他部署20名程',
     phase: ['UI/UXデザイン', '企画', '開発', 'テスト'],
@@ -181,7 +181,7 @@ export const ITJOB_INTRODUCTION = [
     ),
   },
   {
-    outsourcedCompany: '銀行系システム開発会社（SIer）',
+    outsourcedCompany: '銀行系システム開発（SIer）',
     period: '常駐先/フルリモート/1年',
     scale: '100名以上（内FEチーム20名）',
     phase: [
@@ -194,16 +194,17 @@ export const ITJOB_INTRODUCTION = [
     ],
     bussinessContent: [
       '業務システムの新規作成（50ページ以上）',
+      '設計書関連ドキュメントの作成',
       'デザインシステムの構築とコンポーネント設計',
       'ページリーダーとしてタスク管理・新人教育',
       '単体テスト・結合テスト（Jest）',
     ],
     devenvironment: {
       language: ['HTML', 'CSS', 'SASS', 'JavaScript', 'TypeScript'],
-      framework: ['Vue.js', 'Jest'],
+      framework: ['Next.js', 'Jest'],
       os: 'Windows',
       tool: ['Teams', 'Adobe XD', 'Photoshop', 'GitLab', 'Storybook'],
-      libraries: ['Vuex', 'Vue Router', 'Vuelidate', 'Axios'],
+      libraries: ['Axios'],
       testing: ['Jest', 'Vue Testing Library'],
     },
     achievements: [
