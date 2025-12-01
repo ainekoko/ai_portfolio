@@ -143,12 +143,13 @@ const SesContents: React.FC<PropType> = (props) => {
                     <div className='relative max-w-5xl w-full h-full lg:max-h-[75vh] flex flex-col'>
                       {/* キャラクター画像 - 右下に固定 */}
                       <Huwahuwa_img
-                        image='shimaenaga-03.png'
+                        image='shimaenaga-04.gif'
                         name='キャラクター'
                         move='gentle'
                         bottom='50px'
-                        left='-180px'
+                        left='10px'
                         speech={content.hukidashi}
+                        width='100px'
                       />
 
                       {/* メインカード */}
