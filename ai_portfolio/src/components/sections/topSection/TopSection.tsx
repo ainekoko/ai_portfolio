@@ -1,6 +1,7 @@
 import FadeInElement from '../../common/fadeIn/FadeIn';
 import Image from 'next/image';
 import { BACK_IMG } from '@/utils/TopData';
+import FireflyBackground from '../../ui/FireflyBackground';
 
 /**
  * @param isVisible - 指定id表示されているかどうか
@@ -19,10 +20,22 @@ const TopSection = ({ isVisible }: SectionIdProps) => {
   return (
     <section
       id='topSection'
-      className='w-screen overflow-hidden'
+      className='w-screen overflow-hidden bg-white relative'
       aria-label='トップセクション'
     >
+      {/* 背景画像 */}
+      <div className='absolute inset-0 flex items-center justify-center pointer-events-none'>
+        <Image
+          src='/assets/images/flowerLeaf.png'
+          alt='Background'
+          width={800}
+          height={800}
+          className='opacity-10 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2'
+        />
+      </div>
+
       <div className='relative h-[1500px]  max-sm:h-[calc(130vw*500/450+135vw*400/550)] w-auto lg:w-[1025px] m-auto'>
+        <FireflyBackground />
         <FadeInElement direction='up' delay={0}>
           <div className='absolute left-0 sm:top-20 top-0   '>
             <Image
@@ -52,7 +65,7 @@ const TopSection = ({ isVisible }: SectionIdProps) => {
             className='
         mr-2.5
         text-8xl md:text-[8rem]
-        drop-shadow-[1px_0px_35px_#383838] 
+        drop-shadow-[1px_0px_15px_#383838] 
         text-white m-0 p-0 absolute 
         top-[30vh] right-0 
         font-bold
@@ -100,7 +113,7 @@ const TopSection = ({ isVisible }: SectionIdProps) => {
           className={`
             text-center 
             text-8xl md:text-[8rem]
-            drop-shadow-[1px_0px_35px_#383838] 
+            drop-shadow-[1px_0px_15px_#383838] 
             w-full 
             text-white m-0 p-0 font-bold 
             transition-all duration-1000 ease-out 

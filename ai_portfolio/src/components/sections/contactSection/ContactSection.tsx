@@ -8,6 +8,7 @@ import AnimatedWaveBackground from '@/components/contact/animatedWaveBackground/
 import { ContactFormValues, ContactSchema } from '@/validations/contracts';
 import Font from '@/components/common/font/Font';
 import { postContactEmailApi } from '@/services/contactApi';
+import Huwahuwa_img from '@/components/common/huwahuwaImg/Huwahuwa_img';
 
 /**
  * フォーム送信状態の型定義
@@ -63,7 +64,7 @@ const ContactSection = ({ isVisible }: SectionProps) => {
       <AnimatedWaveBackground />
       <section
         id='contact'
-        className='relative w-screen pt-16 pb-16 bg-[#f5fffd]'
+        className='relative w-screen pt-16 pb-16 '
         aria-labelledby='contact-heading'
       >
         <SectionHeader
@@ -86,19 +87,19 @@ const ContactSection = ({ isVisible }: SectionProps) => {
                 className='text-[#348a58] text-sm block mb-1'
               >
                 Name <span className='text-red-500'>*</span>
+                {errors.name && (
+                  <span className='text-red-500 text-sm  mb-1'>
+                    {errors.name.message}
+                  </span>
+                )}
               </label>
-              {errors.name && (
-                <span className='text-red-500 text-sm block mb-1'>
-                  {errors.name.message}
-                </span>
-              )}
               <Font>
                 <input
                   type='text'
                   id='name'
                   {...register('name')}
                   disabled={isSubmitting}
-                  className='text-center m-auto w-full border border-[#bde7c4] rounded px-3 py-2 text-base disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-[#348a58]'
+                  className='text-left m-auto w-full bg-white/50 border border-[#bde7c4] rounded px-3 py-2 text-base disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-[#348a58]'
                   aria-required='true'
                   {...(errors.name && {
                     'aria-invalid': 'true',
@@ -114,23 +115,20 @@ const ContactSection = ({ isVisible }: SectionProps) => {
                 htmlFor='email'
                 className='text-[#348a58] text-sm block mb-1'
               >
-                Mail Address <span className='text-red-500'>*</span>
+                Mail Address <span className='text-red-500'>*</span>{' '}
+                {errors.email && (
+                  <span className='text-red-500 text-sm mb-1' id='email-error'>
+                    {errors.email.message}
+                  </span>
+                )}
               </label>
-              {errors.email && (
-                <span
-                  className='text-red-500 text-sm block mb-1'
-                  id='email-error'
-                >
-                  {errors.email.message}
-                </span>
-              )}
               <Font>
                 <input
                   type='email'
                   id='email'
                   {...register('email')}
                   disabled={isSubmitting}
-                  className='text-center m-auto w-full border border-[#bde7c4] rounded px-3 py-2 text-base disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-[#348a58]'
+                  className='text-left m-auto w-full bg-white/50 border border-[#bde7c4] rounded px-3 py-2 text-base disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-[#348a58]'
                   aria-required='true'
                   aria-describedby={errors.email ? 'email-error' : undefined}
                   {...(errors.email && {
@@ -148,22 +146,22 @@ const ContactSection = ({ isVisible }: SectionProps) => {
                 className='text-[#348a58] text-sm block mb-1'
               >
                 Comment <span className='text-red-500'>*</span>
+                {errors.message && (
+                  <span
+                    className='text-red-500 text-sm  mb-1'
+                    id='message-error'
+                  >
+                    {errors.message.message}
+                  </span>
+                )}
               </label>
-              {errors.message && (
-                <span
-                  className='text-red-500 text-sm block mb-1'
-                  id='message-error'
-                >
-                  {errors.message.message}
-                </span>
-              )}
               <Font>
                 <textarea
                   id='contactMessage'
                   rows={4}
                   {...register('message')}
                   disabled={isSubmitting}
-                  className='mb-7 border border-[#bde7c4] rounded px-3 py-2 text-base w-full disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-[#348a58]'
+                  className='mb-7 bg-white/50 border border-[#bde7c4] rounded px-3 py-2 text-base w-full disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-[#348a58]'
                   aria-required='true'
                   {...(errors.message && {
                     'aria-invalid': 'true',
@@ -206,6 +204,13 @@ const ContactSection = ({ isVisible }: SectionProps) => {
             </button>
           </form>
         </div>
+        <Huwahuwa_img
+          image='shimaenaga-02.png'
+          name='キャラクター'
+          move='gentle'
+          bottom='40px'
+          left='450px'
+        />
       </section>
     </>
   );

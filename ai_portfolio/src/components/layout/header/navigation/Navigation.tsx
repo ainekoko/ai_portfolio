@@ -84,7 +84,7 @@ const Navigation = ({
       id='morph-menu'
       ref={navRef}
       inert={!isMenuOpen || undefined}
-      className={`fixed top-0 left-0 w-full h-screen bg-gray-900/[0.98] transition-all duration-700 ease-out z-[900] pointer-events-auto ${
+      className={`fixed top-0 left-0 w-full h-screen bg-gray-900/[0.98] transition-all duration-700 ease-out z-[99999] pointer-events-auto ${
         isMenuOpen ? styles.navClipActive : styles.navClipInitial
       }`}
       aria-hidden={!isMenuOpen}
@@ -95,34 +95,44 @@ const Navigation = ({
     >
       <div className='flex items-center justify-center w-full h-full'>
         <ul className='m-0 p-0 list-none text-center' role='menu'>
-          {navMenuData.map((item) => (
-            <li
-              key={item.sectionId}
-              className={`opacity-0 translate-y-7 transition-all duration-[400ms] ease-out ${
-                item.delay
-              } ${isMenuOpen ? styles.navItemEnter : ''}`}
-              role='none'
-            >
-              <a
-                href={`#${item.sectionId}`}
-                onClick={(e) => {
-                  e.preventDefault();
-                  onSectionClick(item.sectionId);
-                }}
-                className='relative inline-block py-3 md:py-5 px-3 md:px-5 text-2xl md:text-3xl text-white no-underline overflow-hidden hover:text-pink-400 transition-colors duration-500'
-                role='menuitem'
-                tabIndex={isMenuOpen ? 0 : -1}
+          {navMenuData.map((item) => {
+            // urlが'#'で始まる場合はセクションスクロール、それ以外はページ遷移
+            const isHashLink = item.url?.startsWith('#');
+            const href = item.url || `#${item.sectionId}`;
+
+            return (
+              <li
+                key={item.sectionId}
+                className={`opacity-0 translate-y-7 transition-all duration-[400ms] ease-out ${
+                  item.delay
+                } ${isMenuOpen ? styles.navItemEnter : ''}`}
+                role='none'
               >
-                <span className='block pointer-events-none'>
-                  {item.en}
-                  <br />
-                  <span className='text-xs md:text-sm opacity-70'>
-                    {item.ja}
+                <a
+                  href={href}
+                  onClick={(e) => {
+                    if (!isHashLink) {
+                      // ページ遷移の場合は通常のリンク遷移を許可
+                      return;
+                    }
+                    e.preventDefault();
+                    onSectionClick(item.sectionId);
+                  }}
+                  className='relative inline-block py-3 md:py-5 px-3 md:px-5 text-2xl md:text-3xl text-white no-underline overflow-hidden hover:text-pink-400 transition-colors duration-500'
+                  role='menuitem'
+                  tabIndex={isMenuOpen ? 0 : -1}
+                >
+                  <span className='block pointer-events-none'>
+                    {item.en}
+                    <br />
+                    <span className='text-xs md:text-sm opacity-70'>
+                      {item.ja}
+                    </span>
                   </span>
-                </span>
-              </a>
-            </li>
-          ))}
+                </a>
+              </li>
+            );
+          })}
         </ul>
       </div>
     </nav>

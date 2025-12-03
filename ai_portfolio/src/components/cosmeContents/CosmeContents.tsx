@@ -85,17 +85,11 @@ const CosmeContents: React.FC<PropType> = (props) => {
     return () => emblaNode.removeEventListener('wheel', onWheel);
   }, [emblaApi, onWheel, isLargeScreen]);
 
-  // キーボード操作のハンドラー（カルーセル領域にフォーカスがある時のみ有効）
+  // キーボード操作のハンドラー（グローバルに有効）
   useEffect(() => {
     if (!emblaApi || !isLargeScreen) return;
 
-    const emblaNode = emblaApi.rootNode();
-    if (!emblaNode) return;
-
     const handleKeyDown = (event: KeyboardEvent) => {
-      // カルーセル要素またはその子要素にフォーカスがある場合のみ反応
-      if (!emblaNode.contains(document.activeElement)) return;
-
       switch (event.key) {
         case 'ArrowDown':
         case 'ArrowRight':
@@ -142,7 +136,7 @@ const CosmeContents: React.FC<PropType> = (props) => {
                 >
                   <div className='relative max-w-5xl w-full h-full lg:max-h-[75vh] flex flex-col'>
                     {/* メインカード */}
-                    <div className='bg-white overflow-hidden transform transition-all duration-300 hover:shadow-3xl flex flex-col h-full'>
+                    <div className='bg-white/80 overflow-hidden transform transition-all duration-300 hover:shadow-3xl flex flex-col h-full'>
                       {/* ヘッダーセクション - グラデーション背景 */}
                       <div className='relative p-10 shrink-0'>
                         {/* 装飾的な番号 */}

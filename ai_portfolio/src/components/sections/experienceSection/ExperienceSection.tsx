@@ -23,7 +23,7 @@ const ExperienceSection = ({ isVisible }: SectionProps) => {
         subtitle='これまでの職務経歴'
       />
       <div className='max-w-[1200px] mx-auto px-10'>
-        <div className='lg:text-left text-center text-sm leading-relaxed'>
+        <div className='lg:text-left text-center text-sm leading-relaxed relative z-[1]'>
           <p>私が今までに経験した仕事内容をご紹介いたします。</p>
           <p>
             もしよろしければMoreにて仕事内容の詳細を見て頂けたら嬉しいです。

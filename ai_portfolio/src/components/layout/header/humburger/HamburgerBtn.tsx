@@ -23,7 +23,7 @@ const HamburgerBtn = ({ isOpen, onClick }: HamburgerBtnProps) => {
   return (
     <button
       onClick={onClick}
-      className={`fixed top-3 md:top-5 right-3 md:right-5 z-[1000] w-10 h-10 md:w-12 md:h-12 p-0 border-none bg-transparent cursor-pointer pointer-events-auto ${
+      className={`fixed top-3 md:top-5 right-3 md:right-5 z-[100000] w-10 h-10 md:w-12 md:h-12 p-0 border-none bg-transparent cursor-pointer pointer-events-auto ${
         isOpen ? styles.hamburgerActive : ''
       }`}
       aria-label={isOpen ? 'メニューを閉じる' : 'メニューを開く'}

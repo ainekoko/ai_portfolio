@@ -1,4 +1,5 @@
-// utils/messageData.tsx
+import Num from '@/components/common/font/Font';
+
 export interface QAItemData {
   id: string;
   question: string;
@@ -21,7 +22,8 @@ export const SELF_INTRODUCTION: SelfIntroduction = {
       <p className='mb-6'>
         私はフロントエンドエンジニアとして現在働いております。
         <br />
-        5年程化粧品業界で接客から営業、企画を経て現在IT業界へ転職し7年になりました。
+        <Num>5</Num>
+        年程化粧品業界で接客から営業、企画を経て現在IT業界へ転職し7年になりました。
         <br />
         そしてリモートワークの普及や子供が生まれた事もあり、意を決して2年前に北海道に移住を決意！
         幸いな事にフルリモートの案件を頂く事が出来、子供との時間も増え、非常に充実した生活を送っております。

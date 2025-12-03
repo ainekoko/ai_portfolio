@@ -9,7 +9,8 @@ export default function CosmeContentsPage() {
   const OPTIONS: EmblaOptionsType = { axis: 'y' };
 
   return (
-    <div className="w-screen min-h-screen bg-white lg:overflow-hidden lg:fixed lg:inset-0 lg:z-50 bg-[url('/assets/images/bg_flower_left.png')] bg-no-repeat bg-left">
+    <div className='w-screen min-h-screen bg-white lg:overflow-hidden lg:fixed lg:inset-0 lg:z-50 relative'>
+      <div className="absolute inset-0 bg-[url('/assets/images/flowerLeaf.png')] bg-no-repeat bg-center bg-[length:700px_700px] opacity-20 pointer-events-none" />
       <CosmeContents options={OPTIONS} />
     </div>
   );

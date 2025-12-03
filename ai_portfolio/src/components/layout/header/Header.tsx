@@ -35,11 +35,20 @@ const Header = () => {
         return;
       }
 
-      element.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start',
-      });
+      // メニューを先に閉じる
       closeMenu();
+
+      // メニューのアニメーションが完了するまで待ってからスクロール
+      setTimeout(() => {
+        const yOffset = 0; // ヘッダーの高さ分のオフセット（必要に応じて調整）
+        const y =
+          element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+
+        window.scrollTo({
+          top: y,
+          behavior: 'smooth',
+        });
+      }, 100);
     },
     [closeMenu]
   );

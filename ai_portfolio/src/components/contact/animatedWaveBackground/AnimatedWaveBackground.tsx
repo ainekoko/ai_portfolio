@@ -37,10 +37,16 @@ const AnimatedWaveBackground = () => {
           preserveAspectRatio='none'
           xmlns='http://www.w3.org/2000/svg'
         >
+          <defs>
+            <linearGradient id='waveGradient' x1='0%' y1='0%' x2='0%' y2='100%'>
+              <stop offset='0%' stopColor='#ffffff' stopOpacity='0' />
+              <stop offset='50%' stopColor='#ffffff' stopOpacity='0.6' />
+              <stop offset='100%' stopColor='#ffffff' stopOpacity='0.9' />
+            </linearGradient>
+          </defs>
           <path
             d='M0,90 C120,130 180,130 300,100 C420,70 480,50 600,60 C720,70 780,110 900,120 C1020,130 1080,110 1200,80 L1200,180 L0,180 Z'
-            fill='#ffffff'
-            fillOpacity='0.9'
+            fill='url(#waveGradient)'
           >
             <animate
               attributeName='d'

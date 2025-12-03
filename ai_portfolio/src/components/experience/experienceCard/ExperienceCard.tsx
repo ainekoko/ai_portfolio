@@ -4,7 +4,7 @@ import React from 'react';
 type ExperienceCardProps = {
   title: string;
   period: string;
-  description: string;
+  description: string | React.ReactElement;
   link: string;
 };
 
@@ -15,16 +15,16 @@ const ExperienceCard = ({
   link,
 }: ExperienceCardProps) => {
   return (
-    <div className='mt-20 relative'>
-      <div className='flex items-center relative z-10'>
+    <div className='mt-20 relative z-[1]'>
+      <div className='flex items-center relative'>
         <h2 className='text-2xl font-light mr-12 whitespace-nowrap'>{title}</h2>
         <span className='text-sm mr-8 whitespace-nowrap'>{period}</span>
       </div>
-      <p className='py-5 px-10 relative z-10'>{description}</p>
+      <p className='py-5 px-10 relative'>{description}</p>
       {/* More */}
-      <div className='flex justify-end relative z-10'>
+      <div className='flex justify-end relative'>
         <Link href={link} className='inline-flex items-center gap-4 group'>
-          <span className='text-xl font-light text-gray-600 group-hover:text-gray-900 transition-colors duration-300'>
+          <span className=' text-xl font-bold text-gray-600 group-hover:text-gray-900 transition-colors duration-300'>
             more
           </span>
           <div className='relative w-32'>
