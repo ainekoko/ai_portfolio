@@ -1,12 +1,23 @@
 'use client';
 import { useEffect, useRef } from 'react';
 
+// anime.jsの型定義
+interface AnimeInstance {
+  timeline: (config: { loop: boolean }) => AnimeInstance;
+  add: (config: unknown) => AnimeInstance;
+  (config: unknown): void;
+}
+
+interface WindowWithAnime extends Window {
+  anime?: AnimeInstance;
+}
+
 export default function AnimatedTitle() {
   const titleRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     // anime.jsが既にロードされているか確認
-    if (typeof window !== 'undefined' && (window as any).anime) {
+    if (typeof window !== 'undefined' && (window as WindowWithAnime).anime) {
       initAnimation();
       return;
     }
@@ -36,7 +47,9 @@ export default function AnimatedTitle() {
         "<span class='letter' style='display: inline-block; line-height: 1em; transform-origin: 0 0;'>$&</span>"
       );
 
-      const anime = (window as any).anime;
+      const anime = (window as WindowWithAnime).anime;
+      if (!anime) return;
+
       anime
         .timeline({ loop: true })
         .add({
@@ -44,7 +57,7 @@ export default function AnimatedTitle() {
           opacity: [0, 1],
           rotateY: [-90, 0],
           duration: 1300,
-          delay: (_el: any, i: number) => 45 * i,
+          delay: (_el: Element, i: number) => 45 * i,
         })
         .add({
           targets: '.loading-title',
