@@ -4,7 +4,7 @@ import React from 'react';
 type ExperienceCardProps = {
   title: string;
   period: string;
-  description: string;
+  description: string | React.ReactElement;
   link: string;
 };
 
