@@ -6,11 +6,8 @@ import ExperienceSection from '@/components/sections/experienceSection/Experienc
 import SkillSection from '@/components/sections/skillSection/SkillSection';
 import ContactSection from '@/components/sections/contactSection/ContactSection';
 import MessageSection from '@/components/sections/messageSection/MessageSection';
-import Loading from '@/components/common/loading/Loading';
 
 const ThreeCanvas = () => {
-  const [isLoading, setIsLoading] = useState(true);
-  const [fadeOut, setFadeOut] = useState(false);
   const [visibleSections, setVisibleSections] = useState<Set<string>>(
     new Set()
   );
@@ -62,16 +59,6 @@ const ThreeCanvas = () => {
     // 初回実行
     handleScroll();
 
-    // 1.6秒後にフェードアウト開始
-    const fadeTimer = setTimeout(() => {
-      setFadeOut(true);
-    }, 1600);
-
-    // フェードアウト完了後にローディングを非表示
-    const hideTimer = setTimeout(() => {
-      setIsLoading(false);
-    }, 2100);
-
     // スクロールイベントリスナー
     let ticking = false;
     const scrollListener = () => {
@@ -90,8 +77,6 @@ const ThreeCanvas = () => {
     window.addEventListener('resize', handleScroll, { passive: true });
 
     return () => {
-      clearTimeout(fadeTimer);
-      clearTimeout(hideTimer);
       window.removeEventListener('scroll', scrollListener);
       window.removeEventListener('resize', handleScroll);
     };
@@ -102,15 +87,6 @@ const ThreeCanvas = () => {
 
   return (
     <>
-      {isLoading && (
-        <div
-          className={`${
-            fadeOut ? 'opacity-0' : 'opacity-100'
-          } transition-opacity duration-500`}
-        >
-          <Loading />
-        </div>
-      )}
       <TopSection isVisible={isVisible('hello')} />
       <ProfileSection isVisible={isVisible} />
       <MessageSection />

@@ -20,9 +20,20 @@ const TopSection = ({ isVisible }: SectionIdProps) => {
   return (
     <section
       id='topSection'
-      className='w-screen overflow-hidden bg-white'
+      className='w-screen overflow-hidden bg-white relative'
       aria-label='トップセクション'
     >
+      {/* 背景画像 */}
+      <div className='absolute inset-0 flex items-center justify-center pointer-events-none'>
+        <Image
+          src='/assets/images/flowerLeaf.png'
+          alt='Background'
+          width={800}
+          height={800}
+          className='opacity-10 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2'
+        />
+      </div>
+
       <div className='relative h-[1500px]  max-sm:h-[calc(130vw*500/450+135vw*400/550)] w-auto lg:w-[1025px] m-auto'>
         <FireflyBackground />
         <FadeInElement direction='up' delay={0}>
