@@ -85,17 +85,11 @@ const SesContents: React.FC<PropType> = (props) => {
     return () => emblaNode.removeEventListener('wheel', onWheel);
   }, [emblaApi, onWheel, isLargeScreen]);
 
-  // キーボード操作のハンドラー（カルーセル領域にフォーカスがある時のみ有効）
+  // キーボード操作のハンドラー（グローバルに有効）
   useEffect(() => {
     if (!emblaApi || !isLargeScreen) return;
 
-    const emblaNode = emblaApi.rootNode();
-    if (!emblaNode) return;
-
     const handleKeyDown = (event: KeyboardEvent) => {
-      // カルーセル要素またはその子要素にフォーカスがある場合のみ反応
-      if (!emblaNode.contains(document.activeElement)) return;
-
       switch (event.key) {
         case 'ArrowDown':
         case 'ArrowRight':
