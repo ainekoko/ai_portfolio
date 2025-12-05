@@ -11,7 +11,7 @@ export const COSME_CONTENTS: CosmeContent[] = [
   {
     title: 'ネイリスト',
     color: '#ff6b9d',
-    year: '2011~2014',
+    year: '2011~2016',
     description: ['店舗接客', 'イベント接客', '店舗サンプル作成', '事務作業等'],
     businessContent: (
       <>
@@ -37,9 +37,9 @@ export const COSME_CONTENTS: CosmeContent[] = [
   {
     title: 'ルート営業',
     color: '#c44569',
-    year: '2012~2014',
+    year: '2012~2015',
     description: [
-      '棚卸や新商品の紹介へ現地へ',
+      '棚卸や新商品の紹介へ直接店舗へ',
       '販促物の提案',
       '棚割り',
       'イベント企画等',
@@ -64,7 +64,7 @@ export const COSME_CONTENTS: CosmeContent[] = [
   {
     title: 'OEM営業',
     color: '#6a5acd',
-    year: '2015~2019',
+    year: '2012~2015',
     description: [
       '新規開拓',
       '「他社ブランドの製品を製造する」ための、企画・開発・品質管理・納期調整・納品まで全てを担当',
@@ -96,7 +96,7 @@ export const COSME_CONTENTS: CosmeContent[] = [
   {
     title: '企画',
     color: '#4682b4',
-    year: '2018~2020',
+    year: '2015~2016',
     description: [
       '自社商品の企画',
       'パッケージデザイン',

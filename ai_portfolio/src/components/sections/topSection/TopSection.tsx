@@ -20,7 +20,7 @@ const TopSection = ({ isVisible }: SectionIdProps) => {
   return (
     <section
       id='topSection'
-      className='w-screen overflow-hidden bg-white relative'
+      className='w-full overflow-hidden bg-white relative'
       aria-label='トップセクション'
     >
       {/* 背景画像 */}
