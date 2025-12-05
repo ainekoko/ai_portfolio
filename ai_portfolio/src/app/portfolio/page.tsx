@@ -1,10 +1,31 @@
 'use client';
 import Image from 'next/image';
+import { useState } from 'react';
 import SectionHeader from '@/components/common/sectionHeader/SectionHeader';
 import ContactButtons from '@/components/profile/contactButtons/ContactButtons';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 
 export default function PortfolioContentsPage() {
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+
+  const images = [
+    {
+      src: '/assets/images/HOME.png',
+      alt: 'HOMEページのデザインカンプ',
+      title: 'HOMEページ',
+    },
+    {
+      src: '/assets/images/cosme.png',
+      alt: '化粧品業界ページのデザインカンプ',
+      title: '化粧品業界ページ',
+    },
+    {
+      src: '/assets/images/portforio.png',
+      alt: 'ポートフォリオページのデザインカンプ',
+      title: 'ポートフォリオページ',
+    },
+  ];
+
   return (
     <section className='min-h-screen bg-white'>
       <div className='w-screen min-h-screen relative'>
@@ -161,45 +182,24 @@ export default function PortfolioContentsPage() {
                 </h2>
               </div>
               <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 pl-6'>
-                <div className='space-y-3'>
-                  <div className='relative aspect-[4/3] rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300'>
-                    <Image
-                      src='/assets/images/HOME.png'
-                      alt='HOMEページのデザインカンプ'
-                      fill
-                      className='object-cover'
-                    />
+                {images.map((image, index) => (
+                  <div key={index} className='space-y-3'>
+                    <div
+                      className='relative aspect-[4/3] rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300 cursor-pointer'
+                      onClick={() => setSelectedImage(image.src)}
+                    >
+                      <Image
+                        src={image.src}
+                        alt={image.alt}
+                        fill
+                        className='object-cover object-top'
+                      />
+                    </div>
+                    <p className='text-center text-sm text-gray-600'>
+                      {image.title}
+                    </p>
                   </div>
-                  <p className='text-center text-sm text-gray-600'>
-                    HOMEページ
-                  </p>
-                </div>
-                <div className='space-y-3'>
-                  <div className='relative aspect-[4/3] rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300'>
-                    <Image
-                      src='/assets/images/cosme.png'
-                      alt='化粧品業界ページのデザインカンプ'
-                      fill
-                      className='object-cover'
-                    />
-                  </div>
-                  <p className='text-center text-sm text-gray-600'>
-                    化粧品業界ページ
-                  </p>
-                </div>
-                <div className='space-y-3'>
-                  <div className='relative aspect-[4/3] rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300'>
-                    <Image
-                      src='/assets/images/portfolio.png'
-                      alt='ポートフォリオページのデザインカンプ'
-                      fill
-                      className='object-cover'
-                    />
-                  </div>
-                  <p className='text-center text-sm text-gray-600'>
-                    ポートフォリオページ
-                  </p>
-                </div>
+                ))}
               </div>
             </div>
 
@@ -217,7 +217,7 @@ export default function PortfolioContentsPage() {
               </div>
               <div className='text-gray-700 leading-relaxed space-y-4 pl-6'>
                 <p>
-                  今後は、ブログ機能の追加や、より詳細なプロジェクト紹介ページの実装を予定しています。
+                  今後は、自身のマイページ能の追加や、より詳細なプロジェクト紹介ページの実装を予定しています。
                   また、ユーザーからのフィードバックを元に、継続的に改善を重ねていきます。
                 </p>
               </div>
@@ -237,6 +237,32 @@ export default function PortfolioContentsPage() {
           </div>
         </div>
       </div>
+
+      {/* モーダル */}
+      {selectedImage && (
+        <div
+          className='fixed inset-0 bg-black/90 z-200 flex items-center justify-center p-4'
+          onClick={() => setSelectedImage(null)}
+        >
+          <div className='relative max-w-7xl max-h-[90vh] w-full h-full'>
+            <button
+              onClick={() => setSelectedImage(null)}
+              className='absolute top-4 right-4 text-white text-4xl font-bold hover:text-gray-300 transition-colors z-10'
+              aria-label='閉じる'
+            >
+              ×
+            </button>
+            <div className='relative w-full h-full'>
+              <Image
+                src={selectedImage}
+                alt='デザインカンプ拡大表示'
+                fill
+                className='object-contain'
+              />
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 }

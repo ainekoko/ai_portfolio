@@ -109,8 +109,12 @@ const Navigation = ({
                 role='none'
               >
                 <a
-                  href={href}
+                  href={item.disabled ? '#' : href}
                   onClick={(e) => {
+                    if (item.disabled) {
+                      e.preventDefault();
+                      return;
+                    }
                     if (!isHashLink) {
                       // ページ遷移の場合は通常のリンク遷移を許可
                       return;
@@ -118,11 +122,20 @@ const Navigation = ({
                     e.preventDefault();
                     onSectionClick(item.sectionId);
                   }}
-                  className='relative inline-block py-3 md:py-5 px-3 md:px-5 text-2xl md:text-3xl text-white no-underline overflow-hidden hover:text-pink-400 transition-colors duration-500'
+                  className={`relative inline-block py-3 md:py-5 px-3 md:px-5 text-2xl md:text-3xl text-white no-underline overflow-hidden transition-colors duration-500${
+                    item.disabled
+                      ? ' opacity-50 cursor-not-allowed'
+                      : ' hover:text-pink-400'
+                  }`}
                   role='menuitem'
-                  tabIndex={isMenuOpen ? 0 : -1}
+                  tabIndex={isMenuOpen && !item.disabled ? 0 : -1}
+                  aria-disabled={item.disabled || undefined}
                 >
-                  <span className='block pointer-events-none'>
+                  <span
+                    className={`block pointer-events-none${
+                      item.disabled ? ' line-through' : ''
+                    }`}
+                  >
                     {item.en}
                     <br />
                     <span className='text-xs md:text-sm opacity-70'>

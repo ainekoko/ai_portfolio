@@ -14,7 +14,7 @@ type LogoProps = {
  */
 const Logo = ({ onSectionClick }: LogoProps) => {
   return (
-    <div className='fixed top-0 left-0 z-20 pointer-events-auto'>
+    <div className='fixed top-0 left-0 z-100 pointer-events-auto'>
       <div className='header-top flex items-center px-3 md:px-6 pt-2 md:pt-4 pb-2 relative'>
         <a
           href='#topSection'

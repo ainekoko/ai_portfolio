@@ -19,6 +19,8 @@ type NavMenuItem = {
   sectionId: string;
   /** アニメーション遅延クラス */
   delay: string;
+  /** 無効化フラグ */
+  disabled?: boolean;
 };
 
 /**
@@ -52,7 +54,7 @@ export const NAV_MENU: NavMenuItem[] = [
     en: 'Home',
     ja: 'ホーム',
     sectionId: 'topSection',
-    url: '#',
+    url: '/',
     delay: 'delay-[300ms]',
   },
   {
@@ -82,6 +84,7 @@ export const NAV_MENU: NavMenuItem[] = [
     sectionId: 'mypage',
     url: '/mypage',
     delay: 'delay-[700ms]',
+    disabled: true,
   },
 ];
 

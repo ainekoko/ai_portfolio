@@ -1,5 +1,6 @@
 'use client';
 import { useState, useCallback, useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 import CustomCursor from '@/components/ui/CustomCursor/CustomCursor';
 import HamburgerBtn from './humburger/HamburgerBtn';
 import Navigation from './navigation/Navigation';
@@ -11,7 +12,9 @@ import { NAV_MENU, SIDE_MENU } from '@/utils/HeaderData';
  * ヘッダーコンポーネント
  */
 const Header = () => {
+  const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const isHomePage = pathname === '/';
 
   // メニュー開閉のトグル
   const toggleMenu = useCallback(() => {
@@ -73,7 +76,7 @@ const Header = () => {
 
       <header>
         <nav
-          className='pointer-events-none z-10 fixed top-0 right-0 w-full md:w-64 h-full flex flex-col'
+          className='pointer-events-none z-100 fixed top-0 right-0 w-full md:w-64 h-full flex flex-col'
           aria-label='メインナビゲーション'
         >
           {/* ハンバーガーメニュー */}
@@ -86,11 +89,13 @@ const Header = () => {
             navMenuData={NAV_MENU}
           />
 
-          {/* デスクトップナビゲーション */}
-          <HeaderNav
-            onSectionClick={handleSectionClick}
-            sideMenuData={SIDE_MENU}
-          />
+          {/* デスクトップナビゲーション（ホームページのみ表示） */}
+          {isHomePage && (
+            <HeaderNav
+              onSectionClick={handleSectionClick}
+              sideMenuData={SIDE_MENU}
+            />
+          )}
         </nav>
 
         {/* ロゴ */}

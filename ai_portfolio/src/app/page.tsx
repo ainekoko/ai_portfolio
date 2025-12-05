@@ -11,8 +11,14 @@ const ThreeCanvas = () => {
   const [visibleSections, setVisibleSections] = useState<Set<string>>(
     new Set()
   );
+  const [mounted, setMounted] = useState(false);
 
   const isVisible = (sectionId: string) => visibleSections.has(sectionId);
+
+  // クライアントサイドマウント検知
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // スクロールイベントハンドラー
   const handleScroll = useCallback(() => {
@@ -56,8 +62,21 @@ const ThreeCanvas = () => {
   }, []);
 
   useEffect(() => {
+    if (!mounted) return;
+
     // 初回実行
     handleScroll();
+
+    // URLハッシュがある場合、該当セクションにスクロール
+    const hash = window.location.hash.replace('#', '');
+    if (hash) {
+      setTimeout(() => {
+        const element = document.getElementById(hash);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 500); // ページ読み込み後少し待ってからスクロール
+    }
 
     // スクロールイベントリスナー
     let ticking = false;
@@ -80,7 +99,7 @@ const ThreeCanvas = () => {
       window.removeEventListener('scroll', scrollListener);
       window.removeEventListener('resize', handleScroll);
     };
-  }, [handleScroll]);
+  }, [handleScroll, mounted]);
 
   // visibleSectionsが変更されたらログ出力
   useEffect(() => {}, [visibleSections]);
