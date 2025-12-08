@@ -42,6 +42,9 @@
     "out",
     ".next",
     "**/*.test.ts",
-    "**/*.test.tsx"
+    "**/*.test.tsx",
+    "**/*.stories.ts",
+    "**/*.stories.tsx",
+    ".storybook"
   ]
 }
