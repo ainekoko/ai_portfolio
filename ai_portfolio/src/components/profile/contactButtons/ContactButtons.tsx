@@ -26,6 +26,11 @@ const ContactButtons: React.FC<ContactButtonsProps> = ({ contacts }) => {
       text: 'text-purple-400',
       ring: 'hover:ring-purple-400 focus:ring-purple-400',
     },
+    'pink-400': {
+      border: 'border-pink-400',
+      text: 'text-pink-400',
+      ring: 'hover:ring-pink-400 focus:ring-pink-400',
+    },
     'indigo-500': {
       border: 'border-indigo-500',
       text: 'text-indigo-500',
