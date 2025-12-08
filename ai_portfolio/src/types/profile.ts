@@ -5,9 +5,9 @@ import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 
 /**
  * カラータイプの定義
- * 'rose-300', 'purple-400', 'indigo-500'のいずれか
+ * 'rose-300', 'purple-400', 'pink-400', 'indigo-500'のいずれか
  */
-export type ColorType = 'rose-300' | 'purple-400' | 'indigo-500';
+export type ColorType = 'rose-300' | 'purple-400' | 'pink-400' | 'indigo-500';
 
 /**
  * 連絡先情報の定義

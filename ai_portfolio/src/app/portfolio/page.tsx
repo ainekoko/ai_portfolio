@@ -4,6 +4,7 @@ import { useState } from 'react';
 import SectionHeader from '@/components/common/sectionHeader/SectionHeader';
 import ContactButtons from '@/components/profile/contactButtons/ContactButtons';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
+import { faBook } from '@fortawesome/free-solid-svg-icons';
 
 export default function PortfolioContentsPage() {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
@@ -313,6 +314,13 @@ export default function PortfolioContentsPage() {
                   fullText: 'https://github.com/ainekoko',
                   color: 'purple-400' as const,
                   href: 'https://github.com/ainekoko',
+                },
+                {
+                  icon: faBook,
+                  text: 'Storybook',
+                  fullText: 'コンポーネントカタログ',
+                  color: 'pink-400' as const,
+                  href: 'https://storybook-ai-portfolio.vercel.app',
                 },
               ]}
             />
