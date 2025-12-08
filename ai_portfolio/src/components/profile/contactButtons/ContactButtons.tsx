@@ -47,7 +47,7 @@ const ContactButtons: React.FC<ContactButtonsProps> = ({ contacts }) => {
   };
 
   return (
-    <div className='flex flex-wrap justify-center gap-5 md:my-15 mt-8 text-base font-medium'>
+    <div className='flex flex-nowrap md:flex-wrap justify-center gap-5 md:my-15 mt-8 text-base font-medium'>
       {contacts.map((contact, index) => {
         const colors = colorClasses[contact.color];
         const isDisabled = !contact.href || contact.href === '#';
@@ -56,7 +56,7 @@ const ContactButtons: React.FC<ContactButtonsProps> = ({ contacts }) => {
           <button
             key={index}
             className={`
-              min-w-52
+              md:min-w-52
               lg:rounded-lg rounded-full relative h-12 overflow-hidden 
               border ${colors.border} solid bg-white 
               lg:px-5 lg:py-2.5 px-3.5 

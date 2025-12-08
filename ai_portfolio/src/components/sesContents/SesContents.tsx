@@ -135,12 +135,13 @@ const SesContents: React.FC<PropType> = (props) => {
                     }
                   >
                     <div className='relative max-w-5xl w-full h-full lg:max-h-[75vh] flex flex-col'>
-                      {/* キャラクター画像 - 右下に固定 */}
+                      {/* キャラクター画像*/}
                       <Huwahuwa_img
                         image='shimaenaga-04.gif'
                         name='キャラクター'
                         move='gentle'
                         bottom='50px'
+                        bottomSp='0px'
                         left='10px'
                         speech={content.hukidashi}
                         width='100px'
@@ -157,7 +158,7 @@ const SesContents: React.FC<PropType> = (props) => {
                         </div>
 
                         {/* コンテンツセクション */}
-                        <div className='px-6 py-0 lg:px-12 flex-1 overflow-y-auto'>
+                        <div className='px-6 pb-30 lg:py-0 lg:px-12 flex-1 overflow-y-auto'>
                           <div className='grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12'>
                             {/* 左側:業務内容 */}
                             <div className='space-y-6'>
@@ -177,7 +178,7 @@ const SesContents: React.FC<PropType> = (props) => {
 
                               <div className='mb-6 pb-3 border-b border-gray-200'>
                                 <h2 className='text-sm font-medium text-gray-500 tracking-widest'>
-                                  WORK CONTENT
+                                  WORK CONTENT（業務内容）
                                 </h2>
                               </div>
                               <div className='space-y-4'>
@@ -221,7 +222,7 @@ const SesContents: React.FC<PropType> = (props) => {
                               <div>
                                 <div className='mb-6 pb-3 border-b border-gray-200'>
                                   <h2 className='text-sm font-medium text-gray-500 tracking-widest'>
-                                    DEVELOPMENT ENVIRONMENT
+                                    DEVELOPMENT ENVIRONMENT（開発環境）
                                   </h2>
                                 </div>
                                 <div className='space-y-2 text-sm'>
@@ -299,7 +300,7 @@ const SesContents: React.FC<PropType> = (props) => {
                               <div>
                                 <div className='mb-6 pb-3 border-b border-gray-200'>
                                   <h2 className='text-sm font-medium text-gray-500 tracking-widest'>
-                                    DETAILS
+                                    DETAILS（仕事詳細）
                                   </h2>
                                 </div>
                                 <div className='prose prose-sm lg:prose-base max-w-none'>
@@ -347,7 +348,7 @@ const SesContents: React.FC<PropType> = (props) => {
         {/* スタイル4: 上部にテキスト */}
         <Link
           href='/#experience'
-          className='z-50 absolute button-4 bottom-5 right-5 group pl-25 p-3 pointer-events-auto block'
+          className='z-50 fixed lg:absolute button-4 bottom-5 right-5 group pl-25 p-3 pointer-events-auto block'
         >
           <p className='text-center text-sm font-bold text-gray-800 group-hover:text-amber-600 transition-colors duration-300 pointer-events-none'>
             Back Page

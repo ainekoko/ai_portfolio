@@ -52,7 +52,7 @@ export default function PortfolioContentsPage() {
                   height={50}
                   className='opacity-80'
                 />
-                <h2 className='text-2xl font-bold text-gray-800'>
+                <h2 className='text-lg md:text-2xl font-bold text-gray-800'>
                   ポートフォリオを作成したきっかけ
                 </h2>
               </div>
@@ -77,7 +77,9 @@ export default function PortfolioContentsPage() {
                   height={50}
                   className='opacity-80'
                 />
-                <h2 className='text-2xl font-bold text-gray-800'>使用技術</h2>
+                <h2 className='text-lg md:text-2xl font-bold text-gray-800'>
+                  使用技術
+                </h2>
               </div>
               <div className='pl-6'>
                 <ul className='space-y-3 text-gray-700'>
@@ -102,7 +104,13 @@ export default function PortfolioContentsPage() {
                   <li className='flex items-center gap-3'>
                     <span className='w-2 h-2 bg-rose-400 rounded-full'></span>
                     <span>
-                      <strong>アニメーション：</strong>Anime.js, Framer Motion
+                      <strong>テスト：</strong>JEST, React Testing Library
+                    </span>
+                  </li>
+                  <li className='flex items-center gap-3'>
+                    <span className='w-2 h-2 bg-rose-400 rounded-full'></span>
+                    <span>
+                      <strong>UI開発・ドキュメント：</strong>Storybook
                     </span>
                   </li>
                   <li className='flex items-center gap-3'>
@@ -111,11 +119,29 @@ export default function PortfolioContentsPage() {
                       <strong>デザインツール：</strong>Figma
                     </span>
                   </li>
+                  <li className='flex items-center gap-3'>
+                    <span className='w-2 h-2 bg-rose-400 rounded-full'></span>
+                    <span>
+                      <strong>バージョン管理：</strong>Git, GitHub
+                    </span>
+                  </li>
+                  <li className='flex items-center gap-3'>
+                    <span className='w-2 h-2 bg-rose-400 rounded-full'></span>
+                    <span>
+                      <strong>ホスティング：</strong>Vercel
+                    </span>
+                  </li>
+                  <li className='flex items-center gap-3'>
+                    <span className='w-2 h-2 bg-rose-400 rounded-full'></span>
+                    <span>
+                      <strong>開発支援：</strong>GitHub Copilot
+                    </span>
+                  </li>
                 </ul>
               </div>
             </div>
 
-            {/* こだわりポイント */}
+            {/* 良かったポイント */}
             <div className='space-y-6'>
               <div className='flex items-center gap-4'>
                 <Image
@@ -125,42 +151,86 @@ export default function PortfolioContentsPage() {
                   height={50}
                   className='opacity-80'
                 />
-                <h2 className='text-2xl font-bold text-gray-800'>
-                  こだわりポイント
+                <h2 className='text-lg md:text-2xl font-bold text-gray-800'>
+                  良かったポイント
                 </h2>
               </div>
               <div className='text-gray-700 leading-relaxed space-y-4 pl-6'>
                 <ul className='space-y-4'>
                   <li>
-                    <strong className='text-gray-800'>
-                      • レスポンシブデザイン：
+                    <strong className='text-green-700'>
+                      ✓ レスポンシブデザイン：
                     </strong>
                     <p className='mt-1 ml-4'>
-                      PC、タブレット、スマートフォンなど、あらゆるデバイスで快適に閲覧できるよう設計
+                      PC、タブレット、スマートフォンなど、あらゆるデバイスで快適に閲覧できるよう設計しました。
                     </p>
                   </li>
                   <li>
-                    <strong className='text-gray-800'>
-                      • アニメーション：
+                    <strong className='text-green-700'>
+                      ✓ アニメーション：
                     </strong>
                     <p className='mt-1 ml-4'>
-                      ページ遷移やスクロールに合わせた滑らかなアニメーションで、ユーザー体験を向上
+                      ページ遷移やスクロールに合わせた滑らかなアニメーションで、ユーザー体験を向上させました。
                     </p>
                   </li>
                   <li>
-                    <strong className='text-gray-800'>
-                      • アクセシビリティ：
+                    <strong className='text-green-700'>
+                      ✓ アクセシビリティ：
                     </strong>
                     <p className='mt-1 ml-4'>
-                      セマンティックHTMLとARIA属性を活用し、すべてのユーザーが利用しやすいサイトを実現
+                      セマンティックHTMLとARIA属性を活用し、すべてのユーザーが利用しやすいサイトを実現しました。
                     </p>
                   </li>
                   <li>
-                    <strong className='text-gray-800'>
-                      • パフォーマンス最適化：
+                    <strong className='text-green-700'>
+                      ✓ パフォーマンス最適化：
                     </strong>
                     <p className='mt-1 ml-4'>
-                      Next.jsの機能を活用し、高速なページロードを実現
+                      Next.jsの機能を活用し、高速なページロードを実現しました。
+                    </p>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            {/* 残念ポイント */}
+            <div className='space-y-6'>
+              <div className='flex items-center gap-4'>
+                <Image
+                  src='/assets/images/flowerLeaf.png'
+                  alt='装飾'
+                  width={50}
+                  height={50}
+                  className='opacity-80'
+                />
+                <h2 className='text-lg md:text-2xl font-bold text-gray-800'>
+                  残念ポイント
+                </h2>
+              </div>
+              <div className='text-gray-700 leading-relaxed space-y-4 pl-6'>
+                <ul className='space-y-4'>
+                  <li>
+                    <strong className='text-orange-600'>
+                      △ フォルダ設計の曖昧：
+                    </strong>
+                    <p className='mt-1 ml-4'>
+                      コンポーネントの配置やディレクトリ構造に一貫性が欠け、保守性や拡張性の面で改善の余地があります。
+                    </p>
+                  </li>
+                  <li>
+                    <strong className='text-orange-600'>
+                      △ アニメーションの技術不足：
+                    </strong>
+                    <p className='mt-1 ml-4'>
+                      当初、three.jsを使用した3Dアニメーションを検討しましたが、spサイズにした際のバグや他のバグ表示に悩まされ、最終的に断念しました。
+                    </p>
+                  </li>
+                  <li>
+                    <strong className='text-orange-600'>
+                      △ コンポーネントの再利用性：
+                    </strong>
+                    <p className='mt-1 ml-4'>
+                      一部のコンポーネントが特定のページに依存しており、他のプロジェクトでの再利用が難しかったり、冗長なコードが発生したりしました。
                     </p>
                   </li>
                 </ul>
@@ -177,7 +247,7 @@ export default function PortfolioContentsPage() {
                   height={50}
                   className='opacity-80'
                 />
-                <h2 className='text-2xl font-bold text-gray-800'>
+                <h2 className='text-lg md:text-2xl font-bold text-gray-800'>
                   Figmaで作成したデザインカンプ
                 </h2>
               </div>
@@ -213,12 +283,16 @@ export default function PortfolioContentsPage() {
                   height={50}
                   className='opacity-80'
                 />
-                <h2 className='text-2xl font-bold text-gray-800'>今後の展望</h2>
+                <h2 className='text-lg md:text-2xl font-bold text-gray-800'>
+                  今後の展望
+                </h2>
               </div>
               <div className='text-gray-700 leading-relaxed space-y-4 pl-6'>
                 <p>
-                  今後は、自身のマイページ能の追加や、より詳細なプロジェクト紹介ページの実装を予定しています。
-                  また、ユーザーからのフィードバックを元に、継続的に改善を重ねていきます。
+                  今後は、自身のマイページ能の追加や、API連携による動的コンテンツの導入など、さらなる機能拡充を目指しています。
+                </p>
+                <p>
+                  そして、webGLやthree.jsを活用した高度なアニメーション表現にも興味があるので勉強をしていきたいと思っています。
                 </p>
               </div>
             </div>
