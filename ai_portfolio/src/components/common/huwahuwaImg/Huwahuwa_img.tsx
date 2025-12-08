@@ -1,12 +1,14 @@
 import React from 'react';
 
 interface HuwahuwaImgProps {
+  hidden?: 'pc';
   image: string;
   name: string;
   top?: string;
   right?: string;
   left?: string;
   bottom?: string;
+  bottomSp?: string; // SPサイズ用のbottom値
   width?: string;
   move?: string;
   speech?: string | React.ReactElement;
@@ -33,10 +35,12 @@ const Huwahuwa_img = ({
   right,
   left,
   bottom,
+  bottomSp,
   width,
   move = 'float',
   speech,
   speechWidth,
+  hidden,
 }: HuwahuwaImgProps) => {
   const animationClass =
     move === 'sway'
@@ -47,14 +51,24 @@ const Huwahuwa_img = ({
 
   return (
     <div
-      className='absolute z-0 w-fit h-fit flex items-start gap-4'
+      className={`absolute z-0 w-fit h-fit flex items-start gap-4 ${
+        hidden === 'pc' ? 'max-lg:hidden' : 'sample'
+      }`}
       style={{
         top: top,
         right: right,
         left: left,
         bottom: bottom,
+        ['--bottom-sp' as string]: bottomSp || bottom,
       }}
     >
+      <style jsx>{`
+        @media (max-width: 1023px) {
+          div {
+            bottom: var(--bottom-sp) !important;
+          }
+        }
+      `}</style>
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src={`/assets/images/${image}`}

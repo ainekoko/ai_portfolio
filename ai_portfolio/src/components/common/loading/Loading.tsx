@@ -41,16 +41,6 @@ const Loading = () => {
           <div className='absolute inset-0 flex items-center justify-center'>
             <div className='w-16 h-16 bg-gradient-to-br from-rose-400 via-pink-300 to-purple-300 rounded-full shadow-lg animate-pulse'></div>
           </div>
-
-          {/* Inner white dot */}
-          <div className='absolute inset-0 flex items-center justify-center'>
-            <div className='w-6 h-6 bg-white rounded-full shadow-md'></div>
-          </div>
-
-          {/* Decorative floating dots */}
-          <div className='absolute -top-2 left-1/2 w-3 h-3 bg-rose-400 rounded-full animate-float-1'></div>
-          <div className='absolute top-1/2 -right-2 w-2 h-2 bg-blue-400 rounded-full animate-float-2'></div>
-          <div className='absolute -bottom-2 left-1/4 w-2.5 h-2.5 bg-purple-300 rounded-full animate-float-3'></div>
         </div>
 
         {/* Portfolio title */}

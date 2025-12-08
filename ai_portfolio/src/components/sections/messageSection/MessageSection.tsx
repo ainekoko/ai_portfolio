@@ -47,7 +47,8 @@ const MessageSection = () => {
         name='キャラクター'
         move='gentle'
         top='250px'
-        left='200px'
+        right='80%'
+        hidden='pc'
       />
     </section>
   );

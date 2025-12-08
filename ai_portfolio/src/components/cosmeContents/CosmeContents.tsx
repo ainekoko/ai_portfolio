@@ -167,7 +167,7 @@ const CosmeContents: React.FC<PropType> = (props) => {
                             <div>
                               <div className='mb-6 pb-3 border-b border-gray-200'>
                                 <h2 className='text-sm font-medium text-gray-500 tracking-widest'>
-                                  WORK CONTENT
+                                  WORK CONTENT（業務内容）
                                 </h2>
                               </div>
                               <div className='space-y-2'>
@@ -199,7 +199,7 @@ const CosmeContents: React.FC<PropType> = (props) => {
                             <div className='mt-8'>
                               <div className='mb-6 pb-3 border-b border-gray-200'>
                                 <h2 className='text-sm font-medium text-gray-500 tracking-widest'>
-                                  MEMORIES
+                                  MEMORIES（思い出）
                                 </h2>
                               </div>
                               <p className='text-gray-700 text-sm lg:text-base leading-relaxed italic'>
@@ -212,7 +212,7 @@ const CosmeContents: React.FC<PropType> = (props) => {
                           <div>
                             <div className='mb-6 pb-3 border-b border-gray-200'>
                               <h2 className='text-sm font-medium text-gray-500 tracking-widest'>
-                                DETAILS
+                                DETAILS（仕事詳細）
                               </h2>
                             </div>
                             <div className='prose prose-sm lg:prose-base max-w-none'>
@@ -257,8 +257,8 @@ const CosmeContents: React.FC<PropType> = (props) => {
         </div>
         {/* スタイル4: 上部にテキスト */}
         <Link
-          href='/'
-          className='z-50 absolute button-4 bottom-5 right-5 group pl-25 p-3 pointer-events-auto block'
+          href='/#experience'
+          className='z-50 fixed lg:absolute button-4 bottom-5 right-5 group pl-25 p-3 pointer-events-auto block'
         >
           <p className='text-center text-sm font-bold text-gray-800 group-hover:text-amber-600 transition-colors duration-300 pointer-events-none'>
             Back Page

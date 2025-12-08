@@ -21,7 +21,7 @@
     "@react-three/fiber": "^9.3.0",
     "camera-controls": "^2.9.0",
     "embla-carousel-react": "^8.6.0",
-    "next": "15.4.6",
+    "next": "^16.0.7",
     "nodemailer": "^7.0.10",
     "react": "19.1.0",
     "react-dom": "19.1.0",

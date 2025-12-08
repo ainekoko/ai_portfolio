@@ -17,6 +17,10 @@ module.exports = {
         // カスタムブレークポイント（必要に応じて）
         desktop: '875px',
       },
+      zIndex: {
+        '100': '100',
+        '200': '200',
+      },
       colors: {
         background: 'var(--background)',
         foreground: 'var(--foreground)',

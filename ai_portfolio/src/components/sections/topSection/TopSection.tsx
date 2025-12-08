@@ -20,7 +20,7 @@ const TopSection = ({ isVisible }: SectionIdProps) => {
   return (
     <section
       id='topSection'
-      className='w-screen overflow-hidden bg-white relative'
+      className='w-full overflow-hidden bg-white relative'
       aria-label='トップセクション'
     >
       {/* 背景画像 */}
@@ -49,7 +49,7 @@ const TopSection = ({ isVisible }: SectionIdProps) => {
         </FadeInElement>
 
         <FadeInElement direction='up' delay={0.5}>
-          <div className='absolute left-0 sm:left-auto sm:right-0 top-[calc(100vw*500/450)] sm:top-[600px] w-full sm:w-auto'>
+          <div className='absolute left-0 sm:left-auto sm:right-0 top-[calc(100vw*680/450)] sm:top-[600px] w-full sm:w-auto'>
             <Image
               src={BACK_IMG[1].src}
               alt={BACK_IMG[1].alt}
@@ -80,16 +80,16 @@ const TopSection = ({ isVisible }: SectionIdProps) => {
         className='h-[1200px] w-auto lg:w-[1025px] m-auto relative'
       >
         <FadeInElement direction='up'>
-          <div className='absolute top-0 max-sm:hidden'>
+          <div className='absolute top-36 sm:top-0 '>
             <Image
               src={BACK_IMG[2].src}
               alt={BACK_IMG[2].alt}
               width={BACK_IMG[2].width}
               height={BACK_IMG[2].height}
-              className='shadow-xl'
+              className='shadow-xl  max-sm:w-[640px]'
             />
           </div>
-          <div className='absolute left-1/2 -translate-x-1/2  top-44'>
+          <div className='absolute left-1/2 -translate-x-1/2  top-44 max-sm:hidden'>
             <Image
               src={BACK_IMG[3].src}
               alt={BACK_IMG[3].alt}
@@ -124,13 +124,14 @@ const TopSection = ({ isVisible }: SectionIdProps) => {
         </h2>
         <p
           className='
+              
               absolute top-[25vh] 
               transform -translate-x-1/2
               left-[52%]
               text-left
               text-sm  md:text-graduate
               w-1 
-              drop-shadow-[0_0_3px_white]
+             drop-shadow-[0_0_15px_white]
             '
         >
           閲覧頂きありがとうございます
@@ -143,7 +144,7 @@ const TopSection = ({ isVisible }: SectionIdProps) => {
               text-left
               text-base 
               w-1 
-              drop-shadow-[0_0_3px_white]
+               drop-shadow-[0_0_15px_white]
           '
         >
           このサイトで少しでも私の事を知って頂けたら幸いです

@@ -209,7 +209,8 @@ const ContactSection = ({ isVisible }: SectionProps) => {
           name='キャラクター'
           move='gentle'
           bottom='40px'
-          left='450px'
+          right='60%'
+          hidden='pc'
         />
       </section>
     </>
