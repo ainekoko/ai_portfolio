@@ -83,58 +83,58 @@ export default function PortfolioContentsPage() {
               </div>
               <div className='pl-6'>
                 <ul className='space-y-3 text-gray-700'>
-                  <li className='flex items-center gap-3'>
-                    <span className='w-2 h-2 bg-rose-400 rounded-full'></span>
+                  <li className='flex items-start gap-3'>
+                    <span className='text-gray-500 text-lg mt-0.5'>▸</span>
                     <span>
-                      <strong>フレームワーク：</strong>Next.js 15 (App Router)
+                      <strong>フレームワーク:</strong>Next.js 15 (App Router)
                     </span>
                   </li>
-                  <li className='flex items-center gap-3'>
-                    <span className='w-2 h-2 bg-rose-400 rounded-full'></span>
+                  <li className='flex items-start gap-3'>
+                    <span className='text-gray-500 text-lg mt-0.5'>▸</span>
                     <span>
-                      <strong>言語：</strong>TypeScript
+                      <strong>言語:</strong>TypeScript
                     </span>
                   </li>
-                  <li className='flex items-center gap-3'>
-                    <span className='w-2 h-2 bg-rose-400 rounded-full'></span>
+                  <li className='flex items-start gap-3'>
+                    <span className='text-gray-500 text-lg mt-0.5'>▸</span>
                     <span>
-                      <strong>スタイリング：</strong>Tailwind CSS
+                      <strong>スタイリング:</strong>Tailwind CSS
                     </span>
                   </li>
-                  <li className='flex items-center gap-3'>
-                    <span className='w-2 h-2 bg-rose-400 rounded-full'></span>
+                  <li className='flex items-start gap-3'>
+                    <span className='text-gray-500 text-lg mt-0.5'>▸</span>
                     <span>
-                      <strong>テスト：</strong>JEST, React Testing Library
+                      <strong>テスト:</strong>JEST, React Testing Library
                     </span>
                   </li>
-                  <li className='flex items-center gap-3'>
-                    <span className='w-2 h-2 bg-rose-400 rounded-full'></span>
+                  <li className='flex items-start gap-3'>
+                    <span className='text-gray-500 text-lg mt-0.5'>▸</span>
                     <span>
-                      <strong>UI開発・ドキュメント：</strong>Storybook
+                      <strong>UI開発・ドキュメント:</strong>Storybook
                     </span>
                   </li>
-                  <li className='flex items-center gap-3'>
-                    <span className='w-2 h-2 bg-rose-400 rounded-full'></span>
+                  <li className='flex items-start gap-3'>
+                    <span className='text-gray-500 text-lg mt-0.5'>▸</span>
                     <span>
-                      <strong>デザインツール：</strong>Figma
+                      <strong>デザインツール:</strong>Figma
                     </span>
                   </li>
-                  <li className='flex items-center gap-3'>
-                    <span className='w-2 h-2 bg-rose-400 rounded-full'></span>
+                  <li className='flex items-start gap-3'>
+                    <span className='text-gray-500 text-lg mt-0.5'>▸</span>
                     <span>
-                      <strong>バージョン管理：</strong>Git, GitHub
+                      <strong>バージョン管理:</strong>Git, GitHub
                     </span>
                   </li>
-                  <li className='flex items-center gap-3'>
-                    <span className='w-2 h-2 bg-rose-400 rounded-full'></span>
+                  <li className='flex items-start gap-3'>
+                    <span className='text-gray-500 text-lg mt-0.5'>▸</span>
                     <span>
-                      <strong>ホスティング：</strong>Vercel
+                      <strong>ホスティング:</strong>Vercel
                     </span>
                   </li>
-                  <li className='flex items-center gap-3'>
-                    <span className='w-2 h-2 bg-rose-400 rounded-full'></span>
+                  <li className='flex items-start gap-3'>
+                    <span className='text-gray-500 text-lg mt-0.5'>▸</span>
                     <span>
-                      <strong>開発支援：</strong>GitHub Copilot
+                      <strong>開発支援:</strong>GitHub Copilot
                     </span>
                   </li>
                 </ul>
@@ -233,6 +233,14 @@ export default function PortfolioContentsPage() {
                       一部のコンポーネントが特定のページに依存しており、他のプロジェクトでの再利用が難しかったり、冗長なコードが発生したりしました。
                     </p>
                   </li>
+                  <li>
+                    <strong className='text-orange-600'>
+                      △ 時間配分ミス：
+                    </strong>
+                    <p className='mt-1 ml-4'>
+                      全体のスケジュール管理が不十分で、一先ずポートフォリオページを一旦完成させた為、コンポーネント化や他の実装に十分な時間を割けませんでした。
+                    </p>
+                  </li>
                 </ul>
               </div>
             </div>
@@ -292,7 +300,7 @@ export default function PortfolioContentsPage() {
                   今後は、自身のマイページ能の追加や、API連携による動的コンテンツの導入など、さらなる機能拡充を目指しています。
                 </p>
                 <p>
-                  そして、webGLやthree.jsを活用した高度なアニメーション表現にも興味があるので勉強をしていきたいと思っています。
+                  そして、webGLやthree.jsを活用した高度なアニメーション表現にも興味があるので引き続き勉強をしていきたいと思っています。
                 </p>
               </div>
             </div>
