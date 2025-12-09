@@ -14,7 +14,7 @@ describe('Logo', () => {
 
     const link = screen.getByRole('link', { name: 'トップページへ戻る' });
     expect(link).toBeInTheDocument();
-    expect(link).toHaveAttribute('href', '#topSection');
+    expect(link).toHaveAttribute('href', '/');
   });
 
   it('リンクをクリックするとonSectionClickが呼ばれる', () => {

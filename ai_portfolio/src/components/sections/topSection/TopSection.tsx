@@ -63,7 +63,7 @@ const TopSection = ({ isVisible }: SectionIdProps) => {
         <FadeInElement direction='up' delay={0}>
           <h1
             className='
-        mr-2.5
+        mr-2.5 ml-2.5
         text-8xl md:text-[8rem]
         drop-shadow-[1px_0px_15px_#383838] 
         text-white m-0 p-0 absolute 
