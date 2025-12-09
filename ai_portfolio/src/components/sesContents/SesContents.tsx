@@ -31,8 +31,12 @@ type PropType = {
  */
 const SesContents: React.FC<PropType> = (props) => {
   const { options } = props;
-  const [emblaRef, emblaApi] = useEmblaCarousel(options);
   const [isLargeScreen, setIsLargeScreen] = useState(true);
+
+  // lg以上の場合のみEmbla Carouselを初期化
+  const [emblaRef, emblaApi] = useEmblaCarousel(
+    isLargeScreen ? options : undefined
+  );
 
   const { selectedIndex, scrollSnaps, onDotButtonClick } =
     useDotButton(emblaApi);
@@ -121,7 +125,11 @@ const SesContents: React.FC<PropType> = (props) => {
       {/* カルーセル: lg以上で有効、lg以下で無効 */}
       <section className='embla w-screen px-2 text-sm min-h-screen lg:h-screen'>
         <Font>
-          <div className='embla__viewport ' ref={emblaRef} tabIndex={0}>
+          <div
+            className='embla__viewport'
+            ref={isLargeScreen ? emblaRef : null}
+            tabIndex={isLargeScreen ? 0 : -1}
+          >
             <div className='embla__container lg:flex lg:flex-row flex-col'>
               {ITJOB_INTRODUCTION.map((content, index) => (
                 <div
