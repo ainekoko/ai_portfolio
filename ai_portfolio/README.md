@@ -1,63 +1,151 @@
+# AI Portfolio
+
+個人ポートフォリオサイト - 化粧品業界と IT 業界での経験を活かした Web アプリケーション
+
+## 概要
+
+このプロジェクトは、Next.js 16 と TypeScript を使用して構築された個人ポートフォリオサイトです。レスポンシブデザイン、スムーズなアニメーション、優れたアクセシビリティを備えています。
+
+### デモサイト
+
+[https://ai-portfolio-delta-two.vercel.app/](https://ai-portfolio-delta-two.vercel.app/)
+
+## 主な機能
+
+- ✨ **レスポンシブデザイン**: PC、タブレット、スマートフォンに最適化
+- 🎨 **スムーズなアニメーション**: スクロールとページ遷移のアニメーション
+- ♿ **アクセシビリティ**: セマンティック HTML と ARIA 属性を活用
+- ⚡ **高速パフォーマンス**: Next.js の App Router による最適化
+- 📱 **モバイルファースト**: タッチフレンドリーな UI/UX
+- 🎯 **3 つの主要ページ**:
+  - HOME: プロフィールとスキル紹介
+  - 化粧品業界経験ページ
+  - IT 業界経験ページ
+  - ポートフォリオ詳細ページ
+
+## 技術スタック
+
+### フロントエンド
+
+- **フレームワーク**: Next.js 16.0.7 (App Router)
+- **言語**: TypeScript
+- **スタイリング**: Tailwind CSS v4
+- **UI コンポーネント**: React 19.1.0
+- **アニメーション**: React Three Fiber, Three.js
+- **フォームバリデーション**: React Hook Form, Yup, Zod
+- **アイコン**: Font Awesome
+
+### 開発ツール
+
+- **テスト**: Jest, React Testing Library, Vitest
+- **UI 開発**: Storybook 10.1.4 _(現在 Next.js 16 と互換性なし)_
+- **リンター**: ESLint
+- **デザイン**: Figma
+- **バージョン管理**: Git, GitHub
+- **CI/CD**: Vercel
+- **開発支援**: GitHub Copilot
+
+## セットアップ
+
+### 必要環境
+
+- Node.js 20.x 以上
+- Yarn または npm
+
+### インストール
+
+```bash
+# リポジトリのクローン
+git clone https://github.com/ainekoko/ai_portfolio.git
+cd ai_portfolio
+
+# 依存関係のインストール
+yarn install
+```
+
+### 開発サーバーの起動
+
+```bash
+yarn dev
+```
+
+ブラウザで [http://localhost:3000](http://localhost:3000) を開いてください。
+
+### ビルド
+
+```bash
+yarn build
+```
+
+### 本番環境での起動
+
+```bash
+yarn start
+```
+
+### テスト実行
+
+```bash
+yarn test
+```
+
 ## ディレクトリ構成
 
 ```bash
 ai_portfolio/
-├── public/                  # 静的ファイル（画像、PDF、HTMLなど）を配置
-│   ├── assets/              # 画像やフォントなどのアセット
-│   │   ├── images/
-│   │   └── fonts/
-│   ├── mockups/             # figma から書き出した画像や PDF カンプ
-│   └── static-html/         # HTML/CSS のみで作成された静的ページ
-│       ├── index.html
-│       └── style.css
-├── src/                     # Next.js のソースコード
-│   ├── pages/               # ページコンポーネント
-│   ├── components/          # 再利用可能な UI コンポーネント
-│   ├── styles/              # CSS / SCSS モジュール
-│   └── lib/                 # ユーティリティ関数など
-├── .gitignore
-├── README.md
-└── next.config.js
+├── public/                     # 静的ファイル
+│   ├── assets/
+│   │   └── images/            # 画像ファイル
+│   ├── mockups/               # Figmaカンプ
+│   └── static-html/           # 静的HTML
+├── src/
+│   ├── app/                   # Next.js App Router
+│   │   ├── page.tsx          # HOMEページ
+│   │   ├── cosmetics/        # 化粧品業界ページ
+│   │   ├── ses/              # IT業界ページ
+│   │   └── portfolio/        # ポートフォリオ詳細
+│   ├── components/            # Reactコンポーネント
+│   │   ├── common/           # 共通コンポーネント
+│   │   ├── layout/           # レイアウトコンポーネント
+│   │   ├── sections/         # セクションコンポーネント
+│   │   └── ui/               # UIコンポーネント
+│   ├── hooks/                # カスタムフック
+│   ├── services/             # API通信
+│   ├── styles/               # グローバルスタイル
+│   ├── types/                # TypeScript型定義
+│   ├── utils/                # ユーティリティ関数・データ
+│   └── validations/          # バリデーションスキーマ
+├── coverage/                  # テストカバレッジレポート
+├── .storybook/               # Storybook設定
+└── stories/                  # Storybookストーリー
 ```
 
-### インストールしたパッケージ
+## 既知の問題
 
-・react-three/fiber
-・react-three/drei
+### Storybook 互換性
 
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+Storybook 10.1.4 は現在 Next.js 16 と互換性がなく、以下のエラーが発生します：
 
-## Getting Started
-
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+```
+SyntaxError: The requested module 'next/dist/build/swc/index.js' does not provide an export named 'isWasm'
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+この問題が解決されるまで、Storybook の公開デプロイは保留中です。
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 今後の展望
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- マイページ機能の追加
+- API 連携による動的コンテンツ
+- WebGL/Three.js を活用した高度なアニメーション
+- Storybook 互換性の解決と Chromatic デプロイ
 
-## Learn More
+## ライセンス
 
-To learn more about Next.js, take a look at the following resources:
+このプロジェクトは個人ポートフォリオ用です。
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 作者
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+**ainekoko**
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- GitHub: [@ainekoko](https://github.com/ainekoko)
+- Portfolio: [https://ai-portfolio-delta-two.vercel.app/](https://ai-portfolio-delta-two.vercel.app/)
