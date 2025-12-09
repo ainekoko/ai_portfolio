@@ -39,6 +39,9 @@
     "**/*.test.tsx",
     "**/*.stories.ts",
     "**/*.stories.tsx",
-    ".storybook"
+    ".storybook",
+    "vitest.config.ts",
+    "jest.config.js",
+    "jest.setup.js"
   ]
 }
