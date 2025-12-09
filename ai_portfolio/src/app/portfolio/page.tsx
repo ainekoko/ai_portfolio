@@ -4,7 +4,6 @@ import { useState } from 'react';
 import SectionHeader from '@/components/common/sectionHeader/SectionHeader';
 import ContactButtons from '@/components/profile/contactButtons/ContactButtons';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
-import { faBook } from '@fortawesome/free-solid-svg-icons';
 
 export default function PortfolioContentsPage() {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
@@ -228,6 +227,16 @@ export default function PortfolioContentsPage() {
                   </li>
                   <li>
                     <strong className='text-orange-600'>
+                      △ storybookのリンク不可：
+                    </strong>
+                    <p className='mt-1 ml-4'>
+                      Storybook 10.1.4 は Next.js 16
+                      と完全に互換性がなく、Storybook
+                      内のコンポーネントが正しく表示されない問題が発生しました。
+                    </p>
+                  </li>
+                  <li>
+                    <strong className='text-orange-600'>
                       △ コンポーネントの再利用性：
                     </strong>
                     <p className='mt-1 ml-4'>
@@ -314,13 +323,6 @@ export default function PortfolioContentsPage() {
                   fullText: 'https://github.com/ainekoko',
                   color: 'purple-400' as const,
                   href: 'https://github.com/ainekoko',
-                },
-                {
-                  icon: faBook,
-                  text: 'Storybook',
-                  fullText: 'コンポーネントカタログ',
-                  color: 'pink-400' as const,
-                  href: 'https://storybook-ai-portfolio.vercel.app',
                 },
               ]}
             />
