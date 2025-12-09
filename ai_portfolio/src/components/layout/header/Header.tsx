@@ -99,7 +99,7 @@ const Header = () => {
         </nav>
 
         {/* ロゴ */}
-        <Logo onSectionClick={handleSectionClick} />
+        <Logo />
       </header>
     </>
   );
