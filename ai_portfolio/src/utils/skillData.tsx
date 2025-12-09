@@ -52,7 +52,7 @@ export const SKILL_DATA = {
     {
       label: 'Vue.js',
       img: '/assets/images/icons8-vue.svg',
-      year: 2,
+      year: 1,
     },
     {
       label: 'Laravel',

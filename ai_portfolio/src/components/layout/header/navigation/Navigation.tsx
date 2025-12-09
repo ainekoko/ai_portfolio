@@ -33,7 +33,6 @@ const Navigation = ({
     if (!isMenuOpen) return;
 
     const nav = navRef.current;
-    console.log('Nav');
     if (!nav) return;
 
     // フォーカス可能な要素を取得
@@ -51,8 +50,6 @@ const Navigation = ({
       if (e.key !== 'Tab') return;
 
       if (e.shiftKey) {
-        // Shift + Tab（逆方向）
-        console.log('Shift+Tab');
         if (document.activeElement === firstElement) {
           e.preventDefault();
           lastElement.focus();
