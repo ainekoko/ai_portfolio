@@ -3,7 +3,7 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { ColorType, Contact } from '@/types/profile';
 
-interface ContactButtonsProps {
+export interface ContactButtonsProps {
   contacts: Contact[];
 }
 
