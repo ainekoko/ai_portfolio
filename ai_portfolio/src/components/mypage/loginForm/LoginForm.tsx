@@ -71,15 +71,21 @@ export default function LoginForm() {
     setIsLoading(true);
 
     try {
-      // TODO: 実際のログインAPI呼び出し
-      // const response = await fetch('/api/auth/login', {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify(formData),
-      // });
+      const response = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
 
-      // 仮のログイン処理（2秒待機）
-      await new Promise((resolve) => setTimeout(resolve, 2000));
+      const data = await response.json();
+
+      if (!response.ok) {
+        setErrors((prev) => ({
+          ...prev,
+          password: data.error || 'ログインに失敗しました',
+        }));
+        return;
+      }
 
       // ログイン成功後、ダッシュボードへ遷移
       router.push('/mypage/dashboard');
