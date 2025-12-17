@@ -82,11 +82,11 @@ export const CONTACT_BUTTONS = [
     color: 'purple-400' as const,
     href: 'https://github.com/ainekoko',
   },
-  {
-    icon: faXTwitter,
-    text: 'X (Twitter)',
-    fullText: '@ainekoko',
-    color: 'indigo-500' as const,
-    href: 'https://twitter.com/ainekoko',
-  },
+//{
+//    icon: faXTwitter,
+//    text: 'X (Twitter)',
+//    fullText: '@ainekoko',
+//    color: 'indigo-500' as const,
+//    href: 'https://twitter.com/ainekoko',
+//  },
 ];
