@@ -11,19 +11,22 @@ export default function Loading() {
           alt='Background'
           width={400}
           height={400}
+          priority
           className='opacity-20'
+          style={{ width: 'auto', height: 'auto' }}
         />
       </div>
 
       <div className='relative z-10'>
         {/* Main loading animation */}
         <div className='relative w-32 h-32 flex items-center justify-center'>
-          <Image
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
             src='/assets/images/leaf1.gif'
             alt='Loading'
             width={128}
             height={128}
-            unoptimized
+            style={{ width: '128px', height: '128px' }}
           />
         </div>
 

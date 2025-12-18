@@ -52,7 +52,7 @@ const Huwahuwa_img = ({
   return (
     <div
       className={`absolute z-0 w-fit h-fit flex items-start gap-4 ${
-        hidden === 'pc' ? 'max-lg:hidden' : 'sample'
+        hidden === 'pc' ? 'max-lg:hidden' : ''
       }`}
       style={{
         top: top,

@@ -19,6 +19,7 @@ export default function LoginForm() {
   });
   const [isLoading, setIsLoading] = useState(false);
 
+  /** フォーム入力変更ハンドラー */
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -61,6 +62,7 @@ export default function LoginForm() {
     return isValid;
   };
 
+  /** フォーム送信ハンドラー */
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 

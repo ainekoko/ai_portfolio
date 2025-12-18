@@ -30,7 +30,14 @@ const TopSection = ({ isVisible }: SectionIdProps) => {
           alt='Background'
           width={800}
           height={800}
+          priority
           className='opacity-10 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2'
+          style={{
+            width: 'auto',
+            height: 'auto',
+            maxWidth: '800px',
+            maxHeight: '800px',
+          }}
         />
       </div>
 
