@@ -1,4 +1,4 @@
-import { auth } from '@/auth';
+import { auth, signOut } from '@/auth';
 import Link from 'next/link';
 
 export default async function MyPage() {
@@ -15,12 +15,27 @@ export default async function MyPage() {
           {JSON.stringify(session, null, 2)}
         </pre>
       </div>
-      <Link
-        href='/'
-        className='bg-green-500 text-white rounded-lg px-8 py-2 mt-6 hover:bg-green-400 focus-visible:outline-offset-2'
-      >
-        ホーム
-      </Link>
+      <div className='flex gap-4 mt-6'>
+        <Link
+          href='/'
+          className='bg-green-500 text-white rounded-lg px-8 py-2 hover:bg-green-400 focus-visible:outline-offset-2'
+        >
+          ホーム
+        </Link>
+        <form
+          action={async () => {
+            'use server';
+            await signOut();
+          }}
+        >
+          <button
+            type='submit'
+            className='bg-red-500 text-white rounded-lg px-8 py-2 hover:bg-red-400 focus-visible:outline-offset-2'
+          >
+            ログアウト
+          </button>
+        </form>
+      </div>
     </main>
   );
 }
