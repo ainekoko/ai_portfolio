@@ -1,59 +1,43 @@
 'use client';
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
-import Image from 'next/image';
+import { useActionState, useState } from 'react';
+import { login } from '@/lib/actions';
 import Button_form from '@/components/common/buttonForm/Button_form';
 
 /**
  * マイページログインフォームコンポーネント
  */
 export default function LoginForm() {
-  const router = useRouter();
-  const [formData, setFormData] = useState({
-    email: '',
-    password: '',
-  });
+  const [errorMessage, dispatch, isPending] = useActionState(login, undefined);
   const [errors, setErrors] = useState({
     email: '',
     password: '',
   });
-  const [isLoading, setIsLoading] = useState(false);
 
-  /** フォーム入力変更ハンドラー */
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-    // エラーをクリア
-    setErrors((prev) => ({
-      ...prev,
-      [name]: '',
-    }));
-  };
-
-  const validateForm = (): boolean => {
+  /** フォーム検証 */
+  const validateForm = (formData: FormData): boolean => {
     const newErrors = {
       email: '',
       password: '',
     };
     let isValid = true;
 
+    const email = formData.get('email') as string;
+    const password = formData.get('password') as string;
+
     // メールアドレスバリデーション
-    if (!formData.email) {
+    if (!email) {
       newErrors.email = 'メールアドレスを入力してください';
       isValid = false;
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       newErrors.email = '有効なメールアドレスを入力してください';
       isValid = false;
     }
 
     // パスワードバリデーション
-    if (!formData.password) {
+    if (!password) {
       newErrors.password = 'パスワードを入力してください';
       isValid = false;
-    } else if (formData.password.length < 6) {
+    } else if (password.length < 6) {
       newErrors.password = 'パスワードは6文字以上で入力してください';
       isValid = false;
     }
@@ -63,42 +47,10 @@ export default function LoginForm() {
   };
 
   /** フォーム送信ハンドラー */
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    if (!validateForm()) {
-      return;
-    }
-
-    setIsLoading(true);
-
-    try {
-      const response = await fetch('/api/auth/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        setErrors((prev) => ({
-          ...prev,
-          password: data.error || 'ログインに失敗しました',
-        }));
-        return;
-      }
-
-      // ログイン成功後、ダッシュボードへ遷移
-      router.push('/mypage/dashboard');
-    } catch (error) {
-      console.error('Login error:', error);
-      setErrors((prev) => ({
-        ...prev,
-        password: 'ログインに失敗しました',
-      }));
-    } finally {
-      setIsLoading(false);
+  const handleSubmit = (formData: FormData) => {
+    if (validateForm(formData)) {
+      console.log('フォーム送信');
+      dispatch(formData);
     }
   };
 
@@ -119,7 +71,7 @@ export default function LoginForm() {
 
           {/* ログインフォーム */}
           <div className='bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl p-8 md:p-10 border border-gray-100'>
-            <form onSubmit={handleSubmit} className='space-y-6'>
+            <form action={handleSubmit} className='space-y-6'>
               {/* メールアドレス */}
               <div>
                 <label
@@ -133,11 +85,12 @@ export default function LoginForm() {
                     type='email'
                     id='email'
                     name='email'
-                    value={formData.email}
-                    onChange={handleChange}
                     className='w-full px-4 py-3 pl-11 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-purple-400 focus:border-purple-400 outline-none transition-all text-gray-700 placeholder:text-gray-400'
                     placeholder='example@example.com'
-                    disabled={isLoading}
+                    disabled={isPending}
+                    onChange={() =>
+                      setErrors((prev) => ({ ...prev, email: '' }))
+                    }
                   />
                   <svg
                     className='absolute left-3 top-3.5 w-5 h-5 text-gray-400'
@@ -184,11 +137,12 @@ export default function LoginForm() {
                     type='password'
                     id='password'
                     name='password'
-                    value={formData.password}
-                    onChange={handleChange}
                     className='w-full px-4 py-3 pl-11 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-purple-400 focus:border-purple-400 outline-none transition-all text-gray-700 placeholder:text-gray-400'
                     placeholder='6文字以上'
-                    disabled={isLoading}
+                    disabled={isPending}
+                    onChange={() =>
+                      setErrors((prev) => ({ ...prev, password: '' }))
+                    }
                   />
                   <svg
                     className='absolute left-3 top-3.5 w-5 h-5 text-gray-400'
@@ -222,23 +176,55 @@ export default function LoginForm() {
                 )}
               </div>
 
+              {/* エラーメッセージ */}
+              {errorMessage && (
+                <p className='text-sm text-red-500 text-center flex items-center justify-center gap-1'>
+                  <svg
+                    className='w-4 h-4'
+                    fill='currentColor'
+                    viewBox='0 0 20 20'
+                  >
+                    <path
+                      fillRule='evenodd'
+                      d='M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z'
+                      clipRule='evenodd'
+                    />
+                  </svg>
+                  {errorMessage}
+                </p>
+              )}
+
               {/* ログインボタン */}
               <div className='flex justify-center'>
                 <Button_form
                   text='ログイン'
                   type='submit'
-                  isLoading={isLoading}
+                  isLoading={isPending}
+                  disabled={isPending}
                 />
               </div>
             </form>
 
-            {/* パスワードを忘れた場合 */}
+            {/* パスワード忘れリンク */}
             <div className='mt-6 text-center'>
               <a
                 href='#'
-                className='text-sm text-purple-400 hover:text-purple-500 transition-colors'
+                className='text-sm text-purple-600 hover:text-purple-700 hover:underline transition-colors'
               >
-                パスワードを忘れた場合
+                パスワードをお忘れの方
+              </a>
+            </div>
+
+            {/* 新規登録リンク */}
+            <div className='mt-4 pt-6 border-t border-gray-200 text-center'>
+              <p className='text-sm text-gray-600'>
+                アカウントをお持ちでない方は
+              </p>
+              <a
+                href='/register'
+                className='inline-block mt-2 text-purple-600 hover:text-purple-700 font-semibold hover:underline transition-colors'
+              >
+                新規登録はこちら
               </a>
             </div>
           </div>

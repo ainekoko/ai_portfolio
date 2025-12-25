@@ -1,4 +1,4 @@
-import SignUpForm from '@/app/ui/signup-form';
+import SignUpForm from '@/components/mypage/signupForm/SignupForm';
 import Link from 'next/link';
 
 export default function SignUpPage() {

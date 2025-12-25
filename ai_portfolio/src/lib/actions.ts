@@ -58,13 +58,14 @@ export async function signUp(
 }
 
 export async function login(prevState: string | undefined, formData: FormData) {
+  console.log('ログインAPI');
   try {
     await signIn('credentials', formData);
   } catch (error) {
     if (error instanceof AuthError) {
       switch (error.type) {
         case 'CredentialsSignin':
-          return 'Invalid credentials.';
+          return 'メールアドレスまたはパスワードが正しくありません。';
         default:
           return 'Something went wrong.';
       }
